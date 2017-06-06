@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -168,16 +170,66 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelOP.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelOP.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelOP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelOP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelOP.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UtilApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TbArea.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbCategoria.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbCategoriaRH.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbEspecialidad.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbFormato.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbPedidoM.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbPedidoPersonal.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbProfesion.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbSolicitud.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbUnidad.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbUsuario.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -186,8 +238,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ModelOP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelOP.edmx</DependentUpon>
+      <LastGenOutput>ModelOP.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelOP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelOP.edmx</DependentUpon>
+      <LastGenOutput>ModelOP.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="ModelOP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelOP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModelOP.edmx.diagram">
+      <DependentUpon>ModelOP.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -234,6 +303,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Areas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +315,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
