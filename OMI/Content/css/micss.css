@@ -1,0 +1,93 @@
+﻿body {
+}
+.input {
+    padding: 10 !important; 
+    margin: 0 !important; 
+    border: 0 !important; 
+    width: 100% !important; 
+    border-radius: 0 !important; 
+    line-height: 1 !important;
+}
+
+td {
+    margin: 0 !important; 
+    padding: 0 !important;
+}
+.row
+{margin-top: 10px;
+}
+
+.jumbotron{    margin-bottom: 0;
+    min-height: 10%;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 0px;
+}
+#menubar-logo {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    max-height: 20px;
+    margin-left: 20px;
+    margin: 0 auto;
+    align-content: right;
+}
+#titulo
+{
+    margin-left: 20px;
+
+
+}
+#panel_ovi
+{
+    margin-top: 0px;
+
+}
+
+
+.img 
+{
+
+    max-width: 10px;
+}
+.miinput
+{
+
+    display: table-row;
+}
+
+.selectContainer
+{
+    padding-top: -10px;padding-bottom: -10px;padding-left: 5px;padding-right: 5px;
+			
+}
+
+.panel-body
+{
+    padding-top: 5px;padding-bottom: 5px;padding-left: 5px;padding-right: 5px;
+			
+}
+
+/* Adjust feedback icon position */
+#productForm .selectContainer .form-control-feedback,
+#productForm .inputGroupContainer .form-control-feedback {
+    right: -15px;
+}
+input.pull-left
+{
+
+    padding-right: 15px;
+    border-right-width: 15px;
+    border-right-style: solid;
+    margin-right: 15px;}
+.v-center {
+    min-height:200px;
+    display: flex;
+    justify-content:center;
+    flex-flow: column wrap;
+}
+

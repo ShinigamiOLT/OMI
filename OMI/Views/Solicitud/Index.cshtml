@@ -1,0 +1,250 @@
+﻿
+
+@using (@Html.BeginForm("Index", "Formato", FormMethod.Post))
+{
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="menubar-logo" id="titulo">
+
+
+                    <span class="container">
+                        <h3>Ingenieria Aplicada OnePro</h3><br>
+                        
+
+                        <h1> Formato de Oportunidades</h1>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default" id="panel_ovi">
+
+                    <div class="panel-body">
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="sizing-addon4">Folio</span>
+                            <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="F-0001" style="text-align: right; color: red" readonly="true">
+                        </div>
+                       
+                        <ul class="list-group">
+                            <li class="list-group-item"><h6>No. Formato: FC_CZ_01</h6></li>
+                            <li class="list-group-item"><h6>Revisión: 1.0</h6></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--dasdasd div zxccxc-->
+
+
+
+
+
+    <div class="container">
+    
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Contacto</h2>
+                </div>
+                <div class="panel-body ">
+
+                    <div class="input-group miinput">
+                        <span class="input-group-addon" id="sizing-addon1">Fecha:</span>
+
+                        <input type="date" class="form-control" name="FechaOportunidad" placeholder="Fecha" aria-describedby="sizing-addon1" value="12-05-2017" required>
+                    </div>
+
+                    <div class="input-group miinput">
+                        <span class="input-group-addon" id="sizing-addon2">Compania :</span>
+
+                        <input type="text" class="form-control" name="NombreCompania" placeholder="Nombre de la Compania" aria-describedby="sizing-addon1" required>
+                    </div>
+
+                    <div class="input-group miinput">
+                        <span class="input-group-addon" id="sizing-addon3">Representante :</span>
+
+                        <input type="text" class="form-control" name="Representante" placeholder="Persona de contacto" aria-describedby="sizing-addon2" required>
+                    </div>
+
+                    <div class="input-group miinput">
+
+                        <span class="input-group-addon" id="sizing-addon4">Telefono :</span>
+                        <input type="tel" class="form-control" name="Telefono" placeholder="Telefono" aria-describedby="sizing-addon2" required>
+                    </div>
+
+                    <div class="input-group miinput">
+                        <span class="input-group-addon" id="sizing-addon5">Correo: </span>
+                        <input type="email" class="form-control" name="Correo" placeholder="Correo" aria-describedby="sizing-addon2" required>
+                    </div>
+                    <div class="input-group miinput">
+                        <span class="input-group-addon" id="sizing-addon6">Medio: </span>
+
+                        <div class="col-xs-12 selectContainer">
+                            <select class="form-control" name="MedioContacto" required>
+                                <option value="Null">Seleccione un tipo</option>
+                                <option value="Correo">Correo</option>
+                                <option value="Web">Portal de Internet</option>
+                                <option value="Telefono">Teléfono</option>
+                                <option value="Whatsapp">Whatsapp</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Otros">Otros</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                   
+                   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Requerimiento de la oportunidad</h2>
+                    </div>
+                    <div class="panel-body ">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="DescripcionOportunidad" rows="4" placeholder="Describa la oportunidad" width=100% required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Informacion</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-6 selectContainer">
+
+
+                            <div class="list-group" name="TipoOportunidad" id="list1" require>
+                                <a class="list-group-item "><h4><span>Tipo de Oportunidad</span></h4></a>
+                                <a class="list-group-item">Proyecto<input type="checkbox" class="pull-left" name="TipoOportunidad" value="1"></a>
+                                <a class="list-group-item">Suministro<input type="checkbox" class="pull-left" name="TipoOportunidad" value="2"></a>
+                                <a class="list-group-item">Desarrollo de Software<input type="checkbox" class="pull-left" name="TipoOportunidad" value="3"></a>
+                                <a class="list-group-item">Curso<input type="checkbox" class="pull-left" name="TipoOportunidad" value="4"></a>
+                                <a class="list-group-item">Licitacion<input type="checkbox" class="pull-left" name="TipoOportunidad" value="5"></a>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 selectContainer">
+
+
+                            <div class="list-group" id="list1" require>
+                                <a class="list-group-item "><h4><span>Area de Interes</span></h4></a>
+                                <a class="list-group-item">Productividad de Pozos<input type="checkbox" class="pull-left" name="AreaInteres" value="1"></a>
+                                <a class="list-group-item">Instalaciones Superficiales<input type="checkbox" class="pull-left" name="AreaInteres" value="2"></a>
+                                <a class="list-group-item">Soluciones Tecnológicas<input type="checkbox" class="pull-left" name="AreaInteres" value="3"></a>
+                                <a class="list-group-item">Potencia y Energía Renovable<input type="checkbox" class="pull-left" name="AreaInteres" value="4"></a>
+                                <a class="list-group-item">Automatización<input type="checkbox" class="pull-left" name="AreaInteres" value="5"></a>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+        <div class="row" style="margin: 20px;">
+            <form>
+                <div class="form-group">
+
+                    <div class="col-md-6" style="align-content: center">
+                        <button type="submit" id="enviar" class="btn btn-primary">Nueva Oportunidad</button>
+                        <button type="submit" id="cancelar" class="btn btn-danger">Cancelar Oportunidad</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+      
+    </div>
+}
+
+<script>
+    $('.add').click(function(){
+        $('.all').prop("checked",false);
+        var items = $("#list1 input:checked:not('.all')");
+        var n = items.length;
+        if (n > 0) {
+            items.each(function(idx,item){
+                var choice = $(item);
+                choice.prop("checked",false);
+                choice.parent().appendTo("#list2");
+            });
+        }
+        else {
+            alert("Choose an item from list 1");
+        }
+    });
+
+    $('.remove').click(function(){
+        $('.all').prop("checked",false);
+        var items = $("#list2 input:checked:not('.all')");
+        items.each(function(idx,item){
+            var choice = $(item);
+            choice.prop("checked",false);
+            choice.parent().appendTo("#list1");
+        });
+    });
+
+    /* toggle all checkboxes in group */
+    $('.all').click(function(e){
+        e.stopPropagation();
+        var $this = $(this);
+        if($this.is(":checked")) {
+            $this.parents('.list-group').find("[type=checkbox]").prop("checked",true);
+        }
+        else {
+            $this.parents('.list-group').find("[type=checkbox]").prop("checked",false);
+            $this.prop("checked",false);
+        }
+    });
+
+    $('[type=checkbox]').click(function(e){
+        e.stopPropagation();
+    });
+
+    /* toggle checkbox when list group item is clicked */
+    $('.list-group a').click(function(e){
+
+        e.stopPropagation();
+
+        var $this = $(this).find("[type=checkbox]");
+        if($this.is(":checked")) {
+            $this.prop("checked",false);
+        }
+        else {
+            $this.prop("checked",true);
+        }
+
+        if ($this.hasClass("all")) {
+            $this.trigger('click');
+        }
+    });
+
+</script>  
+
+
+
+

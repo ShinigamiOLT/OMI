@@ -6,15 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="afd70f0b0b454becbfb24f45e04fb3f2" Name="Diagram1">
         <EntityTypeShape EntityType="OPModel.TbArea" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbCategoria" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbCategoria" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbCategoriaRH" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbEspecialidad" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbFormato" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbFormato" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbPedidoM" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbPedidoPersonal" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbProfesion" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbSolicitud" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbUnidad" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbUnidad" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OPModel.TbUsuario" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
         <AssociationConnector Association="OPModel.AreaId" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdCategoria_fk" ManuallyRouted="false" />
@@ -26,6 +26,8 @@
         <AssociationConnector Association="OPModel.IdPedPersonal_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdProfesion_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdUsuario_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OPModel.VUsuarioxArea" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="OPModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
