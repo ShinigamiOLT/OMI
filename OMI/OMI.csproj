@@ -398,6 +398,7 @@
     <Content Include="Views\Shared\EditorTemplates\TimePickerm.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_FieldLayout.cshtml" />
     <Content Include="Views\Solicitud\Create.cshtml" />
+    <Content Include="Views\Shared\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

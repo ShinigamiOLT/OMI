@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -97,5 +98,31 @@ namespace OMI.Models
         {
             return contexto.TbPedidoM.Find(id);
         }
+
+        public void UpdatePedido(PedidoInPut input)
+        {
+            var dinner = GetPedidoM(input.Id);
+
+            dinner.Cantidad = input.Cantidad;
+            dinner.IdUnidad = input.IdUnidad;
+            dinner.Descripcion = input.Descripcion;
+            dinner.IdCategoria = input.Categoria;
+            contexto.Entry(dinner).State = EntityState.Modified;
+            contexto.SaveChanges();
+
+        }
+
+        public void DelPedido(int inputId)
+        {
+           contexto.Entry(GetPedidoM(inputId)).State = EntityState.Deleted;
+            contexto.SaveChanges();
+        }
+    }
+
+    public class DeleteConfirmInput
+    {
+        public int Id { get; set; }
+        public string Message { get; set; }
+        public string GridId { get; set; }
     }
 }

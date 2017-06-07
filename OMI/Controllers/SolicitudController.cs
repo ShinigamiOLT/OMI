@@ -133,24 +133,36 @@ namespace OMI.Controllers
 
             return PartialView("Create", input);
         }
-/*
+
         [HttpPost]
-        public ActionResult Edit(DinnerInput input)
+        public ActionResult Edit(PedidoInPut input)
         {
-            if (!ModelState.IsValid) return PartialView("Create", input);
-            var dinner = Db.Get<Dinner>(input.Id);
+            if (!ModelState.IsValid)
+                return PartialView("Create", input);
+            sol.UpdatePedido(input);
 
-            dinner.Name = input.Name;
-            dinner.Date = input.Date.Value;
-            dinner.Chef = Db.Get<Chef>(input.Chef);
-            dinner.Meals = Db.Meals.Where(m => input.Meals.Contains(m.Id));
-            dinner.BonusMeal = Db.Get<Meal>(input.BonusMealId);
-            Db.Update(dinner);
-
+           
             // returning the key to call grid.api.update
-            return Json(new { Id = dinner.Id });
-        }*/
+            return Json(new { Id = input.Id });
+        }
+        public ActionResult Delete(int id, string gridId)
+        {
+            var dinner =sol.GetPedidoM(id);
 
+            return PartialView(new DeleteConfirmInput
+            {
+                Id = id,
+                GridId = gridId,
+                Message = string.Format("Are you sure you want to delete dinner <b>{0}</b> ?", dinner.Descripcion)
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(DeleteConfirmInput input)
+        {
+            sol.DelPedido(input.Id);
+            return Json(new { Id = input.Id });
+        }
 
     }
 }
