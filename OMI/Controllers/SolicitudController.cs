@@ -15,11 +15,13 @@ namespace OMI.Controllers
             return View();
         }
 
-        public string Datos()
+        public string Datos(int id)
         {
             cSolicitud sol = new cSolicitud();
 
-            return sol.Datos();
+            return sol.Datos(id);
         }
+
+        public ActionResult
     }
 }

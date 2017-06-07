@@ -15,7 +15,7 @@ namespace OMI.Models
         private TbUsuario usuario;
         public cSolicitud()
         {
-            idformato = 1;
+            idformato = 2;
             contexto= new OPEntities();
 
             tipoformato = contexto.TbFormato.Find(idformato);
@@ -28,9 +28,9 @@ namespace OMI.Models
         }
 
 
-        public string Datos()
+        public string Datos(int id)
         {
-            return usuario.Nombre + " : " + usuario.TbArea.Nombre;
+            return usuario.Nombre + " : " + usuario.TbArea.Nombre + ": " + tipoformato.Nombre + " : " + tipoformato.Descripcion + id;
         }
     }
 }
