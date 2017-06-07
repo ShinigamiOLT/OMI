@@ -40,6 +40,7 @@ namespace OMI
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
         public virtual DbSet<VUsuarioxArea> VUsuarioxArea { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

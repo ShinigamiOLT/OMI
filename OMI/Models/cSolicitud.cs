@@ -9,13 +9,14 @@ namespace OMI.Models
     public class cSolicitud
     {
          [Key]
-        public int Id;
+         public int IdSolicitud;
 
         public string Folio;
 
         public DateTime Fecha;
+
         //aqui se supone que sera para dar de alta una solicitud.
-       private  OPEntities contexto;
+        public  OPEntities contexto;
         private int idformato;
         public TbFormato tipoformato;
 
@@ -25,7 +26,8 @@ namespace OMI.Models
      
         public cSolicitud()
         {
-            idformato = 2;
+            idformato = 1;
+            IdSolicitud = 1;
             contexto= new OPEntities();
 
             tipoformato = contexto.TbFormato.Find(idformato);
@@ -34,9 +36,9 @@ namespace OMI.Models
 
             ListaPedido = new List<TbPedidoM>();
 
-            Id = 1;
+          
 
-            Folio = tipoformato.Nombre+"-" + Id.ToString("000");
+            Folio = tipoformato.Nombre+"-" + IdSolicitud.ToString("000");
             Fecha = DateTime.Now;
         }
 
@@ -48,6 +50,29 @@ namespace OMI.Models
 
         public string FechaCorta {
             get { return Fecha.ToShortDateString(); }
+        }
+
+        public  TbPedidoM Get<T> (int id) where T : TbPedidoM
+        {
+
+            return  contexto.TbPedidoM.Find(id);
+        }
+
+       
+        public TbCategoria GetCategoria(int? id)
+        {
+
+            return contexto.TbCategoria.Find(id);
+        }
+
+        internal void GuardaPedidos()
+        {
+            foreach (TbPedidoM m in ListaPedido)
+            {
+                contexto.TbPedidoM.Add(m);
+
+            }
+            contexto.SaveChanges();
         }
     }
 }

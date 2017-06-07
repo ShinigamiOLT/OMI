@@ -1,4 +1,7 @@
-﻿@model OMI.Models.cSolicitud
+﻿@using Omu.Awem.Helpers
+@using Omu.AwesomeMvc
+@using OMII.Utils
+@model OMI.Models.cSolicitud
 
 @{
     ViewBag.Title = "NuevaSolcitud";
@@ -46,13 +49,50 @@
             <div class="panel panel-default" id="panel_ovi">
 
                 <div class="panel-body">
-                  <ul class="list-group">
-                      <li class="list-group-item"><h6>Area Solicitante <span style="color: red;"><strong> @Html.DisplayFor(m => m.usuario.TbArea.Nombre)</strong></span></h6></li>
-                      <li class="list-group-item"><h6>Usuario:<span style="color:red"><strong> @Html.DisplayFor(m => m.usuario.Nombre)</strong></span></h6></li>
-                      <li class="list-group-item"><h6>Fecha:<span style="color:red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
+                    <ul class="list-group">
+                        <li class="list-group-item"><h6>Area Solicitante <span style="color: red;"><strong> @Html.DisplayFor(m => m.usuario.TbArea.Nombre)</strong></span></h6></li>
+                        <li class="list-group-item"><h6>Usuario:<span style="color:red"><strong> @Html.DisplayFor(m => m.usuario.Nombre)</strong></span></h6></li>
+                        <li class="list-group-item"><h6>Fecha:<span style="color:red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
                  
                     </ul>
                 </div>
+            </div>
+            
+            @Html.InitCrudPopupsForGrid("DinnersGrid", "Solicitud")
+            @* popup names will be action + gridid; name is used when calling awe.open(name) *@
+
+            <div class="bar">
+                <button type="button" onclick="awe.open('createDinnersGrid')" class="awe-btn mbtn">Create</button>
+            </div>
+
+            @(Html.Awe().Grid("DinnersGrid")
+                  .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
+                  .Url(Url.Action("GridGetItems", "Solicitud"))
+                  .Resizable()
+                  .Reorderable()
+                  .Height(350)
+                  .Paging(false)
+                  .Groupable(false)
+                  .Columns(
+                      new Column{Name = "Id", Width = 55 },
+                      new Column{Name="Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
+
+                      new Column { Name = "Cantidad" },
+                      new Column {Name = "Unidad"},
+                      new Column{Name = "Descripcion"}.Mod(o => o.Nohide()),
+                      new Column { Name = "IdSupervisor", Header  ="Autoriza"},
+                      new Column { Name = "Estatus"},
+                     
+                      /*new Column{Name = "Date"},
+                      new Column{Name = "Chef.FirstName,Chef.LastName", ClientFormat = ".ChefName", Header = "Chef"},
+                      new Column{ClientFormat = ".Meals", Header = "Meals"},*/
+                      new Column {ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide()),
+                      new Column{ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide())))
+            <br/>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="NuevaSolicitud" class="btn btn-default" />
             </div>
         </div>
     </div>

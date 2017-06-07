@@ -49,6 +49,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Omu.Awem">
+      <HintPath>\\Mac\Home\Nextcloud\Utilerias\AwesomeMvcTrial.5.0\bin\mvc5\Omu.Awem.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.AwesomeMvc">
+      <HintPath>\\Mac\Home\Nextcloud\Utilerias\AwesomeMvcTrial.5.0\bin\mvc5\Omu.AwesomeMvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -171,6 +177,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
@@ -194,9 +202,13 @@
       <DependentUpon>ModelOP.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
+    <Compile Include="Models\GridUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MobileUtils.cs" />
+    <Compile Include="Models\PedidoInPut.cs" />
     <Compile Include="Models\UtilApp.cs" />
     <Compile Include="PedidoMXSolicitud_Result.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
@@ -242,6 +254,9 @@
     <Compile Include="TbSolicitud.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbStatusAutorizacion.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbUnidad.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
@@ -255,7 +270,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Common.css" />
     <Content Include="Content\css\micss.css" />
+    <Content Include="Content\themes\wui\awem.css" />
+    <Content Include="Content\themes\wui\AwesomeMvc.css" />
+    <Content Include="Content\themes\wui\awe_icons.png" />
+    <Content Include="Content\themes\wui\editdel.png" />
+    <Content Include="Content\themes\wui\loading.gif" />
+    <Content Include="Content\themes\wui\pm.png" />
+    <Content Include="Content\themes\wui\pm3.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -270,6 +293,8 @@
       <DependentUpon>ModelOP.edmx</DependentUpon>
       <LastGenOutput>ModelOP.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\awem.js" />
+    <Content Include="Scripts\AwesomeMvc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="ModelOP.edmx">
@@ -298,6 +323,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -343,9 +369,36 @@
     <Content Include="Views\Unidad\Index.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Solicitud\NuevaSolicitud.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AjaxCheckboxList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AjaxDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AjaxRadioList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Autocomplete.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ButtonGroupCheckbox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ButtonGroupRadio.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ColorDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Combobox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Hidden.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Lookup.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LookupDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MealsOdropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultiLookup.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultiLookupDropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Multiselect.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Odropdown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Single.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimePicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimePickerm.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_FieldLayout.cshtml" />
+    <Content Include="Views\Solicitud\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

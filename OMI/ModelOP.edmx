@@ -38,14 +38,6 @@
           <Property Name="Inicio" Type="int" />
           <Property Name="Fin" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="TbCompras">
-          <Property Name="Id" Type="int" />
-          <Property Name="IdSolicitud" Type="int" />
-          <Property Name="IdPedidoPersonal" Type="int" />
-          <Property Name="IdPedidoMaterial" Type="int" />
-        </EntityType>-->
         <EntityType Name="TbEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,7 +58,7 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSolicitud" Type="int" />
           <Property Name="IdCategoria" Type="int" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
@@ -75,6 +67,7 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
           <Property Name="IdSupervisor" Type="int" />
           <Property Name="Estatus" Type="int" />
           <Property Name="Surtido" Type="int" />
+          <Property Name="Dato" Type="int" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -107,11 +100,18 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
           <Property Name="IdPedidoP" Type="int" />
           <Property Name="IdPedidoM" Type="int" />
         </EntityType>
+        <EntityType Name="TbStatusAutorizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TbUnidad">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="TbUsuario">
@@ -228,9 +228,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pero no se encuentra la tabla.
-        <Association Name="IdSolicitud_fk" />-->
         <Association Name="IdUnidad_fk">
           <End Role="TbUnidad" Type="Self.TbUnidad" Multiplicity="0..1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -252,6 +249,18 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Principal>
             <Dependent Role="TbSolicitud">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Status_fk">
+          <End Role="TbStatusAutorizacion" Type="Self.TbStatusAutorizacion" Multiplicity="0..1" />
+          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbStatusAutorizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="Estatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -303,6 +312,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <EntitySet Name="TbPedidoPersonal" EntityType="Self.TbPedidoPersonal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbSolicitud" EntityType="Self.TbSolicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbStatusAutorizacion" EntityType="Self.TbStatusAutorizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUsuario" EntityType="Self.TbUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VUsuarioxArea" EntityType="Self.VUsuarioxArea" store:Type="Views" store:Schema="dbo">
@@ -351,6 +361,10 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <AssociationSet Name="IdUsuario_fk" Association="Self.IdUsuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="Status_fk" Association="Self.Status_fk">
+            <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -417,6 +431,8 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <NavigationProperty Name="TbCategoria" Relationship="Self.IdCategoria_fk" FromRole="TbPedidoM" ToRole="TbCategoria" />
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdPedMaterial" FromRole="TbPedidoM" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidad" Relationship="Self.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
+          <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
+          <Property Name="Dato" Type="Int32" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -686,6 +702,11 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="sysdiagrams" EntityType="OPModel.sysdiagrams" />
+          <EntitySet Name="TbStatusAutorizacion" EntityType="OPModel.TbStatusAutorizacion" />
+          <AssociationSet Name="Status_fk" Association="OPModel.Status_fk">
+            <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="VUsuarioxArea">
           <Key>
@@ -744,6 +765,26 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TbStatusAutorizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.Status_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoM" />
+        </EntityType>
+        <Association Name="Status_fk">
+          <End Type="OPModel.TbStatusAutorizacion" Role="TbStatusAutorizacion" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbStatusAutorizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -797,6 +838,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <EntitySetMapping Name="TbPedidoM">
             <EntityTypeMapping TypeName="OPModel.TbPedidoM">
               <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
@@ -937,6 +979,14 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbStatusAutorizacion">
+            <EntityTypeMapping TypeName="OPModel.TbStatusAutorizacion">
+              <MappingFragment StoreEntitySet="TbStatusAutorizacion">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
