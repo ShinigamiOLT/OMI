@@ -1,0 +1,62 @@
+﻿@model OMI.Models.cSolicitud
+
+@{
+    ViewBag.Title = "NuevaSolcitud";
+}
+
+@using (@Html.BeginForm("NuevaSolicitud", "Solicitud", FormMethod.Post))
+{
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="menubar-logo" id="titulo">
+
+
+                    <span class="container">
+                        <h3>Ingenieria Aplicada OnePro</h3><br>
+
+
+                        <h1>@Html.DisplayFor(m=>m.tipoformato.Descripcion)</h1>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default" id="panel_ovi">
+
+                    <div class="panel-body">
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="sizing-addon4">Folio</span>
+                            <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Html.DisplayFor(m=>m.Folio)" style="text-align: right; color: red" readonly="true">
+                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item"><h6>No. Formato:@Html.DisplayFor(m => m.tipoformato.Nombre)</h6></li>
+                            <li class="list-group-item"><h6>Revisión: 1.0</h6></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default" id="panel_ovi">
+
+                <div class="panel-body">
+                  <ul class="list-group">
+                      <li class="list-group-item"><h6>Area Solicitante <span style="color: red;"><strong> @Html.DisplayFor(m => m.usuario.TbArea.Nombre)</strong></span></h6></li>
+                      <li class="list-group-item"><h6>Usuario:<span style="color:red"><strong> @Html.DisplayFor(m => m.usuario.Nombre)</strong></span></h6></li>
+                      <li class="list-group-item"><h6>Fecha:<span style="color:red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
+                 
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

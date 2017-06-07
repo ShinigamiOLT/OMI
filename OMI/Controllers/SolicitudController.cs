@@ -22,6 +22,13 @@ namespace OMI.Controllers
             return sol.Datos(id);
         }
 
-        public ActionResult
+        public ActionResult NuevaSolicitud()
+        {
+
+            cSolicitud sol = new cSolicitud();
+
+
+            return View(sol);
+        }
     }
 }
