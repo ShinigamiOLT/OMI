@@ -74,5 +74,28 @@ namespace OMI.Models
             }
             contexto.SaveChanges();
         }
+
+        internal int GeneraIdPedidoM()
+        {
+            int siguiente = 0;
+            var elemento = contexto.TbPedidoM.Max(x => x.Id);
+            if (elemento != null)
+            {
+                siguiente = elemento + 1;
+            }
+            return siguiente;
+        }
+
+        public void AgregaPedido(TbPedidoM dinner)
+        {
+            dinner.Id = GeneraIdPedidoM();
+        contexto.TbPedidoM.Add(dinner);
+            contexto.SaveChanges();
+        }
+
+        internal TbPedidoM GetPedidoM(int id)
+        {
+            return contexto.TbPedidoM.Find(id);
+        }
     }
 }

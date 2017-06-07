@@ -73,8 +73,9 @@
                   .Height(350)
                   .Paging(false)
                   .Groupable(false)
+                 
                   .Columns(
-                      new Column{Name = "Id", Width = 55 },
+                      new Column{Name = "Id", Width = 55,Hidden = true},
                       new Column{Name="Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
 
                       new Column { Name = "Cantidad" },

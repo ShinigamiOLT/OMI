@@ -12,23 +12,19 @@ namespace OMI
     using System;
     using System.Collections.Generic;
     
-    public partial class TbUsuario
+    public partial class Supervisores
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TbUsuario()
+        public Supervisores()
         {
-            this.TbSolicitud = new HashSet<TbSolicitud>();
-            this.Supervisores = new HashSet<Supervisores>();
+            this.TbPedidoM = new HashSet<TbPedidoM>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> Area { get; set; }
+        public int IdUsuario { get; set; }
     
-        public virtual TbArea TbArea { get; set; }
+        public virtual TbUsuario TbUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supervisores> Supervisores { get; set; }
+        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
     }
 }

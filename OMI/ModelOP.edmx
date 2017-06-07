@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Supervisores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -144,6 +151,18 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_usuario_fk">
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
+          <End Role="Supervisores" Type="Self.Supervisores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supervisores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="IdCategoria_fk">
           <End Role="TbCategoria" Type="Self.TbCategoria" Multiplicity="0..1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -225,6 +244,18 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Principal>
             <Dependent Role="TbPedidoPersonal">
               <PropertyRef Name="IdProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idSupervisor_fk">
+          <End Role="Supervisores" Type="Self.Supervisores" Multiplicity="0..1" />
+          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supervisores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdSupervisor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,6 +333,7 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="OPModelStoreContainer">
+          <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbCategoria" EntityType="Self.TbCategoria" Schema="dbo" store:Type="Tables" />
@@ -325,6 +357,10 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <AssociationSet Name="AreaId" Association="Self.AreaId">
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="id_usuario_fk" Association="Self.id_usuario_fk">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="Supervisores" EntitySet="Supervisores" />
           </AssociationSet>
           <AssociationSet Name="IdCategoria_fk" Association="Self.IdCategoria_fk">
             <End Role="TbCategoria" EntitySet="TbCategoria" />
@@ -353,6 +389,10 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <AssociationSet Name="IdProfesion_fk" Association="Self.IdProfesion_fk">
             <End Role="TbProfesion" EntitySet="TbProfesion" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="idSupervisor_fk" Association="Self.idSupervisor_fk">
+            <End Role="Supervisores" EntitySet="Supervisores" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
           <AssociationSet Name="IdUnidad_fk" Association="Self.IdUnidad_fk">
             <End Role="TbUnidad" EntitySet="TbUnidad" />
@@ -385,7 +425,7 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoM" Relationship="Self.IdCategoria_fk" FromRole="TbCategoria" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdCategoria_fk" FromRole="TbCategoria" ToRole="TbPedidoM" />
         </EntityType>
         <EntityType Name="TbCategoriaRH">
           <Key>
@@ -414,25 +454,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Revision" Type="Int32" />
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
-        </EntityType>
-        <EntityType Name="TbPedidoM">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdSolicitud" Type="Int32" />
-          <Property Name="IdCategoria" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IdUnidad" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="IdSupervisor" Type="Int32" />
-          <Property Name="Estatus" Type="Int32" />
-          <Property Name="Surtido" Type="Int32" />
-          <NavigationProperty Name="TbCategoria" Relationship="Self.IdCategoria_fk" FromRole="TbPedidoM" ToRole="TbCategoria" />
-          <NavigationProperty Name="TbSolicitud" Relationship="Self.IdPedMaterial" FromRole="TbPedidoM" ToRole="TbSolicitud" />
-          <NavigationProperty Name="TbUnidad" Relationship="Self.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
-          <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
-          <Property Name="Dato" Type="Int32" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -470,9 +491,9 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <Property Name="IdPedidoP" Type="Int32" />
           <Property Name="IdPedidoM" Type="Int32" />
           <NavigationProperty Name="TbFormato" Relationship="Self.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
-          <NavigationProperty Name="TbPedidoM" Relationship="Self.IdPedMaterial" FromRole="TbSolicitud" ToRole="TbPedidoM" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="Self.IdPedPersonal_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbUsuario" Relationship="Self.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdPedMaterial" FromRole="TbSolicitud" ToRole="TbPedidoM" />
         </EntityType>
         <EntityType Name="TbUnidad">
           <Key>
@@ -480,7 +501,7 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoM" Relationship="Self.IdUnidad_fk" FromRole="TbUnidad" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdUnidad_fk" FromRole="TbUnidad" ToRole="TbPedidoM" />
         </EntityType>
         <EntityType Name="TbUsuario">
           <Key>
@@ -491,6 +512,7 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <Property Name="Area" Type="Int32" />
           <NavigationProperty Name="TbArea" Relationship="Self.AreaId" FromRole="TbUsuario" ToRole="TbArea" />
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
+          <NavigationProperty Name="Supervisores" Relationship="OPModel.id_usuario_fk" FromRole="TbUsuario" ToRole="Supervisores" />
         </EntityType>
         <Association Name="AreaId">
           <End Role="TbArea" Type="Self.TbArea" Multiplicity="0..1" />
@@ -501,18 +523,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Principal>
             <Dependent Role="TbUsuario">
               <PropertyRef Name="Area" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdCategoria_fk">
-          <End Role="TbCategoria" Type="Self.TbCategoria" Multiplicity="0..1" />
-          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbCategoria">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbPedidoM">
-              <PropertyRef Name="IdCategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,30 +559,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Principal>
             <Dependent Role="TbSolicitud">
               <PropertyRef Name="IdFormato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdPedMaterial">
-          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="0..1" />
-          <End Role="TbSolicitud" Type="Self.TbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbPedidoM">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbSolicitud">
-              <PropertyRef Name="IdPedidoM" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdUnidad_fk">
-          <End Role="TbUnidad" Type="Self.TbUnidad" Multiplicity="0..1" />
-          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbUnidad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbPedidoM">
-              <PropertyRef Name="IdUnidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -618,7 +604,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <EntitySet Name="TbCategoriaRH" EntityType="Self.TbCategoriaRH" />
           <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" />
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" />
-          <EntitySet Name="TbPedidoM" EntityType="Self.TbPedidoM" />
           <EntitySet Name="TbPedidoPersonal" EntityType="Self.TbPedidoPersonal" />
           <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" />
           <EntitySet Name="TbSolicitud" EntityType="Self.TbSolicitud" />
@@ -627,10 +612,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <AssociationSet Name="AreaId" Association="Self.AreaId">
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="IdCategoria_fk" Association="Self.IdCategoria_fk">
-            <End Role="TbCategoria" EntitySet="TbCategoria" />
-            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
           <AssociationSet Name="IdCategoriaRH_fk" Association="Self.IdCategoriaRH_fk">
             <End Role="TbCategoriaRH" EntitySet="TbCategoriaRH" />
@@ -643,14 +624,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <AssociationSet Name="IdFormato_fk" Association="Self.IdFormato_fk">
             <End Role="TbFormato" EntitySet="TbFormato" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="IdPedMaterial" Association="Self.IdPedMaterial">
-            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
-            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="IdUnidad_fk" Association="Self.IdUnidad_fk">
-            <End Role="TbUnidad" EntitySet="TbUnidad" />
-            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
           <AssociationSet Name="IdPedPersonal_fk" Association="Self.IdPedPersonal_fk">
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
@@ -703,11 +676,33 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="sysdiagrams" EntityType="OPModel.sysdiagrams" />
           <EntitySet Name="TbStatusAutorizacion" EntityType="OPModel.TbStatusAutorizacion" />
+          <EntitySet Name="Supervisores" EntityType="OPModel.Supervisores" />
+          <EntitySet Name="TbPedidoM" EntityType="OPModel.TbPedidoM" />
+          <AssociationSet Name="id_usuario_fk" Association="OPModel.id_usuario_fk">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="Supervisores" EntitySet="Supervisores" />
+          </AssociationSet>
+          <AssociationSet Name="IdCategoria_fk" Association="OPModel.IdCategoria_fk">
+            <End Role="TbCategoria" EntitySet="TbCategoria" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
+          <AssociationSet Name="IdPedMaterial" Association="OPModel.IdPedMaterial">
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="IdUnidad_fk" Association="OPModel.IdUnidad_fk">
+            <End Role="TbUnidad" EntitySet="TbUnidad" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
           <AssociationSet Name="Status_fk" Association="OPModel.Status_fk">
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="idSupervisor_fk" Association="OPModel.idSupervisor_fk">
+            <End Role="Supervisores" EntitySet="Supervisores" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="VUsuarioxArea">
           <Key>
             <PropertyRef Name="Id" />
@@ -773,6 +768,83 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TbPedidoM" Relationship="OPModel.Status_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoM" />
         </EntityType>
+        <EntityType Name="Supervisores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.id_usuario_fk" FromRole="Supervisores" ToRole="TbUsuario" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.idSupervisor_fk" FromRole="Supervisores" ToRole="TbPedidoM" />
+        </EntityType>
+        <EntityType Name="TbPedidoM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSolicitud" Type="Int32" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidad" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="IdSupervisor" Type="Int32" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="Surtido" Type="Int32" />
+          <Property Name="Dato" Type="Int32" />
+          <NavigationProperty Name="TbCategoria" Relationship="OPModel.IdCategoria_fk" FromRole="TbPedidoM" ToRole="TbCategoria" />
+          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdPedMaterial" FromRole="TbPedidoM" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbUnidad" Relationship="OPModel.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
+          <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
+          <NavigationProperty Name="Supervisores" Relationship="OPModel.idSupervisor_fk" FromRole="TbPedidoM" ToRole="Supervisores" />
+        </EntityType>
+        <Association Name="id_usuario_fk">
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
+          <End Type="OPModel.Supervisores" Role="Supervisores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supervisores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdCategoria_fk">
+          <End Type="OPModel.TbCategoria" Role="TbCategoria" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbCategoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdPedMaterial">
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="0..1" />
+          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbPedidoM">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="IdPedidoM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdUnidad_fk">
+          <End Type="OPModel.TbUnidad" Role="TbUnidad" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUnidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Status_fk">
           <End Type="OPModel.TbStatusAutorizacion" Role="TbStatusAutorizacion" Multiplicity="0..1" />
           <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
@@ -785,7 +857,19 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="idSupervisor_fk">
+          <End Type="OPModel.Supervisores" Role="Supervisores" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supervisores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdSupervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -832,22 +916,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Revision" ColumnName="Revision" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbPedidoM">
-            <EntityTypeMapping TypeName="OPModel.TbPedidoM">
-              <MappingFragment StoreEntitySet="TbPedidoM">
-                <ScalarProperty Name="Dato" ColumnName="Dato" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdSupervisor" ColumnName="IdSupervisor" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,6 +1054,30 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             <EntityTypeMapping TypeName="OPModel.TbStatusAutorizacion">
               <MappingFragment StoreEntitySet="TbStatusAutorizacion">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supervisores">
+            <EntityTypeMapping TypeName="OPModel.Supervisores">
+              <MappingFragment StoreEntitySet="Supervisores">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbPedidoM">
+            <EntityTypeMapping TypeName="OPModel.TbPedidoM">
+              <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdSupervisor" ColumnName="IdSupervisor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

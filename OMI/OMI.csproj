@@ -224,6 +224,9 @@
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Supervisores.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>

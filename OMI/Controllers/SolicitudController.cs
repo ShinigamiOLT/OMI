@@ -18,11 +18,12 @@ namespace OMI.Controllers
                     o.Id,
                     o.Descripcion,
                     o.Cantidad,
-                    o.Estatus,
-                    o.IdSupervisor,
+                    IdSupervisor= o.Supervisores.TbUsuario.Nombre,
+                    Estatus =  o.TbStatusAutorizacion.Nombre,
                   Unidad=  o.TbUnidad.Nombre,
               
                   Categoria=o.TbCategoria.Nombre
+                 
                    /* Date = o.Date.ToShortDateString(),
                     ChefName = o.Chef.FirstName + " " + o.Chef.LastName,
                     Meals = string.Join(", ", o.Meals.Select(m => m.Name))*/
@@ -71,7 +72,7 @@ namespace OMI.Controllers
         {
           
             search = (search ?? "").ToLower();
-            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == 1).AsQueryable().OrderBy(m=>m.Id);
+            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == 1).AsQueryable();//.OrderBy(m=>m.Id);
 
             return Json(new GridModelBuilder<TbPedidoM>(items, g)
             {
@@ -105,14 +106,51 @@ namespace OMI.Controllers
                 Cantidad = input.Cantidad,
                 TbUnidad =  sol.contexto.TbUnidad.Find(input.IdUnidad),
                 TbCategoria =  sol.GetCategoria (input.Categoria)
+                
                 /*
                 Chef = Db.Get<Chef>(input.Chef),
                 Meals = Db.Meals.Where(o => input.Meals.Contains(o.Id)),
               */
             });
-            sol.contexto.TbPedidoM.Add(dinner);
-           
+            sol.AgregaPedido(dinner);
+          
             return Json(MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
         }
+
+        public ActionResult Edit(int id)
+        {
+            var dinner = sol.GetPedidoM(id);
+
+            var input = new PedidoInPut()
+            {
+                Id = dinner.Id,
+                IdUnidad = dinner.IdUnidad,
+                Descripcion = dinner.Descripcion,
+                IdSolicitud = dinner.IdSolicitud,
+                Cantidad = dinner.Cantidad,
+                Categoria = dinner.IdCategoria
+            };
+
+            return PartialView("Create", input);
+        }
+/*
+        [HttpPost]
+        public ActionResult Edit(DinnerInput input)
+        {
+            if (!ModelState.IsValid) return PartialView("Create", input);
+            var dinner = Db.Get<Dinner>(input.Id);
+
+            dinner.Name = input.Name;
+            dinner.Date = input.Date.Value;
+            dinner.Chef = Db.Get<Chef>(input.Chef);
+            dinner.Meals = Db.Meals.Where(m => input.Meals.Contains(m.Id));
+            dinner.BonusMeal = Db.Get<Meal>(input.BonusMealId);
+            Db.Update(dinner);
+
+            // returning the key to call grid.api.update
+            return Json(new { Id = dinner.Id });
+        }*/
+
+
     }
 }

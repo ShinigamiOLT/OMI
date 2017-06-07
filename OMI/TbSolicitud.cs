@@ -23,8 +23,8 @@ namespace OMI
         public Nullable<int> IdPedidoM { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
-        public virtual TbPedidoM TbPedidoM { get; set; }
         public virtual TbPedidoPersonal TbPedidoPersonal { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
+        public virtual TbPedidoM TbPedidoM { get; set; }
     }
 }
