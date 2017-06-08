@@ -10,53 +10,63 @@ namespace OMI.Models
     public class cSolicitud
     {
          [Key]
-         public int IdSolicitud;
-
-        public string Folio;
-
-        public DateTime Fecha;
+        
 
         //aqui se supone que sera para dar de alta una solicitud.
         public  OPEntities contexto;
-        private int idformato;
-        public TbFormato tipoformato;
+     
 
-        public TbUsuario usuario;
+        public string Folio;
+       
+
+        public TbSolicitud TbSol;
 
         public List<TbPedidoM> ListaPedido;
+
+        public bool Guardar;
      
         public cSolicitud()
         {
-            idformato = 1;
-            IdSolicitud = 2;
+            int   idformato = 1;
+           int  IdSolicitud = 2;
+            int idusuario = 2;
             contexto= new OPEntities();
+            TbSol = contexto.TbSolicitud.Find(IdSolicitud);
+            if (TbSol == null)
+            {
+                TbSol= new TbSolicitud();
+                TbSol.Fecha = DateTime.Now;
+                TbSol.IdFormato = idformato;
+                TbSol.IdUsuario = idusuario;
+                TbSol.TipoMaterialPersonal = 1;
+                
+                contexto.TbSolicitud.Add(TbSol);
+                contexto.SaveChanges();
 
-            tipoformato = contexto.TbFormato.Find(idformato);
+            }
 
-            usuario = contexto.TbUsuario.Find(2);
+          TbSol.TbFormato   = contexto.TbFormato.Find(idformato);
 
-            ListaPedido = new List<TbPedidoM>();
+            TbSol.TbUsuario = contexto.TbUsuario.Find(idusuario);
 
-          
 
-            Folio = tipoformato.Nombre+"-" + IdSolicitud.ToString("000");
-            Fecha = DateTime.Now;
+
+            ListaPedido = TbSol.TbPedidoM;
+            Folio =  TbSol.TbFormato.Nombre+"-" + IdSolicitud.ToString("000");
+            
         }
 
 
-        public string Datos(int id)
-        {
-            return usuario.Nombre + " : " + usuario.TbArea.Nombre + ": " + tipoformato.Nombre + " : " + tipoformato.Descripcion + id;
-        }
+       
 
         public string FechaCorta {
-            get { return Fecha.ToShortDateString(); }
+            get { return TbSol. Fecha.ToShortDateString(); }
         }
 
-        public  TbPedidoM Get<T> (int id) where T : TbPedidoM
+        public  TbPedidoM Get<T> (int id,int id2) where T : TbPedidoM
         {
 
-            return  contexto.TbPedidoM.Find(id);
+            return  contexto.TbPedidoM.Find(id,id2);
         }
 
        
@@ -70,7 +80,24 @@ namespace OMI.Models
         {
             foreach (TbPedidoM m in ListaPedido)
             {
-                contexto.TbPedidoM.Add(m);
+                if (m.Dato != 2)
+                    m.Dato = 1;
+
+            }
+            EliminaPedidos(2);
+            contexto.SaveChanges();
+        }
+
+        internal void EliminaPedidos(int clave)
+        {
+            foreach (TbPedidoM m in ListaPedido.ToList())
+            {
+                
+                if (m.Dato == clave)
+                {
+                    contexto.Entry(m).State= EntityState.Deleted;
+                }
+               
 
             }
             contexto.SaveChanges();
@@ -94,14 +121,15 @@ namespace OMI.Models
             contexto.SaveChanges();
         }
 
-        internal TbPedidoM GetPedidoM(int id)
+        internal TbPedidoM GetPedidoM(int id,int id2)
         {
-            return contexto.TbPedidoM.Find(id);
+           
+            return contexto.TbPedidoM.Find(id,id2);
         }
 
         public void UpdatePedido(PedidoInPut input)
         {
-            var dinner = GetPedidoM(input.Id);
+            var dinner = GetPedidoM(input.Id,input.IdSolicitud);
 
             dinner.Cantidad = input.Cantidad;
             dinner.IdUnidad = input.IdUnidad;
@@ -114,7 +142,28 @@ namespace OMI.Models
 
         public void DelPedido(int inputId)
         {
-           contexto.Entry(GetPedidoM(inputId)).State = EntityState.Deleted;
+           contexto.Entry(GetPedidoM(inputId,TbSol.IdSolicitud)).State = EntityState.Deleted;
+            contexto.SaveChanges();
+        }
+        public void DelPedido2(int inputId)
+        {
+       //     contexto.Entry(GetPedidoM(inputId, TbSol.IdSolicitud)).State = EntityState.Deleted;
+            GetPedidoM(inputId, TbSol.IdSolicitud).Dato = 2;
+            contexto.SaveChanges();
+        }
+
+        public void DesMarcaEliminado(int clave)
+        {
+            foreach (TbPedidoM m in ListaPedido.ToList())
+            {
+                
+                if (m.Dato == clave)
+                {
+                    m.Dato = 1;
+                }
+
+
+            }
             contexto.SaveChanges();
         }
     }

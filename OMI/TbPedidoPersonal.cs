@@ -14,12 +14,6 @@ namespace OMI
     
     public partial class TbPedidoPersonal
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TbPedidoPersonal()
-        {
-            this.TbSolicitud = new HashSet<TbSolicitud>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> IdTipoEspecialidad { get; set; }
         public Nullable<int> IdProfesion { get; set; }
@@ -30,8 +24,6 @@ namespace OMI
     
         public virtual TbCategoriaRH TbCategoriaRH { get; set; }
         public virtual TbEspecialidad TbEspecialidad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
         public virtual TbProfesion TbProfesion { get; set; }
     }
 }

@@ -14,17 +14,21 @@ namespace OMI
     
     public partial class TbSolicitud
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TbSolicitud()
+        {
+            this.TbPedidoM = new List<TbPedidoM>();
+        }
+    
         public int IdSolicitud { get; set; }
-        public Nullable<int> IdFormato { get; set; }
+        public int IdFormato { get; set; }
         public System.DateTime Fecha { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
         public Nullable<int> TipoMaterialPersonal { get; set; }
-        public Nullable<int> IdPedidoP { get; set; }
-        public Nullable<int> IdPedidoM { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
-        public virtual TbPedidoPersonal TbPedidoPersonal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual List<TbPedidoM> TbPedidoM { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
-        public virtual TbPedidoM TbPedidoM { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace OMI.Models
 
         [UIHint("Lookup")]
         [Required]
-        public int? IdUnidad { get; set; }
+        public int IdUnidad { get; set; }
 
         [Required]
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetCategoria", Controller = "Data")]
         [DisplayName("Categoria")]
-        public int? Categoria { get; set; }
+        public int Categoria { get; set; }
 
         public PedidoInPut()
         {

@@ -34,7 +34,6 @@ namespace OMI
         public virtual DbSet<TbFormato> TbFormato { get; set; }
         public virtual DbSet<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual DbSet<TbProfesion> TbProfesion { get; set; }
-        public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
         public virtual DbSet<TbUnidad> TbUnidad { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
         public virtual DbSet<VUsuarioxArea> VUsuarioxArea { get; set; }
@@ -42,6 +41,8 @@ namespace OMI
         public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
         public virtual DbSet<Supervisores> Supervisores { get; set; }
         public virtual DbSet<TbPedidoM> TbPedidoM { get; set; }
+        public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
+        public virtual DbSet<CustomersV1> CustomersV1 { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

@@ -183,6 +183,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
+    <Compile Include="CustomersV1.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
