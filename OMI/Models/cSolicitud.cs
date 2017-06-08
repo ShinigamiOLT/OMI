@@ -28,7 +28,7 @@ namespace OMI.Models
         public cSolicitud()
         {
             idformato = 1;
-            IdSolicitud = 1;
+            IdSolicitud = 2;
             contexto= new OPEntities();
 
             tipoformato = contexto.TbFormato.Find(idformato);

@@ -296,6 +296,10 @@
       <DependentUpon>ModelOP.edmx</DependentUpon>
       <LastGenOutput>ModelOP.cs</LastGenOutput>
     </Content>
+    <Content Include="Referencia\Omu.Awem.dll" />
+    <Content Include="Referencia\Omu.Awem.xml" />
+    <Content Include="Referencia\Omu.AwesomeMvc.dll" />
+    <Content Include="Referencia\Omu.AwesomeMvc.XML" />
     <Content Include="Scripts\awem.js" />
     <Content Include="Scripts\AwesomeMvc.js" />
     <Content Include="Scripts\bootstrap.js" />

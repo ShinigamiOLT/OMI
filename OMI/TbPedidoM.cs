@@ -21,11 +21,11 @@ namespace OMI
         }
     
         public int Id { get; set; }
-        public int IdSolicitud { get; set; }
+        public Nullable<int> IdSolicitud { get; set; }
         public Nullable<int> IdCategoria { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> IdUnidad { get; set; }
-        public int Cantidad { get; set; }
+        public Nullable<int> Cantidad { get; set; }
         public Nullable<int> IdSupervisor { get; set; }
         public Nullable<int> Estatus { get; set; }
         public Nullable<int> Surtido { get; set; }

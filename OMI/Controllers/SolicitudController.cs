@@ -9,7 +9,7 @@ using OMI.Models;
 namespace OMI.Controllers
 {
     public class SolicitudController : Controller
-    {
+    {cSolicitud sol ;
         private static object MapToGridModel(TbPedidoM o)
         {
             return
@@ -21,7 +21,6 @@ namespace OMI.Controllers
                     IdSupervisor= o.Supervisores.TbUsuario.Nombre,
                     Estatus =  o.TbStatusAutorizacion.Nombre,
                   Unidad=  o.TbUnidad.Nombre,
-              
                   Categoria=o.TbCategoria.Nombre
                  
                    /* Date = o.Date.ToShortDateString(),
@@ -29,7 +28,7 @@ namespace OMI.Controllers
                     Meals = string.Join(", ", o.Meals.Select(m => m.Name))*/
                 };
         }
-   cSolicitud sol ;
+   
 
         public SolicitudController()
         {
@@ -51,8 +50,7 @@ namespace OMI.Controllers
 
         public ActionResult NuevaSolicitud()
         {
-
-          
+            
             return View(sol);
         }
 
@@ -61,8 +59,8 @@ namespace OMI.Controllers
        {
            if (ModelState.IsValid)
            {
-               sol.GuardaPedidos();
-               sol.contexto.SaveChanges();
+               sol_.GuardaPedidos();
+               sol_.contexto.SaveChanges();
            }
            return RedirectToAction("Index");
        }
@@ -72,7 +70,7 @@ namespace OMI.Controllers
         {
           
             search = (search ?? "").ToLower();
-            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == 1).AsQueryable();//.OrderBy(m=>m.Id);
+            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == sol.IdSolicitud).AsQueryable();//.OrderBy(m=>m.Id);
 
             return Json(new GridModelBuilder<TbPedidoM>(items, g)
             {
@@ -115,8 +113,8 @@ namespace OMI.Controllers
                 Meals = Db.Meals.Where(o => input.Meals.Contains(o.Id)),
               */
             });
-            sol.AgregaPedido(dinner);
-          
+         sol.AgregaPedido(dinner);
+         //    sol.ListaPedido.Add(dinner);
             return Json(MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
         }
 
@@ -156,7 +154,7 @@ namespace OMI.Controllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Are you sure you want to delete dinner <b>{0}</b> ?", dinner.Descripcion)
+                Message = string.Format("¿Estas Seguro que quieres Elimina el pedido de <b>{0}</b> ?", dinner.Descripcion)
             });
         }
 
