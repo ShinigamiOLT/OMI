@@ -102,11 +102,14 @@ namespace OMI.Controllers
                 Descripcion = input.Descripcion,
                 Estatus = 1,
                 IdSupervisor = 1,
+               
                 Surtido = 1,
                 Cantidad = input.Cantidad,
                 TbUnidad =  sol.contexto.TbUnidad.Find(input.IdUnidad),
-                TbCategoria =  sol.GetCategoria (input.Categoria)
-                
+                TbCategoria =  sol.GetCategoria (input.Categoria),
+                 Supervisores =  sol.contexto.Supervisores.Find(1),
+                 TbStatusAutorizacion = sol.contexto.TbStatusAutorizacion.Find(1)
+
                 /*
                 Chef = Db.Get<Chef>(input.Chef),
                 Meals = Db.Meals.Where(o => input.Meals.Contains(o.Id)),
