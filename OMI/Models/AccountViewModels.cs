@@ -91,8 +91,8 @@ namespace OMI.Models
         [Display(Name = "Nombre de Usuario")]
         public string UserName { get; set; }
 
-        [Display(Name = "Nivel")]
-        [Required(ErrorMessage = "El nivel  es requerido")]
+        [Display(Name = "Area")]
+        [Required(ErrorMessage = "El Area  es requerido")]
         public int? Nivel { get; set; }
 
 

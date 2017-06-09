@@ -16,7 +16,7 @@ namespace OMI.Models
         public string FirstName { get; set; }
         [MaxLength(500)]
         public string LastName { get; set; }
-     
+     [Display (Name = "Areas")]
         public int Nivel { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

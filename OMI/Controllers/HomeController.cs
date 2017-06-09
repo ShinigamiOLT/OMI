@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace OMI.Controllers
 {
@@ -11,6 +12,9 @@ namespace OMI.Controllers
     {
         public ActionResult Index()
         {
+            string userName = User.Identity.GetUserId();
+          
+            ViewBag.UsuarioActual = userName;
             return View();
         }
 

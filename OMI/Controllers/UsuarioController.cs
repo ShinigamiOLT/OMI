@@ -31,6 +31,8 @@ namespace OMI.Controllers
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             ViewBag.RoleId = new SelectList(roleManager.Roles.ToList(), "Name", "Name");
+               OPEntities db = new OPEntities();
+          ViewBag.Areas=new SelectList( db.TbArea.ToList(),"Id","Nombre");
 
             return View();
         }
