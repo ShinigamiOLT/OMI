@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -15,9 +16,12 @@ namespace OMI.Models
 {
     public class cUsuario
     {
+        [Key]
         public string Id { get; set; }
         [DisplayName("Nombre")]
         public string FullName { get; set; }
+        [DisplayName("Apellido")]
+        public string Apellido { get; set; }
         [DisplayName("Usuario")]
         public string Usuario { get; set; }
         [DisplayName("Email")]

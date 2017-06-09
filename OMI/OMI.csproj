@@ -214,6 +214,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706091445361_InitialCreate.cs" />
+    <Compile Include="Migrations\201706091445361_InitialCreate.Designer.cs">
+      <DependentUpon>201706091445361_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelOP.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -436,6 +441,7 @@
     <Content Include="Views\Solicitud\Create.cshtml" />
     <Content Include="Views\Shared\Delete.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -450,6 +456,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706091445361_InitialCreate.resx">
+      <DependentUpon>201706091445361_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

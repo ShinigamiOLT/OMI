@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -15,6 +16,8 @@ namespace OMI.Models
         public string FirstName { get; set; }
         [MaxLength(500)]
         public string LastName { get; set; }
+     
+        public int Nivel { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -47,6 +50,9 @@ namespace OMI.Models
             modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
+            modelBuilder.Entity<cUsuario>().ToTable("UsuariosOMI");
         }
+
+        public DbSet<cUsuario> UsuariosOMI { get; set; }
     }
 }

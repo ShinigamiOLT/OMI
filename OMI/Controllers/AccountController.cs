@@ -68,14 +68,24 @@ namespace OMI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                // return View(model);
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                if (user != null)
+                {
+                    await SignInAsync(user, true);
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Usuario o contraseña invalido.");
+                }
             }
 
             // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
             // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -90,7 +100,12 @@ namespace OMI.Controllers
                     return View(model);
             }
         }
-
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

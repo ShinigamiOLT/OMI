@@ -49,6 +49,9 @@ namespace OMI.Models
     public class LoginViewModel
     {
         [Required]
+        [Display(Name = "Nombre de usuario")]
+        public string UserName { get; set; }
+        [Required]
         [Display(Name = "Correo electrónico")]
         [EmailAddress]
         public string Email { get; set; }
@@ -79,6 +82,23 @@ namespace OMI.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string FirstName { get; set; }
+        [Display(Name = "Apellido")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Nivel")]
+        [Required(ErrorMessage = "El nivel  es requerido")]
+        public int? Nivel { get; set; }
+
+
+
+        public string[] selectedRoles { get; set; }
+
     }
 
     public class ResetPasswordViewModel
