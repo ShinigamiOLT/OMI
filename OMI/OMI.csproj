@@ -44,11 +44,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Omu.Awem">
       <HintPath>\\Mac\Home\Nextcloud\Utilerias\AwesomeMvcTrial.5.0\bin\mvc5\Omu.Awem.dll</HintPath>
     </Reference>
@@ -183,6 +207,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="CustomersV1.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
@@ -207,12 +232,16 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
+    <Compile Include="Models\cUsuario.cs" />
     <Compile Include="Models\GridUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MobileUtils.cs" />
     <Compile Include="Models\PedidoInPut.cs" />
     <Compile Include="Models\UtilApp.cs" />
+    <Compile Include="Models\Utils\IExplorer.cs" />
+    <Compile Include="Models\Utils\Message.cs" />
+    <Compile Include="Models\Utils\ResultSet.cs" />
     <Compile Include="PedidoMXSolicitud_Result.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
@@ -406,6 +435,7 @@
     <Content Include="Views\Shared\EditorTemplates\_FieldLayout.cshtml" />
     <Content Include="Views\Solicitud\Create.cshtml" />
     <Content Include="Views\Shared\Delete.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
