@@ -169,5 +169,12 @@ namespace OMI.Controllers
             return Json(new { Id = input.Id });
         }
 
+
+        public ActionResult Lista()
+        {
+            
+            return View(sol.TbSol);
+        }
+
     }
 }
