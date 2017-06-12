@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace OMI.Controllers
 {
-    [Authorize]
+  
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -18,14 +18,14 @@ namespace OMI.Controllers
             return View();
         }
 
-        [Authorize (Roles = "Administrador")]
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-        [Authorize(Roles = "Gerente,Administrador")]
+       
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
