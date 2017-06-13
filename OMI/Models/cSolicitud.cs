@@ -37,6 +37,7 @@ namespace OMI.Models
                CreaNuevaSolicitud(idformato,idusuario);
 
             }
+            IdSolicitud = TbSol.IdSolicitud;
 
 
 
