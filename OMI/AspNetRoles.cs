@@ -12,21 +12,18 @@ namespace OMI
     using System;
     using System.Collections.Generic;
     
-    public partial class TbStatusAutorizacion
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TbStatusAutorizacion()
+        public AspNetRoles()
         {
-            this.TbPedidoM = new HashSet<TbPedidoM>();
-            this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int Id { get; set; }
-        public string Nombre { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

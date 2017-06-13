@@ -18,6 +18,7 @@ namespace OMI
         public TbUsuario()
         {
             this.Supervisores = new HashSet<Supervisores>();
+            this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
             this.TbSolicitud = new HashSet<TbSolicitud>();
         }
     
@@ -28,6 +29,8 @@ namespace OMI
         public virtual TbArea TbArea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supervisores> Supervisores { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
     }

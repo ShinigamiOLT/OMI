@@ -1,0 +1,63 @@
+﻿@using Omu.Awem.Helpers
+@using OMII.Utils
+
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title">Historial de Pedidos de Material</h2>
+            </div>
+            <div class="panel-body">
+                <h2>Hola</h2>
+                
+                <div class="container">
+                    <div class="row">
+                        
+                        @Html.InitCrudPopupsForGrid("GridPedidoM", "Solicitud")
+                        @* popup names will be action + gridid; name is used when calling awe.open(name) *@
+
+                        <div class="bar">
+                            <button type="button" onclick="awe.open('createGridPedidoM')" class="awe-btn mbtn">Nuevo Pedido</button>
+                        </div>
+
+                        @(Html.Awe().Grid("GridPedidoM")
+                              .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
+                              .Url(Url.Action("GridGetPedidoMaterial", "Solicitud"))
+                              .Resizable()
+                              .Reorderable()
+                              .Height(0)
+                              .Paging(false)
+                              .Groupable(false)
+
+                              .Columns(
+                                  new Column{Name = "Folio", Width = 55,Hidden = true},
+                                  new Column { Bind = "FECHA", Width = 120 },
+                                  new Column{Name="Categoria", ClientFormat = ".Categoria", Header = "Categoria",Bind = "Nombre"},
+                                  new Column {Name = "Descripcion"},
+                                  new Column { Name = "Unidad" },
+                                  new Column { Name = "Cantidad" },
+new Column { Name = "Autoriza", Header = "Autoriza" },
+                                  new Column { Name = "Estatus" },
+                                  new Column{Name = "Usuario"},
+
+
+                                  /*new Column{Name = "Date"},
+                      new Column{Name = "Chef.FirstName,Chef.LastName", ClientFormat = ".ChefName", Header = "Chef"},
+                      new Column{ClientFormat = ".Meals", Header = "Meals"},*/
+                                  new Column {ClientFormat = GridUtils.EditFormatForGrid("GridPedidoM"), Width = 50}.Mod(o => o.Nohide()),
+                                  new Column{ClientFormat = GridUtils.DeleteFormatForGrid("GridPedidoM"), Width = 50}.Mod(o => o.Nohide())))
+                        <br/>
+
+                    </div>
+
+                </div>
+                
+                
+
+            </div>
+        </div>
+    </div>
+</div>

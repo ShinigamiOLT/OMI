@@ -25,6 +25,37 @@ namespace OMI.Controllers
 
             return Json(items);
         }
+        public ActionResult GetProfesion()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+            foreach (var unidad in contexto.TbProfesion)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+
+            return Json(items);
+        }
+
+        public ActionResult GetEspecialidad()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+            foreach (var unidad in contexto.TbEspecialidad)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+
+            return Json(items);
+        }
+        public ActionResult GetCategoriaRH()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+            foreach (var unidad in contexto.TbCategoriaRH)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+
+            return Json(items);
+        }
         public ActionResult GetCategoria()
         {
             List<KeyContent> items = new List<KeyContent>();

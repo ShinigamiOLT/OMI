@@ -199,6 +199,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
@@ -209,6 +221,9 @@
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="CustomersV1.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -243,6 +258,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MobileUtils.cs" />
     <Compile Include="Models\PedidoInPut.cs" />
+    <Compile Include="Models\Procedimientos.cs" />
     <Compile Include="Models\UtilApp.cs" />
     <Compile Include="Models\Utils\IExplorer.cs" />
     <Compile Include="Models\Utils\Message.cs" />
@@ -301,6 +317,9 @@
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbUsuario.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosOMI.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="VUsuarioxArea.cs">
@@ -3694,6 +3713,7 @@
     <Content Include="Views\Shared\Delete.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Register.cshtml" />
+    <Content Include="Views\Solicitud\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

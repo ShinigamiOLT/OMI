@@ -17,7 +17,8 @@ namespace OMI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TbSolicitud()
         {
-            this.TbPedidoM = new List<TbPedidoM>();
+            this.TbPedidoM = new HashSet<TbPedidoM>();
+            this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
         }
     
         public int IdSolicitud { get; set; }
@@ -25,10 +26,13 @@ namespace OMI
         public System.DateTime Fecha { get; set; }
         public int IdUsuario { get; set; }
         public Nullable<int> TipoMaterialPersonal { get; set; }
+        public string Folio { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual List<TbPedidoM> TbPedidoM { get; set; }
+        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
     }
 }

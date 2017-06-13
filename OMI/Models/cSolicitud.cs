@@ -28,36 +28,38 @@ namespace OMI.Models
         public cSolicitud()
         {
             int   idformato = 1;
-           int  IdSolicitud = 2;
+           int  IdSolicitud = 3;
             int idusuario = 2;
             contexto= new OPEntities();
             TbSol = contexto.TbSolicitud.Find(IdSolicitud);
             if (TbSol == null)
             {
-                TbSol= new TbSolicitud();
-                TbSol.Fecha = DateTime.Now;
-                TbSol.IdFormato = idformato;
-                TbSol.IdUsuario = idusuario;
-                TbSol.TipoMaterialPersonal = 1;
-                
-                contexto.TbSolicitud.Add(TbSol);
-                contexto.SaveChanges();
+               CreaNuevaSolicitud(idformato,idusuario);
 
             }
 
-          TbSol.TbFormato   = contexto.TbFormato.Find(idformato);
-
-            TbSol.TbUsuario = contexto.TbUsuario.Find(idusuario);
 
 
 
             ListaPedido = TbSol.TbPedidoM;
-            Folio =  TbSol.TbFormato.Nombre+"-" + IdSolicitud.ToString("000");
-            
+          TbSol.Folio =  TbSol.TbFormato.Nombre+"-" + IdSolicitud.ToString("000");
+            contexto.SaveChanges();
+
         }
 
+        void CreaNuevaSolicitud(int idformato, int idusuario)
+        {
+            TbSol = new TbSolicitud();
+            TbSol.Fecha = DateTime.Now;
+            TbSol.IdFormato = idformato;
+            TbSol.IdUsuario = idusuario;
+            TbSol.TipoMaterialPersonal = 1;
+            contexto.TbSolicitud.Add(TbSol);
+            contexto.SaveChanges();
+            TbSol.TbFormato = contexto.TbFormato.Find(idformato);
+            TbSol.TbUsuario = contexto.TbUsuario.Find(idusuario);
+        }
 
-       
 
         public string FechaCorta {
             get { return TbSol. Fecha.ToShortDateString(); }

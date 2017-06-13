@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -82,6 +85,33 @@ namespace OMI.Controllers
                 Map = MapToGridModel
             }.Build());
         }
+
+        public ActionResult GridGetPedidoMaterial(GridParams g, string search)
+        {
+           OPEntities contexto = new OPEntities();
+          var items =  contexto.PedidoMXSolicitud(2).ToList().AsQueryable();
+
+
+        
+            return Json(new GridModelBuilder<PedidoMXSolicitud_Result>(items, g)
+            {
+                Key = "Id",
+                Map = o => new
+                {
+                  Folio= o.Formato+ o.Folio,
+                 Fecha= o.Fecha.ToShortDateString(),
+                  Categoria=  o.Nombre,
+                 Descripcion=  o.Descripcion,
+                Unidad=   o.Unidad,
+               o.Cantidad,
+                    o.Autoriza,
+                 Estatus=   o.Estatus,
+                 Usuario=   o.Usuario
+                },
+            }.Build());
+        }
+        
+
         public ActionResult Create()
         {
             TbPedidoM dinner = new TbPedidoM();
@@ -110,7 +140,8 @@ namespace OMI.Controllers
                 TbCategoria =  sol.GetCategoria (input.Categoria),
                  Supervisores =  sol.contexto.Supervisores.Find(1),
                  TbStatusAutorizacion = sol.contexto.TbStatusAutorizacion.Find(1),
-                 Dato = 0
+                 Dato = 0,
+                
                  
                 /*
                 Chef = Db.Get<Chef>(input.Chef),
@@ -173,7 +204,7 @@ namespace OMI.Controllers
         public ActionResult Lista()
         {
             
-            return View(sol.TbSol);
+            return View();
         }
 
     }
