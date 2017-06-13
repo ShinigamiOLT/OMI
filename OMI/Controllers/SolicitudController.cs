@@ -12,7 +12,8 @@ using OMI.Models;
 namespace OMI.Controllers
 {
     public class SolicitudController : Controller
-    {cSolicitud sol = new cSolicitud();
+    {
+      
         private static object MapToGridModel(TbPedidoM o)
         {
             return
@@ -43,9 +44,11 @@ namespace OMI.Controllers
 
         
 
-        public ActionResult NuevaSolicitud()
+        public ActionResult NuevaSolicitud(int? ID)
         {
-            
+
+            cSolicitud sol = new cSolicitud(ID ?? 1);
+            Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
             return View(sol);
         }
 
@@ -57,14 +60,17 @@ namespace OMI.Controllers
                sol_.GuardaPedidos();
               
            }
-           return RedirectToAction("NuevaSolicitud", "Solicitud");
+           int id = (int)Session["IdSolicitud"];
+            return RedirectToAction("NuevaSolicitud", "Solicitud", new { id  });
        }
      
         public ActionResult Cancelar()
         {
-           sol. EliminaPedidos(0);
+            int id = (int) Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id);
+            sol. EliminaPedidos(0);
             sol.DesMarcaEliminado(2);
-            return RedirectToAction("NuevaSolicitud", "Solicitud");
+            return RedirectToAction("NuevaSolicitud", "Solicitud", new {id});
         }
         public ActionResult Enviar()
         {
@@ -74,7 +80,10 @@ namespace OMI.Controllers
 
         public ActionResult GridGetItems(GridParams g, string search)
         {
-          
+            int id = 1;
+          if (Session["IdSolicitud"]!=null)
+         id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id);
             search = (search ?? "").ToLower();
             var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == sol.TbSol.IdSolicitud).Where(o => o.Dato !=2).AsQueryable();//.OrderBy(m=>m.Id);
 
@@ -89,15 +98,16 @@ namespace OMI.Controllers
         public ActionResult GridGetPedidoMaterial(GridParams g, string search)
         {
            OPEntities contexto = new OPEntities();
-          var items =  contexto.PedidoMXSolicitud(2).ToList().AsQueryable();
-
+          var items =  contexto.Sp_AllPedido().ToList().AsQueryable();
+           
 
         
-            return Json(new GridModelBuilder<PedidoMXSolicitud_Result>(items, g)
+            return Json(new GridModelBuilder<Sp_AllPedido_Result>(items, g)
             {
                 Key = "Id",
                 Map = o => new
                 {
+                    Id=o.Id,
                   Folio= o.Formato+ o.Folio,
                  Fecha= o.Fecha.ToShortDateString(),
                   Categoria=  o.Nombre,
@@ -123,7 +133,8 @@ namespace OMI.Controllers
         public ActionResult Create(PedidoInPut input)
         {
             if (!ModelState.IsValid) return PartialView(input);
-           
+            int id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id);
 
             TbPedidoM dinner = (new TbPedidoM()
             {
@@ -155,6 +166,8 @@ namespace OMI.Controllers
 
         public ActionResult Edit(int id)
         {
+            int id_ = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id_);
             var dinner = sol.GetPedidoM(id,sol.TbSol.IdSolicitud);
 
             var input = new PedidoInPut()
@@ -175,6 +188,8 @@ namespace OMI.Controllers
         {
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
+            int id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id);
             sol.UpdatePedido(input);
 
            
@@ -183,6 +198,8 @@ namespace OMI.Controllers
         }
         public ActionResult Delete(int id, string gridId)
         {
+            int id_ = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id_);
             var dinner =sol.GetPedidoM(id,sol.TbSol.IdSolicitud);
 
             return PartialView(new DeleteConfirmInput
@@ -196,6 +213,8 @@ namespace OMI.Controllers
         [HttpPost]
         public ActionResult Delete(DeleteConfirmInput input)
         {
+            int id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id);
             sol.DelPedido2(input.Id);
             return Json(new { Id = input.Id });
         }
@@ -204,6 +223,11 @@ namespace OMI.Controllers
         public ActionResult Lista()
         {
             
+            return View();
+        }
+
+        public ActionResult editovi()
+        {
             return View();
         }
 

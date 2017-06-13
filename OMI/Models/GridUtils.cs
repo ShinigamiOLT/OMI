@@ -28,6 +28,17 @@
         {
             return EditFormat("edit" + gridId, key);
         }
+        public static string EditForOvi(string gridId, string key = "Id")
+        {
+            return EditFormat1("Editovi" + gridId, key);
+            }
+        public static string EditFormat1(string popupName, string key = "Id")
+        {
+            return string.Format("<button type='button' class='awe-btn' onclick=\'Insert()\' \"><span class='ico-edit'></span></button>",
+                popupName, key);
+          
+        }
+
 
         public static string DeleteFormatForGrid(string gridId, string key = "Id")
         {

@@ -18,7 +18,7 @@ namespace OMI
         public TbSolicitud()
         {
             this.TbPedidoM = new List<TbPedidoM>();
-            this.TbPedidoPersonal = new List<TbPedidoPersonal>();
+            this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
         }
     
         public int IdSolicitud { get; set; }
@@ -32,7 +32,7 @@ namespace OMI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<TbPedidoM> TbPedidoM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual List<TbPedidoPersonal> TbPedidoPersonal { get; set; }
+        public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
     }
 }

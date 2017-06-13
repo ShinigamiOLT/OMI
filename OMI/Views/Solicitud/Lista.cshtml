@@ -33,6 +33,7 @@
                               .Groupable(false)
 
                               .Columns(
+                                  new Column{Name = "Id", Width = 55,Hidden = true},
                                   new Column{Name = "Folio", Width = 55,Hidden = true},
                                   new Column { Bind = "FECHA", Width = 120 },
                                   new Column{Name="Categoria", ClientFormat = ".Categoria", Header = "Categoria",Bind = "Nombre"},
@@ -47,7 +48,7 @@ new Column { Name = "Autoriza", Header = "Autoriza" },
                                   /*new Column{Name = "Date"},
                       new Column{Name = "Chef.FirstName,Chef.LastName", ClientFormat = ".ChefName", Header = "Chef"},
                       new Column{ClientFormat = ".Meals", Header = "Meals"},*/
-                                  new Column {ClientFormat = GridUtils.EditFormatForGrid("GridPedidoM"), Width = 50}.Mod(o => o.Nohide()),
+                                  new Column {ClientFormat = GridUtils.EditForOvi("GridPedidoM"), Width = 50}.Mod(o => o.Nohide()),
                                   new Column{ClientFormat = GridUtils.DeleteFormatForGrid("GridPedidoM"), Width = 50}.Mod(o => o.Nohide())))
                         <br/>
 
@@ -61,3 +62,11 @@ new Column { Name = "Autoriza", Header = "Autoriza" },
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function Insert() {
+        var urlInsert = '@Url.Action("NuevaSolicitud","Solicitud" , new {Id=2})';
+        $.get(urlInsert, function () {
+        });
+    }
+
+</script>

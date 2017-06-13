@@ -50,9 +50,8 @@ namespace OMI.Models
             modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
-            modelBuilder.Entity<cUsuario>().ToTable("UsuariosOMI");
         }
+        
 
-        public DbSet<cUsuario> UsuariosOMI { get; set; }
     }
 }

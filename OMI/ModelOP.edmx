@@ -69,15 +69,6 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="500" />
           <Property Name="Nivel" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="CustomersV1">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompantyName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EntryDate" Type="date" Nullable="false" />
-        </EntityType>
         <EntityType Name="Supervisores">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,14 +109,6 @@
           <Property Name="Inicio" Type="int" />
           <Property Name="Fin" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="TbCompras">
-          <Property Name="Id" Type="int" />
-          <Property Name="IdSolicitud" Type="int" />
-          <Property Name="IdPedidoPersonal" Type="int" />
-          <Property Name="IdPedidoMaterial" Type="int" />
-        </EntityType>-->
         <EntityType Name="TbEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -212,26 +195,6 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
           <Property Name="Area" Type="int" />
-        </EntityType>
-        <EntityType Name="UsuariosOMI">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="FullName" Type="nvarchar(max)" />
-          <Property Name="Usuario" Type="nvarchar(max)" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Apellido" Type="nvarchar(max)" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="VUsuarioxArea">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="255" />
-          <Property Name="Area" Type="varchar" MaxLength="255" />
         </EntityType>
         <Association Name="AreaId">
           <End Role="TbArea" Type="Self.TbArea" Multiplicity="0..1" />
@@ -409,9 +372,6 @@ advertencia 6002: La tabla o vista 'DBOPSGI.dbo.VUsuarioxArea' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pero no se encuentra la tabla.
-        <Association Name="IdSolicitud_fk" />-->
         <Association Name="idSupervisor_fk">
           <End Role="Supervisores" Type="Self.Supervisores" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -476,6 +436,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
         <Function Name="PedidoMXSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdSol" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_AllPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -513,7 +474,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomersV1" EntityType="Self.CustomersV1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
@@ -528,14 +488,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <EntitySet Name="TbStatusAutorizacion" EntityType="Self.TbStatusAutorizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUsuario" EntityType="Self.TbUsuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsuariosOMI" EntityType="Self.UsuariosOMI" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VUsuarioxArea" EntityType="Self.VUsuarioxArea" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [VUsuarioxArea].[Id] AS [Id], 
-    [VUsuarioxArea].[Nombre] AS [Nombre], 
-    [VUsuarioxArea].[Area] AS [Area]
-    FROM [dbo].[VUsuarioxArea] AS [VUsuarioxArea]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="AreaId" Association="Self.AreaId">
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
@@ -784,7 +736,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbProfesion" EntitySet="TbProfesion" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
           </AssociationSet>
-          <EntitySet Name="VUsuarioxArea" EntityType="OPModel.VUsuarioxArea" />
           <FunctionImport Name="PedidoMXSolicitud" ReturnType="Collection(OPModel.PedidoMXSolicitud_Result)">
           <Parameter Name="IdSol" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -845,7 +796,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
-          <EntitySet Name="CustomersV1" EntityType="OPModel.CustomersV1" />
           <AssociationSet Name="idEstatusPersonal_fk" Association="OPModel.idEstatusPersonal_fk">
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
@@ -859,8 +809,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <EntitySet Name="AspNetUserClaims" EntityType="OPModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="OPModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="OPModel.AspNetUsers" />
-          <EntitySet Name="TbSolicitud" EntityType="OPModel.TbSolicitud" />
-          <EntitySet Name="UsuariosOMI" EntityType="OPModel.UsuariosOMI" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -869,6 +817,12 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="OPModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(OPModel.Sp_AllPedido_Result)" />
+          <EntitySet Name="TbSolicitud" EntityType="OPModel.TbSolicitud" />
           <AssociationSet Name="IdFormato_fk" Association="OPModel.IdFormato_fk">
             <End Role="TbFormato" EntitySet="TbFormato" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
@@ -885,19 +839,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="OPModel.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="VUsuarioxArea">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Folio" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
@@ -1046,15 +988,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CustomersV1">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompantyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
         <Association Name="idEstatusPersonal_fk">
           <End Type="OPModel.TbStatusAutorizacion" Role="TbStatusAutorizacion" Multiplicity="0..1" />
           <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
@@ -1141,31 +1074,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <NavigationProperty Name="AspNetUserLogins" Relationship="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="OPModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="TbSolicitud">
-          <Key>
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdFormato" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="TipoMaterialPersonal" Type="Int32" />
-          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbFormato" Relationship="OPModel.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
-          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
-          <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
-        </EntityType>
-        <EntityType Name="UsuariosOMI">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+     
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1194,6 +1103,41 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="OPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="Sp_AllPedido_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Estatus" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="TbSolicitud">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFormato" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="TipoMaterialPersonal" Type="Int32" />
+          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbFormato" Relationship="OPModel.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+        </EntityType>
         <Association Name="IdFormato_fk">
           <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
           <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
@@ -1241,10 +1185,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="OPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1336,15 +1276,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VUsuarioxArea">
-            <EntityTypeMapping TypeName="OPModel.VUsuarioxArea">
-              <MappingFragment StoreEntitySet="VUsuarioxArea">
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="PedidoMXSolicitud" FunctionName="OPModel.Store.PedidoMXSolicitud">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OPModel.PedidoMXSolicitud_Result">
@@ -1430,16 +1361,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CustomersV1">
-            <EntityTypeMapping TypeName="OPModel.CustomersV1">
-              <MappingFragment StoreEntitySet="CustomersV1">
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="CompantyName" ColumnName="CompantyName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="OPModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -1498,6 +1419,34 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="OPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AllPedido" FunctionName="OPModel.Store.Sp_AllPedido">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OPModel.Sp_AllPedido_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="TbSolicitud">
             <EntityTypeMapping TypeName="OPModel.TbSolicitud">
               <MappingFragment StoreEntitySet="TbSolicitud">
@@ -1510,25 +1459,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UsuariosOMI">
-            <EntityTypeMapping TypeName="OPModel.UsuariosOMI">
-              <MappingFragment StoreEntitySet="UsuariosOMI">
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="OPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

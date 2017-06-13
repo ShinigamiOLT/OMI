@@ -36,19 +36,16 @@ namespace OMI
         public virtual DbSet<TbProfesion> TbProfesion { get; set; }
         public virtual DbSet<TbUnidad> TbUnidad { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
-        public virtual DbSet<VUsuarioxArea> VUsuarioxArea { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
         public virtual DbSet<Supervisores> Supervisores { get; set; }
         public virtual DbSet<TbPedidoM> TbPedidoM { get; set; }
-        public virtual DbSet<CustomersV1> CustomersV1 { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
-        public virtual DbSet<UsuariosOMI> UsuariosOMI { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {
@@ -59,14 +56,7 @@ namespace OMI
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PedidoMXSolicitud_Result>("PedidoMXSolicitud", idSolParameter);
         }
     
-        public virtual ObjectResult<PedidosXSolicitud_Result> PedidosXSolicitud(Nullable<int> idSol)
-        {
-            var idSolParameter = idSol.HasValue ?
-                new ObjectParameter("IdSol", idSol) :
-                new ObjectParameter("IdSol", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PedidosXSolicitud_Result>("PedidosXSolicitud", idSolParameter);
-        }
+      
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -169,6 +159,11 @@ namespace OMI
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<Sp_AllPedido_Result> Sp_AllPedido()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedido_Result>("Sp_AllPedido");
         }
     }
 }

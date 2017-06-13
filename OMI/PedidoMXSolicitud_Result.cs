@@ -13,8 +13,6 @@ namespace OMI
     
     public partial class PedidoMXSolicitud_Result
     {
-        public Nullable<int> Folio { get; set; }
-        public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Unidad { get; set; }
         public Nullable<int> Cantidad { get; set; }
@@ -25,5 +23,7 @@ namespace OMI
         public string NombreFormato { get; set; }
         public string Usuario { get; set; }
         public string Area { get; set; }
+        public DateTime Fecha { get; set; }
+        public int Id { get; set; }
     }
 }

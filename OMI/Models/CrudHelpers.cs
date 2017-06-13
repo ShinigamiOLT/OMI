@@ -13,33 +13,42 @@ namespace OMI.Helpers.Awesome
             var url = new UrlHelper(html.ViewContext.RequestContext);
 
             var result =
-            html.Awe()
-                .InitPopupForm()
-                .Name("create" + gridId)
-                .Group(gridId)
-                .Height(createPopupHeight)
-                .Url(url.Action("Create", crudController))
-                .Success("utils.itemCreated('" + gridId + "')")
-                .ToString()
+                html.Awe()
+                    .InitPopupForm()
+                    .Name("create" + gridId)
+                    .Group(gridId)
+                    .Height(createPopupHeight)
+                    .Url(url.Action("Create", crudController))
+                    .Success("utils.itemCreated('" + gridId + "')")
+                    .ToString()
 
-            + html.Awe()
-                  .InitPopupForm()
-                  .Name("edit" + gridId)
-                  .Group(gridId)
-                  .Height(createPopupHeight)
-                  .Url(url.Action("Edit", crudController))
-                  .Modal(true)
-                  .Success("utils.itemEdited('" + gridId + "')")
+                + html.Awe()
+                    .InitPopupForm()
+                    .Name("edit" + gridId)
+                    .Group(gridId)
+                    .Height(createPopupHeight)
+                    .Url(url.Action("Edit", crudController))
+                    .Modal(true)
+                    .Success("utils.itemEdited('" + gridId + "')")
 
-            + html.Awe()
-                  .InitPopupForm()
-                  .Name("delete" + gridId)
-                  .Group(gridId)
-                  .Url(url.Action("Delete", crudController))
-                  .Success("utils.itemDeleted('" + gridId + "')")
-                  .OnLoad("utils.delConfirmLoad('" + gridId + "')") // calls grid.api.select and animates the row
-                  .Height(200)
-                  .Modal(true);
+                + html.Awe()
+                    .InitPopupForm()
+                    .Name("delete" + gridId)
+                    .Group(gridId)
+                    .Url(url.Action("Delete", crudController))
+                    .Success("utils.itemDeleted('" + gridId + "')")
+                    .OnLoad("utils.delConfirmLoad('" + gridId + "')") // calls grid.api.select and animates the row
+                    .Height(200)
+                    .Modal(true)
+
+                + html.Awe()
+                    .InitPopupForm()
+                    .Name("EditOvi" + gridId)
+                    .Group(gridId)
+                    .Height(createPopupHeight)
+                    .Url(url.Action("EditOvi", crudController))
+                    .Success("utils.itemCreated('" + gridId + "')")
+                    .ToString();
 
             return new MvcHtmlString(result);
         }

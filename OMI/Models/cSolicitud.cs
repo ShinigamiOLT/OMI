@@ -15,36 +15,24 @@ namespace OMI.Models
         //aqui se supone que sera para dar de alta una solicitud.
         public  OPEntities contexto;
      
-
-        public string Folio;
-       
-
         public TbSolicitud TbSol;
 
         public List<TbPedidoM> ListaPedido;
 
         public bool Guardar;
      
-        public cSolicitud()
+        public cSolicitud( int idSol)
         {
             int   idformato = 1;
-           int  IdSolicitud = 3;
             int idusuario = 2;
             contexto= new OPEntities();
-            TbSol = contexto.TbSolicitud.Find(IdSolicitud);
+            TbSol = contexto.TbSolicitud.Find(idSol);
             if (TbSol == null)
             {
                CreaNuevaSolicitud(idformato,idusuario);
 
             }
-            IdSolicitud = TbSol.IdSolicitud;
-
-
-
-
-            ListaPedido = TbSol.TbPedidoM;
-          TbSol.Folio =  TbSol.TbFormato.Nombre+"-" + IdSolicitud.ToString("000");
-            contexto.SaveChanges();
+            
 
         }
 
@@ -59,6 +47,9 @@ namespace OMI.Models
             contexto.SaveChanges();
             TbSol.TbFormato = contexto.TbFormato.Find(idformato);
             TbSol.TbUsuario = contexto.TbUsuario.Find(idusuario);
+            ListaPedido = TbSol.TbPedidoM;
+            TbSol.Folio = TbSol.TbFormato.Nombre + "-" + TbSol.IdSolicitud.ToString("000");
+            contexto.SaveChanges();
         }
 
 

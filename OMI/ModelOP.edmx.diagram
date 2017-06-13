@@ -18,7 +18,6 @@
         <AssociationConnector Association="OPModel.IdCategoriaRH_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdEspecialidad_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdProfesion_fk" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="OPModel.VUsuarioxArea" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="OPModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="OPModel.TbStatusAutorizacion" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="OPModel.Supervisores" Width="1.5" PointX="8" PointY="16.625" />
@@ -28,7 +27,6 @@
         <AssociationConnector Association="OPModel.IdCategoria_fk" />
         <AssociationConnector Association="OPModel.IdUnidad_fk" />
         <AssociationConnector Association="OPModel.Status_fk" />
-        <EntityTypeShape EntityType="OPModel.CustomersV1" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="OPModel.idEstatusPersonal_fk" />
         <AssociationConnector Association="OPModel.idsupervisorPer_fk" />
         <EntityTypeShape EntityType="OPModel.C__MigrationHistory" Width="1.5" PointX="5.375" PointY="7.75" />
@@ -36,15 +34,14 @@
         <EntityTypeShape EntityType="OPModel.AspNetUserClaims" Width="1.5" PointX="13.875" PointY="3.625" />
         <EntityTypeShape EntityType="OPModel.AspNetUserLogins" Width="1.5" PointX="13.875" PointY="1" />
         <EntityTypeShape EntityType="OPModel.AspNetUsers" Width="1.5" PointX="11.625" PointY="1.125" />
-        <EntityTypeShape EntityType="OPModel.TbSolicitud" Width="1.5" PointX="9" PointY="10.375" />
-        <EntityTypeShape EntityType="OPModel.UsuariosOMI" Width="1.5" PointX="5.375" PointY="10.75" />
         <AssociationConnector Association="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="OPModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="OPModel.TbSolicitud" Width="1.5" PointX="9" PointY="10.375" />
         <AssociationConnector Association="OPModel.IdFormato_fk" />
         <AssociationConnector Association="OPModel.IdSol_fk" />
         <AssociationConnector Association="OPModel.id_SolP_fk" />
         <AssociationConnector Association="OPModel.IdUsuario_fk" />
-        <AssociationConnector Association="OPModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
