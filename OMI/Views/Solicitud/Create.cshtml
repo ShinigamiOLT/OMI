@@ -3,12 +3,14 @@
 @using (Html.BeginForm())
 {
     using (Html.Awe().BeginContext())
-    { 
-         @Html.EditorFor(o => o.Categoria)
+    {
+        @Html.HiddenFor(o => o.IdSolicitud)
+        @Html.HiddenFor(o => o.Id)
+        @Html.EditorFor(o => o.Categoria)
         @Html.EditorFor(o => o.IdUnidad)
-        @Html.EditorFor(o=> o.Cantidad)
+        @Html.EditorFor(o => o.Cantidad)
         @Html.EditorFor(o => o.Descripcion)
 
-      
+
     }
 }

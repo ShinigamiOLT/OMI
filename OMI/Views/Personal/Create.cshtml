@@ -1,0 +1,16 @@
+﻿
+@model OMI.Models.PedidoPInPut
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    { @Html.HiddenFor(o=>o.IdSolicitud)
+        @Html.HiddenFor(o => o.Id)
+        @Html.EditorFor(o => o.Especialidad)
+        @Html.EditorFor(o => o.Profesion)
+        @Html.EditorFor(o=> o.Categoria)
+        @Html.EditorFor(o => o.Cantidad)
+        @Html.EditorFor(o => o.Descripcion)
+
+      
+    }
+}

@@ -146,7 +146,7 @@
             <PropertyRef Name="Id" />
             <PropertyRef Name="IdSolicitud" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoEspecialidad" Type="int" />
           <Property Name="IdProfesion" Type="int" />
           <Property Name="IdCategoriaRH" Type="int" />
@@ -155,6 +155,7 @@
           <Property Name="Estatus" Type="int" />
           <Property Name="IdSolicitud" Type="int" Nullable="false" />
           <Property Name="Dato" Type="int" />
+          <Property Name="Descripcion" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="TbProfesion">
           <Key>
@@ -173,6 +174,7 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="TipoMaterialPersonal" Type="int" />
           <Property Name="Folio" Type="varchar" MaxLength="50" />
+          <Property Name="Enviado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TbStatusAutorizacion">
           <Key>
@@ -588,7 +590,7 @@
             <PropertyRef Name="Id" />
             <PropertyRef Name="IdSolicitud" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTipoEspecialidad" Type="Int32" />
           <Property Name="IdProfesion" Type="Int32" />
           <Property Name="IdCategoriaRH" Type="Int32" />
@@ -603,6 +605,7 @@
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.idEstatusPersonal_fk" FromRole="TbPedidoPersonal" ToRole="TbStatusAutorizacion" />
           <NavigationProperty Name="TbUsuario" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbPedidoPersonal" ToRole="TbUsuario" />
           <NavigationProperty Name="TbSolicitud" Relationship="OPModel.id_SolP_fk" FromRole="TbPedidoPersonal" ToRole="TbSolicitud" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TbProfesion">
           <Key>
@@ -1074,6 +1077,7 @@
           <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+          <Property Name="Enviado" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="IdFormato_fk">
           <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
@@ -1192,6 +1196,7 @@
           <EntitySetMapping Name="TbPedidoPersonal">
             <EntityTypeMapping TypeName="OPModel.TbPedidoPersonal">
               <MappingFragment StoreEntitySet="TbPedidoPersonal">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Dato" ColumnName="Dato" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1359,6 +1364,7 @@
           <EntitySetMapping Name="TbSolicitud">
             <EntityTypeMapping TypeName="OPModel.TbSolicitud">
               <MappingFragment StoreEntitySet="TbSolicitud">
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="Folio" ColumnName="Folio" />
                 <ScalarProperty Name="TipoMaterialPersonal" ColumnName="TipoMaterialPersonal" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />

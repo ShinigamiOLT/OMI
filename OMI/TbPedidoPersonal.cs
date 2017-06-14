@@ -23,6 +23,7 @@ namespace OMI
         public Nullable<int> Estatus { get; set; }
         public int IdSolicitud { get; set; }
         public Nullable<int> Dato { get; set; }
+        public string Descripcion { get; set; }
     
         public virtual TbCategoriaRH TbCategoriaRH { get; set; }
         public virtual TbEspecialidad TbEspecialidad { get; set; }

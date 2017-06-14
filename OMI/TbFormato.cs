@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-
 namespace OMI
 {
     using System;
@@ -23,8 +21,6 @@ namespace OMI
         }
     
         public int Id { get; set; }
-        
-    
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Revision { get; set; }

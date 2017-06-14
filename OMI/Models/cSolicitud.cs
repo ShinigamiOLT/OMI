@@ -16,11 +16,11 @@ namespace OMI.Models
         public  OPEntities contexto;
      
         public TbSolicitud TbSol;
-        public bool Guardar;
+        public bool Valido;
 
-        public cSolicitud(int idSol)
+        public cSolicitud(int idSol,int idformato)
         {
-            int idformato = 1;
+            Valido = false;
             int idusuario = 2;
             contexto = new OPEntities();
             TbSol = contexto.TbSolicitud.Find(idSol);
@@ -28,6 +28,8 @@ namespace OMI.Models
             {
                 CreaNuevaSolicitud(idformato, idusuario);
             }
+            if (TbSol.IdFormato == idformato)
+                Valido = true;
         }
         void CreaNuevaSolicitud(int idformato, int idusuario)
         {
@@ -35,7 +37,7 @@ namespace OMI.Models
             TbSol.Fecha = DateTime.Now;
             TbSol.IdFormato = idformato;
             TbSol.IdUsuario = idusuario;
-            TbSol.TipoMaterialPersonal = 1;
+            TbSol.TipoMaterialPersonal = idformato;
             contexto.TbSolicitud.Add(TbSol);
             contexto.SaveChanges();
             TbSol.TbFormato = contexto.TbFormato.Find(idformato);
@@ -100,6 +102,17 @@ namespace OMI.Models
             return siguiente;
         }
 
+        internal int GeneraIdPedidoP()
+        {
+            int siguiente = 0;
+            var elemento = contexto.TbPedidoPersonal.Max(x => x.Id);
+            if (elemento != null)
+            {
+                siguiente = elemento + 1;
+            }
+            return siguiente;
+        }
+
         public void AgregaPedido(TbPedidoM dinner)
         {
             dinner.Id = GeneraIdPedidoM();
@@ -107,12 +120,17 @@ namespace OMI.Models
             contexto.SaveChanges();
         }
 
+
         internal TbPedidoM GetPedidoM(int id,int id2)
         {
            
             return contexto.TbPedidoM.Find(id,id2);
         }
+        internal TbPedidoPersonal GetPedidoP(int id, int id2)
+        {
 
+            return contexto.TbPedidoPersonal.Find(id, id2);
+        }
         public void UpdatePedido(PedidoInPut input)
         {
             var dinner = GetPedidoM(input.Id,input.IdSolicitud);
@@ -125,16 +143,35 @@ namespace OMI.Models
             contexto.SaveChanges();
 
         }
+        public void UpdatePedidoP(PedidoPInPut input)
+        {
+            var dinner = GetPedidoP(input.Id, input.IdSolicitud);
+
+            dinner.Cantidad = input.Cantidad;
+            dinner.IdTipoEspecialidad = input.Especialidad;
+            dinner.IdProfesion = input.Profesion;
+            dinner.IdCategoriaRH = input.Categoria;
+            dinner.Descripcion = input.Descripcion;
+            contexto.Entry(dinner).State = EntityState.Modified;
+            contexto.SaveChanges();
+
+        }
 
         public void DelPedido(int inputId)
         {
            contexto.Entry(GetPedidoM(inputId,TbSol.IdSolicitud)).State = EntityState.Deleted;
             contexto.SaveChanges();
         }
-        public void DelPedido2(int inputId)
+        public void DelPedidoM(int inputId)
         {
        //     contexto.Entry(GetPedidoM(inputId, TbSol.IdSolicitud)).State = EntityState.Deleted;
             GetPedidoM(inputId, TbSol.IdSolicitud).Dato = 2;
+            contexto.SaveChanges();
+        }
+        public void DelPedidoP(int inputId)
+        {
+            //     contexto.Entry(GetPedidoM(inputId, TbSol.IdSolicitud)).State = EntityState.Deleted;
+            GetPedidoP(inputId, TbSol.IdSolicitud).Dato = 2;
             contexto.SaveChanges();
         }
 
@@ -150,6 +187,12 @@ namespace OMI.Models
 
 
             }
+            contexto.SaveChanges();
+        }
+
+        public void EnviarPedido()
+        {
+            TbSol.Enviado = 1;
             contexto.SaveChanges();
         }
     }

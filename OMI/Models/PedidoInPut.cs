@@ -35,4 +35,37 @@ namespace OMI.Models
             Descripcion = "Nuevo";
         }
     }
+    public class PedidoPInPut
+    {
+        public int Id { get; set; }
+        public int IdSolicitud { get; set; }
+        [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetEspecialidad", Controller = "Data")]
+        [DisplayName("Especialidad")]
+        public int Especialidad { get; set; }
+
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetProfesion", Controller = "Data")]
+        [DisplayName("Profesion")]
+        public int Profesion { get; set; }
+
+        [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetCategoriaRH", Controller = "Data")]
+        [DisplayName("Categoria")]
+        public int Categoria { get; set; }
+        public string Descripcion { get; set; }
+        public int Cantidad { get; set; }
+        public PedidoPInPut()
+        {
+            Id = 0;
+            IdSolicitud = 1;
+            Categoria = 1;
+            Profesion = 1;
+            Especialidad = 1;
+            Cantidad = 1;
+            Descripcion = "";
+        }
+    }
 }

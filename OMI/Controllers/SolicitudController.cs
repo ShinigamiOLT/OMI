@@ -47,8 +47,11 @@ namespace OMI.Controllers
         public ActionResult NuevaSolicitud(int? ID)
         {
 
-            cSolicitud sol = new cSolicitud(ID ?? 0);
+            cSolicitud sol = new cSolicitud(ID ?? 0,1);
+            if(!sol.Valido)
+            return  RedirectToAction("Index");
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
+            ViewBag.Visible = sol.TbSol.Enviado;
             return View(sol);
         }
 
@@ -69,7 +72,7 @@ namespace OMI.Controllers
        
             if (ModelState.IsValid)
             {
-               cSolicitud sol = new cSolicitud(id);
+               cSolicitud sol = new cSolicitud(id,1);
                 sol.GuardaPedidos();
               
             }
@@ -82,14 +85,24 @@ namespace OMI.Controllers
         public ActionResult Cancelar()
         {
             int id = (int) Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id);
+            cSolicitud sol = new cSolicitud(id,1);
             sol. EliminaPedidos(0);
             sol.DesMarcaEliminado(2);
             return RedirectToAction("NuevaSolicitud", "Solicitud", new {id});
         }
         public ActionResult Enviar()
         {
-            return RedirectToAction("Index","Home");
+            //se supone que aqui enviaremos los documentos.
+            int id = (int)Session["IdSolicitud"];
+
+            cSolicitud sol = new cSolicitud(id, 1);
+                sol.EnviarPedido();
+
+
+            return RedirectToAction("NuevaSolicitud", "Solicitud", new
+            {
+                id
+            });
         }
 
 
@@ -98,7 +111,9 @@ namespace OMI.Controllers
             int id = 1;
           if (Session["IdSolicitud"]!=null)
          id = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id);
+            cSolicitud sol = new cSolicitud(id,1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
             search = (search ?? "").ToLower();
             var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == sol.TbSol.IdSolicitud).Where(o => o.Dato !=2).AsQueryable();//.OrderBy(m=>m.Id);
 
@@ -139,9 +154,10 @@ namespace OMI.Controllers
 
         public ActionResult Create()
         {
-            TbPedidoM dinner = new TbPedidoM();
-
-            return PartialView();
+           
+            PedidoInPut nuevo = new PedidoInPut();
+            
+            return PartialView(nuevo);
         }
 
         [HttpPost]
@@ -149,9 +165,9 @@ namespace OMI.Controllers
         {
             if (!ModelState.IsValid) return PartialView(input);
             int id = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id);
-
-            TbPedidoM dinner = (new TbPedidoM()
+            cSolicitud sol = new cSolicitud(id,1);
+            
+            TbPedidoM dinner = new TbPedidoM()
             {
               
                 IdSolicitud = sol.TbSol.IdSolicitud,
@@ -173,7 +189,7 @@ namespace OMI.Controllers
                 Chef = Db.Get<Chef>(input.Chef),
                 Meals = Db.Meals.Where(o => input.Meals.Contains(o.Id)),
               */
-            });
+            };
          sol.AgregaPedido(dinner);
            //  sol.ListaPedido.Add(dinner);
             return Json(MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
@@ -182,7 +198,11 @@ namespace OMI.Controllers
         public ActionResult Edit(int id)
         {
             int id_ = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id_);
+            cSolicitud sol = new cSolicitud(id_,1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
+
+
             var dinner = sol.GetPedidoM(id,sol.TbSol.IdSolicitud);
 
             var input = new PedidoInPut()
@@ -204,7 +224,9 @@ namespace OMI.Controllers
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
             int id = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id);
+            cSolicitud sol = new cSolicitud(id,1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
             sol.UpdatePedido(input);
 
            
@@ -214,7 +236,9 @@ namespace OMI.Controllers
         public ActionResult Delete(int id, string gridId)
         {
             int id_ = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id_);
+            cSolicitud sol = new cSolicitud(id_,1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
             var dinner =sol.GetPedidoM(id,sol.TbSol.IdSolicitud);
 
             return PartialView(new DeleteConfirmInput
@@ -229,8 +253,8 @@ namespace OMI.Controllers
         public ActionResult Delete(DeleteConfirmInput input)
         {
             int id = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id);
-            sol.DelPedido2(input.Id);
+            cSolicitud sol = new cSolicitud(id,1);
+            sol.DelPedidoP(input.Id);
             return Json(new { Id = input.Id });
         }
 
@@ -254,13 +278,27 @@ namespace OMI.Controllers
         {
            OPEntities context = new OPEntities(); 
 
-            return View(context.TbSolicitud.Where(o=> o.TipoMaterialPersonal ==1).ToList());
+            return View(context.TbSolicitud.Where(o=> o.IdFormato !=0).ToList());
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int idfor)
         {
+            if (idfor==3)
+                return RedirectToAction("Index", "Personal", new { id });
             return RedirectToAction("NuevaSolicitud", "Solicitud", new {id});
         }
-
+        public ActionResult DeleteM(int id, int idfor)
+        {if(idfor==3)
+                return RedirectToAction("AllSolicitud", "Solicitud", new { id });
+            return RedirectToAction("AllSolicitud", "Solicitud", new { id });
+        }
+        public ActionResult DetailsP(int id)
+        {
+            return RedirectToAction("Index", "Personal", new { id });
+        }
+        public ActionResult DeleteP(int id)
+        {
+            return RedirectToAction("AllSolicitud", "Solicitud", new { id });
+        }
     }
 }

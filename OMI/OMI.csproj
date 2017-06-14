@@ -227,6 +227,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -3972,6 +3973,8 @@
     <Content Include="Views\Solicitud\Lista.cshtml" />
     <Content Include="Views\Solicitud\Concentrado.cshtml" />
     <Content Include="Views\Solicitud\AllSolicitud.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Personal\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
