@@ -250,5 +250,17 @@ namespace OMI.Controllers
             return View(items);
         }
 
+        public ActionResult AllSolicitud()
+        {
+           OPEntities context = new OPEntities(); 
+
+            return View(context.TbSolicitud.Where(o=> o.TipoMaterialPersonal ==1).ToList());
+        }
+
+        public ActionResult Details(int id)
+        {
+            return RedirectToAction("NuevaSolicitud", "Solicitud", new {id});
+        }
+
     }
 }

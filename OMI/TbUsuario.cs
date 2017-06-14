@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace OMI
 {
     using System;
@@ -23,6 +25,7 @@ namespace OMI
         }
     
         public int Id { get; set; }
+        [DisplayName("Usuario")]
         public string Nombre { get; set; }
         public Nullable<int> Area { get; set; }
     

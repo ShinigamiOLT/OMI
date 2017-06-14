@@ -3971,6 +3971,7 @@
     <Content Include="Views\Usuario\Register.cshtml" />
     <Content Include="Views\Solicitud\Lista.cshtml" />
     <Content Include="Views\Solicitud\Concentrado.cshtml" />
+    <Content Include="Views\Solicitud\AllSolicitud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

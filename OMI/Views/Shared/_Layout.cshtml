@@ -1,5 +1,7 @@
 ﻿@using System.Threading
 @using Omu.AwesomeMvc
+@using Microsoft.AspNet.Identity
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,10 +138,27 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="~/Content/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="md md-face-unlock"></i> Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
-                            <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
-                            <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                           
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm",@class= "dropdown-toggle profile" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li><a href="@Url.Action("Index", "Manage")"><i class="md md-face-unlock"></i> @User.Identity.GetUserName()</a></li>
+                                @*  <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+             <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
+        <li><a href="@Url.Action("Index","Manage")"><i class=" md md-lock"></i> @User.Identity.GetUserName()</a></li>
+    <li> @Html.ActionLink("Hola " + User.Identity.GetUserName() + " !", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage", @class = "md md-face-unlock"})</li>*@
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="md md-settings-power"></i>Cerrar sesión</a></li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Registrarse", "Register", "Usuario", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
+                            <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
+
+                        }
                         </ul>
                     </li>
                 </ul>
@@ -183,7 +202,8 @@
                 <li class="has_sub">
                     <a href="#" class="waves-effect"><i class="md md-laptop-windows"></i><span> Pedido Material </span><span class="pull-right"><i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="@Url.Action("Concentrado", "Solicitud")">Registro</a></li>
+                        <li><a href="@Url.Action("AllSolicitud", "Solicitud")">Todos las Solicitudes</a></li>
+                        <li><a href="@Url.Action("Concentrado", "Solicitud")">Todos los Pedidos</a></li>
                         <li><a href="@Url.Action("NuevaSolicitud", "Solicitud")">Nueva Solicitud</a></li>
 
                     </ul>
