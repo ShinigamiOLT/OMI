@@ -16,26 +16,19 @@ namespace OMI.Models
         public  OPEntities contexto;
      
         public TbSolicitud TbSol;
-
-        public List<TbPedidoM> ListaPedido;
-
         public bool Guardar;
-     
-        public cSolicitud( int idSol)
+
+        public cSolicitud(int idSol)
         {
-            int   idformato = 1;
+            int idformato = 1;
             int idusuario = 2;
-            contexto= new OPEntities();
+            contexto = new OPEntities();
             TbSol = contexto.TbSolicitud.Find(idSol);
             if (TbSol == null)
             {
-               CreaNuevaSolicitud(idformato,idusuario);
-
+                CreaNuevaSolicitud(idformato, idusuario);
             }
-            
-
         }
-
         void CreaNuevaSolicitud(int idformato, int idusuario)
         {
             TbSol = new TbSolicitud();
@@ -47,12 +40,10 @@ namespace OMI.Models
             contexto.SaveChanges();
             TbSol.TbFormato = contexto.TbFormato.Find(idformato);
             TbSol.TbUsuario = contexto.TbUsuario.Find(idusuario);
-            ListaPedido = TbSol.TbPedidoM;
             TbSol.Folio = TbSol.TbFormato.Nombre + "-" + TbSol.IdSolicitud.ToString("000");
             contexto.SaveChanges();
         }
-
-
+        
         public string FechaCorta {
             get { return TbSol. Fecha.ToShortDateString(); }
         }
@@ -72,7 +63,8 @@ namespace OMI.Models
 
         internal void GuardaPedidos()
         {
-            foreach (TbPedidoM m in ListaPedido)
+            
+            foreach (TbPedidoM m in TbSol.TbPedidoM.ToList())
             {
                 if (m.Dato != 2)
                     m.Dato = 1;
@@ -84,7 +76,7 @@ namespace OMI.Models
 
         internal void EliminaPedidos(int clave)
         {
-            foreach (TbPedidoM m in ListaPedido.ToList())
+            foreach (TbPedidoM m in TbSol.TbPedidoM.ToList())
             {
                 
                 if (m.Dato == clave)
@@ -148,7 +140,7 @@ namespace OMI.Models
 
         public void DesMarcaEliminado(int clave)
         {
-            foreach (TbPedidoM m in ListaPedido.ToList())
+            foreach (TbPedidoM m in TbSol.TbPedidoM.ToList())
             {
                 
                 if (m.Dato == clave)

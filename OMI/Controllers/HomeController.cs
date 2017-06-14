@@ -7,13 +7,15 @@ using Microsoft.AspNet.Identity;
 
 namespace OMI.Controllers
 {
-  
+
+   [Authorize]
+
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             string userName = User.Identity.GetUserId();
-          
+          ViewBag.User=  User.Identity.Name;
             ViewBag.UsuarioActual = userName;
             return View();
         }

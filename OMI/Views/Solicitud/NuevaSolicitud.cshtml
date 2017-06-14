@@ -27,7 +27,7 @@
 
 
                                     <span class="container">
-                                        <h3>Ingenieria Aplicada OnePro</h3><br>
+                                    
 
 
                                         <h1>@Html.DisplayFor(m=>m.TbSol.TbFormato.Descripcion)</h1>
@@ -71,7 +71,7 @@
                             @* popup names will be action + gridid; name is used when calling awe.open(name) *@
 
                             <div class="bar">
-                                <button type="button" onclick="awe.open('createDinnersGrid')" class="awe-btn mbtn">Nuevo Pedido</button>
+                                <button type="button" onclick="awe.open('createDinnersGrid')" class="awe-btn mbtn">Agregar</button>
                             </div>
 
                             @(Html.Awe().Grid("DinnersGrid")
@@ -103,8 +103,8 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
                                 <a class="btn btn-danger" id="btnCancelar" href="@Url.Action("Cancelar", "Solicitud")">Cancelar</a>
-                                <input type="submit" value="Guardar" id="btnSave" class="btn btn-primary"/>
-
+                             @*  <input type="submit" value="Guardar" id="btnSave" class="btn btn-primary"/>*@
+                                <a class="btn btn-primary" id="btnSave" href="@Url.Action("Guadar", "Solicitud")">Guardar</a>
                                 <a class="btn btn-success" id="btnCancelar" href="@Url.Action("Enviar", "Solicitud")">Enviar</a>
 
                             </div>

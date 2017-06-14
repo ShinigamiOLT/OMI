@@ -51,7 +51,9 @@ namespace OMI.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
         }
-        
 
+        public System.Data.Entity.DbSet<OMI.Sp_AllPedido_Result> Sp_AllPedido_Result { get; set; }
+
+        public DbSet<cUsuario> UsuariosOMI { get; set; }
     }
 }

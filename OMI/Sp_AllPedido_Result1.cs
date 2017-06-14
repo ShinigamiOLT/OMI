@@ -11,19 +11,21 @@ namespace OMI
 {
     using System;
     
-    public partial class PedidoMXSolicitud_Result
+    public partial class Sp_AllPedido_Result1
     {
-        public Nullable<int> Folio { get; set; }
-        public string Nombre { get; set; }
+        public int Id { get; set; }
+        public string Folio { get; set; }
+        public string Categoria { get; set; }
         public string Descripcion { get; set; }
         public string Unidad { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<int> Autoriza { get; set; }
-        public Nullable<int> Estatus { get; set; }
-        public Nullable<int> Surtido { get; set; }
+        public int Cantidad { get; set; }
+        public int Autoriza { get; set; }
+        public int Estatus { get; set; }
+        public int Surtido { get; set; }
         public string Formato { get; set; }
         public string NombreFormato { get; set; }
         public string Usuario { get; set; }
         public string Area { get; set; }
+        public System.DateTime Fecha { get; set; }
     }
 }

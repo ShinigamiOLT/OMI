@@ -5,25 +5,25 @@
     <div class="col-md-12">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">TITULO APP</h3>
+                <h3 class="panel-title">Sistema OMI</h3>
             </div>
             <div class="panel-body">
                 <div class="jumbotron">
-                    <h1>ASP.NET </h1>
+                    <h1>Bienvenido:</h1> @Html.ViewBag.User
                     <p>@Html.ViewBag.UsuarioActual</p>
-                    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-                    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+                    <p class="lead">Sistema Interno Para la Sistema de Gestion de la Calidad</p>
+                    <p><a href="@Url.Action("Concentrado","Solicitud")" class="btn btn-primary btn-lg">Resgistro &raquo;</a></p>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4">
-                        <h2>Getting started</h2>
+                        <h2>Solicitar Servicio/Producto</h2>
                         <p>
                             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
                             enables a clean separation of concerns and gives you full control over markup
                             for enjoyable, agile development.
                         </p>
-                        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                        <p><a class="btn btn-default" href="@Url.Action("NuevaSolicitud","Solicitud")">Solicitar &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Get more libraries</h2>

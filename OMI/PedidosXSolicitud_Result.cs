@@ -11,7 +11,7 @@ namespace OMI
 {
     using System;
     
-    public partial class PedidoMXSolicitud_Result
+    public partial class PedidosXSolicitud_Result
     {
         public Nullable<int> Folio { get; set; }
         public string Nombre { get; set; }
@@ -22,7 +22,7 @@ namespace OMI
         public Nullable<int> Estatus { get; set; }
         public Nullable<int> Surtido { get; set; }
         public string Formato { get; set; }
-        public string NombreFormato { get; set; }
+        public string Descripcion1 { get; set; }
         public string Usuario { get; set; }
         public string Area { get; set; }
     }

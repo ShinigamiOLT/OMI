@@ -47,7 +47,7 @@ namespace OMI.Controllers
         public ActionResult NuevaSolicitud(int? ID)
         {
 
-            cSolicitud sol = new cSolicitud(ID ?? 1);
+            cSolicitud sol = new cSolicitud(ID ?? 0);
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
             return View(sol);
         }
@@ -62,7 +62,22 @@ namespace OMI.Controllers
            }
            int id = (int)Session["IdSolicitud"];
             return RedirectToAction("NuevaSolicitud", "Solicitud", new { id  });
-       }
+        }
+       public ActionResult Guadar()
+        {
+            int id = (int)Session["IdSolicitud"];
+       
+            if (ModelState.IsValid)
+            {
+               cSolicitud sol = new cSolicitud(id);
+                sol.GuardaPedidos();
+              
+            }
+          
+            return RedirectToAction("NuevaSolicitud", "Solicitud", new { id
+            });
+        }
+     
      
         public ActionResult Cancelar()
         {
@@ -102,7 +117,7 @@ namespace OMI.Controllers
            
 
         
-            return Json(new GridModelBuilder<Sp_AllPedido_Result>(items, g)
+            return Json(new GridModelBuilder<Sp_AllPedido_Result1>(items, g)
             {
                 Key = "Id",
                 Map = o => new
@@ -110,7 +125,7 @@ namespace OMI.Controllers
                     Id=o.Id,
                   Folio= o.Formato+ o.Folio,
                  Fecha= o.Fecha.ToShortDateString(),
-                  Categoria=  o.Nombre,
+                  Categoria=  o.Categoria,
                  Descripcion=  o.Descripcion,
                 Unidad=   o.Unidad,
                o.Cantidad,
@@ -226,9 +241,13 @@ namespace OMI.Controllers
             return View();
         }
 
-        public ActionResult editovi()
+        public ActionResult Concentrado()
         {
-            return View();
+            OPEntities contexto = new OPEntities();
+            var items = contexto.Sp_AllPedido().ToList();
+
+
+            return View(items);
         }
 
     }

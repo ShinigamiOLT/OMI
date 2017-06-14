@@ -9,8 +9,7 @@ namespace OMI.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "OMI.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(OMI.Models.ApplicationDbContext context)

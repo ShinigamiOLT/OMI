@@ -15,10 +15,11 @@ namespace OMI.Models
         public string Descripcion { get; set; }
         public int Cantidad { get; set; }
 
-        [UIHint("Lookup")]
         [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetUnidad", Controller = "Data")]
+        [DisplayName("Unidad") ]
         public int IdUnidad { get; set; }
-
         [Required]
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetCategoria", Controller = "Data")]
