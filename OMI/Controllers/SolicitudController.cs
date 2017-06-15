@@ -300,5 +300,16 @@ namespace OMI.Controllers
         {
             return RedirectToAction("AllSolicitud", "Solicitud", new { id });
         }
+
+        public ActionResult Autorizar()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult Autorizar(AutorizaInput entrada)
+        {
+            return PartialView();
+        }
+
     }
 }

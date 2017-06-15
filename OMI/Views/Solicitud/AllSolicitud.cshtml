@@ -38,6 +38,10 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Enviado)
                         </th>
+                        <th>
+                            Autorizar
+                        </th>
+
                         <th></th>
                     </tr>
                     </thead>
@@ -64,6 +68,9 @@
                                 @Html.DisplayFor(modelItem => item.Enviado)
                             </td>
                             <td>
+                                <button type="button" class="awe-btn" onclick="awe.open('createdDinner')">Create</button>          
+                            </td>
+                            <td>
                    
                                 @Html.ActionLink("Details", "Details", new {id = item.IdSolicitud, idfor = item.IdFormato })
                                 <span> &#124; </span>
@@ -83,9 +90,51 @@
 </div>
    
 
+@(Html.Awe().InitPopupForm()
+      .Name("editDinner")
+      .Height(400)
+      .Url(Url.Action("Autorizar", "Solicitud"))
+      .Success("created"))
+
+
+
+
 @section Scripts
 {
+    <script type="text/javascript">
 
+        function created(result, popup) {
+            alert('dinner created');
+        }
+    </script>
+    
+    <script type="text/javascript">
+     $(function() {
+         $('.editModal').modal();
+     });
+
+     function editProduct(productId) {
+         $.ajax({
+             url: '/Product/GetProductDetailsModal/' + productId, // The method name + paramater
+             success: function(data) {
+                 $('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
+             }
+         });
+     }
+
+
+
+
+     $("#btnCancelar").click(function () {
+
+         var form = $(this).parent("form");
+
+         form.attr('action', '<%= Url.RouteUrl(new { Controller = "Solicitud", Action = "Cancelar" }) %>');
+
+         form.attr('method', 'get');
+
+     });
+</script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -103,6 +152,6 @@
                 }
             });
         });
-    </script>
+</script>
 
 }

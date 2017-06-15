@@ -3975,6 +3975,8 @@
     <Content Include="Views\Solicitud\AllSolicitud.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\Personal\Create.cshtml" />
+    <Content Include="Views\Shared\_PartialPersona.cshtml" />
+    <Content Include="Views\Solicitud\Autorizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

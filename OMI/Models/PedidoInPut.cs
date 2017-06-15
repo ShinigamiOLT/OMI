@@ -68,4 +68,15 @@ namespace OMI.Models
             Descripcion = "";
         }
     }
+
+    public class AutorizaInput
+    {
+        [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetAutorizacion", Controller = "Data")]
+        [DisplayName("Autorizar")]
+        public int Autorizar { get; set; }
+    }
+
+
 }
