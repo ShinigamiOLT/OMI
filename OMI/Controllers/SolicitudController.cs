@@ -301,14 +301,25 @@ namespace OMI.Controllers
             return RedirectToAction("AllSolicitud", "Solicitud", new { id });
         }
 
-        public ActionResult Autorizar()
+        public ActionResult Autorizar()//string parent, int p1, string a, string b)
         {
             return PartialView();
         }
         [HttpPost]
         public ActionResult Autorizar(AutorizaInput entrada)
         {
-            return PartialView();
+            return Json(entrada);
+        }
+        [HttpGet]
+        public JsonResult Eliminar(int id = 0)
+        {
+
+           // int idsol = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id,3);
+            sol.contexto.TbSolicitud.Find(id).Enviado = 1;
+            sol.contexto.SaveChanges();
+        
+            return Json(id, JsonRequestBehavior.AllowGet);
         }
 
     }

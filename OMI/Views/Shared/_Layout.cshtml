@@ -44,7 +44,7 @@
 <body class="fixed-left">
         
 <!-- Begin page -->
-<div id="wrapper" class="forced enlarged">
+<div id="wrapper" class="forced">
         
 <!-- Top Bar Start -->
 <div class="topbar">
@@ -169,66 +169,9 @@
 </div>
 <!-- Top Bar End -->
 
-
-<!-- ========== Left Sidebar Start ========== -->
-
-<div class="left side-menu">
-    <div class="sidebar-inner slimscrollleft">
-        <div class="user-details">
-            <div class="pull-left">
-                <img src="~/Content/assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
-            </div>
-            <div class="user-info">
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Administrador<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
-                        <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
-                        <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
-                        <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
-                    </ul>
-                </div>
-                            
-                <p class="text-muted m-0">Administrator</p>
-            </div>
-        </div>
-        <!--- Divider -->
-        <div id="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="@Url.Action("Index", "Home")" class="waves-effect"><i class="md md-home"></i><span> Inicio </span></a>
-                    <ul class="list-unstyled">
-                    <li><a href="@Url.Action("AllSolicitud", "Solicitud")">Todos las Solicitudes</a></li>
-                    <li><a href="@Url.Action("Concentrado", "Solicitud")">Todos los Pedidos</a></li>
-                    </ul>
-                </li>
-
-                <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-laptop-windows"></i><span>Producto / Servicio</span><span class="pull-right"><i class="md md-add"></i></span></a>
-                    <ul class="list-unstyled">
-                       <li><a href="@Url.Action("NuevaSolicitud", "Solicitud")">Nueva Solicitud</a></li>
-
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Personal</span><span class="pull-right"><i class="md md-add"></i></span></a>
-                    <ul class="list-unstyled">
-                       
-                            <li><a href="@Url.Action("Index", "Personal")">Nueva Solicitud</a></li>
-
-                    </ul>
-             </li>
-
-             
-            </ul>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- Left Sidebar End --> 
-
-
+    <section id="MenuIzquierdo">
+        @Html.Partial("_MenuIzquierdo")
+    </section>
 
 <!-- ============================================================== -->
 <!-- Start right Content here -->
@@ -261,15 +204,14 @@
 
 <!-- Right Sidebar -->
 <div class="side-bar right-bar nicescroll">
-    <h4 class="text-center">Chat</h4>
+    <h4 class="text-center">Notificaciones</h4>
     <div class="contact-list nicescroll">
        
     </div>
 </div>
 <!-- /Right-bar -->
-
-
 </div>
+
 <!-- END wrapper -->
 
 <script>
@@ -295,7 +237,7 @@
 <script src="@Url.Content("~/Scripts/awem.js")" type="text/javascript"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js" type="text/javascript"></script>
 <script>
-    var isMobileOrTablet = '@(MobileUtils.IsMobileOrTablet())' == "True";
+    var isMobileOrTablet = '@(MobileUtils.IsMobileOrTablet())' === "True";
     var dateFormat = '@(AweUtil.ConvertTojQueryDateFormat(Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern))';
     var decimalSep = '@Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator';
 

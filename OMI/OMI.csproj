@@ -261,6 +261,7 @@
     <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
     <Compile Include="Models\cUsuario.cs" />
+    <Compile Include="Models\FrontUser.cs" />
     <Compile Include="Models\GridUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -3897,6 +3898,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Utilidades\TextFile1.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3977,6 +3979,7 @@
     <Content Include="Views\Personal\Create.cshtml" />
     <Content Include="Views\Shared\_PartialPersona.cshtml" />
     <Content Include="Views\Solicitud\Autorizar.cshtml" />
+    <Content Include="Views\Shared\_MenuIzquierdo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
