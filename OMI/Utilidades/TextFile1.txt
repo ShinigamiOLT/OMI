@@ -1,0 +1,84 @@
+﻿ <script type="text/javascript">
+        $('.eliminar').click(function() {
+            var idEliminar = $(this).attr("data-id");
+            $("#btnEliminar").attr("data-eliminar", idEliminar);
+            $("#myModal").modal();
+        });
+        $("#btnEliminar").click(function() {
+            var idEliminar = $(this).attr("data-eliminar");
+            console.log("en click");
+            var miurl = '@Url.Action("Eliminar", "solicitud")';
+            var id = idEliminar;
+            $.ajax({
+                url: miurl,
+                type: 'get',
+                data: { id },
+                dataType: 'json',
+                success: function(result) {
+                    console.log("Exito");
+                    $("#" + idEliminar).remove();
+                    $("#myModal").modal('hide');
+                },
+                error: function() {
+                    console.log("fallo");
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        var idEliminar = null;
+        $("#btnCancelar").click(function () {
+          idEliminar=  $(this).attr("data-id");
+        });
+
+
+        function created(result, popup) {
+
+
+            var mivar = $(this).attr("data-id");
+            alert(result.Autorizar + mivar);
+            console.log("Exito");
+            $("#" +idEliminar).html("Ovi");
+
+        }
+    </script>
+
+
+
+	
+                            </td><td><button class="btn-danger eliminar" data-id="@item.IdSolicitud">Eliminar</button></td>
+
+							<td>
+                                <button id="btnCancelar" type="button" data-id="@item.Enviado" class="awe-btn" onclick="awe.open('editarDinner')">Create</button>          
+                            </td>
+
+							   @(Html.Awe().InitPopupForm()
+                      .Name("editarDinner")
+                      .Height(400)
+                      .Url(Url.Action("Autorizar", "Solicitud"))
+                      
+                      .Success("created")
+                      .Title("Confirmar"))
+
+
+					  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro que queire eliminar este registro?
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnEliminar" data-eliminar="">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
