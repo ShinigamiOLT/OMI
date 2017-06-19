@@ -46,6 +46,10 @@ namespace OMI
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
+        public virtual DbSet<TbAreaInteres> TbAreaInteres { get; set; }
+        public virtual DbSet<TbMedioContacto> TbMedioContacto { get; set; }
+        public virtual DbSet<TbTipoOportunidad> TbTipoOportunidad { get; set; }
+        public virtual DbSet<TbOportunidad> TbOportunidad { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

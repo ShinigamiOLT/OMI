@@ -86,12 +86,35 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Tb_Opor_Area">
+          <Key>
+            <PropertyRef Name="IdOportunidad" />
+            <PropertyRef Name="IdAreaInteres" />
+          </Key>
+          <Property Name="IdOportunidad" Type="int" Nullable="false" />
+          <Property Name="IdAreaInteres" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tb_Opor_Tipo">
+          <Key>
+            <PropertyRef Name="IdOportunidad" />
+            <PropertyRef Name="IdTipoOportunidad" />
+          </Key>
+          <Property Name="IdOportunidad" Type="int" Nullable="false" />
+          <Property Name="IdTipoOportunidad" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TbArea">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TbAreaInteres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="TbCategoria">
           <Key>
@@ -109,6 +132,14 @@
           <Property Name="Inicio" Type="int" />
           <Property Name="Fin" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TbCompras">
+          <Property Name="Id" Type="int" />
+          <Property Name="IdSolicitud" Type="int" />
+          <Property Name="IdPedidoPersonal" Type="int" />
+          <Property Name="IdPedidoMaterial" Type="int" />
+        </EntityType>-->
         <EntityType Name="TbEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -124,6 +155,30 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="Revision" Type="int" />
+        </EntityType>
+        <EntityType Name="TbMedioContacto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TbOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Folio" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="FechaSistema" Type="date" Nullable="false" />
+          <Property Name="Representante" Type="varchar(max)" Nullable="false" />
+          <Property Name="Telefono" Type="varchar(max)" />
+          <Property Name="Correo" Type="varchar(max)" Nullable="false" />
+          <Property Name="MedioContacto" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="idFormato" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Compania" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="TbPedidoM">
           <Key>
@@ -183,6 +238,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TbTipoOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="TbUnidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -207,6 +269,18 @@
             </Principal>
             <Dependent Role="TbUsuario">
               <PropertyRef Name="Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TbOportun__idUsu__373B3228">
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -266,6 +340,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_Area">
+          <End Role="TbAreaInteres" Type="Self.TbAreaInteres" Multiplicity="1" />
+          <End Role="Tb_Opor_Area" Type="Self.Tb_Opor_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbAreaInteres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tb_Opor_Area">
+              <PropertyRef Name="IdAreaInteres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_formatoOpor">
+          <End Role="TbFormato" Type="Self.TbFormato" Multiplicity="1" />
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_medio">
+          <End Role="TbMedioContacto" Type="Self.TbMedioContacto" Multiplicity="1" />
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbMedioContacto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="MedioContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_Opor">
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1" />
+          <End Role="Tb_Opor_Area" Type="Self.Tb_Opor_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbOportunidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tb_Opor_Area">
+              <PropertyRef Name="IdOportunidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_oportunidad">
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1" />
+          <End Role="Tb_Opor_Tipo" Type="Self.Tb_Opor_Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbOportunidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tb_Opor_Tipo">
+              <PropertyRef Name="IdOportunidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="id_SolP_fk">
           <End Role="TbSolicitud" Type="Self.TbSolicitud" Multiplicity="1" />
           <End Role="TbPedidoPersonal" Type="Self.TbPedidoPersonal" Multiplicity="*" />
@@ -275,6 +409,18 @@
             </Principal>
             <Dependent Role="TbPedidoPersonal">
               <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_tipo">
+          <End Role="TbTipoOportunidad" Type="Self.TbTipoOportunidad" Multiplicity="1" />
+          <End Role="Tb_Opor_Tipo" Type="Self.Tb_Opor_Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbTipoOportunidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tb_Opor_Tipo">
+              <PropertyRef Name="IdTipoOportunidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -374,6 +520,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pero no se encuentra la tabla.
+        <Association Name="IdSolicitud_fk" />-->
         <Association Name="idSupervisor_fk">
           <End Role="Supervisores" Type="Self.Supervisores" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -448,21 +597,31 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Opor_Area" EntityType="Self.Tb_Opor_Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Opor_Tipo" EntityType="Self.Tb_Opor_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbAreaInteres" EntityType="Self.TbAreaInteres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbCategoria" EntityType="Self.TbCategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbCategoriaRH" EntityType="Self.TbCategoriaRH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbMedioContacto" EntityType="Self.TbMedioContacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbOportunidad" EntityType="Self.TbOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbPedidoM" EntityType="Self.TbPedidoM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbPedidoPersonal" EntityType="Self.TbPedidoPersonal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbSolicitud" EntityType="Self.TbSolicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbStatusAutorizacion" EntityType="Self.TbStatusAutorizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbTipoOportunidad" EntityType="Self.TbTipoOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUsuario" EntityType="Self.TbUsuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="AreaId" Association="Self.AreaId">
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="Self.FK__TbOportun__idUsu__373B3228">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -480,9 +639,33 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="id_Area" Association="Self.id_Area">
+            <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
+            <End Role="Tb_Opor_Area" EntitySet="Tb_Opor_Area" />
+          </AssociationSet>
+          <AssociationSet Name="id_formatoOpor" Association="Self.id_formatoOpor">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="id_medio" Association="Self.id_medio">
+            <End Role="TbMedioContacto" EntitySet="TbMedioContacto" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="id_Opor" Association="Self.id_Opor">
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+            <End Role="Tb_Opor_Area" EntitySet="Tb_Opor_Area" />
+          </AssociationSet>
+          <AssociationSet Name="id_oportunidad" Association="Self.id_oportunidad">
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+            <End Role="Tb_Opor_Tipo" EntitySet="Tb_Opor_Tipo" />
+          </AssociationSet>
           <AssociationSet Name="id_SolP_fk" Association="Self.id_SolP_fk">
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="id_tipo" Association="Self.id_tipo">
+            <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
+            <End Role="Tb_Opor_Tipo" EntitySet="Tb_Opor_Tipo" />
           </AssociationSet>
           <AssociationSet Name="id_usuario_fk" Association="Self.id_usuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
@@ -584,6 +767,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Revision" Type="Int32" />
           <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_formatoOpor" FromRole="TbFormato" ToRole="TbOportunidad" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -634,6 +818,7 @@
           <NavigationProperty Name="Supervisores" Relationship="OPModel.id_usuario_fk" FromRole="TbUsuario" ToRole="Supervisores" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbUsuario" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.FK__TbOportun__idUsu__373B3228" FromRole="TbUsuario" ToRole="TbOportunidad" />
         </EntityType>
         <Association Name="AreaId">
           <End Role="TbArea" Type="Self.TbArea" Multiplicity="0..1" />
@@ -779,6 +964,30 @@
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
           </AssociationSet>
           <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(OPModel.Sp_AllPedido_Result1)" />
+          <EntitySet Name="TbAreaInteres" EntityType="OPModel.TbAreaInteres" />
+          <EntitySet Name="TbMedioContacto" EntityType="OPModel.TbMedioContacto" />
+          <EntitySet Name="TbTipoOportunidad" EntityType="OPModel.TbTipoOportunidad" />
+          <EntitySet Name="TbOportunidad" EntityType="OPModel.TbOportunidad" />
+          <AssociationSet Name="id_formatoOpor" Association="OPModel.id_formatoOpor">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="id_medio" Association="OPModel.id_medio">
+            <End Role="TbMedioContacto" EntitySet="TbMedioContacto" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="OPModel.FK__TbOportun__idUsu__373B3228">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="Tb_Opor_Area" Association="OPModel.Tb_Opor_Area">
+            <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="Tb_Opor_Tipo" Association="OPModel.Tb_Opor_Tipo">
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+            <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Folio" Nullable="true" />
@@ -1143,6 +1352,96 @@
           <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
           <Property Type="DateTime" Name="Fecha" Nullable="false" />
         </ComplexType>
+        <EntityType Name="TbAreaInteres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Area" FromRole="TbAreaInteres" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbMedioContacto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_medio" FromRole="TbMedioContacto" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbTipoOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbTipoOportunidad" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaSistema" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Representante" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MedioContacto" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idFormato" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Compania" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbFormato" Relationship="OPModel.id_formatoOpor" FromRole="TbOportunidad" ToRole="TbFormato" />
+          <NavigationProperty Name="TbMedioContacto" Relationship="OPModel.id_medio" FromRole="TbOportunidad" ToRole="TbMedioContacto" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.FK__TbOportun__idUsu__373B3228" FromRole="TbOportunidad" ToRole="TbUsuario" />
+          <NavigationProperty Name="TbAreaInteres" Relationship="OPModel.Tb_Opor_Area" FromRole="TbOportunidad" ToRole="TbAreaInteres" />
+          <NavigationProperty Name="TbTipoOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbOportunidad" ToRole="TbTipoOportunidad" />
+        </EntityType>
+        <Association Name="id_formatoOpor">
+          <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_medio">
+          <End Type="OPModel.TbMedioContacto" Role="TbMedioContacto" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbMedioContacto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="MedioContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TbOportun__idUsu__373B3228">
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tb_Opor_Area">
+          <End Type="OPModel.TbAreaInteres" Role="TbAreaInteres" Multiplicity="*" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+        </Association>
+        <Association Name="Tb_Opor_Tipo">
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <End Type="OPModel.TbTipoOportunidad" Role="TbTipoOportunidad" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1394,7 +1693,65 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="TbAreaInteres">
+            <EntityTypeMapping TypeName="OPModel.TbAreaInteres">
+              <MappingFragment StoreEntitySet="TbAreaInteres">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbMedioContacto">
+            <EntityTypeMapping TypeName="OPModel.TbMedioContacto">
+              <MappingFragment StoreEntitySet="TbMedioContacto">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbTipoOportunidad">
+            <EntityTypeMapping TypeName="OPModel.TbTipoOportunidad">
+              <MappingFragment StoreEntitySet="TbTipoOportunidad">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbOportunidad">
+            <EntityTypeMapping TypeName="OPModel.TbOportunidad">
+              <MappingFragment StoreEntitySet="TbOportunidad">
+                <ScalarProperty Name="Compania" ColumnName="Compania" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idFormato" ColumnName="idFormato" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="MedioContacto" ColumnName="MedioContacto" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Representante" ColumnName="Representante" />
+                <ScalarProperty Name="FechaSistema" ColumnName="FechaSistema" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Tb_Opor_Area" TypeName="OPModel.Tb_Opor_Area" StoreEntitySet="Tb_Opor_Area">
+            <EndProperty Name="TbOportunidad">
+              <ScalarProperty Name="Id" ColumnName="IdOportunidad" />
+            </EndProperty>
+            <EndProperty Name="TbAreaInteres">
+              <ScalarProperty Name="Id" ColumnName="IdAreaInteres" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Tb_Opor_Tipo" TypeName="OPModel.Tb_Opor_Tipo" StoreEntitySet="Tb_Opor_Tipo">
+            <EndProperty Name="TbTipoOportunidad">
+              <ScalarProperty Name="Id" ColumnName="IdTipoOportunidad" />
+            </EndProperty>
+            <EndProperty Name="TbOportunidad">
+              <ScalarProperty Name="Id" ColumnName="IdOportunidad" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

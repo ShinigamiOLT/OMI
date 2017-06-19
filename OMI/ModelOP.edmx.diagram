@@ -4,44 +4,53 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="afd70f0b0b454becbfb24f45e04fb3f2" Name="Diagram1">
-        <EntityTypeShape EntityType="OPModel.TbArea" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbCategoria" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbCategoriaRH" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbEspecialidad" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbFormato" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbPedidoPersonal" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbProfesion" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbUnidad" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OPModel.TbUsuario" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+      <Diagram DiagramId="afd70f0b0b454becbfb24f45e04fb3f2" Name="Diagram1" ZoomLevel="100" ShowGrid="true">
+        <EntityTypeShape EntityType="OPModel.TbArea" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbCategoria" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbCategoriaRH" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbEspecialidad" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbFormato" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbPedidoPersonal" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbProfesion" Width="1.5" PointX="6" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbUnidad" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OPModel.TbUsuario" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="OPModel.AreaId" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdCategoriaRH_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdEspecialidad_fk" ManuallyRouted="false" />
         <AssociationConnector Association="OPModel.IdProfesion_fk" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="OPModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="5.75" />
-        <EntityTypeShape EntityType="OPModel.TbStatusAutorizacion" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="OPModel.Supervisores" Width="1.5" PointX="8" PointY="16.625" />
+        <EntityTypeShape EntityType="OPModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="OPModel.TbStatusAutorizacion" Width="1.5" PointX="6" PointY="12.75" />
+        <EntityTypeShape EntityType="OPModel.Supervisores" Width="1.5" PointX="6" PointY="17.625" />
         <AssociationConnector Association="OPModel.id_usuario_fk" />
-        <EntityTypeShape EntityType="OPModel.TbPedidoM" Width="1.5" PointX="11.25" PointY="7.5" />
+        <EntityTypeShape EntityType="OPModel.TbPedidoM" Width="1.5" PointX="8.25" PointY="3.125" />
         <AssociationConnector Association="OPModel.idSupervisor_fk" />
         <AssociationConnector Association="OPModel.IdCategoria_fk" />
         <AssociationConnector Association="OPModel.IdUnidad_fk" />
         <AssociationConnector Association="OPModel.Status_fk" />
         <AssociationConnector Association="OPModel.idEstatusPersonal_fk" />
         <AssociationConnector Association="OPModel.idsupervisorPer_fk" />
-        <EntityTypeShape EntityType="OPModel.C__MigrationHistory" Width="1.5" PointX="5.375" PointY="7.75" />
-        <EntityTypeShape EntityType="OPModel.AspNetRoles" Width="1.5" PointX="9.375" PointY="2.5" />
-        <EntityTypeShape EntityType="OPModel.AspNetUserClaims" Width="1.5" PointX="13.875" PointY="3.625" />
-        <EntityTypeShape EntityType="OPModel.AspNetUserLogins" Width="1.5" PointX="13.875" PointY="1" />
-        <EntityTypeShape EntityType="OPModel.AspNetUsers" Width="1.5" PointX="11.625" PointY="1.125" />
+        <EntityTypeShape EntityType="OPModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="7.5" />
+        <EntityTypeShape EntityType="OPModel.AspNetRoles" Width="1.5" PointX="10.75" PointY="3.25" />
+        <EntityTypeShape EntityType="OPModel.AspNetUserClaims" Width="1.5" PointX="15.25" PointY="4.375" />
+        <EntityTypeShape EntityType="OPModel.AspNetUserLogins" Width="1.5" PointX="15.25" PointY="1.875" />
+        <EntityTypeShape EntityType="OPModel.AspNetUsers" Width="1.5" PointX="13" PointY="1.875" />
         <AssociationConnector Association="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="OPModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="OPModel.TbSolicitud" Width="1.5" PointX="9" PointY="10.375" />
+        <EntityTypeShape EntityType="OPModel.TbSolicitud" Width="1.5" PointX="3" PointY="7.5" />
         <AssociationConnector Association="OPModel.IdFormato_fk" />
         <AssociationConnector Association="OPModel.IdSol_fk" />
         <AssociationConnector Association="OPModel.id_SolP_fk" />
         <AssociationConnector Association="OPModel.IdUsuario_fk" />
+        <EntityTypeShape EntityType="OPModel.TbAreaInteres" Width="1.5" PointX="3.75" PointY="11.5" />
+        <EntityTypeShape EntityType="OPModel.TbMedioContacto" Width="1.5" PointX="3.75" PointY="5.125" />
+        <EntityTypeShape EntityType="OPModel.TbTipoOportunidad" Width="1.5" PointX="8.5" PointY="7.75" />
+        <EntityTypeShape EntityType="OPModel.TbOportunidad" Width="1.5" PointX="6" PointY="7.25" />
+        <AssociationConnector Association="OPModel.id_formatoOpor" />
+        <AssociationConnector Association="OPModel.id_medio" />
+        <AssociationConnector Association="OPModel.FK__TbOportun__idUsu__373B3228" />
+        <AssociationConnector Association="OPModel.Tb_Opor_Area" />
+        <AssociationConnector Association="OPModel.Tb_Opor_Tipo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
