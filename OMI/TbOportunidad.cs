@@ -17,7 +17,7 @@ namespace OMI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TbOportunidad()
         {
-            this.TbAreaInteres = new List<TbAreaInteres>();
+            this.TbAreaInteres = new HashSet<TbAreaInteres>();
             this.TbTipoOportunidad = new HashSet<TbTipoOportunidad>();
         }
     
@@ -38,7 +38,7 @@ namespace OMI
         public virtual TbMedioContacto TbMedioContacto { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual List<TbAreaInteres> TbAreaInteres { get; set; }
+        public virtual ICollection<TbAreaInteres> TbAreaInteres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbTipoOportunidad> TbTipoOportunidad { get; set; }
     }

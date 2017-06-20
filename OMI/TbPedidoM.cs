@@ -27,8 +27,8 @@ namespace OMI
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }
+        public virtual TbSolicitud TbSolicitud { get; set; }
         public virtual TbUnidad TbUnidad { get; set; }
         public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
-        public virtual TbSolicitud TbSolicitud { get; set; }
     }
 }

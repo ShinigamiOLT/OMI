@@ -5,86 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
-          <Property Name="Nivel" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Supervisores">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tb_Opor_Area">
           <Key>
@@ -272,7 +198,7 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__373B3228">
+        <Association Name="FK__TbOportun__idUsu__5535A963">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,62 +207,6 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
             </Principal>
             <Dependent Role="TbOportunidad">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -583,20 +453,12 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="PedidoMXSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdSol" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_AllPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="OPModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Area" EntityType="Self.Tb_Opor_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Tipo" EntityType="Self.Tb_Opor_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
@@ -619,25 +481,9 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="Self.FK__TbOportun__idUsu__373B3228">
+          <AssociationSet Name="FK__TbOportun__idUsu__5535A963" Association="Self.FK__TbOportun__idUsu__5535A963">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="id_Area" Association="Self.id_Area">
             <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
@@ -724,193 +570,70 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="TbArea">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbUsuario" Relationship="Self.AreaId" FromRole="TbArea" ToRole="TbUsuario" />
-        </EntityType>
-        <EntityType Name="TbCategoria">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdCategoria_fk" FromRole="TbCategoria" ToRole="TbPedidoM" />
-        </EntityType>
-        <EntityType Name="TbCategoriaRH">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Inicio" Type="Int32" />
-          <Property Name="Fin" Type="Int32" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="Self.IdCategoriaRH_fk" FromRole="TbCategoriaRH" ToRole="TbPedidoPersonal" />
-        </EntityType>
-        <EntityType Name="TbEspecialidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="Self.IdEspecialidad_fk" FromRole="TbEspecialidad" ToRole="TbPedidoPersonal" />
-        </EntityType>
-        <EntityType Name="TbFormato">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Revision" Type="Int32" />
-          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
-          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_formatoOpor" FromRole="TbFormato" ToRole="TbOportunidad" />
-        </EntityType>
-        <EntityType Name="TbPedidoPersonal">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTipoEspecialidad" Type="Int32" />
-          <Property Name="IdProfesion" Type="Int32" />
-          <Property Name="IdCategoriaRH" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="Supervisor" Type="Int32" />
-          <Property Name="Estatus" Type="Int32" />
-          <NavigationProperty Name="TbCategoriaRH" Relationship="Self.IdCategoriaRH_fk" FromRole="TbPedidoPersonal" ToRole="TbCategoriaRH" />
-          <NavigationProperty Name="TbEspecialidad" Relationship="Self.IdEspecialidad_fk" FromRole="TbPedidoPersonal" ToRole="TbEspecialidad" />
-          <NavigationProperty Name="TbProfesion" Relationship="Self.IdProfesion_fk" FromRole="TbPedidoPersonal" ToRole="TbProfesion" />
-          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
-          <Property Name="Dato" Type="Int32" />
-          <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.idEstatusPersonal_fk" FromRole="TbPedidoPersonal" ToRole="TbStatusAutorizacion" />
-          <NavigationProperty Name="TbUsuario" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbPedidoPersonal" ToRole="TbUsuario" />
-          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.id_SolP_fk" FromRole="TbPedidoPersonal" ToRole="TbSolicitud" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TbProfesion">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="Self.IdProfesion_fk" FromRole="TbProfesion" ToRole="TbPedidoPersonal" />
-        </EntityType>
-        <EntityType Name="TbUnidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdUnidad_fk" FromRole="TbUnidad" ToRole="TbPedidoM" />
-        </EntityType>
-        <EntityType Name="TbUsuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="Int32" />
-          <NavigationProperty Name="TbArea" Relationship="Self.AreaId" FromRole="TbUsuario" ToRole="TbArea" />
-          <NavigationProperty Name="Supervisores" Relationship="OPModel.id_usuario_fk" FromRole="TbUsuario" ToRole="Supervisores" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbUsuario" ToRole="TbPedidoPersonal" />
-          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
-          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.FK__TbOportun__idUsu__373B3228" FromRole="TbUsuario" ToRole="TbOportunidad" />
-        </EntityType>
-        <Association Name="AreaId">
-          <End Role="TbArea" Type="Self.TbArea" Multiplicity="0..1" />
-          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbArea">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbUsuario">
-              <PropertyRef Name="Area" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdCategoriaRH_fk">
-          <End Role="TbCategoriaRH" Type="Self.TbCategoriaRH" Multiplicity="0..1" />
-          <End Role="TbPedidoPersonal" Type="Self.TbPedidoPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbCategoriaRH">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbPedidoPersonal">
-              <PropertyRef Name="IdCategoriaRH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdEspecialidad_fk">
-          <End Role="TbEspecialidad" Type="Self.TbEspecialidad" Multiplicity="0..1" />
-          <End Role="TbPedidoPersonal" Type="Self.TbPedidoPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbEspecialidad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbPedidoPersonal">
-              <PropertyRef Name="IdTipoEspecialidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdProfesion_fk">
-          <End Role="TbProfesion" Type="Self.TbProfesion" Multiplicity="0..1" />
-          <End Role="TbPedidoPersonal" Type="Self.TbPedidoPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbProfesion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbPedidoPersonal">
-              <PropertyRef Name="IdProfesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="OPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TbArea" EntityType="Self.TbArea" />
-          <EntitySet Name="TbCategoria" EntityType="Self.TbCategoria" />
-          <EntitySet Name="TbCategoriaRH" EntityType="Self.TbCategoriaRH" />
-          <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" />
-          <EntitySet Name="TbFormato" EntityType="Self.TbFormato" />
-          <EntitySet Name="TbPedidoPersonal" EntityType="Self.TbPedidoPersonal" />
-          <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" />
-          <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" />
-          <EntitySet Name="TbUsuario" EntityType="Self.TbUsuario" />
-          <AssociationSet Name="AreaId" Association="Self.AreaId">
-            <End Role="TbArea" EntitySet="TbArea" />
-            <End Role="TbUsuario" EntitySet="TbUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="IdCategoriaRH_fk" Association="Self.IdCategoriaRH_fk">
-            <End Role="TbCategoriaRH" EntitySet="TbCategoriaRH" />
-            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="IdEspecialidad_fk" Association="Self.IdEspecialidad_fk">
-            <End Role="TbEspecialidad" EntitySet="TbEspecialidad" />
-            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="IdProfesion_fk" Association="Self.IdProfesion_fk">
-            <End Role="TbProfesion" EntitySet="TbProfesion" />
-            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
-          </AssociationSet>
           <FunctionImport Name="PedidoMXSolicitud" ReturnType="Collection(OPModel.PedidoMXSolicitud_Result)">
           <Parameter Name="IdSol" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="sysdiagrams" EntityType="OPModel.sysdiagrams" />
-          <EntitySet Name="TbStatusAutorizacion" EntityType="OPModel.TbStatusAutorizacion" />
+          <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(OPModel.Sp_AllPedido_Result1)" />
           <EntitySet Name="Supervisores" EntityType="OPModel.Supervisores" />
+          <EntitySet Name="TbArea" EntityType="OPModel.TbArea" />
+          <EntitySet Name="TbAreaInteres" EntityType="OPModel.TbAreaInteres" />
+          <EntitySet Name="TbCategoria" EntityType="OPModel.TbCategoria" />
+          <EntitySet Name="TbCategoriaRH" EntityType="OPModel.TbCategoriaRH" />
+          <EntitySet Name="TbEspecialidad" EntityType="OPModel.TbEspecialidad" />
+          <EntitySet Name="TbFormato" EntityType="OPModel.TbFormato" />
+          <EntitySet Name="TbMedioContacto" EntityType="OPModel.TbMedioContacto" />
+          <EntitySet Name="TbOportunidad" EntityType="OPModel.TbOportunidad" />
+          <EntitySet Name="TbPedidoM" EntityType="OPModel.TbPedidoM" />
+          <EntitySet Name="TbPedidoPersonal" EntityType="OPModel.TbPedidoPersonal" />
+          <EntitySet Name="TbProfesion" EntityType="OPModel.TbProfesion" />
+          <EntitySet Name="TbSolicitud" EntityType="OPModel.TbSolicitud" />
+          <EntitySet Name="TbStatusAutorizacion" EntityType="OPModel.TbStatusAutorizacion" />
+          <EntitySet Name="TbTipoOportunidad" EntityType="OPModel.TbTipoOportunidad" />
+          <EntitySet Name="TbUnidad" EntityType="OPModel.TbUnidad" />
+          <EntitySet Name="TbUsuario" EntityType="OPModel.TbUsuario" />
           <AssociationSet Name="id_usuario_fk" Association="OPModel.id_usuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="Supervisores" EntitySet="Supervisores" />
           </AssociationSet>
-          <EntitySet Name="TbPedidoM" EntityType="OPModel.TbPedidoM" />
           <AssociationSet Name="idSupervisor_fk" Association="OPModel.idSupervisor_fk">
             <End Role="Supervisores" EntitySet="Supervisores" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
+          <AssociationSet Name="AreaId" Association="OPModel.AreaId">
+            <End Role="TbArea" EntitySet="TbArea" />
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
           <AssociationSet Name="IdCategoria_fk" Association="OPModel.IdCategoria_fk">
             <End Role="TbCategoria" EntitySet="TbCategoria" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
+          <AssociationSet Name="IdCategoriaRH_fk" Association="OPModel.IdCategoriaRH_fk">
+            <End Role="TbCategoriaRH" EntitySet="TbCategoriaRH" />
+            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="IdEspecialidad_fk" Association="OPModel.IdEspecialidad_fk">
+            <End Role="TbEspecialidad" EntitySet="TbEspecialidad" />
+            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="id_formatoOpor" Association="OPModel.id_formatoOpor">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="IdFormato_fk" Association="OPModel.IdFormato_fk">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="id_medio" Association="OPModel.id_medio">
+            <End Role="TbMedioContacto" EntitySet="TbMedioContacto" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TbOportun__idUsu__5535A963" Association="OPModel.FK__TbOportun__idUsu__5535A963">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
+          </AssociationSet>
+          <AssociationSet Name="IdSol_fk" Association="OPModel.IdSol_fk">
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
           <AssociationSet Name="IdUnidad_fk" Association="OPModel.IdUnidad_fk">
@@ -921,64 +644,25 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
+          <AssociationSet Name="id_SolP_fk" Association="OPModel.id_SolP_fk">
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
           <AssociationSet Name="idEstatusPersonal_fk" Association="OPModel.idEstatusPersonal_fk">
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
+            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="IdProfesion_fk" Association="OPModel.IdProfesion_fk">
+            <End Role="TbProfesion" EntitySet="TbProfesion" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
           </AssociationSet>
           <AssociationSet Name="idsupervisorPer_fk" Association="OPModel.idsupervisorPer_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
           </AssociationSet>
-          <EntitySet Name="C__MigrationHistory" EntityType="OPModel.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="OPModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="OPModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="OPModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="OPModel.AspNetUsers" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="OPModel.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="TbSolicitud" EntityType="OPModel.TbSolicitud" />
-          <AssociationSet Name="IdFormato_fk" Association="OPModel.IdFormato_fk">
-            <End Role="TbFormato" EntitySet="TbFormato" />
-            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="IdSol_fk" Association="OPModel.IdSol_fk">
-            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
-          </AssociationSet>
-          <AssociationSet Name="id_SolP_fk" Association="OPModel.id_SolP_fk">
-            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-            <End Role="TbPedidoPersonal" EntitySet="TbPedidoPersonal" />
-          </AssociationSet>
           <AssociationSet Name="IdUsuario_fk" Association="OPModel.IdUsuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
-          </AssociationSet>
-          <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(OPModel.Sp_AllPedido_Result1)" />
-          <EntitySet Name="TbAreaInteres" EntityType="OPModel.TbAreaInteres" />
-          <EntitySet Name="TbMedioContacto" EntityType="OPModel.TbMedioContacto" />
-          <EntitySet Name="TbTipoOportunidad" EntityType="OPModel.TbTipoOportunidad" />
-          <EntitySet Name="TbOportunidad" EntityType="OPModel.TbOportunidad" />
-          <AssociationSet Name="id_formatoOpor" Association="OPModel.id_formatoOpor">
-            <End Role="TbFormato" EntitySet="TbFormato" />
-            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
-          </AssociationSet>
-          <AssociationSet Name="id_medio" Association="OPModel.id_medio">
-            <End Role="TbMedioContacto" EntitySet="TbMedioContacto" />
-            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="OPModel.FK__TbOportun__idUsu__373B3228">
-            <End Role="TbUsuario" EntitySet="TbUsuario" />
-            <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
           <AssociationSet Name="Tb_Opor_Area" Association="OPModel.Tb_Opor_Area">
             <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
@@ -1028,25 +712,38 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TbStatusAutorizacion">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.Status_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoM" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idEstatusPersonal_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoPersonal" />
-        </EntityType>
+        <ComplexType Name="Sp_AllPedido_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Estatus" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_AllPedido_Result1">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Estatus" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+        </ComplexType>
         <EntityType Name="Supervisores">
           <Key>
             <PropertyRef Name="Id" />
@@ -1056,18 +753,89 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <NavigationProperty Name="TbUsuario" Relationship="OPModel.id_usuario_fk" FromRole="Supervisores" ToRole="TbUsuario" />
           <NavigationProperty Name="TbPedidoM" Relationship="OPModel.idSupervisor_fk" FromRole="Supervisores" ToRole="TbPedidoM" />
         </EntityType>
-        <Association Name="id_usuario_fk">
-          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
-          <End Type="OPModel.Supervisores" Role="Supervisores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbUsuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Supervisores">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="TbArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.AreaId" FromRole="TbArea" ToRole="TbUsuario" />
+        </EntityType>
+        <EntityType Name="TbAreaInteres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Area" FromRole="TbAreaInteres" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbCategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdCategoria_fk" FromRole="TbCategoria" ToRole="TbPedidoM" />
+        </EntityType>
+        <EntityType Name="TbCategoriaRH">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Inicio" Type="Int32" />
+          <Property Name="Fin" Type="Int32" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.IdCategoriaRH_fk" FromRole="TbCategoriaRH" ToRole="TbPedidoPersonal" />
+        </EntityType>
+        <EntityType Name="TbEspecialidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.IdEspecialidad_fk" FromRole="TbEspecialidad" ToRole="TbPedidoPersonal" />
+        </EntityType>
+        <EntityType Name="TbFormato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Revision" Type="Int32" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_formatoOpor" FromRole="TbFormato" ToRole="TbOportunidad" />
+          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
+        </EntityType>
+        <EntityType Name="TbMedioContacto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_medio" FromRole="TbMedioContacto" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaSistema" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Representante" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MedioContacto" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idFormato" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Compania" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbFormato" Relationship="OPModel.id_formatoOpor" FromRole="TbOportunidad" ToRole="TbFormato" />
+          <NavigationProperty Name="TbMedioContacto" Relationship="OPModel.id_medio" FromRole="TbOportunidad" ToRole="TbMedioContacto" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.FK__TbOportun__idUsu__5535A963" FromRole="TbOportunidad" ToRole="TbUsuario" />
+          <NavigationProperty Name="TbAreaInteres" Relationship="OPModel.Tb_Opor_Area" FromRole="TbOportunidad" ToRole="TbAreaInteres" />
+          <NavigationProperty Name="TbTipoOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbOportunidad" ToRole="TbTipoOportunidad" />
+        </EntityType>
         <EntityType Name="TbPedidoM">
           <Key>
             <PropertyRef Name="Id" />
@@ -1085,10 +853,106 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <Property Name="Dato" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Supervisores" Relationship="OPModel.idSupervisor_fk" FromRole="TbPedidoM" ToRole="Supervisores" />
           <NavigationProperty Name="TbCategoria" Relationship="OPModel.IdCategoria_fk" FromRole="TbPedidoM" ToRole="TbCategoria" />
+          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdSol_fk" FromRole="TbPedidoM" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidad" Relationship="OPModel.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
-          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdSol_fk" FromRole="TbPedidoM" ToRole="TbSolicitud" />
         </EntityType>
+        <EntityType Name="TbPedidoPersonal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoEspecialidad" Type="Int32" />
+          <Property Name="IdProfesion" Type="Int32" />
+          <Property Name="IdCategoriaRH" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Supervisor" Type="Int32" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="Dato" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbCategoriaRH" Relationship="OPModel.IdCategoriaRH_fk" FromRole="TbPedidoPersonal" ToRole="TbCategoriaRH" />
+          <NavigationProperty Name="TbEspecialidad" Relationship="OPModel.IdEspecialidad_fk" FromRole="TbPedidoPersonal" ToRole="TbEspecialidad" />
+          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.id_SolP_fk" FromRole="TbPedidoPersonal" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.idEstatusPersonal_fk" FromRole="TbPedidoPersonal" ToRole="TbStatusAutorizacion" />
+          <NavigationProperty Name="TbProfesion" Relationship="OPModel.IdProfesion_fk" FromRole="TbPedidoPersonal" ToRole="TbProfesion" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbPedidoPersonal" ToRole="TbUsuario" />
+        </EntityType>
+        <EntityType Name="TbProfesion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.IdProfesion_fk" FromRole="TbProfesion" ToRole="TbPedidoPersonal" />
+        </EntityType>
+        <EntityType Name="TbSolicitud">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFormato" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="TipoMaterialPersonal" Type="Int32" />
+          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Enviado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TbFormato" Relationship="OPModel.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+        </EntityType>
+        <EntityType Name="TbStatusAutorizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.Status_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idEstatusPersonal_fk" FromRole="TbStatusAutorizacion" ToRole="TbPedidoPersonal" />
+        </EntityType>
+        <EntityType Name="TbTipoOportunidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbTipoOportunidad" ToRole="TbOportunidad" />
+        </EntityType>
+        <EntityType Name="TbUnidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdUnidad_fk" FromRole="TbUnidad" ToRole="TbPedidoM" />
+        </EntityType>
+        <EntityType Name="TbUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="Int32" />
+          <NavigationProperty Name="Supervisores" Relationship="OPModel.id_usuario_fk" FromRole="TbUsuario" ToRole="Supervisores" />
+          <NavigationProperty Name="TbArea" Relationship="OPModel.AreaId" FromRole="TbUsuario" ToRole="TbArea" />
+          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.FK__TbOportun__idUsu__5535A963" FromRole="TbUsuario" ToRole="TbOportunidad" />
+          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbUsuario" ToRole="TbPedidoPersonal" />
+          <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
+        </EntityType>
+        <Association Name="id_usuario_fk">
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
+          <End Type="OPModel.Supervisores" Role="Supervisores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supervisores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="idSupervisor_fk">
           <End Type="OPModel.Supervisores" Role="Supervisores" Multiplicity="1" />
           <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
@@ -1101,6 +965,18 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AreaId">
+          <End Type="OPModel.TbArea" Role="TbArea" Multiplicity="0..1" />
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbArea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbUsuario">
+              <PropertyRef Name="Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="IdCategoria_fk">
           <End Type="OPModel.TbCategoria" Role="TbCategoria" Multiplicity="1" />
           <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
@@ -1110,6 +986,90 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Principal>
             <Dependent Role="TbPedidoM">
               <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdCategoriaRH_fk">
+          <End Type="OPModel.TbCategoriaRH" Role="TbCategoriaRH" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbCategoriaRH">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoPersonal">
+              <PropertyRef Name="IdCategoriaRH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdEspecialidad_fk">
+          <End Type="OPModel.TbEspecialidad" Role="TbEspecialidad" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbEspecialidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoPersonal">
+              <PropertyRef Name="IdTipoEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_formatoOpor">
+          <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdFormato_fk">
+          <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
+          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_medio">
+          <End Type="OPModel.TbMedioContacto" Role="TbMedioContacto" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbMedioContacto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="MedioContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TbOportun__idUsu__5535A963">
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
+          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbOportunidad">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdSol_fk">
+          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="1" />
+          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbSolicitud">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdSolicitud" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1137,6 +1097,18 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_SolP_fk">
+          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="1" />
+          <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbSolicitud">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="TbPedidoPersonal">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="idEstatusPersonal_fk">
           <End Type="OPModel.TbStatusAutorizacion" Role="TbStatusAutorizacion" Multiplicity="0..1" />
           <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
@@ -1146,6 +1118,18 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Principal>
             <Dependent Role="TbPedidoPersonal">
               <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IdProfesion_fk">
+          <End Type="OPModel.TbProfesion" Role="TbProfesion" Multiplicity="0..1" />
+          <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProfesion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoPersonal">
+              <PropertyRef Name="IdProfesion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1161,169 +1145,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="OPModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Nivel" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="OPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="OPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="OPModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-     
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="OPModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="OPModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="OPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="OPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <ComplexType Name="Sp_AllPedido_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Cantidad" Nullable="false" />
-          <Property Type="Int32" Name="Autoriza" Nullable="false" />
-          <Property Type="Int32" Name="Estatus" Nullable="false" />
-          <Property Type="Int32" Name="Surtido" Nullable="false" />
-          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="TbSolicitud">
-          <Key>
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdFormato" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="TipoMaterialPersonal" Type="Int32" />
-          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbFormato" Relationship="OPModel.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
-          <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
-          <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
-          <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
-          <Property Name="Enviado" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="IdFormato_fk">
-          <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
-          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbFormato">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbSolicitud">
-              <PropertyRef Name="IdFormato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="IdSol_fk">
-          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="1" />
-          <End Type="OPModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbSolicitud">
-              <PropertyRef Name="IdSolicitud" />
-            </Principal>
-            <Dependent Role="TbPedidoM">
-              <PropertyRef Name="IdSolicitud" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="id_SolP_fk">
-          <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="1" />
-          <End Type="OPModel.TbPedidoPersonal" Role="TbPedidoPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbSolicitud">
-              <PropertyRef Name="IdSolicitud" />
-            </Principal>
-            <Dependent Role="TbPedidoPersonal">
-              <PropertyRef Name="IdSolicitud" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="IdUsuario_fk">
           <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
           <End Type="OPModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
@@ -1333,104 +1154,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             </Principal>
             <Dependent Role="TbSolicitud">
               <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="Sp_AllPedido_Result1">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Cantidad" Nullable="false" />
-          <Property Type="Int32" Name="Autoriza" Nullable="false" />
-          <Property Type="Int32" Name="Estatus" Nullable="false" />
-          <Property Type="Int32" Name="Surtido" Nullable="false" />
-          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="TbAreaInteres">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Area" FromRole="TbAreaInteres" ToRole="TbOportunidad" />
-        </EntityType>
-        <EntityType Name="TbMedioContacto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.id_medio" FromRole="TbMedioContacto" ToRole="TbOportunidad" />
-        </EntityType>
-        <EntityType Name="TbTipoOportunidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbTipoOportunidad" ToRole="TbOportunidad" />
-        </EntityType>
-        <EntityType Name="TbOportunidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Folio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaSistema" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Representante" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MedioContacto" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="idFormato" Type="Int32" Nullable="false" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="Compania" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TbFormato" Relationship="OPModel.id_formatoOpor" FromRole="TbOportunidad" ToRole="TbFormato" />
-          <NavigationProperty Name="TbMedioContacto" Relationship="OPModel.id_medio" FromRole="TbOportunidad" ToRole="TbMedioContacto" />
-          <NavigationProperty Name="TbUsuario" Relationship="OPModel.FK__TbOportun__idUsu__373B3228" FromRole="TbOportunidad" ToRole="TbUsuario" />
-          <NavigationProperty Name="TbAreaInteres" Relationship="OPModel.Tb_Opor_Area" FromRole="TbOportunidad" ToRole="TbAreaInteres" />
-          <NavigationProperty Name="TbTipoOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbOportunidad" ToRole="TbTipoOportunidad" />
-        </EntityType>
-        <Association Name="id_formatoOpor">
-          <End Type="OPModel.TbFormato" Role="TbFormato" Multiplicity="1" />
-          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbFormato">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbOportunidad">
-              <PropertyRef Name="idFormato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="id_medio">
-          <End Type="OPModel.TbMedioContacto" Role="TbMedioContacto" Multiplicity="1" />
-          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbMedioContacto">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbOportunidad">
-              <PropertyRef Name="MedioContacto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TbOportun__idUsu__373B3228">
-          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
-          <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TbUsuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TbOportunidad">
-              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1448,91 +1171,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OPModelStoreContainer" CdmEntityContainer="OPEntities">
-          <EntitySetMapping Name="TbArea">
-            <EntityTypeMapping TypeName="OPModel.TbArea">
-              <MappingFragment StoreEntitySet="TbArea">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbCategoria">
-            <EntityTypeMapping TypeName="OPModel.TbCategoria">
-              <MappingFragment StoreEntitySet="TbCategoria">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbCategoriaRH">
-            <EntityTypeMapping TypeName="OPModel.TbCategoriaRH">
-              <MappingFragment StoreEntitySet="TbCategoriaRH">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Inicio" ColumnName="Inicio" />
-                <ScalarProperty Name="Fin" ColumnName="Fin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbEspecialidad">
-            <EntityTypeMapping TypeName="OPModel.TbEspecialidad">
-              <MappingFragment StoreEntitySet="TbEspecialidad">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbFormato">
-            <EntityTypeMapping TypeName="OPModel.TbFormato">
-              <MappingFragment StoreEntitySet="TbFormato">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Revision" ColumnName="Revision" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbPedidoPersonal">
-            <EntityTypeMapping TypeName="OPModel.TbPedidoPersonal">
-              <MappingFragment StoreEntitySet="TbPedidoPersonal">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Dato" ColumnName="Dato" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdTipoEspecialidad" ColumnName="IdTipoEspecialidad" />
-                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
-                <ScalarProperty Name="IdCategoriaRH" ColumnName="IdCategoriaRH" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbProfesion">
-            <EntityTypeMapping TypeName="OPModel.TbProfesion">
-              <MappingFragment StoreEntitySet="TbProfesion">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbUnidad">
-            <EntityTypeMapping TypeName="OPModel.TbUnidad">
-              <MappingFragment StoreEntitySet="TbUnidad">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbUsuario">
-            <EntityTypeMapping TypeName="OPModel.TbUsuario">
-              <MappingFragment StoreEntitySet="TbUsuario">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="PedidoMXSolicitud" FunctionName="OPModel.Store.PedidoMXSolicitud">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OPModel.PedidoMXSolicitud_Result">
@@ -1551,128 +1189,6 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="OPModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbStatusAutorizacion">
-            <EntityTypeMapping TypeName="OPModel.TbStatusAutorizacion">
-              <MappingFragment StoreEntitySet="TbStatusAutorizacion">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Supervisores">
-            <EntityTypeMapping TypeName="OPModel.Supervisores">
-              <MappingFragment StoreEntitySet="Supervisores">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TbPedidoM">
-            <EntityTypeMapping TypeName="OPModel.TbPedidoM">
-              <MappingFragment StoreEntitySet="TbPedidoM">
-                <ScalarProperty Name="Dato" ColumnName="Dato" />
-                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="IdSupervisor" ColumnName="IdSupervisor" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="OPModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="OPModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="OPModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="OPModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="OPModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="OPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="TbSolicitud">
-            <EntityTypeMapping TypeName="OPModel.TbSolicitud">
-              <MappingFragment StoreEntitySet="TbSolicitud">
-                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="TipoMaterialPersonal" ColumnName="TipoMaterialPersonal" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Sp_AllPedido" FunctionName="OPModel.Store.Sp_AllPedido">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OPModel.Sp_AllPedido_Result1">
@@ -1693,6 +1209,22 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Supervisores">
+            <EntityTypeMapping TypeName="OPModel.Supervisores">
+              <MappingFragment StoreEntitySet="Supervisores">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbArea">
+            <EntityTypeMapping TypeName="OPModel.TbArea">
+              <MappingFragment StoreEntitySet="TbArea">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TbAreaInteres">
             <EntityTypeMapping TypeName="OPModel.TbAreaInteres">
               <MappingFragment StoreEntitySet="TbAreaInteres">
@@ -1701,17 +1233,45 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TbMedioContacto">
-            <EntityTypeMapping TypeName="OPModel.TbMedioContacto">
-              <MappingFragment StoreEntitySet="TbMedioContacto">
+          <EntitySetMapping Name="TbCategoria">
+            <EntityTypeMapping TypeName="OPModel.TbCategoria">
+              <MappingFragment StoreEntitySet="TbCategoria">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TbTipoOportunidad">
-            <EntityTypeMapping TypeName="OPModel.TbTipoOportunidad">
-              <MappingFragment StoreEntitySet="TbTipoOportunidad">
+          <EntitySetMapping Name="TbCategoriaRH">
+            <EntityTypeMapping TypeName="OPModel.TbCategoriaRH">
+              <MappingFragment StoreEntitySet="TbCategoriaRH">
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Inicio" ColumnName="Inicio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbEspecialidad">
+            <EntityTypeMapping TypeName="OPModel.TbEspecialidad">
+              <MappingFragment StoreEntitySet="TbEspecialidad">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbFormato">
+            <EntityTypeMapping TypeName="OPModel.TbFormato">
+              <MappingFragment StoreEntitySet="TbFormato">
+                <ScalarProperty Name="Revision" ColumnName="Revision" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbMedioContacto">
+            <EntityTypeMapping TypeName="OPModel.TbMedioContacto">
+              <MappingFragment StoreEntitySet="TbMedioContacto">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1731,6 +1291,92 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
                 <ScalarProperty Name="FechaSistema" ColumnName="FechaSistema" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbPedidoM">
+            <EntityTypeMapping TypeName="OPModel.TbPedidoM">
+              <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdSupervisor" ColumnName="IdSupervisor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbPedidoPersonal">
+            <EntityTypeMapping TypeName="OPModel.TbPedidoPersonal">
+              <MappingFragment StoreEntitySet="TbPedidoPersonal">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdCategoriaRH" ColumnName="IdCategoriaRH" />
+                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
+                <ScalarProperty Name="IdTipoEspecialidad" ColumnName="IdTipoEspecialidad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbProfesion">
+            <EntityTypeMapping TypeName="OPModel.TbProfesion">
+              <MappingFragment StoreEntitySet="TbProfesion">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbSolicitud">
+            <EntityTypeMapping TypeName="OPModel.TbSolicitud">
+              <MappingFragment StoreEntitySet="TbSolicitud">
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="TipoMaterialPersonal" ColumnName="TipoMaterialPersonal" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbStatusAutorizacion">
+            <EntityTypeMapping TypeName="OPModel.TbStatusAutorizacion">
+              <MappingFragment StoreEntitySet="TbStatusAutorizacion">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbTipoOportunidad">
+            <EntityTypeMapping TypeName="OPModel.TbTipoOportunidad">
+              <MappingFragment StoreEntitySet="TbTipoOportunidad">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbUnidad">
+            <EntityTypeMapping TypeName="OPModel.TbUnidad">
+              <MappingFragment StoreEntitySet="TbUnidad">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbUsuario">
+            <EntityTypeMapping TypeName="OPModel.TbUsuario">
+              <MappingFragment StoreEntitySet="TbUsuario">
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -17,8 +17,8 @@ namespace OMI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TbFormato()
         {
-            this.TbSolicitud = new HashSet<TbSolicitud>();
             this.TbOportunidad = new HashSet<TbOportunidad>();
+            this.TbSolicitud = new HashSet<TbSolicitud>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace OMI
         public Nullable<int> Revision { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbOportunidad> TbOportunidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
     }
 }

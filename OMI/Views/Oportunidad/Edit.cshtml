@@ -1,16 +1,20 @@
-﻿@using System.Web.UI.WebControls
-@model TbOportunidad
+﻿@model OMI.TbOportunidad
 
-<div class="row">
-<div class="col-md-12">
-<div class="panel panel-border panel-primary">
-<div class="panel-heading">
-    <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro</h3>
-</div>
-<div class="panel-body">
+@{
+    ViewBag.Title = "Edit";
+}
 
-@using (@Html.BeginForm("Index", "Oportunidad", FormMethod.Post))
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm()) 
 {
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+    <h4>TbOportunidad</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(o=>o.TbFormato)
     @Html.HiddenFor(o=>o.idFormato)
     @Html.HiddenFor(o=>o.Id)
@@ -105,9 +109,9 @@
                     <div class="input-group miinput">
                         <span class="input-group-addon" id="sizing-addon6">Medio: </span>
                         
-                            @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new { @class = "form-control jsfilter" })
-                        </div>
-                        @*<div class="col-xs-12 selectContainer">
+                        @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new { @class = "form-control jsfilter" })
+                    </div>
+                    @*<div class="col-xs-12 selectContainer">
                             <select class="form-control" name="MedioContacto" >
                                 <option value="Null">Seleccione un tipo</option>
                                 <option value="Correo">Correo</option>
@@ -138,7 +142,7 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                   @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
+                                    @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
                                     <div class="form-group">
                                         @Html.TextAreaFor(o=>o.Descripcion, new { @class = "form-control",rows = "4" ,placeholder = "Describa la oportunidad" ,width = "100 %", })
                                         @Html.ValidationMessageFor(model => model.Descripcion)
@@ -211,170 +215,6 @@
                 </div>
             </div>
         </div>
-                                       
-        <div class="row" style="margin: 20px;">
-            <form>
-                <div class="form-group">
-
-                    <div class="col-md-6" >
-                        <button type="submit" id="enviar" class="btn btn-primary">Nueva Oportunidad</button>
-                        <button type="submit" id="cancelar" class="btn btn-danger">Cancelar Oportunidad</button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-
-    </div>
-}
-</div>
-</div>
-</div>
-</div>
- 
-
-
-@section Scripts{
-<script>
-   
-
-    /* toggle all checkboxes in group 
-    $('.all').click(function(e){
-        e.stopPropagation();
-        var $this = $(this);
-        if($this.is(":checked")) {
-            $this.parents('.list-group').find("[type=checkbox]").prop("checked",true);
-        }
-        else {
-            $this.parents('.list-group').find("[type=checkbox]").prop("checked",false);
-            $this.prop("checked",false);
-        }
-    });
-
-    $('[type=checkbox]').click(function(e){
-        e.stopPropagation();
-    });
-*/
-    /* toggle checkbox when list group item is clicked */
-    $('.list-group li').click(function(e){
-
-        e.stopPropagation();
-
-        var $this = $(this).find("[type=checkbox]");
-        if($this.is(":checked")) {
-            $this.prop("checked",false);
-        }
-        else {
-            $this.prop("checked",true);
-        }
-
-        if ($this.hasClass("all")) {
-            $this.trigger('click');
-        }
-    });
-    $('.list-group a').click(function (e) {
-
-        e.stopPropagation();
-
-        var $this = $(this).find("[type=checkbox]");
-        if ($this.is(":checked")) {
-            $this.prop("checked", false);
-        }
-        else {
-            $this.prop("checked", true);
-        }
-
-        if ($this.hasClass("all")) {
-            $this.trigger('click');
-        }
-    });
-
-</script>  
-}
-
-@*
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>TbOportunidad</h4>
-        <hr />
-        
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Folio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Folio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Folio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaSistema, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaSistema, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaSistema, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Representante, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Representante, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Representante, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MedioContacto, "MedioContacto", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-             @*   @Html.DropDownList("MedioContacto", null, htmlAttributes: new { @class = "form-control" })* @
-                @Html.ValidationMessageFor(model => model.MedioContacto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-      
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -382,8 +222,13 @@
             </div>
         </div>
     </div>
-}
-*@
+    </div>
+    }
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

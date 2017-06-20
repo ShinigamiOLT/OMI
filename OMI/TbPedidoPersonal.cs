@@ -27,9 +27,9 @@ namespace OMI
     
         public virtual TbCategoriaRH TbCategoriaRH { get; set; }
         public virtual TbEspecialidad TbEspecialidad { get; set; }
-        public virtual TbProfesion TbProfesion { get; set; }
-        public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
-        public virtual TbUsuario TbUsuario { get; set; }
         public virtual TbSolicitud TbSolicitud { get; set; }
+        public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
+        public virtual TbProfesion TbProfesion { get; set; }
+        public virtual TbUsuario TbUsuario { get; set; }
     }
 }

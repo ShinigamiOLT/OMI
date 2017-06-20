@@ -1,0 +1,106 @@
+﻿@model OMI.TbOportunidad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TbOportunidad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Folio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Folio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaSistema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaSistema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Representante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Compania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compania)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TbFormato.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TbFormato.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TbMedioContacto.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TbMedioContacto.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TbUsuario.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

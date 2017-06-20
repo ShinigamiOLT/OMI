@@ -209,18 +209,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="AspNetRoles.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserClaims.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserLogins.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUsers.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
@@ -230,11 +218,9 @@
     <Compile Include="Controllers\OportunidadController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\TbOportunidadsController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +249,7 @@
     <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
     <Compile Include="Models\cUsuario.cs" />
+    <Compile Include="Models\forOportunidad.cs" />
     <Compile Include="Models\FrontUser.cs" />
     <Compile Include="Models\GridUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -295,9 +282,6 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Supervisores.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbArea.cs">
@@ -3995,6 +3979,14 @@
     <Content Include="Views\Solicitud\Autorizar.cshtml" />
     <Content Include="Views\Shared\_MenuIzquierdo.cshtml" />
     <Content Include="Views\Oportunidad\Index.cshtml" />
+    <Content Include="Views\TbOportunidads\Create.cshtml" />
+    <Content Include="Views\TbOportunidads\Delete.cshtml" />
+    <Content Include="Views\TbOportunidads\Details.cshtml" />
+    <Content Include="Views\TbOportunidads\Edit.cshtml" />
+    <Content Include="Views\TbOportunidads\Index.cshtml" />
+    <Content Include="Views\Oportunidad\Edit.cshtml" />
+    <Content Include="Views\Oportunidad\List.cshtml" />
+    <Content Include="Views\Oportunidad\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

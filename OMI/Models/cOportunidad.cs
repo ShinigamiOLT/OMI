@@ -14,9 +14,10 @@ namespace OMI.Models
         public cOportunidad()
         {
             OPEntities contexto= new OPEntities();
-         
+         oportunidad = new TbOportunidad();
             LAreas = contexto.TbAreaInteres.ToList();
             LOportunidad = contexto.TbTipoOportunidad.ToList();
+           
 
         }
     }
