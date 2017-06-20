@@ -216,6 +216,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OportunidadController.cs" />
+    <Compile Include="Controllers\OrganizacionController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\TbOportunidadsController.cs" />
@@ -282,6 +283,9 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Supervisores.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TablaMaestra.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbArea.cs">
@@ -3987,6 +3991,10 @@
     <Content Include="Views\Oportunidad\Edit.cshtml" />
     <Content Include="Views\Oportunidad\List.cshtml" />
     <Content Include="Views\Oportunidad\Create.cshtml" />
+    <Content Include="Views\Organizacion\Index.cshtml" />
+    <Content Include="Views\Organizacion\Politica.cshtml" />
+    <Content Include="Views\Organizacion\Reglamento.cshtml" />
+    <Content Include="Views\Organizacion\Maestra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

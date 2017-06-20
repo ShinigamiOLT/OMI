@@ -78,9 +78,9 @@
 
                                             <span class="input-group-addon" id="sizing-addon1">Fecha:</span>
                                             @*                  @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control",type="date"})
-    <input  class="form-control" type="datetime-local" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required>*@
-                                            @Html.TextBoxFor(model=>model.Fecha,new {@class="form-control"})
-                                            @Html.ValidationMessageFor(model => model.Fecha)
+    <input  class="form-control" type="datetime-local" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required> @Html.ValidationMessageFor(model => model.Fecha)*@
+                                            @Html.TextBoxFor(model=>model.Fecha2,new {@class="form-control"})
+                                           
                 </div>
 
                 <div class="input-group miinput">

@@ -167,7 +167,7 @@ namespace OMI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario)
+        public ActionResult Create(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario, DateTime Fecha2)
         {
 
             oportunidad.FechaSistema = DateTime.Now;

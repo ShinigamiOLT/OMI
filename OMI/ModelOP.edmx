@@ -12,6 +12,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TablaMaestra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="Area" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Rev" Type="int" Nullable="false" />
+          <Property Name="Link" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Tb_Opor_Area">
           <Key>
             <PropertyRef Name="IdOportunidad" />
@@ -58,14 +70,6 @@
           <Property Name="Inicio" Type="int" />
           <Property Name="Fin" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="TbCompras">
-          <Property Name="Id" Type="int" />
-          <Property Name="IdSolicitud" Type="int" />
-          <Property Name="IdPedidoPersonal" Type="int" />
-          <Property Name="IdPedidoMaterial" Type="int" />
-        </EntityType>-->
         <EntityType Name="TbEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -198,7 +202,7 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__5535A963">
+        <Association Name="FK__TbOportun__idUsu__373B3228">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -390,9 +394,6 @@ advertencia 6013: La tabla o vista 'DBOPSGI.dbo.TbCompras' no tiene definida una
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pero no se encuentra la tabla.
-        <Association Name="IdSolicitud_fk" />-->
         <Association Name="idSupervisor_fk">
           <End Role="Supervisores" Type="Self.Supervisores" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -459,6 +460,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
         <Function Name="Sp_AllPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="OPModelStoreContainer">
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablaMaestra" EntityType="Self.TablaMaestra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Area" EntityType="Self.Tb_Opor_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Tipo" EntityType="Self.Tb_Opor_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
@@ -481,7 +483,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__5535A963" Association="Self.FK__TbOportun__idUsu__5535A963">
+          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="Self.FK__TbOportun__idUsu__373B3228">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
@@ -672,6 +674,7 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
             <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
           </AssociationSet>
+          <EntitySet Name="TablaMaestra" EntityType="OPModel.TablaMaestra" />
           </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Folio" Nullable="true" />
@@ -1165,6 +1168,23 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
           <End Type="OPModel.TbOportunidad" Role="TbOportunidad" Multiplicity="*" />
           <End Type="OPModel.TbTipoOportunidad" Role="TbTipoOportunidad" Multiplicity="*" />
         </Association>
+        <EntityType Name="TablaMaestra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>Cod</Summary>
+              <LongDescription>Nombre</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Rev" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1397,6 +1417,19 @@ error 6004: Una relación hace referencia a la tabla 'DBOPSGI.dbo.TbCompras', pe
               <ScalarProperty Name="Id" ColumnName="IdOportunidad" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="TablaMaestra">
+            <EntityTypeMapping TypeName="OPModel.TablaMaestra">
+              <MappingFragment StoreEntitySet="TablaMaestra">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Rev" ColumnName="Rev" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

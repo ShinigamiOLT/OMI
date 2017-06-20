@@ -274,11 +274,11 @@ namespace OMI.Controllers
             return View(items);
         }
 
-        public ActionResult AllSolicitud()
+        public ActionResult AllSolicitud(int id=1)
         {
            OPEntities context = new OPEntities(); 
 
-            return View(context.TbSolicitud.Where(o=> o.IdFormato !=0).ToList());
+            return View(context.TbSolicitud.Where(o=> o.IdFormato ==id).ToList());
         }
 
         public ActionResult Details(int id, int idfor)
