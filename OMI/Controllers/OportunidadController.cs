@@ -20,6 +20,8 @@ namespace OMI.Controllers
             ViewBag.LAreas = contexto.TbAreaInteres.ToList();
             ViewBag.LTipoOportunidad = contexto.TbTipoOportunidad.ToList();
             ViewBag.Medios = new SelectList(contexto.TbMedioContacto.ToList(), "Id", "Nombre");
+            Tb.Fecha = Tb.FechaSistema = DateTime.Now.Date;
+
             return View(Tb);
         }
 
@@ -168,7 +170,7 @@ namespace OMI.Controllers
         public ActionResult Create(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario)
         {
 
-
+            oportunidad.FechaSistema = DateTime.Now;
             OPEntities contexto = new OPEntities();
             oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
             oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);

@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro</h3>
+                <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro @Model.Fecha2</h3>
             </div>
             <div class="panel-body">
 
@@ -77,58 +77,58 @@
                                         <div class="input-group miinput">
 
                                             <span class="input-group-addon" id="sizing-addon1">Fecha:</span>
+                                            @*                  @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control",type="date"})
+    <input  class="form-control" type="datetime-local" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required>*@
+                                            @Html.TextBoxFor(model=>model.Fecha,new {@class="form-control"})
+                                            @Html.ValidationMessageFor(model => model.Fecha)
+                </div>
+
+                <div class="input-group miinput">
+                    <span class="input-group-addon" id="sizing-addon2">Compania :</span>
+                    <input type="text" class="form-control" name="@Html.NameFor(o => o.Compania)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Compania" required>
+                </div>
 
 
-                                            @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control",type="date"})
+                <div class="input-group miinput">
+                    <span class="input-group-addon" id="sizing-addon3">Representante :</span>
 
-                                        </div>
+                    <input type="text" class="form-control" name="@Html.NameFor(o => o.Representante)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Representante">
+                </div>
 
-                                        <div class="input-group miinput">
-                                            <span class="input-group-addon" id="sizing-addon2">Compania :</span>
-                                            <input type="text" class="form-control" name="@Html.NameFor(o => o.Compania)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Compania" required>
-                                        </div>
+                <div class="input-group miinput">
 
+                    <span class="input-group-addon" id="sizing-addon4">Telefono :</span>
+                    <input type="tel" class="form-control" name="@Html.NameFor(o => o.Telefono)" placeholder="Telefono" aria-describedby="sizing-addon2" value="@Model.Telefono">
+                </div>
 
-                                        <div class="input-group miinput">
-                                            <span class="input-group-addon" id="sizing-addon3">Representante :</span>
+                <div class="input-group miinput">
+                    <span class="input-group-addon" id="sizing-addon5">Correo: </span>
+                    <input type="email" class="form-control" name="@Html.NameFor(o => o.Correo)" placeholder="Correo" aria-describedby="sizing-addon2" value="@Model.Correo">
+                </div>
+                <div class="input-group miinput">
+                    <span class="input-group-addon" id="sizing-addon6">Medio: </span>
 
-                                            <input type="text" class="form-control" name="@Html.NameFor(o => o.Representante)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Representante">
-                                        </div>
+                    @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new {@class = "form-control jsfilter"})
+                </div>
 
-                                        <div class="input-group miinput">
-
-                                            <span class="input-group-addon" id="sizing-addon4">Telefono :</span>
-                                            <input type="tel" class="form-control" name="@Html.NameFor(o => o.Telefono)" placeholder="Telefono" aria-describedby="sizing-addon2" value="@Model.Telefono">
-                                        </div>
-
-                                        <div class="input-group miinput">
-                                            <span class="input-group-addon" id="sizing-addon5">Correo: </span>
-                                            <input type="email" class="form-control" name="@Html.NameFor(o => o.Correo)" placeholder="Correo" aria-describedby="sizing-addon2" value="@Model.Correo">
-                                        </div>
-                                        <div class="input-group miinput">
-                                            <span class="input-group-addon" id="sizing-addon6">Medio: </span>
-
-                                            @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new {@class = "form-control jsfilter"})
-                                        </div>
-
-                                    </div>
+            </div>
 
 
 
-                                </div>
-                            </div>
+        </div>
+    </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h2 class="panel-title">Requerimiento de la oportunidad</h2>
-                                        </div>
-                                        <div class="panel-body ">
-                                            <div class="form-horizontal">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Requerimiento de la oportunidad</h2>
+                </div>
+                <div class="panel-body ">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
                                                         <div class="form-group">
                                                             @Html.TextAreaFor(o => o.Descripcion, new {@class = "form-control", rows = "4", placeholder = "Describa la oportunidad", width = "100 %",})
                                                             @Html.ValidationMessageFor(model => model.Descripcion)
@@ -220,6 +220,20 @@
         </div>
     </div>
 
-        @section Scripts {
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Fecha').datepicker({
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true
+            });
+        });
+    </script>
             @Scripts.Render("~/bundles/jqueryval")
         }

@@ -11,7 +11,8 @@ namespace OMI
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TbOportunidad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +24,17 @@ namespace OMI
     
         public int Id { get; set; }
         public string Folio { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [RegularExpression("(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d", ErrorMessage = "Fecha Invalida")]
+
         public System.DateTime Fecha { get; set; }
+        public string Fecha2 {
+            get
+            {
+            return String.Format("{0:dd/MM/yyyy}", Fecha);//String.Format("{0:yyy/MM/dd}", Fecha);
+            }
+        }
         public System.DateTime FechaSistema { get; set; }
         public string Representante { get; set; }
         public string Telefono { get; set; }
@@ -41,5 +52,7 @@ namespace OMI
         public virtual ICollection<TbAreaInteres> TbAreaInteres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbTipoOportunidad> TbTipoOportunidad { get; set; }
+
+
     }
 }

@@ -42,7 +42,7 @@
                     <div class="panel-body">
                         <div class="input-group ">
                             <span class="input-group-addon" id="sizing-addon4">Folio</span>
-                            <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly="true">
+                            <input type="text" class="form-control" name="Folio" placeholder="XX-XX" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly="true">
                         </div>
 
                         <ul class="list-group">
@@ -78,9 +78,11 @@
                         @*     @Html.TextBoxFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
     @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                                                                                     <input type="date" class="form-control" name="@Model.Fecha" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required>
-                                        *@
 
-                        @Html.TextBoxFor(model => model.Fecha, new { @class = "form-control",style="display: row;"})
+
+                        @Html.TextBoxFor(model => model.Fecha2, new { @class = "form-control",type="Date"})   *@
+                        @Html.TextBoxFor(model=>model.Fecha,new {@class="form-control"})
+                        @Html.ValidationMessageFor(model => model.Fecha)
 
                     </div>
 
@@ -226,9 +228,23 @@
     }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "List")
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Fecha').datepicker({
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true
+            });
+        });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }
