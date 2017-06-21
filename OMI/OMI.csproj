@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\DownloaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OportunidadController.cs" />
@@ -2286,6 +2287,7 @@
     <Content Include="Content\assets\js\jquery.blockUI.js" />
     <Content Include="Content\assets\js\jquery.min.js" />
     <Content Include="Content\assets\js\jquery.nicescroll.js" />
+    <Content Include="Content\assets\js\jquery.orgchart.js" />
     <Content Include="Content\assets\js\jquery.scrollTo.js" />
     <Content Include="Content\assets\js\jquery.scrollTo.min.js" />
     <Content Include="Content\assets\js\jquery.slimscroll.js" />
@@ -3563,6 +3565,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\jquery.orgchart.css" />
     <Content Include="Content\themes\wui\awem.css" />
     <Content Include="Content\themes\wui\AwesomeMvc.css" />
     <Content Include="Content\themes\wui\awe_icons.png" />
@@ -3798,6 +3801,8 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Download\Files\FI_DI_01.pdf" />
+    <Content Include="Download\Files\FI_DI_02.xls" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3889,6 +3894,7 @@
     <Content Include="Scripts\jquery.event.drag.live.min.js" />
     <Content Include="Scripts\jquery.event.drag.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.orgchart.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -3995,10 +4001,12 @@
     <Content Include="Views\Organizacion\Politica.cshtml" />
     <Content Include="Views\Organizacion\Reglamento.cshtml" />
     <Content Include="Views\Organizacion\Maestra.cshtml" />
+    <Content Include="Views\Organizacion\Organigrama.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Data\" />
+    <Folder Include="Views\Downloader\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
