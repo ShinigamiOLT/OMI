@@ -43,6 +43,7 @@
         <AssociationConnector Association="OPModel.Tb_Opor_Area" />
         <AssociationConnector Association="OPModel.Tb_Opor_Tipo" />
         <EntityTypeShape EntityType="OPModel.TablaMaestra" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OPModel.TablaDirectorio" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

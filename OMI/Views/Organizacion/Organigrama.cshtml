@@ -1,202 +1,24 @@
-﻿
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Sistema OIM</h3>
+            </div>
+            <div style="text-align: center">
+                <h1>
+                    <span>
+                        ORGANIGRAMA INTERNO DE TRABAJO
+                        <br />
+                        INGENIERÍA APLICADA ONEPRO
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = null;
-}
+                    </span>
+                </h1>
+            </div>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Organization Chart Plugin</title>
-
-    <link rel="icon" href="../img/logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/FortAwesome/Font-Awesome/master/css/font-awesome.min.css">
-    <link href="~/Content/jquery.orgchart.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/style.css">
-    <style type="text/css">
-        #chart-container {
-            text-align: left;
-        }
-
-        html,body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.428571429;
-            color: #333333;
-        }
-
-        #chart-containerr {
-            position: relative;
-            display: inline-block;
-            top: 10px;
-            left: 10px;
-            height: 420px;
-            width: calc(100% - 24px);
-           
-            border-radius: 5px;
-            overflow: auto;
-            text-align: center;
-        }
-
-        .home-link {
-            margin-top: 20px;
-            margin-right: 20px;
-            float: right;
-        }
-
-        .home-link a {
-            font-size: 36px;
-            color: #000;
-            text-decoration: none;
-        }
-
-        .home-link a:hover {
-            text-shadow: 0 0 3px #000;
-        }
-
-        .home-link img {
-            border-radius: 24px;
-            vertical-align: bottom;
-            margin-left: 20px;
-        }
-
-        .home-link a:hover+img {
-            box-shadow: 0 1px 0 #ccc,
-                        0 2px 0 #c9c9c9,
-                        0 3px 0 #bbb,
-                        0 4px 0 #b9b9b9,
-                        0 5px 0 #aaa,
-                        0 6px 1px rgba(0,0,0,.1),
-                        0 0 5px rgba(0,0,0,.1),
-                        0 1px 3px rgba(0,0,0,.3),
-                        0 3px 5px rgba(0,0,0,.2),
-                        0 5px 10px rgba(0,0,0,.25),
-                        0 10px 10px rgba(0,0,0,.2),
-                        0 20px 20px rgba(0,0,0,.15);
-        }
-        .orgchart {
-            background: #fff;
-            position: center;
-        }
-        .orgchart .product-dept .title {
-            background-color: #000000;
-        }
-        .orgchart .product-dept .content {
-            border-color: #009933;
-        }
-        .orgchart .node {
-
-            font-size: 100 px;
-        }
-    </style>
-</head>
-<body>
-<div id="chart-container"></div>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="~/Content/assets/js/jquery.orgchart.js"></script>
-<script type="text/javascript">
-    'use strict';
-
-    (function ($) {
-
-        $(function() {
-
-            var datascource = {
-                'name': 'Direccion',
-                'title': 'Juan Cruz',
-                'children': [
-                    {
-                        'name': 'Coordinacion',
-                        'title': 'Administración y Finanzas',
-                        'className': 'product-dept',
-                        'children': [
-                            {
-                                'name': 'Coordinacion',
-                                'title': 'Gestión de SGI',
-                                'className': 'product-dept'
-                            },
-                            {
-                                'name': 'Coordinacion',
-                                'title': 'Gestión de Infraestructura',
-                                'className': 'product-dept'
-                            }
-                        ]
-                    },
-                    {
-                        'name': 'Coordinacion',
-                        'title': 'Comercialización',
-                        'className': 'product-dept'
-                    },
-                    {
-                        'name': 'Coordinacion',
-                        'title': 'Ejecución de Proyectos',
-                        'className': 'product-dept',
-                        'children': [
-                            {
-                                'name': 'Unidad de Negocio',
-                                'title': 'Oild & Gas',
-                                'children': [
-                                    {
-                                        'name': 'Unidad Tecnica',
-                                        'title': 'Productividad de Pozos',
-                                        'className': 'product-dept'
-                                    },
-                                    {
-                                        'name': 'Unidad Tecnica',
-                                        'title': 'Instalaciones Superficiales',
-                                        'className': 'product-dept'
-                                    }
-                                ]
-                            },
-                            { 'name': 'Unidad de Negocio', 'title': 'Soluciones Tecnologicas' },
-                            {
-                                'name': 'Unidad de Negocio',
-                                'title': 'Energia y Automatización',
-                                'className': 'product-dept',
-                                'children': [
-                                    {
-                                        'name': 'Unidad Tecnica',
-                                        'title': 'Potencia y Energia renovable',
-                                        'className': 'product-dept'
-                                    },
-                                    {
-                                        'name': 'Unidad Tecnica',
-                                        'title': 'Automatización',
-                                        'className': 'product-dept'
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    { 'name': 'Coordinacion', 'title': 'Investigacion y Desarrollo', 'className': 'product-dept' }
-                ]
-            };
-
-            $('#chart-container').orgchart({
-                'data': datascource,
-                'nodeContent': 'title',
-                'direction': 'l2r',
-                'pan': true,
-                'zoom': true
-            });
-            });
-
-    })(jQuery);
-</script>
-</body>
-</html>
+            <div class="crop-img" >
+                  <img  src="@Url.Content("~/Images/organigrama.png")" style="float:left;clear:left;" alt="imgf" />
+        
+            </div>
+        </div>
+    </div>
+</div>

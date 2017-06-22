@@ -12,6 +12,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TablaDirectorio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="Correo" Type="varchar(max)" Nullable="false" />
+          <Property Name="CorreoPersonal" Type="varchar(max)" Nullable="false" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
         <EntityType Name="TablaMaestra">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,8 +30,8 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Codigo" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
-          <Property Name="Area" Type="varchar(max)" Nullable="false" />
-          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Rev" Type="int" Nullable="false" />
           <Property Name="Link" Type="varchar(max)" />
         </EntityType>
@@ -202,7 +213,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__373B3228">
+        <Association Name="FK__TbOportun__idUsu__5535A963">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -460,6 +471,7 @@
         <Function Name="Sp_AllPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="OPModelStoreContainer">
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablaDirectorio" EntityType="Self.TablaDirectorio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaMaestra" EntityType="Self.TablaMaestra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Area" EntityType="Self.Tb_Opor_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Tipo" EntityType="Self.Tb_Opor_Tipo" Schema="dbo" store:Type="Tables" />
@@ -483,7 +495,7 @@
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="Self.FK__TbOportun__idUsu__373B3228">
+          <AssociationSet Name="FK__TbOportun__idUsu__5535A963" Association="Self.FK__TbOportun__idUsu__5535A963">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
@@ -675,6 +687,7 @@
             <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
           </AssociationSet>
           <EntitySet Name="TablaMaestra" EntityType="OPModel.TablaMaestra" />
+          <EntitySet Name="TablaDirectorio" EntityType="OPModel.TablaDirectorio" />
           </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Folio" Nullable="true" />
@@ -1180,10 +1193,21 @@
           </Property>
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="String" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Rev" Type="Int32" Nullable="false" />
           <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TablaDirectorio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoPersonal" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1426,6 +1450,18 @@
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TablaDirectorio">
+            <EntityTypeMapping TypeName="OPModel.TablaDirectorio">
+              <MappingFragment StoreEntitySet="TablaDirectorio">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

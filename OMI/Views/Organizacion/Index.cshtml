@@ -4,43 +4,16 @@
         <div class="panel-heading">
             <h3 class="panel-title">Sistema OIM</h3>
         </div>
-        <div style="text-align: center">
-            <h1><span> POLÍTICA INTEGRAL
-                    <br/>
-                    INGENIERÍA APLICADA ONEPRO
-                </span>
-            </h1>
-            </div>
+       
         <div class="panel-body" style="text-align: justify">
-            <p>
-                Ingeniería Aplicada OnePro sostiene un compromiso permanente con la satisfacción de los Clientes, la generación de valor a sus colaboradores, la realización de sus Integrantes y el bienestar de la sociedad.
+            <li>@Html.ActionLink("Download Temp PDF","PDFDownload")</li>
 
-                Por ello nuestra filosofía reside en mantener la máxima Calidad posible en sus productos y servicios, trabajar con responsabilidad Ambiental considerando la preservación Ambiental y la Responsabilidad en la Salud y Seguridad en el Trabajo, los cuales están presentes en cada uno de los procesos de la empresa.
-
-                Asimismo, la Vanguardia Tecnológica forma parte de la esencia de la Organización, la cual contribuye a la competitividad y productividad, mediante la creatividad, generación de conocimiento tecnológico, la innovación y la sinergia en los Negocios.
-
-
-            Nuestro compromiso atiende a los siguientes principios:
-                </p>
-                <br/>
-                <ul>
-                    <li>	Asegurar que los procesos y operaciones de la empresa cumplan con la Legislación y Normatividad aplicable;</li>
-                    <li>	Mejorar continuamente la calidad, previniendo los impactos ambientales y los riesgos laborales.</li>
-                    <li>	Promover y aplicar la protección activa de la salud y la seguridad de los trabajadores e instalaciones, como principio básico para el desarrollo de las actividades.</li>
-                    <li>	Mantener una Cultura Organizacional basada en la Calidad, el comportamiento ético y en la conciencia del personal para ejecutar sus actividades de manera responsable.</li>
-                    <li>	Construir en cada Área de Negocio soluciones en sostenibilidad por medio de nuestros productos y servicios.</li>
-                    <li>	Fomentar entre los integrantes de la Organización, el desarrollo de proyectos de Investigación, Innovación y tecnologías que nos permitan obtener nuevos productos y/o servicios que mejoren los procesos de producción aportando ventajas competitivas para la empresa.</li>
-                    <li>	Generar iniciativas de colaboración con Instituciones Educativas afines a las competencias de la Empresa, dirigidas a la formación de los profesionales para perfeccionar y complementar la Educación y el conocimiento técnico de los Estudiantes.</li>
-                    <li>	Ejecutar revisiones periódicas para confirmar el cumplimiento de los objetivos y la eficacia de la Gestión.</li>
-                    <li>	Comunicar a todos los integrantes de la Institución y la comunidad nuestra Política, los esfuerzos realizados y logros obtenidos para el Desarrollo Sostenible.</li>
-                </ul>
-            
-            <span>
-                Juan Cruz Velázquez
-                Director
-
-            </span>
-
+            @using (Html.BeginForm("ViewPDF", "Organizacion", FormMethod.Post))
+            {
+                <a href="javascript:;" onclick="document.forms[0].submit();">View PDF</a>
+                <hr/>
+                @Html.Raw(TempData["Embed"])
+            }
 
         </div>
     </div>

@@ -286,6 +286,9 @@
     <Compile Include="Supervisores.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
+    <Compile Include="TablaDirectorio.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="TablaMaestra.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
@@ -3577,6 +3580,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\organigrama.png" />
     <Content Include="ModelOP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelOP.edmx</DependentUpon>
@@ -3803,6 +3807,8 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Download\Files\FI_DI_01.pdf" />
     <Content Include="Download\Files\FI_DI_02.xls" />
+    <Content Include="fonts\Javacom.otf" />
+    <Content Include="fonts\Crystal Personal Use.ttf" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3899,6 +3905,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mitable.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -3907,6 +3914,7 @@
     <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Utilidades\TextFile1.txt" />
+    <Content Include="Utilidades\TextFile2.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -4002,6 +4010,7 @@
     <Content Include="Views\Organizacion\Reglamento.cshtml" />
     <Content Include="Views\Organizacion\Maestra.cshtml" />
     <Content Include="Views\Organizacion\Organigrama.cshtml" />
+    <Content Include="Views\Organizacion\Directorio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

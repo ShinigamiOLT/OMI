@@ -15,10 +15,23 @@ namespace OMI.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ViewPDF()
+        {
+            string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
+            embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
+            embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
+            embed += "</object>";
+            TempData["Embed"] = string.Format(embed, VirtualPathUtility.ToAbsolute("~/Download/Files/FI_DI_01.pdf"));
+
+            return RedirectToAction("Index");
+        }
+       
         public ActionResult Reglamento()
         {
             return View();
         }
+       
         public ActionResult Politica()
         {
             return View();
@@ -36,15 +49,21 @@ namespace OMI.Controllers
         }
         public ActionResult Download(int id)
         {
+            
             OPEntities contexto = new OPEntities();
-
-            var elemento  =contexto.TablaMaestra.Find(id);
-            if (elemento != null)
+            try
             {
-                DownloaderController x = new DownloaderController();
-             return   x.DownloadFile( elemento.Codigo.Trim(), elemento.Link.Trim());
+                var elemento = contexto.TablaMaestra.Find(id);
+                if (elemento != null)
+                {
+                    DownloaderController x = new DownloaderController();
+                    return x.DownloadFile(elemento.Codigo.Trim(), elemento.Link.Trim());
+                }
             }
-
+            catch
+            {
+                return HttpNotFound();
+            }
             return  RedirectToAction("index", "home");
 
 
@@ -55,7 +74,26 @@ namespace OMI.Controllers
             return File(stream, "text/plain", "Prueba.txt");
             */
         }
-    
+
+        public ActionResult Directorio()
+        {
+            OPEntities contexto = new OPEntities();
+            try
+            {
+                var elemento = contexto.TablaDirectorio.ToList();
+                if (elemento != null)
+                {
+
+                    return View(elemento);
+                } 
+            }
+            catch
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Index");
+        }
+
 
     }
     /*
