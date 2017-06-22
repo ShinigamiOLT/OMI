@@ -167,8 +167,76 @@ namespace OMI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario, DateTime Fecha)
+        public ActionResult Create(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario, DateTime Fecha, String Option)
         {
+        
+            
+            oportunidad.FechaSistema = DateTime.Now;
+            OPEntities contexto = new OPEntities();
+
+         TbOportunidad temp =   contexto.TbOportunidad.Find(oportunidad.Id);
+
+            if (temp == null)
+            {
+
+                oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
+                oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);
+                oportunidad.TbUsuario = contexto.TbUsuario.Find(oportunidad.idUsuario);
+
+                contexto.TbOportunidad.Add(oportunidad);
+                contexto.SaveChanges();
+                TbOportunidad recuperado = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad)
+                    .Include(x => x.TbAreaInteres).ToList()
+                    .Find(c => c.Id == oportunidad.Id);
+
+                if (TipoOportunidad != null)
+                {
+                    recuperado.TbTipoOportunidad.Clear();
+                    foreach (int i in TipoOportunidad)
+                    {
+                        TbTipoOportunidad x = contexto.TbTipoOportunidad.Find(i);
+                        recuperado.TbTipoOportunidad.Add(x);
+                    }
+
+                }
+                if (AreasInteres != null)
+                {
+                    recuperado.TbAreaInteres.Clear();
+
+                    foreach (int i in AreasInteres)
+                    {
+                        TbAreaInteres x = contexto.TbAreaInteres.Find(i);
+                        recuperado.TbAreaInteres.Add(x);
+                    }
+
+                    contexto.SaveChanges();
+                }
+
+                if (Option == "Borrador")
+                {
+                 return   RedirectToAction("Edit", new {id = oportunidad.Id});
+                }
+            }
+
+            else
+            {
+                //aqui se supone que si existe esa tabla.
+               
+            }
+            ViewBag.LAreas = contexto.TbAreaInteres.ToList();
+                ViewBag.LTipoOportunidad = contexto.TbTipoOportunidad.ToList();
+                ViewBag.Medios = new SelectList(contexto.TbMedioContacto.ToList(), "Id", "Nombre");
+         
+            if (ModelState.IsValid)
+                return RedirectToAction("List");
+            return View(oportunidad);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Borrador(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres, int idUsuario, DateTime Fecha, String Option)
+        {
+
 
             oportunidad.FechaSistema = DateTime.Now;
             OPEntities contexto = new OPEntities();
@@ -178,7 +246,7 @@ namespace OMI.Controllers
 
             contexto.TbOportunidad.Add(oportunidad);
             contexto.SaveChanges();
-            TbOportunidad recuperado = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad).Include(x=>x.TbAreaInteres).ToList()
+            TbOportunidad recuperado = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad).Include(x => x.TbAreaInteres).ToList()
                 .Find(c => c.Id == oportunidad.Id);
 
             if (TipoOportunidad != null)
@@ -208,9 +276,13 @@ namespace OMI.Controllers
             ViewBag.Medios = new SelectList(contexto.TbMedioContacto.ToList(), "Id", "Nombre");
             if (ModelState.IsValid)
                 return RedirectToAction("List");
-            return View(oportunidad);
+            return   RedirectToAction("Create", new { oportunidad});
         }
+
+
+
+
     }
 
-   
+
 }

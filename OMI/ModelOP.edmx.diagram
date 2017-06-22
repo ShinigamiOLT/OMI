@@ -44,6 +44,10 @@
         <AssociationConnector Association="OPModel.Tb_Opor_Tipo" />
         <EntityTypeShape EntityType="OPModel.TablaMaestra" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="OPModel.TablaDirectorio" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="OPModel.TbUnidadNegocios" Width="1.5" PointX="1.5" PointY="14.75" />
+        <EntityTypeShape EntityType="OPModel.TbUnidadTecnica" Width="1.5" PointX="10.375" PointY="3.875" />
+        <AssociationConnector Association="OPModel.Negocio_fk" />
+        <AssociationConnector Association="OPModel.Tecnica_fk" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

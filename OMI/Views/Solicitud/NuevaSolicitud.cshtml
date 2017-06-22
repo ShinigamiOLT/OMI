@@ -58,7 +58,7 @@
 
                                 <div class="panel-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item"><h6>Area Solicitante <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Area Solicitante: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
                                         <li class="list-group-item"><h6>Usuario:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.Nombre)</strong></span></h6></li>
                                         <li class="list-group-item"><h6>Fecha:<span style="color: red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
 
@@ -139,6 +139,7 @@
                                       .UseAjax(false)
                                       .Confirm(true)
                                       .FormClass("normalPost")
+                                      
                                       .ConfirmOptions(o => {o.Message="Esta seguro de enviar esta Solicitud";
                                                                o.Title = "Confirmar envio";
                                                                o.YesText = "Enviar";

@@ -337,6 +337,12 @@
     <Compile Include="TbUnidad.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbUnidadNegocios.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbUnidadTecnica.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbUsuario.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>

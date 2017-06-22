@@ -46,6 +46,8 @@ namespace OMI
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
         public virtual DbSet<TablaMaestra> TablaMaestra { get; set; }
         public virtual DbSet<TablaDirectorio> TablaDirectorio { get; set; }
+        public virtual DbSet<TbUnidadNegocios> TbUnidadNegocios { get; set; }
+        public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

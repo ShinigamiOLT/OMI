@@ -20,16 +20,11 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Correo)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CorreoPersonal)
-                        </th>
+                        
                         <th>
                             @Html.DisplayNameFor(model => model.Celular)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Telefono)
-                        </th>
-                        <th></th>
+                       
                     </tr>
                     </thead>
                     <tbody>
@@ -41,20 +36,12 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Correo)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CorreoPersonal)
-                            </td>
+                           
                             <td>
                                 @Html.DisplayFor(modelItem => item.Celular)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Telefono)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                            </td>
+                           
+                          
                         </tr>
                     }
                     </tbody>

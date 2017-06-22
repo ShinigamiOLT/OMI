@@ -18,10 +18,10 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
-          <Property Name="Correo" Type="varchar(max)" Nullable="false" />
-          <Property Name="CorreoPersonal" Type="varchar(max)" Nullable="false" />
-          <Property Name="Celular" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Telefono" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Correo" Type="varchar(max)" />
+          <Property Name="CorreoPersonal" Type="varchar(max)" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="TablaMaestra">
           <Key>
@@ -30,8 +30,8 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Codigo" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
-          <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Area" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Rev" Type="int" Nullable="false" />
           <Property Name="Link" Type="varchar(max)" />
         </EntityType>
@@ -193,6 +193,20 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="TbUnidadNegocios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TbUnidadTecnica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="TbUsuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -200,6 +214,9 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
           <Property Name="Area" Type="int" />
+          <Property Name="Roles" Type="nvarchar" MaxLength="128" />
+          <Property Name="UnidadNegocio" Type="int" />
+          <Property Name="UnidadTecnica" Type="int" />
         </EntityType>
         <Association Name="AreaId">
           <End Role="TbArea" Type="Self.TbArea" Multiplicity="0..1" />
@@ -213,7 +230,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__5535A963">
+        <Association Name="FK__TbOportun__idUsu__373B3228">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -453,6 +470,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Negocio_fk">
+          <End Role="TbUnidadNegocios" Type="Self.TbUnidadNegocios" Multiplicity="0..1" />
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUnidadNegocios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbUsuario">
+              <PropertyRef Name="UnidadNegocio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Status_fk">
           <End Role="TbStatusAutorizacion" Type="Self.TbStatusAutorizacion" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -462,6 +491,18 @@
             </Principal>
             <Dependent Role="TbPedidoM">
               <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tecnica_fk">
+          <End Role="TbUnidadTecnica" Type="Self.TbUnidadTecnica" Multiplicity="0..1" />
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUnidadTecnica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbUsuario">
+              <PropertyRef Name="UnidadTecnica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -490,12 +531,14 @@
           <EntitySet Name="TbStatusAutorizacion" EntityType="Self.TbStatusAutorizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbTipoOportunidad" EntityType="Self.TbTipoOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbUnidadNegocios" EntityType="Self.TbUnidadNegocios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbUnidadTecnica" EntityType="Self.TbUnidadTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUsuario" EntityType="Self.TbUsuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="AreaId" Association="Self.AreaId">
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__5535A963" Association="Self.FK__TbOportun__idUsu__5535A963">
+          <AssociationSet Name="FK__TbOportun__idUsu__373B3228" Association="Self.FK__TbOportun__idUsu__373B3228">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
@@ -575,9 +618,17 @@
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
           </AssociationSet>
+          <AssociationSet Name="Negocio_fk" Association="Self.Negocio_fk">
+            <End Role="TbUnidadNegocios" EntitySet="TbUnidadNegocios" />
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
           <AssociationSet Name="Status_fk" Association="Self.Status_fk">
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
+          <AssociationSet Name="Tecnica_fk" Association="Self.Tecnica_fk">
+            <End Role="TbUnidadTecnica" EntitySet="TbUnidadTecnica" />
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -688,6 +739,16 @@
           </AssociationSet>
           <EntitySet Name="TablaMaestra" EntityType="OPModel.TablaMaestra" />
           <EntitySet Name="TablaDirectorio" EntityType="OPModel.TablaDirectorio" />
+          <EntitySet Name="TbUnidadNegocios" EntityType="OPModel.TbUnidadNegocios" />
+          <EntitySet Name="TbUnidadTecnica" EntityType="OPModel.TbUnidadTecnica" />
+          <AssociationSet Name="Negocio_fk" Association="OPModel.Negocio_fk">
+            <End Role="TbUnidadNegocios" EntitySet="TbUnidadNegocios" />
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="Tecnica_fk" Association="OPModel.Tecnica_fk">
+            <End Role="TbUnidadTecnica" EntitySet="TbUnidadTecnica" />
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Folio" Nullable="true" />
@@ -956,6 +1017,11 @@
           <NavigationProperty Name="TbOportunidad" Relationship="OPModel.FK__TbOportun__idUsu__5535A963" FromRole="TbUsuario" ToRole="TbOportunidad" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.idsupervisorPer_fk" FromRole="TbUsuario" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
+          <Property Name="Roles" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UnidadNegocio" Type="Int32" />
+          <Property Name="UnidadTecnica" Type="Int32" />
+          <NavigationProperty Name="TbUnidadNegocios" Relationship="OPModel.Negocio_fk" FromRole="TbUsuario" ToRole="TbUnidadNegocios" />
+          <NavigationProperty Name="TbUnidadTecnica" Relationship="OPModel.Tecnica_fk" FromRole="TbUsuario" ToRole="TbUnidadTecnica" />
         </EntityType>
         <Association Name="id_usuario_fk">
           <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
@@ -1193,8 +1259,8 @@
           </Property>
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Rev" Type="Int32" Nullable="false" />
           <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -1204,11 +1270,51 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoPersonal" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoPersonal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="TbUnidadNegocios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.Negocio_fk" FromRole="TbUnidadNegocios" ToRole="TbUsuario" />
+        </EntityType>
+        <EntityType Name="TbUnidadTecnica">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TbUsuario" Relationship="OPModel.Tecnica_fk" FromRole="TbUnidadTecnica" ToRole="TbUsuario" />
+        </EntityType>
+        <Association Name="Negocio_fk">
+          <End Type="OPModel.TbUnidadNegocios" Role="TbUnidadNegocios" Multiplicity="0..1" />
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUnidadNegocios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbUsuario">
+              <PropertyRef Name="UnidadNegocio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tecnica_fk">
+          <End Type="OPModel.TbUnidadTecnica" Role="TbUnidadTecnica" Multiplicity="0..1" />
+          <End Type="OPModel.TbUsuario" Role="TbUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUnidadTecnica">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbUsuario">
+              <PropertyRef Name="UnidadTecnica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1419,6 +1525,9 @@
           <EntitySetMapping Name="TbUsuario">
             <EntityTypeMapping TypeName="OPModel.TbUsuario">
               <MappingFragment StoreEntitySet="TbUsuario">
+                <ScalarProperty Name="UnidadTecnica" ColumnName="UnidadTecnica" />
+                <ScalarProperty Name="UnidadNegocio" ColumnName="UnidadNegocio" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1461,6 +1570,22 @@
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbUnidadNegocios">
+            <EntityTypeMapping TypeName="OPModel.TbUnidadNegocios">
+              <MappingFragment StoreEntitySet="TbUnidadNegocios">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbUnidadTecnica">
+            <EntityTypeMapping TypeName="OPModel.TbUnidadTecnica">
+              <MappingFragment StoreEntitySet="TbUnidadTecnica">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

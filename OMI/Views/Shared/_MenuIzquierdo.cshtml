@@ -81,7 +81,7 @@
                
                     <ul class="list-unstyled">
                         <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
-                        <li><a href="@Url.Action("Create", "Oportunidad")">Crear Oportunidad</a></li>
+                        <li><a href="@Url.Action("Create", "Oportunidad")">Nueva</a></li>
                         <li><a href="@Url.Action("List", "Oportunidad")">Registro</a></li>                        
                       
                      
@@ -100,6 +100,9 @@
                         <li><a href="@Url.Action("Index", "Personal")">Requerimiento Personal</a></li>
                         <li><a href="@Url.Action("AllSolicitud", "Solicitud", new {id=3})">Registro Solicitudes</a></li>
                         <li><a href="@Url.Action("Index", "home")">Estimacion</a></li>
+
+                        <li><a href="@Url.Action("List", "Oportunidad")">Oportunidades</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Propuesta Tecnica</a></li>
                     </ul>
                 </li>
                 <li class="has_sub">
@@ -107,9 +110,10 @@
                
                     <ul class="list-unstyled">
                         <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                        <li><a href="@Url.Action("List", "Oportunidad")">Oportunidades</a></li>  
                         <li><a href="@Url.Action("index", "home")">Propuestas T.E.</a></li>
                         <li><a href="@Url.Action("index", "home")">Cotizacion Equipo</a></li>                        
-                        <li><a href="@Url.Action("index", "home")">Oportunidades</a></li>
+                        <li><a href="@Url.Action("Create", "Oportunidad")">Orden de Servicio</a></li>
                      
                     </ul>
                 </li>
