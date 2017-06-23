@@ -71,6 +71,8 @@ namespace OMI.Models
 
     public class AutorizaInput
     {
+        public int id { get; set; }
+
         [Required]
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetAutorizacion", Controller = "Data")]

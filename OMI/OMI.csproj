@@ -210,11 +210,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmonController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DownloaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfraestructuraController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OportunidadController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
@@ -4017,6 +4019,11 @@
     <Content Include="Views\Organizacion\Maestra.cshtml" />
     <Content Include="Views\Organizacion\Organigrama.cshtml" />
     <Content Include="Views\Organizacion\Directorio.cshtml" />
+    <Content Include="Views\Infraestructura\Requermientos.cshtml" />
+    <Content Include="Views\Infraestructura\Details.cshtml" />
+    <Content Include="Views\Infraestructura\Create.cshtml" />
+    <Content Include="Views\Infraestructura\Edit.cshtml" />
+    <Content Include="Views\Admon\SolCotizacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

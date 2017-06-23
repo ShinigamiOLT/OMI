@@ -51,7 +51,7 @@ namespace OMI.Controllers
             if(!sol.Valido)
             return  RedirectToAction("Index");
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
-            ViewBag.Visible = sol.TbSol.Enviado;
+            ViewBag.Visible = sol.TbSol.EnviadoInfra;
             return View(sol);
         }
 
@@ -316,7 +316,7 @@ namespace OMI.Controllers
 
            // int idsol = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id,3);
-            sol.contexto.TbSolicitud.Find(id).Enviado = 1;
+            sol.contexto.TbSolicitud.Find(id).EnviadoInfra = 1;
             sol.contexto.SaveChanges();
         
             return Json(id, JsonRequestBehavior.AllowGet);

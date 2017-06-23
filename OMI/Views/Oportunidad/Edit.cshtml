@@ -4,146 +4,134 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<div class="row">
+<div class="col-md-12">
+<div class="panel panel-border panel-primary">
+<div class="panel-heading">
+    <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro </h3>
+</div>
+<div class="panel-body">
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-    <h4>TbOportunidad</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(o=>o.TbFormato)
-    @Html.HiddenFor(o=>o.idFormato)
-    @Html.HiddenFor(o=>o.Id)
-    @Html.HiddenFor(o=>o.idUsuario)
+        <h4>TbOportunidad</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(o=>o.TbFormato)
+        @Html.HiddenFor(o=>o.idFormato)
+        @Html.HiddenFor(o=>o.Id)
+        @Html.HiddenFor(o=>o.idUsuario)
 
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-8">
-                <div class="menubar-logo" id="titulo">
+                <div class="col-md-8">
+                    <div class="menubar-logo" id="titulo">
 
 
-                    <span class="container">
+                        <span class="container">
 
-                        <h1> @Model.TbFormato.Descripcion</h1>
-                    </span>
+                            <h1> @Model.TbFormato.Descripcion</h1>
+                        </span>
 
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default" id="panel_ovi">
+                <div class="col-md-4">
+                    <div class="panel panel-default" id="panel_ovi">
 
-                    <div class="panel-body">
-                        <div class="input-group ">
-                            <span class="input-group-addon" id="sizing-addon4">Folio</span>
-                            <input type="text" class="form-control" name="Folio" placeholder="XX-XX" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly="true">
+                        <div class="panel-body">
+                            <div class="input-group ">
+                                <span class="input-group-addon" id="sizing-addon4">Folio</span>
+                                <input type="text" class="form-control" name="Folio" placeholder="XX-XX" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly="true">
+                            </div>
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><h6>No. Formato: @Model.TbFormato.Nombre</h6></li>
+                                <li class="list-group-item"><h6>Revisión: @Model.TbFormato.Revision</h6></li>
+                            </ul>
                         </div>
-
-                        <ul class="list-group">
-                            <li class="list-group-item"><h6>No. Formato: @Model.TbFormato.Nombre</h6></li>
-                            <li class="list-group-item"><h6>Revisión: @Model.TbFormato.Revision</h6></li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--dasdasd div zxccxc-->
-
+        <!--dasdasd div zxccxc-->
 
 
 
 
-    <div class="container">
+
+        <div class="container">
 
 
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Contacto</h2>
-                </div>
-                <div class="panel-body ">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Contacto</h2>
+                    </div>
+                    <div class="panel-body ">
 
-                    <div class="input-group miinput">
+                        <div class="input-group miinput">
                                      
                       
                                           
-                        <span class="input-group-addon" id="sizing-addon1">Fecha:</span>
-                        @*                  @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control",type="date"})
+                            <span class="input-group-addon" id="sizing-addon1">Fecha:</span>
+                            @*                  @Html.TextBoxFor(model => model.Fecha, new {@class = "form-control",type="date"})
     <input  class="form-control" type="datetime-local" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required> @Html.ValidationMessageFor(model => model.Fecha)* @
                                             @Html.TextBoxFor(model=>model.Fecha,new {@class="form-control"})]*@
-                        <input  class="form-control" type="date" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required> @Html.ValidationMessageFor(model => model.Fecha)
-                    </div>
+                            <input  id="Fecha" class="form-control" type="date" name="@Html.NameFor(o => o.Fecha)" placeholder="Fecha" aria-describedby="sizing-addon1" value="@Model.Fecha" required> @Html.ValidationMessageFor(model => model.Fecha)
+                        </div>
 
-                    <div class="input-group miinput">
-                        <span class="input-group-addon" id="sizing-addon2">Compania :</span>
-                        <input type="text" class="form-control" name= "@Html.NameFor(o=>o.Compania)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Compania" required>
-                    </div>
+                        <div class="input-group miinput">
+                            <span class="input-group-addon" id="sizing-addon2">Compania :</span>
+                            <input type="text" class="form-control" name= "@Html.NameFor(o=>o.Compania)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Compania" required>
+                        </div>
 
 
-                    <div class="input-group miinput">
-                        <span class="input-group-addon" id="sizing-addon3">Representante :</span>
+                        <div class="input-group miinput">
+                            <span class="input-group-addon" id="sizing-addon3">Representante :</span>
 
-                        <input type="text" class="form-control" name= "@Html.NameFor(o=>o.Representante)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Representante" >
-                    </div>
+                            <input type="text" class="form-control" name= "@Html.NameFor(o=>o.Representante)" placeholder="Persona de contacto" aria-describedby="sizing-addon2" value="@Model.Representante" >
+                        </div>
 
-                    <div class="input-group miinput">
+                        <div class="input-group miinput">
 
-                        <span class="input-group-addon" id="sizing-addon4">Telefono :</span>
-                        <input type="tel" class="form-control" name= "@Html.NameFor(o=>o.Telefono)" placeholder="Telefono" aria-describedby="sizing-addon2" value ="@Model.Telefono">
-                    </div>
+                            <span class="input-group-addon" id="sizing-addon4">Telefono :</span>
+                            <input type="tel" class="form-control" name= "@Html.NameFor(o=>o.Telefono)" placeholder="Telefono" aria-describedby="sizing-addon2" value ="@Model.Telefono">
+                        </div>
 
-                    <div class="input-group miinput">
-                        <span class="input-group-addon" id="sizing-addon5">Correo: </span>
-                        <input type="email" class="form-control" name= "@Html.NameFor(o=>o.Correo)" placeholder="Correo" aria-describedby="sizing-addon2" value="@Model.Correo">
-                    </div>
-                    <div class="input-group miinput">
-                        <span class="input-group-addon" id="sizing-addon6">Medio: </span>
+                        <div class="input-group miinput">
+                            <span class="input-group-addon" id="sizing-addon5">Correo: </span>
+                            <input type="email" class="form-control" name= "@Html.NameFor(o=>o.Correo)" placeholder="Correo" aria-describedby="sizing-addon2" value="@Model.Correo">
+                        </div>
+                        <div class="input-group miinput">
+                            <span class="input-group-addon" id="sizing-addon6">Medio: </span>
                         
-                        @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new { @class = "form-control jsfilter" })
+                            @Html.DropDownList("MedioContacto", ViewBag.Medios as SelectList, "Seleccione", htmlAttributes: new { @class = "form-control jsfilter" })
+                        </div>
                     </div>
-                    @*<div class="col-xs-12 selectContainer">
-                            <select class="form-control" name="MedioContacto" >
-                                <option value="Null">Seleccione un tipo</option>
-                                <option value="Correo">Correo</option>
-                                <option value="Web">Portal de Internet</option>
-                                <option value="Telefono">Teléfono</option>
-                                <option value="Whatsapp">Whatsapp</option>
-                                <option value="Facebook">Facebook</option>
-                                <option value="Otros">Otros</option>
-
-                            </select>
-                        </div>*@
-              
-                                   
                 </div>
-                            
-
-
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">Requerimiento de la oportunidad</h2>
-                    </div>
-                    <div class="panel-body ">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
-                                    <div class="form-group">
-                                        @Html.TextAreaFor(o=>o.Descripcion, new { @class = "form-control",rows = "4" ,placeholder = "Describa la oportunidad" ,width = "100 %", })
-                                        @Html.ValidationMessageFor(model => model.Descripcion)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Requerimiento de la oportunidad</h2>
+                        </div>
+                        <div class="panel-body ">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @* <textarea class="form-control" name="otro" rows="4" placeholder="Describa la oportunidad" width=100% required value="@Model.Descripcion"></textarea>*@
+                                        <div class="form-group">
+                                            @Html.TextAreaFor(o=>o.Descripcion, new { @class = "form-control",rows = "4" ,placeholder = "Describa la oportunidad" ,width = "100 %", })
+                                            @Html.ValidationMessageFor(model => model.Descripcion)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -151,85 +139,93 @@
                     </div>
                 </div>
             </div>
-        </div>
                         
                         
-        <div class="row">
-            <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">Detalles de la Oportunidad</h2>
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-md-6 selectContainer">
-                            <div class="list-group" name="@Html.NameFor(o=>o.TbTipoOportunidad)" id="list1" require>
-                                <a class="list-group-item"><h4><span>Tipo de Oportunidad</span></h4></a>
-                                @foreach (TbTipoOportunidad g in (List<TbTipoOportunidad>) ViewBag.LTipoOportunidad)
-                                {
-                                    <a class="list-group-item ">
-                                        <input type="checkbox"
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Detalles de la Oportunidad</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6 selectContainer">
+                                <div class="list-group" name="@Html.NameFor(o=>o.TbTipoOportunidad)" id="list1" require>
+                                    <a class="list-group-item"><h4><span>Tipo de Oportunidad</span></h4></a>
+                                    @foreach (TbTipoOportunidad g in (List<TbTipoOportunidad>) ViewBag.LTipoOportunidad)
+                                    {
+                                        <a class="list-group-item ">
+                                            <input type="checkbox"
 
-                                               name="TipoOportunidad" value="@g.Id" id="@g.Id"
+                                                   name="TipoOportunidad" value="@g.Id" id="@g.Id"
 
-                                               @foreach (TbTipoOportunidad intereses in Model.TbTipoOportunidad)
-                                               {
-
-
-                                                   if (intereses.Id == g.Id)
+                                                   @foreach (TbTipoOportunidad intereses in Model.TbTipoOportunidad)
                                                    {
 
-                                                       <text> checked = 'checked' </text>
 
-                                                   }
-                                               }/>
+                                                       if (intereses.Id == g.Id)
+                                                       {
+
+                                                           <text> checked = 'checked' </text>
+
+                                                       }
+                                                   }/>
 
 
 
-                                        <label for="@g.Id">@g.Nombre</label>
-                                    </a>
-                                }
+                                            <label for="@g.Id">@g.Nombre</label>
+                                        </a>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 selectContainer">
-                            <div class="list-group" name="AreaInteres" id="list2" require>
-                                <a class="list-group-item"><h4><span>Area de Interes</span></h4></a>
-                                @foreach (TbAreaInteres g in (List<TbAreaInteres>)ViewBag.LAreas)
-                                {
-                                    <a class="list-group-item ">
-                                        <input type="checkbox"
-                                               name="AreasInteres" value="@g.Id" id="@g.Id"
-                                               @foreach (TbAreaInteres intereses in Model.TbAreaInteres)
-                                               {   if (intereses.Id == g.Id) {  <text> checked='checked' </text>   } } />
+                            <div class="col-md-6 selectContainer">
+                                <div class="list-group" name="AreaInteres" id="list2" require>
+                                    <a class="list-group-item"><h4><span>Area de Interes</span></h4></a>
+                                    @foreach (TbAreaInteres g in (List<TbAreaInteres>)ViewBag.LAreas)
+                                    {
+                                        <a class="list-group-item ">
+                                            <input type="checkbox"
+                                                   name="AreasInteres" value="@g.Id" id="@g.Id"
+                                                   @foreach (TbAreaInteres intereses in Model.TbAreaInteres)
+                                                   {   if (intereses.Id == g.Id) {  <text> checked='checked' </text>   } } />
 
-                                        <label for="@g.Id">@g.Nombre</label>
-                                    </a>
-                                }
+                                            <label for="@g.Id">@g.Nombre</label>
+                                        </a>
+                                    }
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-danger" id="cancel">Cancelar</a>
+                  @if (Model.Enviado != 1)
+                  {
+                      <input type="submit" value="Borrador" name="Option" class="btn btn-primary"/>
+                      <input type="submit" value="Enviar" name="Option" class="btn btn-success"/>
+                  }
+
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    }
-
-<div>
-    @Html.ActionLink("Back to List", "List")
+}
 </div>
+</div>
+</div>
+</div>
+
+
+
 
 @section Scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#Fecha').datepicker({
                 dateFormat: "dd/mm/yy",
                 showStatus: true,
@@ -241,6 +237,14 @@
                 highlightWeek: true
             });
         });
+    </script>
+    <script>
+
+        $(document).ready(function() {
+            $("#cancel").attr("onClick",
+                "document.location.href='@Html.Raw(Url.Action("List", "Oportunidad"))'");
+        });
+
     </script>
     @Scripts.Render("~/bundles/jqueryval")
 }

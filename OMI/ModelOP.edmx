@@ -120,6 +120,7 @@
           <Property Name="idFormato" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="Compania" Type="varchar(max)" Nullable="false" />
+          <Property Name="Enviado" Type="int" />
         </EntityType>
         <EntityType Name="TbPedidoM">
           <Key>
@@ -170,7 +171,8 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="TipoMaterialPersonal" Type="int" />
           <Property Name="Folio" Type="varchar" MaxLength="50" />
-          <Property Name="Enviado" Type="int" Nullable="false" />
+          <Property Name="EnviadoInfra" Type="int" Nullable="false" />
+          <Property Name="EnviadoCom" Type="int" />
         </EntityType>
         <EntityType Name="TbStatusAutorizacion">
           <Key>
@@ -279,7 +281,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_Opor">
-          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1" />
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tb_Opor_Area" Type="Self.Tb_Opor_Area" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TbOportunidad">
@@ -291,7 +295,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="id_oportunidad">
-          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1" />
+          <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tb_Opor_Tipo" Type="Self.Tb_Opor_Tipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TbOportunidad">
@@ -912,6 +918,7 @@
           <NavigationProperty Name="TbUsuario" Relationship="OPModel.FK__TbOportun__idUsu__5535A963" FromRole="TbOportunidad" ToRole="TbUsuario" />
           <NavigationProperty Name="TbAreaInteres" Relationship="OPModel.Tb_Opor_Area" FromRole="TbOportunidad" ToRole="TbAreaInteres" />
           <NavigationProperty Name="TbTipoOportunidad" Relationship="OPModel.Tb_Opor_Tipo" FromRole="TbOportunidad" ToRole="TbTipoOportunidad" />
+          <Property Name="Enviado" Type="Int32" />
         </EntityType>
         <EntityType Name="TbPedidoM">
           <Key>
@@ -974,11 +981,12 @@
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="TipoMaterialPersonal" Type="Int32" />
           <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Enviado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TbFormato" Relationship="OPModel.IdFormato_fk" FromRole="TbSolicitud" ToRole="TbFormato" />
           <NavigationProperty Name="TbPedidoM" Relationship="OPModel.IdSol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="OPModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbUsuario" Relationship="OPModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+          <Property Name="EnviadoInfra" Type="Int32" Nullable="false" />
+          <Property Name="EnviadoCom" Type="Int32" />
         </EntityType>
         <EntityType Name="TbStatusAutorizacion">
           <Key>
@@ -1430,6 +1438,7 @@
           <EntitySetMapping Name="TbOportunidad">
             <EntityTypeMapping TypeName="OPModel.TbOportunidad">
               <MappingFragment StoreEntitySet="TbOportunidad">
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="Compania" ColumnName="Compania" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idFormato" ColumnName="idFormato" />
@@ -1488,7 +1497,8 @@
           <EntitySetMapping Name="TbSolicitud">
             <EntityTypeMapping TypeName="OPModel.TbSolicitud">
               <MappingFragment StoreEntitySet="TbSolicitud">
-                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
+                <ScalarProperty Name="EnviadoCom" ColumnName="EnviadoCom" />
+                <ScalarProperty Name="EnviadoInfra" ColumnName="EnviadoInfra" />
                 <ScalarProperty Name="Folio" ColumnName="Folio" />
                 <ScalarProperty Name="TipoMaterialPersonal" ColumnName="TipoMaterialPersonal" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />

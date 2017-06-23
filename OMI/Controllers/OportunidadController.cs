@@ -95,7 +95,7 @@ namespace OMI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres)
+        public ActionResult Edit(TbOportunidad oportunidad, List<int> TipoOportunidad, List<int> AreasInteres,string Option)
         {
 
 
@@ -103,7 +103,11 @@ namespace OMI.Controllers
             oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
             oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);
             oportunidad.TbUsuario = contexto.TbUsuario.Find(oportunidad.idUsuario);
-
+            oportunidad.Enviado = 0;
+            if (Option == "Enviar")
+            {
+                oportunidad.Enviado = 1;
+            }
             contexto.Entry(oportunidad).State = EntityState.Modified;
             contexto.SaveChanges();
             TbOportunidad recuperado = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad).Include(x=>x.TbAreaInteres).ToList()
@@ -131,7 +135,9 @@ namespace OMI.Controllers
                 }
 
              
-            }   contexto.SaveChanges();
+            }
+           
+            contexto.SaveChanges();
             ViewBag.LAreas = contexto.TbAreaInteres.ToList();
             ViewBag.LTipoOportunidad = contexto.TbTipoOportunidad.ToList();
             ViewBag.Medios = new SelectList(contexto.TbMedioContacto.ToList(), "Id", "Nombre");
@@ -182,7 +188,6 @@ namespace OMI.Controllers
                 oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
                 oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);
                 oportunidad.TbUsuario = contexto.TbUsuario.Find(oportunidad.idUsuario);
-
                 contexto.TbOportunidad.Add(oportunidad);
                 contexto.SaveChanges();
                 TbOportunidad recuperado = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad)
@@ -216,6 +221,7 @@ namespace OMI.Controllers
                 {
                  return   RedirectToAction("Edit", new {id = oportunidad.Id});
                 }
+               
             }
 
             else

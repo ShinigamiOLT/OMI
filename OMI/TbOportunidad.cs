@@ -33,6 +33,7 @@ namespace OMI
         public int idFormato { get; set; }
         public int idUsuario { get; set; }
         public string Compania { get; set; }
+        public Nullable<int> Enviado { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
         public virtual TbMedioContacto TbMedioContacto { get; set; }
