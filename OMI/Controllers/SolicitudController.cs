@@ -8,31 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Omu.AwesomeMvc;
 using OMI.Models;
+using OMI.Models.Utils;
 
 namespace OMI.Controllers
 {
     public class SolicitudController : Controller
     {
       
-        private static object MapToGridModel(TbPedidoM o)
-        {
-            return
-                new
-                {
-                    o.Id,
-                    o.Descripcion,
-                    o.Cantidad,
-                    IdSupervisor= o.Supervisores.TbUsuario.Nombre,
-                    Estatus =  o.TbStatusAutorizacion.Nombre,
-                  Unidad=  o.TbUnidad.Nombre,
-                  Categoria=o.TbCategoria.Nombre
-                 
-                   /* Date = o.Date.ToShortDateString(),
-                    ChefName = o.Chef.FirstName + " " + o.Chef.LastName,
-                    Meals = string.Join(", ", o.Meals.Select(m => m.Name))*/
-                };
-        }
-   
+      
 
        
 
@@ -121,7 +104,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem = () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
-                Map = MapToGridModel
+                Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
 
@@ -191,8 +174,9 @@ namespace OMI.Controllers
               */
             };
          sol.AgregaPedido(dinner);
+         
            //  sol.ListaPedido.Add(dinner);
-            return Json(MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
+            return Json(   MaptoGridModel.MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
         }
 
         public ActionResult Edit(int id)

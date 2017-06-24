@@ -24,6 +24,7 @@ namespace OMI
         public int Estatus { get; set; }
         public int Surtido { get; set; }
         public int Dato { get; set; }
+        public Nullable<System.DateTime> FechaAutorizacion { get; set; }
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }

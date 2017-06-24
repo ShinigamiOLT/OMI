@@ -148,6 +148,7 @@ namespace OMI.Models
             var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
 
             dinner.Estatus = input.Autorizar;
+            dinner.FechaAutorizacion = DateTime.Now.Date;
             contexto.Entry(dinner).State = EntityState.Modified;
             contexto.SaveChanges();
 
@@ -207,6 +208,7 @@ namespace OMI.Models
         public void EnviarPedidoCom()
         {
             TbSol.EnviadoCom = 1;
+           
             contexto.SaveChanges();
         }
     }

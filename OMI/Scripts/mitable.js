@@ -1,12 +1,21 @@
 ﻿
-        $(document).ready(function() {
+function formatoaceptacion(lunch, prop) {
+    var color = 'maroon';
+    var estado = lunch[prop];
+    if (estado == 'Orden Compra') color = 'green';
+    if (estado == 'Rechazado') color = 'red';
+    if (estado == 'Pendiente') color = 'maroon';
+    if (estado == 'Inventario') color = 'blue';
+    return "<div style='color:" + color + ";text-width:bold;'>" + estado + " </div>";
+}
+$(document).ready(function () {
 
 
             
             $("#btnExport").click(function () {
                 tableToExcel('assets-data-table', 'Table');
             });
-
+          
 
             var tableToExcel = (function () {
                 var uri = 'data:application/vnd.ms-excel;base64,'

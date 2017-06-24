@@ -6,32 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using Omu.AwesomeMvc;
 using OMI.Models;
+using OMI.Models.Utils;
 
 namespace OMI.Controllers
 {
     public class PersonalController : Controller
     {
-        private static object MapToGridModel(TbPedidoPersonal o)
-        {
-            return
-                new
-                {
-                    o.Id,
-                  Especialidad=  o.TbEspecialidad.Nombre,
-                
-                   Profesion= o.TbProfesion.Nombre,
-                    Categoria = o.TbCategoriaRH.Nombre,
-                    o.Cantidad,
-                    IdSupervisor = o.TbUsuario.Nombre,
-                    Estatus = o.TbStatusAutorizacion.Nombre,
-                    Descripcion= o.Descripcion
-              
-              /*
- Date = o.Date.ToShortDateString(),
-                       ChefName = o.Chef.FirstName + " " + o.Chef.LastName,
-                     Meals = string.Join(", ", o.Meals.Select(m => m.Name))*/
-                };
-        }
+       
 
         public ActionResult GridGetItems(GridParams g, string search)
         {
@@ -46,7 +27,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem = () => sol.contexto.TbPedidoPersonal.Find(Convert.ToInt32(g.Key), sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
-                Map = MapToGridModel
+                Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
 
@@ -97,7 +78,7 @@ namespace OMI.Controllers
             sol.contexto.TbPedidoPersonal.Add(dinner);
             sol.contexto.SaveChanges();
 
-            return Json(MapToGridModel(dinner));
+            return Json(MaptoGridModel.MapToGridModel(dinner));
         }
 
         public ActionResult Edit(int id)

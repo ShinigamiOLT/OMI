@@ -263,6 +263,7 @@
     <Compile Include="Models\Procedimientos.cs" />
     <Compile Include="Models\UtilApp.cs" />
     <Compile Include="Models\Utils\IExplorer.cs" />
+    <Compile Include="Models\Utils\MaptoGridModel.cs" />
     <Compile Include="Models\Utils\Message.cs" />
     <Compile Include="Models\Utils\ResultSet.cs" />
     <Compile Include="PedidoMXSolicitud_Result.cs">
@@ -4024,6 +4025,7 @@
     <Content Include="Views\Infraestructura\Create.cshtml" />
     <Content Include="Views\Infraestructura\Edit.cshtml" />
     <Content Include="Views\Admon\SolCotizacion.cshtml" />
+    <Content Include="Views\Admon\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

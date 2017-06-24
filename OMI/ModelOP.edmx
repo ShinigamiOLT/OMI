@@ -137,6 +137,7 @@
           <Property Name="Estatus" Type="int" Nullable="false" />
           <Property Name="Surtido" Type="int" Nullable="false" />
           <Property Name="Dato" Type="int" Nullable="false" />
+          <Property Name="FechaAutorizacion" Type="date" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -940,6 +941,7 @@
           <NavigationProperty Name="TbSolicitud" Relationship="OPModel.IdSol_fk" FromRole="TbPedidoM" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidad" Relationship="OPModel.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="OPModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
+          <Property Name="FechaAutorizacion" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -1457,6 +1459,7 @@
           <EntitySetMapping Name="TbPedidoM">
             <EntityTypeMapping TypeName="OPModel.TbPedidoM">
               <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
                 <ScalarProperty Name="Dato" ColumnName="Dato" />
                 <ScalarProperty Name="Surtido" ColumnName="Surtido" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
