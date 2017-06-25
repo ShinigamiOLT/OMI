@@ -42,7 +42,7 @@ namespace OMI.Models
         [Required]
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetEspecialidad", Controller = "Data")]
-        [DisplayName("Especialidad")]
+        [DisplayName("Tipo Especialidad")]
         public int Especialidad { get; set; }
 
         [UIHint("Odropdown")]
@@ -68,4 +68,17 @@ namespace OMI.Models
             Descripcion = "";
         }
     }
+
+    public class AutorizaInput
+    {
+        public int id { get; set; }
+
+        [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetAutorizacion", Controller = "Data")]
+        [DisplayName("Autorizar")]
+        public int Autorizar { get; set; }
+    }
+
+
 }

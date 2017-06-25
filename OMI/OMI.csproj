@@ -209,31 +209,22 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="AspNetRoles.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserClaims.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserLogins.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUsers.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmonController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\DownloaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfraestructuraController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OportunidadController.cs" />
+    <Compile Include="Controllers\OrganizacionController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\TbOportunidadsController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,9 +249,11 @@
       <DependentUpon>ModelOP.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\cOportunidad.cs" />
     <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
     <Compile Include="Models\cUsuario.cs" />
+    <Compile Include="Models\forOportunidad.cs" />
     <Compile Include="Models\FrontUser.cs" />
     <Compile Include="Models\GridUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -270,6 +263,7 @@
     <Compile Include="Models\Procedimientos.cs" />
     <Compile Include="Models\UtilApp.cs" />
     <Compile Include="Models\Utils\IExplorer.cs" />
+    <Compile Include="Models\Utils\MaptoGridModel.cs" />
     <Compile Include="Models\Utils\Message.cs" />
     <Compile Include="Models\Utils\ResultSet.cs" />
     <Compile Include="PedidoMXSolicitud_Result.cs">
@@ -295,10 +289,16 @@
     <Compile Include="Supervisores.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="TablaDirectorio.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TablaMaestra.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbArea.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbAreaInteres.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbCategoria.cs">
@@ -311,6 +311,12 @@
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbFormato.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbMedioContacto.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbOportunidad.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbPedidoM.cs">
@@ -328,7 +334,16 @@
     <Compile Include="TbStatusAutorizacion.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbTipoOportunidad.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbUnidad.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbUnidadNegocios.cs">
+      <DependentUpon>ModelOP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbUnidadTecnica.cs">
       <DependentUpon>ModelOP.tt</DependentUpon>
     </Compile>
     <Compile Include="TbUsuario.cs">
@@ -2284,6 +2299,7 @@
     <Content Include="Content\assets\js\jquery.blockUI.js" />
     <Content Include="Content\assets\js\jquery.min.js" />
     <Content Include="Content\assets\js\jquery.nicescroll.js" />
+    <Content Include="Content\assets\js\jquery.orgchart.js" />
     <Content Include="Content\assets\js\jquery.scrollTo.js" />
     <Content Include="Content\assets\js\jquery.scrollTo.min.js" />
     <Content Include="Content\assets\js\jquery.slimscroll.js" />
@@ -3561,6 +3577,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\jquery.orgchart.css" />
     <Content Include="Content\themes\wui\awem.css" />
     <Content Include="Content\themes\wui\AwesomeMvc.css" />
     <Content Include="Content\themes\wui\awe_icons.png" />
@@ -3572,6 +3589,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\organigrama.png" />
     <Content Include="ModelOP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelOP.edmx</DependentUpon>
@@ -3796,6 +3814,10 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Download\Files\FI_DI_01.pdf" />
+    <Content Include="Download\Files\FI_DI_02.xls" />
+    <Content Include="fonts\Javacom.otf" />
+    <Content Include="fonts\Crystal Personal Use.ttf" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3887,10 +3909,12 @@
     <Content Include="Scripts\jquery.event.drag.live.min.js" />
     <Content Include="Scripts\jquery.event.drag.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.orgchart.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mitable.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -3899,6 +3923,7 @@
     <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Utilidades\TextFile1.txt" />
+    <Content Include="Utilidades\TextFile2.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3977,16 +4002,35 @@
     <Content Include="Views\Solicitud\AllSolicitud.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\Personal\Create.cshtml" />
-<<<<<<< HEAD
-=======
     <Content Include="Views\Shared\_PartialPersona.cshtml" />
     <Content Include="Views\Solicitud\Autorizar.cshtml" />
     <Content Include="Views\Shared\_MenuIzquierdo.cshtml" />
->>>>>>> 0c5bca2... xxxx
+    <Content Include="Views\Oportunidad\Index.cshtml" />
+    <Content Include="Views\TbOportunidads\Create.cshtml" />
+    <Content Include="Views\TbOportunidads\Delete.cshtml" />
+    <Content Include="Views\TbOportunidads\Details.cshtml" />
+    <Content Include="Views\TbOportunidads\Edit.cshtml" />
+    <Content Include="Views\TbOportunidads\Index.cshtml" />
+    <Content Include="Views\Oportunidad\Edit.cshtml" />
+    <Content Include="Views\Oportunidad\List.cshtml" />
+    <Content Include="Views\Oportunidad\Create.cshtml" />
+    <Content Include="Views\Organizacion\Index.cshtml" />
+    <Content Include="Views\Organizacion\Politica.cshtml" />
+    <Content Include="Views\Organizacion\Reglamento.cshtml" />
+    <Content Include="Views\Organizacion\Maestra.cshtml" />
+    <Content Include="Views\Organizacion\Organigrama.cshtml" />
+    <Content Include="Views\Organizacion\Directorio.cshtml" />
+    <Content Include="Views\Infraestructura\Requermientos.cshtml" />
+    <Content Include="Views\Infraestructura\Details.cshtml" />
+    <Content Include="Views\Infraestructura\Create.cshtml" />
+    <Content Include="Views\Infraestructura\Edit.cshtml" />
+    <Content Include="Views\Admon\SolCotizacion.cshtml" />
+    <Content Include="Views\Admon\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Data\" />
+    <Folder Include="Views\Downloader\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

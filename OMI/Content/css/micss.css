@@ -1,5 +1,5 @@
-﻿body {
-}
+﻿
+/*
 .input {
     padding: 10 !important; 
     margin: 0 !important; 
@@ -54,6 +54,7 @@ td {
 
     max-width: 10px;
 }
+    */
 .miinput
 {
 
@@ -91,3 +92,30 @@ input.pull-left
     flex-flow: column wrap;
 }
 
+#Documento {
+   text-align: justify;
+   font-size: 20px;
+}
+#firma {
+    font-family: 'Qwigley', cursive; 
+    font-size: 2.4em;
+    text-align: center;
+}
+
+IMG.imgcenter{
+                          display: block;
+                          margin-left: auto;
+                          margin-right: auto;
+                          border:none;
+                      }
+div.crop-img {
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+}
+div.crop-img img {
+    display: block;
+    max-width: none !important;
+}

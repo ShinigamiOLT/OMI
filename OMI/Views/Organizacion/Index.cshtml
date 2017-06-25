@@ -1,0 +1,21 @@
+﻿<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-border panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Sistema OIM</h3>
+        </div>
+       
+        <div class="panel-body" style="text-align: justify">
+            <li>@Html.ActionLink("Download Temp PDF","PDFDownload")</li>
+
+            @using (Html.BeginForm("ViewPDF", "Organizacion", FormMethod.Post))
+            {
+                <a href="javascript:;" onclick="document.forms[0].submit();">View PDF</a>
+                <hr/>
+                @Html.Raw(TempData["Embed"])
+            }
+
+        </div>
+    </div>
+</div>
+</div>

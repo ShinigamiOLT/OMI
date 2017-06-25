@@ -93,7 +93,7 @@
                                       new Column { Bind = "Categoria", Header = "Categoria" },
                                       new Column{ Bind = "Cantidad"},
                                       new Column { Bind = "IdSupervisor", Header  ="Autoriza"},
-                                      new Column { Bind = "Estatus"},
+                                      new Column { Bind = "Estatus",ClientFormatFunc = "formatoaceptacion"},
                                       new Column { Bind = "Descripcion" },
                                        new Column {ClientFormat = GridUtils.EditFormatForGrid("GridPersonal"), Width = 50}.Mod(o => o.Nohide()),
                                       new Column{ClientFormat = GridUtils.DeleteFormatForGrid("GridPersonal"), Width = 50}.Mod(o => o.Nohide())))

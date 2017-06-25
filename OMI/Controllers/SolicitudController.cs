@@ -8,31 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Omu.AwesomeMvc;
 using OMI.Models;
+using OMI.Models.Utils;
 
 namespace OMI.Controllers
 {
     public class SolicitudController : Controller
     {
       
-        private static object MapToGridModel(TbPedidoM o)
-        {
-            return
-                new
-                {
-                    o.Id,
-                    o.Descripcion,
-                    o.Cantidad,
-                    IdSupervisor= o.Supervisores.TbUsuario.Nombre,
-                    Estatus =  o.TbStatusAutorizacion.Nombre,
-                  Unidad=  o.TbUnidad.Nombre,
-                  Categoria=o.TbCategoria.Nombre
-                 
-                   /* Date = o.Date.ToShortDateString(),
-                    ChefName = o.Chef.FirstName + " " + o.Chef.LastName,
-                    Meals = string.Join(", ", o.Meals.Select(m => m.Name))*/
-                };
-        }
-   
+      
 
        
 
@@ -51,7 +34,7 @@ namespace OMI.Controllers
             if(!sol.Valido)
             return  RedirectToAction("Index");
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
-            ViewBag.Visible = sol.TbSol.Enviado;
+            ViewBag.Visible = sol.TbSol.EnviadoInfra;
             return View(sol);
         }
 
@@ -121,7 +104,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem = () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
-                Map = MapToGridModel
+                Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
 
@@ -191,8 +174,9 @@ namespace OMI.Controllers
               */
             };
          sol.AgregaPedido(dinner);
+         
            //  sol.ListaPedido.Add(dinner);
-            return Json(MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
+            return Json(   MaptoGridModel.MapToGridModel(dinner)); // returning grid model, used in grid.api.renderRow
         }
 
         public ActionResult Edit(int id)
@@ -274,11 +258,11 @@ namespace OMI.Controllers
             return View(items);
         }
 
-        public ActionResult AllSolicitud()
+        public ActionResult AllSolicitud(int id=1)
         {
            OPEntities context = new OPEntities(); 
 
-            return View(context.TbSolicitud.Where(o=> o.IdFormato !=0).ToList());
+            return View(context.TbSolicitud.Where(o=> o.IdFormato ==id).ToList());
         }
 
         public ActionResult Details(int id, int idfor)
@@ -300,8 +284,6 @@ namespace OMI.Controllers
         {
             return RedirectToAction("AllSolicitud", "Solicitud", new { id });
         }
-<<<<<<< HEAD
-=======
 
         public ActionResult Autorizar()//string parent, int p1, string a, string b)
         {
@@ -318,12 +300,11 @@ namespace OMI.Controllers
 
            // int idsol = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id,3);
-            sol.contexto.TbSolicitud.Find(id).Enviado = 1;
+            sol.contexto.TbSolicitud.Find(id).EnviadoInfra = 1;
             sol.contexto.SaveChanges();
         
             return Json(id, JsonRequestBehavior.AllowGet);
         }
 
->>>>>>> 0c5bca2... xxxx
     }
 }

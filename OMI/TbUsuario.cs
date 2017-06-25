@@ -18,6 +18,7 @@ namespace OMI
         public TbUsuario()
         {
             this.Supervisores = new HashSet<Supervisores>();
+            this.TbOportunidad = new HashSet<TbOportunidad>();
             this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
             this.TbSolicitud = new HashSet<TbSolicitud>();
         }
@@ -25,13 +26,20 @@ namespace OMI
         public int Id { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> Area { get; set; }
+        public string Roles { get; set; }
+        public Nullable<int> UnidadNegocio { get; set; }
+        public Nullable<int> UnidadTecnica { get; set; }
     
-        public virtual TbArea TbArea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supervisores> Supervisores { get; set; }
+        public virtual TbArea TbArea { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbOportunidad> TbOportunidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
+        public virtual TbUnidadNegocios TbUnidadNegocios { get; set; }
+        public virtual TbUnidadTecnica TbUnidadTecnica { get; set; }
     }
 }

@@ -1,0 +1,139 @@
+﻿@using Omu.Awem.Helpers
+@model IEnumerable<OMI.TbSolicitud>
+
+@{
+    ViewBag.Title = "AllSolicitud";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ingenieria Aplicada OnePro</h3>
+            </div>
+            <div class="panel-body">
+                <h2>AllSolicitud</h2>
+
+                <p>
+                    <a class="btn btn-success" id="NuevoPedido" href="@Url.Action("NuevaSolicitud","Solicitud" ,new { id=-1})">Solicitud de Productos / Servicios</a>
+                  
+                </p>
+                <p>
+                    <a class="btn btn-success" id="NuevoPersonal" href="@Url.Action("Index","Personal" ,new { id=-1})">Solicitud de Personal</a>
+
+                </p>
+             
+                <table id="assets-data-table" class="table table-striped table-bordered" style="width:100%">
+                    <thead>   <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Folio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fecha)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.TbFormato.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
+                        </th>
+                        <th>
+<<<<<<< HEAD
+                            @Html.DisplayNameFor(model => model.Enviado)
+<<<<<<< HEAD
+                        </th>
+                        <th></th>
+=======
+                        </th> 
+                        <th>
+                            Opciones
+                        </th>
+
+>>>>>>> 0c5bca2... xxxx
+=======
+                            @Html.DisplayNameFor(model => model.EnviadoInfra)
+                        </th> 
+                        <th>
+                            Opciones
+                        </th>
+
+>>>>>>> origin/CambiandoDiseño
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach (var item in Model)
+                    {
+        
+
+                        <tr id="@item.IdSolicitud">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Folio)
+                            </td>
+                            <td >
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TbFormato.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
+                            </td>
+                            <td>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                @Html.DisplayFor(modelItem => item.Enviado)
+                            </td>
+=======
+                                <div id="@item.IdSolicitud">
+                                    @Html.DisplayFor(modelItem => item.Enviado)
+                                </div>
+                            </td>
+                            
+>>>>>>> 0c5bca2... xxxx
+=======
+                                <div id="@item.IdSolicitud">
+                                    @Html.DisplayFor(modelItem => item.EnviadoInfra)
+                                </div>
+                            </td>
+                            
+>>>>>>> origin/CambiandoDiseño
+                            <td>
+                   
+                                @Html.ActionLink("Details", "Details", new {id = item.IdSolicitud, idfor = item.IdFormato })
+                                <span> &#124; </span>
+                                @Html.ActionLink("Delete", "DeleteM", new {id = item.IdSolicitud, idfor = item.IdFormato })
+                              
+                    
+                        </tr>
+         
+                    }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+   
+=======
+>>>>>>> origin/CambiandoDiseño
+
+
+<<<<<<< HEAD
+=======
+
+
+
+
+@section Scripts
+{
+>>>>>>> 0c5bca2... xxxx
+    <script type="text/javascript">
+        $(document).ready(function() {
+=======
+>>>>>>> origin/CambiandoDiseño
+
+

@@ -27,25 +27,27 @@ namespace OMI
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Supervisores> Supervisores { get; set; }
         public virtual DbSet<TbArea> TbArea { get; set; }
+        public virtual DbSet<TbAreaInteres> TbAreaInteres { get; set; }
         public virtual DbSet<TbCategoria> TbCategoria { get; set; }
         public virtual DbSet<TbCategoriaRH> TbCategoriaRH { get; set; }
         public virtual DbSet<TbEspecialidad> TbEspecialidad { get; set; }
         public virtual DbSet<TbFormato> TbFormato { get; set; }
+        public virtual DbSet<TbMedioContacto> TbMedioContacto { get; set; }
+        public virtual DbSet<TbOportunidad> TbOportunidad { get; set; }
+        public virtual DbSet<TbPedidoM> TbPedidoM { get; set; }
         public virtual DbSet<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual DbSet<TbProfesion> TbProfesion { get; set; }
+        public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
+        public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
+        public virtual DbSet<TbTipoOportunidad> TbTipoOportunidad { get; set; }
         public virtual DbSet<TbUnidad> TbUnidad { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
-        public virtual DbSet<Supervisores> Supervisores { get; set; }
-        public virtual DbSet<TbPedidoM> TbPedidoM { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
+        public virtual DbSet<TablaMaestra> TablaMaestra { get; set; }
+        public virtual DbSet<TablaDirectorio> TablaDirectorio { get; set; }
+        public virtual DbSet<TbUnidadNegocios> TbUnidadNegocios { get; set; }
+        public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

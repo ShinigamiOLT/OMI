@@ -1,0 +1,13 @@
+﻿
+@model OMI.Models.AutorizaInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.HiddenFor(o=>o.id);
+        @Html.EditorFor(o => o.Autorizar)
+
+
+    }
+}
+

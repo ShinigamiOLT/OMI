@@ -12,11 +12,13 @@ namespace OMI
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class TablaDirectorio
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Correo { get; set; }
+        public string CorreoPersonal { get; set; }
+        public string Celular { get; set; }
+        public string Telefono { get; set; }
     }
 }

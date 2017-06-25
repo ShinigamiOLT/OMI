@@ -58,7 +58,7 @@
 
                                 <div class="panel-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item"><h6>Area Solicitante <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Area Solicitante: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
                                         <li class="list-group-item"><h6>Usuario:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbSol.TbUsuario.Nombre)</strong></span></h6></li>
                                         <li class="list-group-item"><h6>Fecha:<span style="color: red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
 
@@ -93,7 +93,7 @@
                                           new Column {Name = "Unidad"},
                                           new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                           new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                          new Column {Name = "Estatus"},
+                                          new Column {Name = "Estatus",ClientFormatFunc = "formatoaceptacion" },
                                           new Column {ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide()),
                                           new Column {ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide())))
                             }
@@ -116,7 +116,7 @@
                                           new Column {Name = "Unidad"},
                                           new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                           new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                          new Column {Name = "Estatus", ClientFormatFunc = "formatPrice", }))
+                                          new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion", }))
                             }
 
                             <br/>
@@ -139,6 +139,7 @@
                                       .UseAjax(false)
                                       .Confirm(true)
                                       .FormClass("normalPost")
+                                      
                                       .ConfirmOptions(o => {o.Message="Esta seguro de enviar esta Solicitud";
                                                                o.Title = "Confirmar envio";
                                                                o.YesText = "Enviar";
@@ -159,52 +160,6 @@
         </div>
     </div>
     </div>
-@section Scripts
-{
-
-    <script type="text/javascript">
-        //custom checkbox using bootstrap-toggle plugin (http://www.bootstraptoggle.com)
-        $(function () {
-            $('#DinnersGrid').on('awerender', function () {
-                $(this).find(".checkbox-toggle").bootstrapToggle();
-            });
-        });
-
-        var toggleButton = function (model, prop) {
-            var checked = model[prop] ? 'checked = "checked"' : '';
-            return '<input type="checkbox" ' + checked + ' class="checkbox-toggle" data-toggle="toggle" data-on="Yes" data-off="No" data-size="small">';
-        };
-
-        function formatPrice(lunch, prop) {
-            var color = 'maroon';
-            var estado = lunch[prop];
-            if (estado =='Autorizado') color = 'green';
-            if (estado =='Rechazado') color = 'red';
-            return "<div style='color:" + color + ";text-width:bold;'>" + estado + " </div>";
-        }
-
-        function useTemplate(id) {
-            return function (model) {
-                var str = $('#' + id).html();
-                for (var name in model) {
-                    str = str.replace("." + name, model[name]);
-                }
-                return str;
-            };
-        }
-    </script>
-    <style>
-        .maro {
-            color: maroon;
-        }
-    </style>
-    <div id="template1" style="display: none">
-        .Person spent .Price £
-    </div>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-
-}
 
 
 

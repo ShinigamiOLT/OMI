@@ -66,5 +66,16 @@ namespace OMI.Controllers
 
             return Json(items);
         }
+
+        public ActionResult GetAutorizacion()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+            foreach (var unidad in contexto.TbStatusAutorizacion)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+
+            return Json(items);
+        }
     }
 }

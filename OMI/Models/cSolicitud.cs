@@ -143,6 +143,16 @@ namespace OMI.Models
             contexto.SaveChanges();
 
         }
+        public void UpdatePedido(AutorizaInput input)
+        {
+            var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
+
+            dinner.Estatus = input.Autorizar;
+            dinner.FechaAutorizacion = DateTime.Now.Date;
+            contexto.Entry(dinner).State = EntityState.Modified;
+            contexto.SaveChanges();
+
+        }
         public void UpdatePedidoP(PedidoPInPut input)
         {
             var dinner = GetPedidoP(input.Id, input.IdSolicitud);
@@ -192,7 +202,13 @@ namespace OMI.Models
 
         public void EnviarPedido()
         {
-            TbSol.Enviado = 1;
+            TbSol.EnviadoInfra = 1;
+            contexto.SaveChanges();
+        }
+        public void EnviarPedidoCom()
+        {
+            TbSol.EnviadoCom = 1;
+           
             contexto.SaveChanges();
         }
     }

@@ -38,17 +38,12 @@
                             @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Enviado)
-<<<<<<< HEAD
-                        </th>
-                        <th></th>
-=======
+                            @Html.DisplayNameFor(model => model.EnviadoInfra)
                         </th> 
                         <th>
                             Opciones
                         </th>
 
->>>>>>> 0c5bca2... xxxx
                     </tr>
                     </thead>
                     <tbody>
@@ -71,16 +66,11 @@
                                 @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
                             </td>
                             <td>
-<<<<<<< HEAD
-                                @Html.DisplayFor(modelItem => item.Enviado)
-                            </td>
-=======
                                 <div id="@item.IdSolicitud">
-                                    @Html.DisplayFor(modelItem => item.Enviado)
+                                    @Html.DisplayFor(modelItem => item.EnviadoInfra)
                                 </div>
                             </td>
                             
->>>>>>> 0c5bca2... xxxx
                             <td>
                    
                                 @Html.ActionLink("Details", "Details", new {id = item.IdSolicitud, idfor = item.IdFormato })
@@ -98,37 +88,7 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-   
-
-@section Scripts
-{
-
-=======
 
 
 
 
-@section Scripts
-{
->>>>>>> 0c5bca2... xxxx
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            $('#assets-data-table').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
-                "scrollY": true,
-                "scrollX": true,
-                paging: false,
-                datawidth: '*',
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                }
-            });
-        });
-    </script>
-
-}

@@ -27,7 +27,8 @@ namespace OMI
         public int IdUsuario { get; set; }
         public Nullable<int> TipoMaterialPersonal { get; set; }
         public string Folio { get; set; }
-        public int Enviado { get; set; }
+        public int EnviadoInfra { get; set; }
+        public Nullable<int> EnviadoCom { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

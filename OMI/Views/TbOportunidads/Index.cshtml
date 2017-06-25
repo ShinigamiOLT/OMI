@@ -1,0 +1,93 @@
+﻿@model IEnumerable<OMI.TbOportunidad>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Folio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSistema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Representante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Compania)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TbFormato.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TbMedioContacto.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Folio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaSistema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Representante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Compania)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbFormato.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbMedioContacto.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
