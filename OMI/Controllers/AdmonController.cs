@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 using Omu.AwesomeMvc;
 using OMI.Models;
 using OMI.Models.Utils;
@@ -14,8 +15,8 @@ namespace OMI.Controllers
         // GET: Admon
         public ActionResult SolCotizacion()
         {
-            OPEntities context = new OPEntities();
-
+            OIMEntity  context = new OIMEntity();
+            
             return View(context.TbSolicitud.Where(o => o.IdFormato == 1 && o.EnviadoCom == 1).ToList());
         }
 
@@ -57,5 +58,31 @@ namespace OMI.Controllers
                 Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
+
+        public ActionResult Edit(int id)
+        {
+
+            ProveedorInput nuevo = new ProveedorInput();
+
+            return PartialView(nuevo);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AutorizaInput input)
+        {
+            if (!ModelState.IsValid)
+                return PartialView("Create", input);
+            int id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id, 1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
+            sol.TbSol.EnviadoCom = 1;
+            sol.UpdatePedido(input);
+
+
+            // returning the key to call grid.api.update
+            return Json(new { Id = input.id });
+        }
+
     }
 }

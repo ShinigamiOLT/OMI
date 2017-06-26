@@ -80,5 +80,16 @@ namespace OMI.Models
         public int Autorizar { get; set; }
     }
 
+    public class ProveedorInput
+    {
+        public int id { get; set; }
+
+        [Required]
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetAutorizacion", Controller = "Data")]
+        [DisplayName("Autorizar")]
+        public int Autorizar { get; set; }
+    }
+
 
 }

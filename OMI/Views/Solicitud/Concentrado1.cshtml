@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OMI.TbSolicitud>
+
+@{
+    ViewBag.Title = "Concentrado1";
+}
+
+<h2>Concentrado1</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoMaterialPersonal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Folio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnviadoInfra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnviadoCom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TbFormato.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
+        </th>
+        <th>
+            Hola
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoMaterialPersonal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Folio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnviadoInfra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnviadoCom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbFormato.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdSolicitud }) 
+        </td>
+    </tr>
+}
+
+</table>

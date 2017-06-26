@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 using OMI;
 
 namespace OMI.Controllers
 {
     public class TbOportunidadsController : Controller
     {
-        private OPEntities db = new OPEntities();
+        private OIMEntity db = new OIMEntity();
 
         // GET: TbOportunidads
         public ActionResult Index()

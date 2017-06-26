@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMI", "OMI\OMI.csproj", "{71DFE34C-4D96-4230-BAFE-4E738C37C4A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OIM_DAL", "OIM_DAL\OIM_DAL.csproj", "{9B84FC7C-1F0C-48F3-A39E-8326643C4DB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{71DFE34C-4D96-4230-BAFE-4E738C37C4A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71DFE34C-4D96-4230-BAFE-4E738C37C4A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71DFE34C-4D96-4230-BAFE-4E738C37C4A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B84FC7C-1F0C-48F3-A39E-8326643C4DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B84FC7C-1F0C-48F3-A39E-8326643C4DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B84FC7C-1F0C-48F3-A39E-8326643C4DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B84FC7C-1F0C-48F3-A39E-8326643C4DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

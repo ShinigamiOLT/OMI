@@ -105,10 +105,10 @@
                               .Groupable(false)
                               
                               .Columns(
-                                  new Column {Name = "Id", Width = 55},
+                                  new Column {Name = "Id", Width = 55,Hidden = true},
                                   new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria",}.Mod(o => o.Nohide()),
 
-                                  new Column {Name = "Cantidad",Width = 90}.Mod(o => o.Nohide()),
+                                  new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
                                   new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
                                   new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                   new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),

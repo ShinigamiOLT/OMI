@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 using Omu.AwesomeMvc;
 using OMI.Models;
 using OMI.Models.Utils;
@@ -37,7 +38,7 @@ namespace OMI.Controllers
         // GET: Infraestructura
         public ActionResult Requermientos()
         {
-            OPEntities context = new OPEntities();
+            OIMEntity context = new OIMEntity();
 
             return View(context.TbSolicitud.Where(o => o.IdFormato == 1 && o.EnviadoInfra ==1).ToList());
         }
@@ -103,6 +104,16 @@ namespace OMI.Controllers
             {
                 id
             });
+        }
+
+        public ActionResult Solicitudes()
+        {
+            using (OIMEntity contexto=new OIMEntity())
+            {
+                var lista= contexto.Sp_AllPedidoXEstatus(3);
+               return View(lista); 
+            }
+            
         }
     }
 }

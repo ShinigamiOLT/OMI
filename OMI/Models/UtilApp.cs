@@ -4,16 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 
 namespace OMI.Models
 {
     public class UtilApp
     {
-       public OPEntities entidad;
+       public OIMEntity entidad;
 
         public UtilApp()
         {
-            entidad = new OPEntities();
+            entidad = new OIMEntity();
         }
 
         public List<TbArea> GetAreas()
