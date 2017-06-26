@@ -6,14 +6,13 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
+
 namespace OIM_DAL
 {
     using System;
     
     public partial class Sp_AllPedidoXEstatus_Result
     {
-        [Key]
         public int Id { get; set; }
         public string Folio { get; set; }
         public string Categoria { get; set; }
@@ -30,6 +29,4 @@ namespace OIM_DAL
         public string Estatus { get; set; }
         public int Infra { get; set; }
     }
-
-  
 }

@@ -57,6 +57,13 @@ namespace OMI.Controllers
                 var elemento = contexto.TablaMaestra.Find(id);
                 if (elemento != null)
                 {
+                    if (elemento.Link.Contains("PDF"))
+                    {
+                        string filePath  = @"~/Download/Files/" + elemento.Codigo.Trim()+"."+elemento.Link.Trim();
+                        Response.AddHeader("Content-Disposition", "inline; filename=" + elemento.Codigo.Trim());
+
+                        return File(filePath, "application/pdf");
+                    }
                     DownloaderController x = new DownloaderController();
                     return x.DownloadFile(elemento.Codigo.Trim(), elemento.Link.Trim());
                 }

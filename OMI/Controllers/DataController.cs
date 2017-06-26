@@ -78,5 +78,15 @@ namespace OMI.Controllers
 
             return Json(items);
         }
+        public ActionResult GetProveedor()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+            foreach (var unidad in contexto.TbProveedores)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+
+            return Json(items);
+        }
     }
 }

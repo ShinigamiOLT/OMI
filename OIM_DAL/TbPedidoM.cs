@@ -25,6 +25,7 @@ namespace OIM_DAL
         public int Surtido { get; set; }
         public int Dato { get; set; }
         public Nullable<System.DateTime> FechaAutorizacion { get; set; }
+        public string Proveedor { get; set; }
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }

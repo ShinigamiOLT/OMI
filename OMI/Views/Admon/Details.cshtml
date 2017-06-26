@@ -72,14 +72,14 @@
                         @Html.InitCrudPopupsForGrid("DinnersGrid", "Admon")
                         @* popup names will be action + gridid; name is used when calling awe.open(name) *@
                        
-                        @if(Model.TbSol.EnviadoCom==0)
+                        @if(Model.TbSol.EnviadoCom==1)
                         { 
                             @(Html.Awe().Grid("DinnersGrid")
                                   .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
                                   .Url(Url.Action("GridGetItems", "Admon"))
                                   .Resizable()
                                   .Reorderable()
-                                  .Height(700)
+                                  .Height(450)
                                   .Paging(false)
                                   .Groupable(false)
 
@@ -91,8 +91,11 @@
                                       new Column {Name = "Unidad"},
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                       new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion", },
-                                      new Column {Name ="Autorizacion",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
+                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" },
+                                      new Column { Name = "Seleccionado" },
+                                      new Column {Name ="Proveedor",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
+
+                                      ))
                         }
                         else{
                             @(Html.Awe().Grid("DinnersGrid")
@@ -100,10 +103,10 @@
                                   .Url(Url.Action("GridGetItems", "Admon"))
                                   .Resizable()
                                   .Reorderable()
-                                  .Height(700)
+                                  .Height(450)
                                   .Paging(false)
                                   .Groupable(false)
-                              
+
                                   .Columns(
                                       new Column {Name = "Id", Width = 55,Hidden = true},
                                       new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria",}.Mod(o => o.Nohide()),
@@ -111,9 +114,10 @@
                                       new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
                                       new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
+                                      new Column { Name = "Seleccionado" ,Hidden = true},
                                       new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
                                       new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
-                                      new Column {Name ="Autorizacion",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
+                                      new Column {Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
                         }
 
                         <br/>

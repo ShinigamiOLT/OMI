@@ -122,6 +122,9 @@
     <Compile Include="TbProfesion.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbProveedores.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbSolicitud.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

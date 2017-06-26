@@ -154,6 +154,24 @@ namespace OMI.Models
             contexto.SaveChanges();
 
         }
+        public void UpdatePedido(ProveedorInput input)
+        {
+            var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
+            if (input.Proveedor == 0)
+            {
+                dinner.Proveedor = input.OtroProvedor;
+            }
+            else
+            {
+
+
+                dinner.Proveedor = contexto.TbProveedores.Find(input.Proveedor).Nombre;
+            }
+            dinner.FechaAutorizacion = DateTime.Now.Date;
+            contexto.Entry(dinner).State = EntityState.Modified;
+            contexto.SaveChanges();
+
+        }
         public void UpdatePedidoP(PedidoPInPut input)
         {
             var dinner = GetPedidoP(input.Id, input.IdSolicitud);

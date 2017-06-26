@@ -1,4 +1,6 @@
-﻿@model OMI.TbOportunidad
+﻿@using OIM_DAL
+
+@model OIM_DAL.TbOportunidad
 
 @{
     ViewBag.Title = "Create";
@@ -17,7 +19,7 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                <h4>TbOportunidad</h4>
+                
                 <hr/>
                 @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                 @Html.HiddenFor(o => o.TbFormato)
@@ -48,7 +50,7 @@
                                 <div class="panel-body">
                                     <div class="input-group ">
                                         <span class="input-group-addon" id="sizing-addon4">Folio</span>
-                                        <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly="true">
+                                        <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Model.Folio" style="text-align: right; color: red" readonly=true>
                                     </div>
 
                                     <ul class="list-group">

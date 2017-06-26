@@ -68,10 +68,13 @@ namespace OMI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(AutorizaInput input)
+        public ActionResult Edit(ProveedorInput input)
         {
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
+            if(input.Proveedor ==0 && string.IsNullOrWhiteSpace( input.OtroProvedor))
+                return PartialView(input);
+
             int id = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)

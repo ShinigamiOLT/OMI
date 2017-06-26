@@ -84,11 +84,15 @@ namespace OMI.Models
     {
         public int id { get; set; }
 
-        [Required]
+      
         [UIHint("Odropdown")]
-        [AweUrl(Action = "GetAutorizacion", Controller = "Data")]
-        [DisplayName("Autorizar")]
-        public int Autorizar { get; set; }
+        [AweUrl(Action = "GetProveedor", Controller = "Data")]
+        [DisplayName("Proveedor")]
+        public int Proveedor { get; set; }
+
+
+        [DisplayName("Otro Provedoor")]
+        public string OtroProvedor { get; set; }
     }
 
 

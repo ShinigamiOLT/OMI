@@ -110,7 +110,7 @@ namespace OMI.Controllers
         {
             using (OIMEntity contexto=new OIMEntity())
             {
-                var lista= contexto.Sp_AllPedidoXEstatus(3);
+                var lista= contexto.Sp_AllPedidoXEstatus(4).ToList();
                return View(lista); 
             }
             

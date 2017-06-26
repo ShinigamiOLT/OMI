@@ -48,6 +48,7 @@
         <AssociationConnector Association="DBOPSGIModel.Tecnica_fk" ManuallyRouted="false" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Area" ManuallyRouted="false" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Tipo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbProveedores" Width="1.5" PointX="10.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

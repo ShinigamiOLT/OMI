@@ -1,9 +1,9 @@
 ﻿
-body {
+.top-content {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: #888;
+    color: #000;
     line-height: 30px;
     text-align: center;
     background-image: url("~/Content/img/1.jpg")

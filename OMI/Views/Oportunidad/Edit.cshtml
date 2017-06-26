@@ -1,4 +1,5 @@
-﻿@model OMI.TbOportunidad
+﻿@using OIM_DAL
+@model OIM_DAL.TbOportunidad
 
 @{
     ViewBag.Title = "Edit";
@@ -17,8 +18,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TbOportunidad</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(o=>o.TbFormato)
         @Html.HiddenFor(o=>o.idFormato)

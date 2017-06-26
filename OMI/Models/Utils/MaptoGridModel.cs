@@ -19,10 +19,14 @@ namespace OMI.Models.Utils
                     IdSupervisor = o.Supervisores.TbUsuario.Nombre,
                     Estatus = o.TbStatusAutorizacion.Nombre,
                     Unidad = o.TbUnidad.Nombre,
-                    Categoria = o.TbCategoria.Nombre
+                    Categoria = o.TbCategoria.Nombre,
+                    Seleccionado = o.Proveedor
+                   
 
                 };
         }
+
+
         public static object MapToGridModel(TbPedidoPersonal o)
         {
             return

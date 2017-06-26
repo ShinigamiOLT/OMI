@@ -50,6 +50,7 @@ namespace OMI.Controllers
                 context.HttpContext.Response.Buffer = true;
                 context.HttpContext.Response.Clear();
                 context.HttpContext.Response.AddHeader("content-disposition", "attachment; filename=" + FileName);
+
                 context.HttpContext.Response.WriteFile(context.HttpContext.Server.MapPath(Path));
             }
         }
