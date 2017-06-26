@@ -87,5 +87,12 @@ namespace OMI.Controllers
             return Json(new { Id = input.id });
         }
 
+        public ActionResult OrdenCompra()
+        {
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatus(3).OrderBy(x=>x.Proveedor).ToList();
+            return View(list);
+        }
+
     }
 }

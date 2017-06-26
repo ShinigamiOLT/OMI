@@ -24,12 +24,7 @@
 
                         <div class="col-md-8">
                             <div class="menubar-logo" id="titulo">
-
-
                                 <span class="container">
-
-
-
                                     <h1>@Html.DisplayFor(m => m.TbSol.TbFormato.Descripcion)</h1>
                                 </span>
 
@@ -72,8 +67,8 @@
                         @Html.InitCrudPopupsForGrid("DinnersGrid", "Admon")
                         @* popup names will be action + gridid; name is used when calling awe.open(name) *@
                        
-                        @if(Model.TbSol.EnviadoCom==1)
-                        { 
+                        @if (ViewBag.Visible == 1)
+                        {
                             @(Html.Awe().Grid("DinnersGrid")
                                   .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
                                   .Url(Url.Action("GridGetItems", "Admon"))
@@ -92,7 +87,7 @@
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                       new Column {Name = "IdSupervisor", Header = "Autoriza"},
                                       new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" },
-                                      new Column { Name = "Seleccionado" },
+                                      new Column { Name = "Seleccionado"}.Mod(o=>o.Nohide()),
                                       new Column {Name ="Proveedor",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
 
                                       ))
@@ -114,9 +109,10 @@
                                       new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
                                       new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
-                                      new Column { Name = "Seleccionado" ,Hidden = true},
+                                     
                                       new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
                                       new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Seleccionado" ,Hidden = true},
                                       new Column {Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
                         }
 
@@ -127,7 +123,7 @@
                                
                             @using (Html.BeginForm("Enviar", "Admon", FormMethod.Post, new { @class = "normalPost" }))
                             {
-                                if (ViewBag.Visible != 1)
+                                if (ViewBag.Visible == 1)
                                 {
                                     <a class="btn btn-danger" id="btnCancelar" href="@Url.Action("Cancelar", "Admon")">Cancelar</a>
                                     @*  <input type="submit" value="Guardar" id="btnSave" class="btn btn-primary"/><a class="btn btn-success" id="btnCancelar" href="@Url.Action("Enviar", "Solicitud")">Enviar</a>*@

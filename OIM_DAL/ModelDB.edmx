@@ -804,7 +804,7 @@
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdSol_fk" FromRole="TbPedidoM" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidad" Relationship="Self.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="Self.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
-          <Property Name="Proveedor" Type="String" />
+          <Property Name="Proveedor" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -1278,10 +1278,10 @@
             <Parameter Name="Estatus" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(DBOPSGIModel.Sp_AllPedido_Result)" />
-          <FunctionImport Name="Sp_AllPedidoXEstatus" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatus_Result)">
-          <Parameter Name="Estatus" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="TbProveedores" EntityType="DBOPSGIModel.TbProveedores" />
+          <FunctionImport Name="Sp_AllPedidoXEstatus" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatus_Result2)">
+            <Parameter Name="Estatus" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1364,6 +1364,44 @@
           <Property Name="Categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Confiable" Type="Int32" />
         </EntityType>
+        <ComplexType Name="Sp_AllPedidoXEstatus_Result1">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Infra" Nullable="false" />
+          <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
+          <Property Type="String" Name="Proveedor" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_AllPedidoXEstatus_Result2">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Infra" Nullable="false" />
+          <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
+          <Property Type="String" Name="Proveedor" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1666,27 +1704,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatus" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DBOPSGIModel.Sp_AllPedidoXEstatus_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
-                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
-                <ScalarProperty Name="Formato" ColumnName="Formato" />
-                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Infra" ColumnName="Infra" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="TbProveedores">
             <EntityTypeMapping TypeName="DBOPSGIModel.TbProveedores">
               <MappingFragment StoreEntitySet="TbProveedores">
@@ -1704,6 +1721,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatus" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBOPSGIModel.Sp_AllPedidoXEstatus_Result2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Infra" ColumnName="Infra" />
+                <ScalarProperty Name="FAutorizacion" ColumnName="FAutorizacion" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

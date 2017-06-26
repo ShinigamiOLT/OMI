@@ -3918,6 +3918,7 @@
     <Content Include="Views\Admon\Edit.cshtml" />
     <Content Include="Views\Solicitud\Concentrado1.cshtml" />
     <Content Include="Views\Infraestructura\Solicitudes.cshtml" />
+    <Content Include="Views\Admon\OrdenCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

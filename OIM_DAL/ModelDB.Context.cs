@@ -77,13 +77,13 @@ namespace OIM_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedido_Result>("Sp_AllPedido");
         }
     
-        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result> Sp_AllPedidoXEstatus(Nullable<int> estatus)
+        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result2> Sp_AllPedidoXEstatus(Nullable<int> estatus)
         {
             var estatusParameter = estatus.HasValue ?
                 new ObjectParameter("Estatus", estatus) :
                 new ObjectParameter("Estatus", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result>("Sp_AllPedidoXEstatus", estatusParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result2>("Sp_AllPedidoXEstatus", estatusParameter);
         }
     }
 }
