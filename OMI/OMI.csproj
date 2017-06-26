@@ -233,21 +233,6 @@
       <DependentUpon>201706091445361_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ModelOP.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOP.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelOP.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelOP.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelOP.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\cOportunidad.cs" />
     <Compile Include="Models\CrudHelpers.cs" />
@@ -266,89 +251,8 @@
     <Compile Include="Models\Utils\MaptoGridModel.cs" />
     <Compile Include="Models\Utils\Message.cs" />
     <Compile Include="Models\Utils\ResultSet.cs" />
-    <Compile Include="PedidoMXSolicitud_Result.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PedidosXSolicitud_Result.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sp_AllPedido_Result.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Sp_AllPedido_Result1.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Supervisores.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TablaDirectorio.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TablaMaestra.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbArea.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbAreaInteres.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbCategoria.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbCategoriaRH.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbEspecialidad.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbFormato.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbMedioContacto.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbOportunidad.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbPedidoM.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbPedidoPersonal.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbProfesion.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbSolicitud.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbStatusAutorizacion.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbTipoOportunidad.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbUnidad.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbUnidadNegocios.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbUnidadTecnica.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TbUsuario.cs">
-      <DependentUpon>ModelOP.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\bootstrap-theme.css" />
@@ -3420,6 +3324,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Common.css" />
     <Content Include="Content\css\micss.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -3590,29 +3495,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\organigrama.png" />
-    <Content Include="ModelOP.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelOP.edmx</DependentUpon>
-      <LastGenOutput>ModelOP.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelOP.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelOP.edmx</DependentUpon>
-      <LastGenOutput>ModelOP.cs</LastGenOutput>
-    </Content>
     <Content Include="Referencia\Omu.Awem.dll" />
     <Content Include="Referencia\Omu.Awem.xml" />
     <Content Include="Referencia\Omu.AwesomeMvc.dll" />
     <Content Include="Referencia\Omu.AwesomeMvc.XML" />
     <Content Include="Scripts\awem.js" />
     <Content Include="Scripts\AwesomeMvc.js" />
-    <EntityDeploy Include="ModelOP.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelOP.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ModelOP.edmx.diagram">
-      <DependentUpon>ModelOP.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\assets\css\bootstrap-theme.css.map" />
     <Content Include="Content\assets\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\assets\css\bootstrap.css.map" />
@@ -3924,6 +3812,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Utilidades\TextFile1.txt" />
     <Content Include="Utilidades\TextFile2.txt" />
+    <Content Include="Utilidades\TextFile3.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -4026,6 +3915,8 @@
     <Content Include="Views\Infraestructura\Edit.cshtml" />
     <Content Include="Views\Admon\SolCotizacion.cshtml" />
     <Content Include="Views\Admon\Details.cshtml" />
+    <Content Include="Views\Admon\Edit.cshtml" />
+    <Content Include="Views\Solicitud\Concentrado1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4043,6 +3934,12 @@
     <EmbeddedResource Include="Migrations\201706091445361_InitialCreate.resx">
       <DependentUpon>201706091445361_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OIM_DAL\OIM_DAL.csproj">
+      <Project>{9b84fc7c-1f0c-48f3-a39e-8326643c4db1}</Project>
+      <Name>OIM_DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

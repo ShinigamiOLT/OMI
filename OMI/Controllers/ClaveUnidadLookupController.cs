@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 using Omu.AwesomeMvc;
 
 namespace OMI.Controllers
 {
     public class IdUnidadLookupController : Controller
     {
-        public OPEntities contexto;
+        public OIMEntity contexto;
 
         public IdUnidadLookupController()
         {
-            contexto = new OPEntities();
+            contexto = new OIMEntity();
         }
         public ActionResult GetItem(int? v)
         {

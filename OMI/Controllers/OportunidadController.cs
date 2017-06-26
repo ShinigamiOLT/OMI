@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using OIM_DAL;
 
 namespace OMI.Controllers
 {
@@ -15,7 +16,7 @@ namespace OMI.Controllers
         // GET: Oportunidad
         public ActionResult Index()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             TbOportunidad Tb = contexto.TbOportunidad.Find(1);
             ViewBag.LAreas = contexto.TbAreaInteres.ToList();
             ViewBag.LTipoOportunidad = contexto.TbTipoOportunidad.ToList();
@@ -29,7 +30,7 @@ namespace OMI.Controllers
         [HttpPost]
         public ActionResult Index(TbOportunidad nuevo, List<int> TipoOportunidad, List<int> AreasInteres)
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
 
             nuevo.TbFormato = contexto.TbFormato.Find(nuevo.idFormato);
             nuevo.TbMedioContacto = contexto.TbMedioContacto.Find(nuevo.MedioContacto);
@@ -82,7 +83,7 @@ namespace OMI.Controllers
 
         public ActionResult Edit(int id = 1)
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             TbOportunidad opor = contexto.TbOportunidad.Include(a => a.TbTipoOportunidad).ToList()
                 .Find(c => c.Id == id);
             if (opor == null)
@@ -99,7 +100,7 @@ namespace OMI.Controllers
         {
 
 
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
             oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);
             oportunidad.TbUsuario = contexto.TbUsuario.Find(oportunidad.idUsuario);
@@ -147,14 +148,14 @@ namespace OMI.Controllers
 
         public ActionResult List()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             var lista =contexto.TbOportunidad.Include(a => a.TbTipoOportunidad).ToList();
             return View(lista);
         }
 
         public ActionResult Create()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             TbOportunidad Tb = new TbOportunidad();
             Tb.TbFormato = contexto.TbFormato.Find(9);
             Tb.TbUsuario = contexto.TbUsuario.Find(2);
@@ -178,7 +179,7 @@ namespace OMI.Controllers
         
             
             oportunidad.FechaSistema = DateTime.Now;
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
 
          TbOportunidad temp =   contexto.TbOportunidad.Find(oportunidad.Id);
 
@@ -245,7 +246,7 @@ namespace OMI.Controllers
 
 
             oportunidad.FechaSistema = DateTime.Now;
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             oportunidad.TbFormato = contexto.TbFormato.Find(oportunidad.idFormato);
             oportunidad.TbMedioContacto = contexto.TbMedioContacto.Find(oportunidad.MedioContacto);
             oportunidad.TbUsuario = contexto.TbUsuario.Find(oportunidad.idUsuario);

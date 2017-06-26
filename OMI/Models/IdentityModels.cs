@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OIM_DAL;
 
 namespace OMI.Models
 {
@@ -52,7 +53,7 @@ namespace OMI.Models
             modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
         }
 
-        public System.Data.Entity.DbSet<OMI.Sp_AllPedido_Result> Sp_AllPedido_Result { get; set; }
+        public System.Data.Entity.DbSet<Sp_AllPedido_Result> Sp_AllPedido_Result { get; set; }
 
         public DbSet<cUsuario> UsuariosOMI { get; set; }
     }

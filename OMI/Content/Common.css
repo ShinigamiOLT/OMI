@@ -33,6 +33,7 @@ h1, h2, h3
     margin: 1em;
 }
 
+/*
 input[type="text"], textarea
 {
     margin: 0;
@@ -53,7 +54,7 @@ input[type="text"] {
     width: 200px;
 }
 
-
+*/
 
 /* Styles for validation helpers*/
 @media (max-width: 767px)

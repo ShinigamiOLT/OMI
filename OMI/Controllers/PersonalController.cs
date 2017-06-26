@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 using Omu.AwesomeMvc;
 using OMI.Models;
 using OMI.Models.Utils;

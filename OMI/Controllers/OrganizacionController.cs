@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using OIM_DAL;
 
 namespace OMI.Controllers
 {
@@ -38,7 +39,7 @@ namespace OMI.Controllers
         }
         public ActionResult Maestra()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             return View(contexto.TablaMaestra.ToList());
         }
 
@@ -50,7 +51,7 @@ namespace OMI.Controllers
         public ActionResult Download(int id)
         {
             
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             try
             {
                 var elemento = contexto.TablaMaestra.Find(id);
@@ -77,7 +78,7 @@ namespace OMI.Controllers
 
         public ActionResult Directorio()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             try
             {
                 var elemento = contexto.TablaDirectorio.ToList();

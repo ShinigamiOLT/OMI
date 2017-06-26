@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Omu.AwesomeMvc;
 using OMI.Models;
 using OMI.Models.Utils;
+using  System.Data.Entity;
+using OIM_DAL;
 
 namespace OMI.Controllers
 {
@@ -110,12 +112,12 @@ namespace OMI.Controllers
 
         public ActionResult GridGetPedidoMaterial(GridParams g, string search)
         {
-           OPEntities contexto = new OPEntities();
+           OIMEntity contexto = new OIMEntity();
           var items =  contexto.Sp_AllPedido().ToList().AsQueryable();
            
 
         
-            return Json(new GridModelBuilder<Sp_AllPedido_Result1>(items, g)
+            return Json(new GridModelBuilder<Sp_AllPedido_Result>(items, g)
             {
                 Key = "Id",
                 Map = o => new
@@ -128,7 +130,7 @@ namespace OMI.Controllers
                 Unidad=   o.Unidad,
                o.Cantidad,
                     o.Autoriza,
-                 Estatus=   o.Estatus,
+                 Estatus=   o.MiEstatus,
                  Usuario=   o.Usuario
                 },
             }.Build());
@@ -251,16 +253,23 @@ namespace OMI.Controllers
 
         public ActionResult Concentrado()
         {
-            OPEntities contexto = new OPEntities();
+            OIMEntity contexto = new OIMEntity();
             var items = contexto.Sp_AllPedido().ToList();
 
 
             return View(items);
         }
+        public ActionResult Concentrado1()
+        {
+            OIMEntity contexto = new OIMEntity();
+            var items = contexto.TbSolicitud.Include(a => a.TbPedidoM).ToList();
 
+
+            return View(items);
+        }
         public ActionResult AllSolicitud(int id=1)
         {
-           OPEntities context = new OPEntities(); 
+           OIMEntity context = new OIMEntity(); 
 
             return View(context.TbSolicitud.Where(o=> o.IdFormato ==id).ToList());
         }

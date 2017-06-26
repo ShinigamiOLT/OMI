@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="09ba82d9a56c45e78351e82ff1a74470" Name="Diagram1">
+        <EntityTypeShape EntityType="DBOPSGIModel.Supervisores" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TablaDirectorio" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TablaMaestra" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbArea" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbAreaInteres" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbCategoria" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbCategoriaRH" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbEspecialidad" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbFormato" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbMedioContacto" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbOportunidad" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbPedidoM" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbPedidoPersonal" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbProfesion" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbSolicitud" Width="1.5" PointX="10.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbStatusAutorizacion" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbTipoOportunidad" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbUnidad" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbUnidadNegocios" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbUnidadTecnica" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbUsuario" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="DBOPSGIModel.id_usuario_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.idSupervisor_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.AreaId" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdCategoria_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdCategoriaRH_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdEspecialidad_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.id_formatoOpor" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdFormato_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.id_medio" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.FK__TbOportun__idUsu__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdSol_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdUnidad_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.Status_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.id_SolP_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.idEstatusPersonal_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdProfesion_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.idsupervisorPer_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.IdUsuario_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.Negocio_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.Tecnica_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Tipo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

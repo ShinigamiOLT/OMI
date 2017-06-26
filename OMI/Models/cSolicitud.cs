@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using OIM_DAL;
 
 namespace OMI.Models
 {
@@ -13,7 +14,7 @@ namespace OMI.Models
         
 
         //aqui se supone que sera para dar de alta una solicitud.
-        public  OPEntities contexto;
+        public  OIMEntity contexto;
      
         public TbSolicitud TbSol;
         public bool Valido;
@@ -22,7 +23,7 @@ namespace OMI.Models
         {
             Valido = false;
             int idusuario = 2;
-            contexto = new OPEntities();
+            contexto = new OIMEntity();
             TbSol = contexto.TbSolicitud.Find(idSol);
             if (TbSol == null)
             {

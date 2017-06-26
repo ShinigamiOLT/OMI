@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OIM_DAL;
 using OMI.Models;
 using OMI.Models.Utils;
 
@@ -31,7 +32,7 @@ namespace OMI.Controllers
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             ViewBag.RoleId = new SelectList(roleManager.Roles.ToList(), "Name", "Name");
-               OPEntities db = new OPEntities();
+               OIMEntity db = new OIMEntity();
           ViewBag.Areas=new SelectList( db.TbArea.ToList(),"Id","Nombre");
 
             return View();

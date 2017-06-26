@@ -1,0 +1,214 @@
+﻿@using Microsoft.AspNet.Identity
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/CambiandoDiseño
+<!-- ========== Left Sidebar Start ========== -->
+
+<div class="left side-menu">
+    <div class="sidebar-inner slimscrollleft">
+        <div class="user-details">
+            <div class="pull-left">
+                <img src="~/Content/assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+            </div>
+            <div class="user-info">
+                <div class="dropdown">
+<<<<<<< HEAD
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Administrador<span class="caret"></span></a>
+=======
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">@User.Identity.GetUserName()<span class="caret"></span></a>
+>>>>>>> origin/CambiandoDiseño
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                    </ul>
+                </div>
+                
+<<<<<<< HEAD
+                <p class="text-muted m-0">@User.Identity.GetUserName()</p>
+=======
+                <p class="text-muted m-0">Administrador</p>
+>>>>>>> origin/CambiandoDiseño
+            </div>
+        </div>
+        <!--- Divider -->
+        <div id="sidebar-menu">
+            <ul>
+<<<<<<< HEAD
+                <li>
+                    <a href="@Url.Action("Index", "Home")" class="waves-effect"><i class="md md-home"></i><span> Inicio </span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("AllSolicitud", "Solicitud")">Todos las Solicitudes</a></li>
+                        <li><a href="@Url.Action("Concentrado", "Solicitud")">Todos los Pedidos</a></li>
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-laptop-windows"></i><span>Producto / Servicio</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("NuevaSolicitud", "Solicitud")">Nueva Solicitud</a></li>
+
+                    </ul>
+               
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Personal</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                       
+                        <li><a href="@Url.Action("Index", "Personal")">Nueva Solicitud</a></li>
+
+                    </ul>
+                </li>
+               
+                <!--Aqui va la peuba del menus-->
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Personal</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                       
+                            
+                                <li><a href="@Url.Action("Index", "home")">CV</a></li>
+                                <li><a href="@Url.Action("Index", "home")">Asistencia</a></li>
+                                <li><a href="@Url.Action("index", "home")">Comisiones</a></li>
+                     
+=======
+               @* <li>
+                    <a href="@Url.Action("Index", "Home")" class="waves-effect"><i class="md md-home"></i><span>Organizacion</span></a>
+                    
+                </li>*@
+                
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-home"></i><span>Organizacion</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("Politica", "Organizacion")">Politica</a></li>
+                        <li><a href="@Url.Action("Reglamento", "Organizacion")">Reglamento</a></li>
+                        <li><a href="@Url.Action("Maestra", "Organizacion")">Lista Maestra</a></li>
+                        <li><a href="@Url.Action("Organigrama", "Organizacion")">Organigrama</a></li>
+                        <li><a href="@Url.Action("Directorio", "Organizacion")">Directorio</a></li>
+
+                    </ul>
+               
+                  
+                </li>
+<li>
+                    <a href="https://trello.com" class="waves-effect"  target="blank" ><i class="md md-format-list-bulleted"></i><span>Tablero Actividades</span></a>
+
+                </li><li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-laptop-windows"></i><span>Requerimientos</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("NuevaSolicitud", "Solicitud")">Productos/Servicios</a></li>
+                      
+                        <li><a href="@Url.Action("index", "home")">Matenimientos</a></li>
+                        <li><a href="@Url.Action("AllSolicitud", "Solicitud")">Registro Solicitudes</a></li>
+                        <li><a href="@Url.Action("Concentrado", "Solicitud")">Registro Pedidos</a></li>
+                        <li><a href="@Url.Action("index", "home")">Capacitacion</a></li>
+                    </ul>
+               
+                  
+                </li>
+               
+                <!--Aqui va la peuba del menus-->
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Perfil</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                       
+                            
+                        <li><a href="@Url.Action("Index", "home")">CV</a></li>
+                        <li><a href="@Url.Action("Index", "home")">Asistencia</a></li>
+                        <li><a href="@Url.Action("index", "home")">Comisiones</a></li>
+                        <li><a href="@Url.Action("index", "home")">Capacitacion</a></li>
+                     
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Oportunidades</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                        <li><a href="@Url.Action("Create", "Oportunidad")">Nueva</a></li>
+                        <li><a href="@Url.Action("List", "Oportunidad")">Registro</a></li>                        
+                      
+                     
+                    </ul>
+                </li>
+                <li class="has_sub">
+                <a href="#" class="waves-effect"><i class="md md-people"></i><span>Ejecucion Servicios</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                    <a href="#" class="waves-effect"><span>Autorizaciones</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul>
+                        <li><a href="@Url.Action("index", "home")">Comisiones</a></li>
+                        <li><a href="@Url.Action("index", "home")">Comprobacion Gastos</a></li>
+                        </ul>
+
+                        <li><a href="@Url.Action("Index", "Personal")">Requerimiento Personal</a></li>
+                        <li><a href="@Url.Action("AllSolicitud", "Solicitud", new {id=3})">Registro Solicitudes</a></li>
+                        <li><a href="@Url.Action("Index", "home")">Estimacion</a></li>
+
+                        <li><a href="@Url.Action("List", "Oportunidad")">Oportunidades</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Propuesta Tecnica</a></li>
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Comercializacion</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                        <li><a href="@Url.Action("List", "Oportunidad")">Oportunidades</a></li>  
+                        <li><a href="@Url.Action("index", "home")">Propuestas T.E.</a></li>
+                        <li><a href="@Url.Action("index", "home")">Cotizacion Equipo</a></li>                        
+                        <li><a href="@Url.Action("Create", "Oportunidad")">Orden de Servicio</a></li>
+                     
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Infraestructura</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <li class="has_sub">
+                           
+                            <a href="#" class="waves-effect"><span>Inventario</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                            <ul>
+                                <li><a href="@Url.Action("index", "home")">Equipo de Computo</a></li>
+                                <li><a href="@Url.Action("index", "home")">Equipos Varios</a></li>
+                                <li><a href="@Url.Action("index", "home")">Licencia de Software</a></li>
+                                <li><a href="@Url.Action("index", "home")">Vehiculos</a></li>
+                            </ul>
+                            
+                        </li>
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                       
+                        <li><a href="@Url.Action("index", "home")">Programa de Mantenimiento</a></li>
+                        <li><a href="@Url.Action("Requermientos", "Infraestructura")">Registro Solicitudes</a></li>
+                        <li><a href="@Url.Action("index", "home")">Solicitud de Compra</a></li>
+
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-people"></i><span>Admon y Finanzas</span><span class="pull-right"><i class="md md-add"></i></span></a>
+               
+                    <ul class="list-unstyled">
+                        <!--a href="#" class="waves-effect"><i class="md md-people"></i><span>C.V.</span><span class="pull-right"><i class="md md-add"></i></span></a>-->
+                        <li><a href="@Url.Action("SolCotizacion", "Admon")">Solicitud Cotizacion</a></li>
+                        <li><a href="@Url.Action("index", "home")">Seleccion Cotizacion</a></li>
+                        <li><a href="@Url.Action("index", "home")">Orden Compra</a></li>
+                        <li><a href="@Url.Action("index", "home")">Evaluacion Post-Venta</a></li>
+                        <li><a href="@Url.Action("index", "home")">Cumpliento Personal</a></li>
+                        <li><a href="@Url.Action("index", "home")">Catalogo Proveedores</a></li>
+                        <li><a href="@Url.Action("index", "home")">Estimaciones</a></li>
+>>>>>>> origin/CambiandoDiseño
+                    </ul>
+                </li>
+             
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- Left Sidebar End --> 
+
