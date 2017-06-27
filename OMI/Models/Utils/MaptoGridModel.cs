@@ -20,8 +20,10 @@ namespace OMI.Models.Utils
                     Estatus = o.TbStatusAutorizacion.Nombre,
                     Unidad = o.TbUnidad.Nombre,
                     Categoria = o.TbCategoria.Nombre,
-                    Seleccionado = o.Proveedor
-                   
+                    Seleccionado = o.TbOrdenCompra.Nombre,
+                   Observacion =o.Observacion,
+                   Solicitud= o.IdSolicitud,
+                   Proveedor= o.Proveedor
 
                 };
         }

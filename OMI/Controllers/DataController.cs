@@ -88,5 +88,22 @@ namespace OMI.Controllers
 
             return Json(items);
         }
+
+        public ActionResult GetCompra()
+        {
+            List<KeyContent> items = new List<KeyContent>();
+
+
+
+            /*  items.Add(new KeyContent(1,"Solicitud Cotizacion"));
+          items.Add(new KeyContent(2, "Rechazado"));
+          items.Add(new KeyContent(3, "Autorizado"));
+          */
+            foreach (var unidad in contexto.TbOrdenCompra)
+            {
+                items.Add(new KeyContent(unidad.Id, unidad.Nombre));
+            }
+            return Json(items);
+        }
     }
 }

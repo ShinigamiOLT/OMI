@@ -6,6 +6,8 @@ function formatoaceptacion(lunch, prop) {
     if (estado == 'Rechazado') color = 'red';
     if (estado == 'Pendiente') color = 'maroon';
     if (estado == 'Inventario') color = 'blue';
+    if (estado == 'Seleccion Cotizacion') color = 'black';
+    if (estado == 'Autorizado') color = 'green';
     return "<div style='color:" + color + ";text-width:bold;'>" + estado + " </div>";
 }
 $(document).ready(function () {

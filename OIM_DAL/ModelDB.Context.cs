@@ -49,6 +49,7 @@ namespace OIM_DAL
         public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
         public virtual DbSet<TbProveedores> TbProveedores { get; set; }
+        public virtual DbSet<TbOrdenCompra> TbOrdenCompra { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {
@@ -84,6 +85,19 @@ namespace OIM_DAL
                 new ObjectParameter("Estatus", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result2>("Sp_AllPedidoXEstatus", estatusParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AllPedidoXEstatusXAdmin_Result> Sp_AllPedidoXEstatusXAdmin(Nullable<int> estatus, Nullable<int> orden)
+        {
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin_Result>("Sp_AllPedidoXEstatusXAdmin", estatusParameter, ordenParameter);
         }
     }
 }

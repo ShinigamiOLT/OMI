@@ -122,6 +122,13 @@
           <Property Name="Compania" Type="varchar(max)" Nullable="false" />
           <Property Name="Enviado" Type="int" />
         </EntityType>
+        <EntityType Name="TbOrdenCompra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="TbPedidoM">
           <Key>
             <PropertyRef Name="Id" />
@@ -139,6 +146,9 @@
           <Property Name="Dato" Type="int" Nullable="false" />
           <Property Name="FechaAutorizacion" Type="date" />
           <Property Name="Proveedor" Type="varchar(max)" />
+          <Property Name="Autorizacion" Type="int" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="OrdenCompra" Type="int" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -506,6 +516,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="OrdenCompra_fk">
+          <End Role="TbOrdenCompra" Type="Self.TbOrdenCompra" Multiplicity="0..1" />
+          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbOrdenCompra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="OrdenCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Status_fk">
           <End Role="TbStatusAutorizacion" Type="Self.TbStatusAutorizacion" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -541,6 +563,10 @@
         <Function Name="Sp_AllPedidoXEstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Estatus" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_AllPedidoXEstatusXAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Estatus" Type="int" Mode="In" />
+          <Parameter Name="Orden" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBOPSGIModelStoreContainer">
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaDirectorio" EntityType="Self.TablaDirectorio" Schema="dbo" store:Type="Tables" />
@@ -555,6 +581,7 @@
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbMedioContacto" EntityType="Self.TbMedioContacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbOportunidad" EntityType="Self.TbOportunidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbOrdenCompra" EntityType="Self.TbOrdenCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbPedidoM" EntityType="Self.TbPedidoM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbPedidoPersonal" EntityType="Self.TbPedidoPersonal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" Schema="dbo" store:Type="Tables" />
@@ -653,6 +680,10 @@
           <AssociationSet Name="Negocio_fk" Association="Self.Negocio_fk">
             <End Role="TbUnidadNegocios" EntitySet="TbUnidadNegocios" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="OrdenCompra_fk" Association="Self.OrdenCompra_fk">
+            <End Role="TbOrdenCompra" EntitySet="TbOrdenCompra" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
           <AssociationSet Name="Status_fk" Association="Self.Status_fk">
             <End Role="TbStatusAutorizacion" EntitySet="TbStatusAutorizacion" />
@@ -805,6 +836,10 @@
           <NavigationProperty Name="TbUnidad" Relationship="Self.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="Self.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
           <Property Name="Proveedor" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Autorizacion" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenCompra" Type="Int32" />
+          <NavigationProperty Name="TbOrdenCompra" Relationship="DBOPSGIModel.OrdenCompra_fk" FromRole="TbPedidoM" ToRole="TbOrdenCompra" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -1280,7 +1315,16 @@
           <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(DBOPSGIModel.Sp_AllPedido_Result)" />
           <EntitySet Name="TbProveedores" EntityType="DBOPSGIModel.TbProveedores" />
           <FunctionImport Name="Sp_AllPedidoXEstatus" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatus_Result2)">
+          <Parameter Name="Estatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TbOrdenCompra" EntityType="DBOPSGIModel.TbOrdenCompra" />
+          <AssociationSet Name="OrdenCompra_fk" Association="DBOPSGIModel.OrdenCompra_fk">
+            <End Role="TbOrdenCompra" EntitySet="TbOrdenCompra" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
+          <FunctionImport Name="Sp_AllPedidoXEstatusXAdmin" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatusXAdmin_Result)">
             <Parameter Name="Estatus" Mode="In" Type="Int32" />
+            <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
@@ -1401,6 +1445,46 @@
           <Property Type="Int32" Name="Infra" Nullable="false" />
           <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
           <Property Type="String" Name="Proveedor" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TbOrdenCompra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.OrdenCompra_fk" FromRole="TbOrdenCompra" ToRole="TbPedidoM" />
+        </EntityType>
+        <Association Name="OrdenCompra_fk">
+          <End Type="DBOPSGIModel.TbOrdenCompra" Role="TbOrdenCompra" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbOrdenCompra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="OrdenCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Sp_AllPedidoXEstatusXAdmin_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Infra" Nullable="false" />
+          <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
+          <Property Type="String" Name="Proveedor" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1523,6 +1607,9 @@
           <EntitySetMapping Name="TbPedidoM">
             <EntityTypeMapping TypeName="DBOPSGIModel.TbPedidoM">
               <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="OrdenCompra" ColumnName="OrdenCompra" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Autorizacion" ColumnName="Autorizacion" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
@@ -1741,6 +1828,38 @@
                 <ScalarProperty Name="Infra" ColumnName="Infra" />
                 <ScalarProperty Name="FAutorizacion" ColumnName="FAutorizacion" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TbOrdenCompra">
+            <EntityTypeMapping TypeName="DBOPSGIModel.TbOrdenCompra">
+              <MappingFragment StoreEntitySet="TbOrdenCompra">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatusXAdmin" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatusXAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBOPSGIModel.Sp_AllPedidoXEstatusXAdmin_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Infra" ColumnName="Infra" />
+                <ScalarProperty Name="FAutorizacion" ColumnName="FAutorizacion" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

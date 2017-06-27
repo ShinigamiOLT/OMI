@@ -49,6 +49,8 @@
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Area" ManuallyRouted="false" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Tipo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbProveedores" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbOrdenCompra" Width="1.5" PointX="12.375" PointY="0.875" />
+        <AssociationConnector Association="DBOPSGIModel.OrdenCompra_fk" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

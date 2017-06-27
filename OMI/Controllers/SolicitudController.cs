@@ -168,7 +168,7 @@ namespace OMI.Controllers
                  Supervisores =  sol.contexto.Supervisores.Find(1),
                  TbStatusAutorizacion = sol.contexto.TbStatusAutorizacion.Find(1),
                  Dato = 0,
-                
+                OrdenCompra = 4
                  
                 /*
                 Chef = Db.Get<Chef>(input.Chef),

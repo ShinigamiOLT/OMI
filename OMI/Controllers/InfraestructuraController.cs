@@ -59,7 +59,7 @@ namespace OMI.Controllers
         {
 
             AutorizaInput nuevo = new AutorizaInput();
-
+            nuevo.Observacion = "";
             return PartialView(nuevo);
         }
 

@@ -1,0 +1,143 @@
+﻿
+@using Omu.Awem.Helpers
+@using Omu.AwesomeMvc
+@using OMII.Utils
+
+@{
+    ViewBag.Title = "NuevaSolcitud";
+   
+}
+@Html.AntiForgeryToken()
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ingenieria Aplicada OnePro</h3>
+            </div>
+            <div class="panel-body">
+              
+               
+                <div class="container">
+                    <div class="row">
+                        <div class="panel panel-default" id="panel_ovi">
+
+                            <div class="panel-body">
+                              
+                            
+                            
+                           
+
+                                @Html.InitCrudPopupsForGrid("DinnersGrid", "Admon")
+                                @* popup names will be action + gridid; name is used when calling awe.open(name) *@
+                       
+                                @if (ViewBag.Visible == 1)
+                                {
+                                    @(Html.Awe().Grid("DinnersGrid")
+                                          .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
+                                          .Url(Url.Action("GridGetItems", "Admon"))
+                                          .Resizable()
+                                          .Reorderable()
+                                          .Height(450)
+                                          .Paging(false)
+                                          .Groupable(false)
+
+                                          .Columns(
+                                              new Column {Name = "Id", Width = 55, Hidden = true},
+                                              new Column { Name = "Solicitud" ,Hidden = false },
+
+                                              new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
+
+                                              new Column {Name = "Cantidad"},
+                                              new Column {Name = "Unidad"},
+                                              new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
+                                              new Column {Name = "IdSupervisor", Header = "Autoriza"},
+                                              new Column {Name = "Estatus",Header = "Solicitud Compra",ClientFormatFunc = "formatoaceptacion" },
+                                              new Column { Name =  "Observacion", Hidden = false },
+                                              new Column { Name = "Seleccionado",Header = "Orden Compra",ClientFormatFunc = "formatoaceptacion",Hidden = false }.Mod(o=>o.Nohide()),
+                                              new Column
+                                              {
+                                                  
+                                              Name = "Proveedor", Hidden = false
+                                              },
+                                              new Column {Name ="Proveedor",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
+
+                                          ))
+                                }
+                                else{
+                                    @(Html.Awe().Grid("DinnersGrid")
+                                          .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
+                                          .Url(Url.Action("GridGetItems", "Admon"))
+                                          .Resizable()
+                                          .Reorderable()
+                                          .Height(450)
+                                          .Paging(false)
+                                          .Groupable(false)
+                                          
+                                          .Columns(
+                                              new Column {Name = "Id", Width = 55,Hidden = true},
+                                              new Column { Name = "Solicitud",  Hidden = false },
+                                              new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria",}.Mod(o => o.Nohide()),
+
+                                              new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
+                                              new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
+                                              new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
+
+                                              new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
+                                              new Column {Name = "Estatus", Header = "Solicitud Compra", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
+                                              new Column { Name =  "Observacion"},
+                                              new Column { Name = "Seleccionado", Hidden = true},
+                                              new Column {Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
+                                }
+
+                                <br/>
+                 
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
+                               
+                                        @using (Html.BeginForm("Enviar", "Admon", FormMethod.Post, new { @class = "normalPost" }))
+                                        {
+                                            if (ViewBag.Visible == 1)
+                                            {
+                                                <a class="btn btn-danger" id="btnCancelar" href="@Url.Action("Cancelar", "Admon")">Cancelar</a>
+                                    @*  <input type="submit" value="Guardar" id="btnSave" class="btn btn-primary"/><a class="btn btn-success" id="btnCancelar" href="@Url.Action("Enviar", "Solicitud")">Enviar</a>*@
+                                                <a class="btn btn-primary" id="btnSave" href="@Url.Action("Guadar", "Admon")">Guardar</a>
+
+                                                <button type="submit" class="btn btn-success">Enviar</button>
+                                            }
+                                        }
+                                        @(Html.Awe().Form()
+                                              .UseAjax(false)
+                                              .Confirm(true)
+                                              .FormClass("normalPost")
+                                      
+                                              .ConfirmOptions(o => {o.Message="Esta seguro de enviar esta Solicitud";
+                                                                       o.Title = "Confirmar envio";
+                                                                       o.YesText = "Enviar";
+                                                                       o.NoText = "Cancelar";
+
+                                              })
+                                              .Tag(new { target = "confirmCont" }))
+                                        <div id="confirmCont"></div>
+
+                                
+                           
+                                    </div>
+                                </div>
+                            </div>
+                
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

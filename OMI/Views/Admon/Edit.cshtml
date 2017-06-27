@@ -3,8 +3,13 @@
 {
     using (Html.Awe().BeginContext())
     {
+        @Html.EditorFor(o => o.Autorizar)
         @Html.EditorFor(o => o.Proveedor)
 
         @Html.EditorFor(o=> o.OtroProvedor)
+        
+        @Html.EditorFor(o=> o.Observacion)
+        @Html.DisplayTextFor(o=>o.Nota)
+        
     }
 }

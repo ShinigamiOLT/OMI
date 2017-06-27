@@ -26,11 +26,15 @@ namespace OIM_DAL
         public int Dato { get; set; }
         public Nullable<System.DateTime> FechaAutorizacion { get; set; }
         public string Proveedor { get; set; }
+        public Nullable<int> Autorizacion { get; set; }
+        public string Observacion { get; set; }
+        public Nullable<int> OrdenCompra { get; set; }
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }
         public virtual TbSolicitud TbSolicitud { get; set; }
         public virtual TbUnidad TbUnidad { get; set; }
         public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
+        public virtual TbOrdenCompra TbOrdenCompra { get; set; }
     }
 }

@@ -94,6 +94,7 @@
                                           new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                           new Column {Name = "IdSupervisor", Header = "Autoriza"},
                                           new Column {Name = "Estatus",ClientFormatFunc = "formatoaceptacion" },
+                                          new Column { Name = "Observacion"},
                                           new Column {ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide()),
                                           new Column {ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid"), Width = 50}.Mod(o => o.Nohide())))
                             }
@@ -116,6 +117,7 @@
                                           new Column {Name = "Unidad"},
                                           new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                           new Column {Name = "IdSupervisor", Header = "Autoriza"},
+                                          new Column { Name = "Observacion"},
                                           new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion", }))
                             }
 

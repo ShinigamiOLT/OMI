@@ -91,7 +91,10 @@
                                       new Column {Name = "Unidad"},
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                       new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" },
+                                      new Column {Name = "Estatus", Header = "Solicitud Compra", ClientFormatFunc = "formatoaceptacion" },
+                                      new Column { Name = "Observacion" },
+                                      new Column { Name = "Seleccionado",Header = "Orden Compra",ClientFormatFunc = "formatoaceptacion",Hidden = false }.Mod(o=>o.Nohide()),
+
                                       new Column {Name ="Autorizacion",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
                         }
                         else{
@@ -103,7 +106,7 @@
                               .Height(700)
                               .Paging(false)
                               .Groupable(false)
-                              
+
                               .Columns(
                                   new Column {Name = "Id", Width = 55,Hidden = true},
                                   new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria",}.Mod(o => o.Nohide()),
@@ -112,7 +115,9 @@
                                   new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
                                   new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
                                   new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
-                                  new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide())
+                                  new Column {Name = "Estatus", Header = "Solicitud Compra", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
+                                  new Column { Name = "Seleccionado",Header = "Orden Compra",ClientFormatFunc = "formatoaceptacion",Hidden = false }.Mod(o=>o.Nohide()),
+                            new Column { Name = "Observacion"}
                                   ))
                         }
 

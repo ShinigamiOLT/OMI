@@ -76,15 +76,21 @@ namespace OMI.Models
         [Required]
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetAutorizacion", Controller = "Data")]
-        [DisplayName("Autorizar")]
+        [DisplayName("Solicitud Compra")]
         public int Autorizar { get; set; }
+
+        public String Observacion { get; set; }
     }
 
     public class ProveedorInput
     {
         public int id { get; set; }
+        [UIHint("Odropdown")]
+        [AweUrl(Action = "GetCompra", Controller = "Data")]
+        [Required]
+        [DisplayName("Orden de Compra")]
+        public int? Autorizar { get; set; }
 
-      
         [UIHint("Odropdown")]
         [AweUrl(Action = "GetProveedor", Controller = "Data")]
         [DisplayName("Proveedor")]
@@ -93,6 +99,9 @@ namespace OMI.Models
 
         [DisplayName("Otro Provedoor")]
         public string OtroProvedor { get; set; }
+
+        public String Observacion { get; set; }
+        public String Nota { get; set; }
     }
 
 

@@ -95,12 +95,13 @@ namespace OMI.Models
         internal int GeneraIdPedidoM()
         {
             int siguiente = 0;
-            var elemento = contexto.TbPedidoM.Max(x => x.Id);
-            if (elemento != null)
+
+            if (contexto.TbPedidoM.Count()>0)
             {
-                siguiente = elemento + 1;
-            }
-            return siguiente;
+
+siguiente= contexto.TbPedidoM.Max(x => x.Id);
+            } 
+            return (siguiente +1);
         }
 
         internal int GeneraIdPedidoP()
@@ -117,15 +118,17 @@ namespace OMI.Models
         public void AgregaPedido(TbPedidoM dinner)
         {
             dinner.Id = GeneraIdPedidoM();
+            dinner.OrdenCompra = 1;
+            dinner.TbOrdenCompra = contexto.TbOrdenCompra.Find(1);
         contexto.TbPedidoM.Add(dinner);
             contexto.SaveChanges();
         }
 
 
-        internal TbPedidoM GetPedidoM(int id,int id2)
+        internal TbPedidoM GetPedidoM(int id_P,int id_Sol)
         {
            
-            return contexto.TbPedidoM.Find(id,id2);
+            return contexto.TbPedidoM.Find(id_P,id_Sol);
         }
         internal TbPedidoPersonal GetPedidoP(int id, int id2)
         {
@@ -140,6 +143,7 @@ namespace OMI.Models
             dinner.IdUnidad = input.IdUnidad;
             dinner.Descripcion = input.Descripcion;
             dinner.IdCategoria = input.Categoria;
+            dinner.OrdenCompra = 4;
             contexto.Entry(dinner).State = EntityState.Modified;
             contexto.SaveChanges();
 
@@ -149,6 +153,7 @@ namespace OMI.Models
             var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
 
             dinner.Estatus = input.Autorizar;
+            dinner.Observacion = input.Observacion;
             dinner.FechaAutorizacion = DateTime.Now.Date;
             contexto.Entry(dinner).State = EntityState.Modified;
             contexto.SaveChanges();
@@ -167,6 +172,10 @@ namespace OMI.Models
 
                 dinner.Proveedor = contexto.TbProveedores.Find(input.Proveedor).Nombre;
             }
+
+            dinner.OrdenCompra = input.Autorizar;
+
+            dinner.Observacion = input.Observacion;
             dinner.FechaAutorizacion = DateTime.Now.Date;
             contexto.Entry(dinner).State = EntityState.Modified;
             contexto.SaveChanges();
@@ -222,6 +231,8 @@ namespace OMI.Models
         public void EnviarPedido()
         {
             TbSol.EnviadoInfra = 1;
+            TbSol.EnviadoCom = 0;
+           
             contexto.SaveChanges();
         }
         public void EnviarPedidoCom()
