@@ -14,6 +14,12 @@ namespace OIM_DAL
     
     public partial class TbProveedores
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TbProveedores()
+        {
+            this.TbCompras = new HashSet<TbCompras>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string RazonSocial { get; set; }
@@ -25,5 +31,8 @@ namespace OIM_DAL
         public string Correo { get; set; }
         public string Categoria { get; set; }
         public Nullable<int> Confiable { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbCompras> TbCompras { get; set; }
     }
 }

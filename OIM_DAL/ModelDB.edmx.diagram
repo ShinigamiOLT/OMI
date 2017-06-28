@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09ba82d9a56c45e78351e82ff1a74470" Name="Diagram1">
+      <Diagram DiagramId="09ba82d9a56c45e78351e82ff1a74470" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="DBOPSGIModel.Supervisores" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="DBOPSGIModel.TablaDirectorio" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBOPSGIModel.TablaMaestra" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
@@ -51,7 +51,11 @@
         <EntityTypeShape EntityType="DBOPSGIModel.TbProveedores" Width="1.5" PointX="10.375" PointY="4.75" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbOrdenCompra" Width="1.5" PointX="12.375" PointY="0.875" />
         <AssociationConnector Association="DBOPSGIModel.OrdenCompra_fk" />
-      </Diagram>
+        <EntityTypeShape EntityType="DBOPSGIModel.TbCompras" Width="1.5" PointX="9.875" PointY="16.125" />
+        <AssociationConnector Association="DBOPSGIModel.Id_com_formato" />
+        <AssociationConnector Association="DBOPSGIModel.id_comp_usuario" />
+        <AssociationConnector Association="DBOPSGIModel.id_comp_prove" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

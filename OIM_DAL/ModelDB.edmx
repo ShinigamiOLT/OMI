@@ -81,6 +81,20 @@
           <Property Name="Inicio" Type="int" />
           <Property Name="Fin" Type="int" />
         </EntityType>
+        <EntityType Name="TbCompras">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Folio" Type="varchar(max)" />
+          <Property Name="NombreProveedor" Type="varchar(max)" />
+          <Property Name="ClaveProveedor" Type="int" />
+          <Property Name="FechaOrden" Type="date" />
+          <Property Name="Open" Type="bit" />
+          <Property Name="IdFormato" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdProveedor" Type="int" />
+        </EntityType>
         <EntityType Name="TbEspecialidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -281,6 +295,42 @@
             </Principal>
             <Dependent Role="Tb_Opor_Area">
               <PropertyRef Name="IdAreaInteres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Id_com_formato">
+          <End Role="TbFormato" Type="Self.TbFormato" Multiplicity="0..1" />
+          <End Role="TbCompras" Type="Self.TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_comp_prove">
+          <End Role="TbProveedores" Type="Self.TbProveedores" Multiplicity="0..1" />
+          <End Role="TbCompras" Type="Self.TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_comp_usuario">
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="0..1" />
+          <End Role="TbCompras" Type="Self.TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -577,6 +627,7 @@
           <EntitySet Name="TbAreaInteres" EntityType="Self.TbAreaInteres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbCategoria" EntityType="Self.TbCategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbCategoriaRH" EntityType="Self.TbCategoriaRH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbCompras" EntityType="Self.TbCompras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbMedioContacto" EntityType="Self.TbMedioContacto" Schema="dbo" store:Type="Tables" />
@@ -604,6 +655,18 @@
           <AssociationSet Name="id_Area" Association="Self.id_Area">
             <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
             <End Role="Tb_Opor_Area" EntitySet="Tb_Opor_Area" />
+          </AssociationSet>
+          <AssociationSet Name="Id_com_formato" Association="Self.Id_com_formato">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="id_comp_prove" Association="Self.id_comp_prove">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="id_comp_usuario" Association="Self.id_comp_usuario">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
           </AssociationSet>
           <AssociationSet Name="id_formatoOpor" Association="Self.id_formatoOpor">
             <End Role="TbFormato" EntitySet="TbFormato" />
@@ -782,6 +845,7 @@
           <Property Name="Revision" Type="Int32" />
           <NavigationProperty Name="TbOportunidad" Relationship="Self.id_formatoOpor" FromRole="TbFormato" ToRole="TbOportunidad" />
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.Id_com_formato" FromRole="TbFormato" ToRole="TbCompras" />
         </EntityType>
         <EntityType Name="TbMedioContacto">
           <Key>
@@ -946,6 +1010,7 @@
           <NavigationProperty Name="TbSolicitud" Relationship="Self.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidadNegocios" Relationship="Self.Negocio_fk" FromRole="TbUsuario" ToRole="TbUnidadNegocios" />
           <NavigationProperty Name="TbUnidadTecnica" Relationship="Self.Tecnica_fk" FromRole="TbUsuario" ToRole="TbUnidadTecnica" />
+          <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.id_comp_usuario" FromRole="TbUsuario" ToRole="TbCompras" />
         </EntityType>
         <Association Name="id_usuario_fk">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
@@ -1326,7 +1391,20 @@
             <Parameter Name="Estatus" Mode="In" Type="Int32" />
             <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
-        </EntityContainer>
+          <EntitySet Name="TbCompras" EntityType="DBOPSGIModel.TbCompras" />
+          <AssociationSet Name="Id_com_formato" Association="DBOPSGIModel.Id_com_formato">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="id_comp_usuario" Association="DBOPSGIModel.id_comp_usuario">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="id_comp_prove" Association="DBOPSGIModel.id_comp_prove">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbCompras" EntitySet="TbCompras" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="PedidoMXSolicitud_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int32" Name="Folio" Nullable="false" />
@@ -1407,6 +1485,7 @@
           <Property Name="Correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Confiable" Type="Int32" />
+          <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.id_comp_prove" FromRole="TbProveedores" ToRole="TbCompras" />
         </EntityType>
         <ComplexType Name="Sp_AllPedidoXEstatus_Result1">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1486,7 +1565,60 @@
           <Property Type="String" Name="Proveedor" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="TbCompras">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveProveedor" Type="Int32" />
+          <Property Name="FechaOrden" Type="DateTime" Precision="0" />
+          <Property Name="Open" Type="Boolean" />
+          <Property Name="IdFormato" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="TbFormato" Relationship="DBOPSGIModel.Id_com_formato" FromRole="TbCompras" ToRole="TbFormato" />
+          <NavigationProperty Name="TbUsuario" Relationship="DBOPSGIModel.id_comp_usuario" FromRole="TbCompras" ToRole="TbUsuario" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <NavigationProperty Name="TbProveedores" Relationship="DBOPSGIModel.id_comp_prove" FromRole="TbCompras" ToRole="TbProveedores" />
+        </EntityType>
+        <Association Name="Id_com_formato">
+          <End Type="DBOPSGIModel.TbFormato" Role="TbFormato" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbCompras" Role="TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_comp_usuario">
+          <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbCompras" Role="TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_comp_prove">
+          <End Type="DBOPSGIModel.TbProveedores" Role="TbProveedores" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbCompras" Role="TbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbCompras">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1863,6 +1995,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="TbCompras">
+            <EntityTypeMapping TypeName="DBOPSGIModel.TbCompras">
+              <MappingFragment StoreEntitySet="TbCompras">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="FechaOrden" ColumnName="FechaOrden" />
+                <ScalarProperty Name="ClaveProveedor" ColumnName="ClaveProveedor" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

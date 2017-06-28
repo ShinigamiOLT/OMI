@@ -24,7 +24,7 @@ namespace OMI.Models.Utils
                    Observacion =o.Observacion,
                    Solicitud= o.IdSolicitud,
                    Proveedor= o.Proveedor
-
+                   
                 };
         }
 

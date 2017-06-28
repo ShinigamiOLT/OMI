@@ -202,12 +202,7 @@ namespace OMI.Controllers
             return Json(new {Id = input.id});
         }
 
-        public ActionResult OrdenCompra()
-        {
-            OIMEntity contextOimEntity = new OIMEntity();
-            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3,3).OrderBy(x => x.Proveedor).ToList();
-            return View(list);
-        }
+        
 
         public ActionResult PorPedido()
         {
@@ -215,6 +210,63 @@ namespace OMI.Controllers
             return View();
 
 
+        }
+        public ActionResult OrdenCompra()
+        {
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3,3).OrderBy(x => x.Proveedor).ToList();
+            return View(list);
+        }
+        [HttpPost]
+        public ActionResult OrdenCompra(Sp_AllPedidoXEstatus_Result[] valor)
+        {
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, 3).OrderBy(x => x.Proveedor).ToList();
+            return View(list);
+        }
+        public ActionResult prueba()
+        {
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, 3).OrderBy(x => x.Proveedor).ToList();
+            return View(list);
+        }
+
+        public ActionResult Formato()
+        {
+           COrdenCompra compra = new COrdenCompra();
+            compra.nuevo();
+            ViewBag.Visible = true;
+            return View(compra);
+        }
+    }
+
+    public class OrdenCompController : Controller
+    {
+        public ActionResult GridGetItems(GridParams g, string search)
+        {
+            int id = 1;
+            if (Session["IdSolicitud"] != null)
+                id = (int)Session["IdSolicitud"];
+            cSolicitud sol = new cSolicitud(id, 1);
+            if (!sol.Valido)
+                return RedirectToAction("Index");
+            search = (search ?? "").ToLower();
+            var items = sol.contexto.TbPedidoM
+
+                .Where(o => o.Dato != 2)
+                .Where(o => o.Estatus == 3)
+
+                .OrderBy(m => m.Id)
+                .AsQueryable();
+
+            return Json(new GridModelBuilder<TbPedidoM>(items, g)
+            {
+                Key = "Id", // needed for api select, update, tree, nesting, EF
+                GetItem =
+                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),
+                        sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
+                Map = MaptoGridModel.MapToGridModel
+            }.Build());
         }
     }
 }

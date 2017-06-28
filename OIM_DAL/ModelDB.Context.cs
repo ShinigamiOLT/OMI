@@ -50,6 +50,7 @@ namespace OIM_DAL
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
         public virtual DbSet<TbProveedores> TbProveedores { get; set; }
         public virtual DbSet<TbOrdenCompra> TbOrdenCompra { get; set; }
+        public virtual DbSet<TbCompras> TbCompras { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {

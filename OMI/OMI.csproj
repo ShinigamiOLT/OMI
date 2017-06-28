@@ -235,6 +235,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\cOportunidad.cs" />
+    <Compile Include="Models\cOrdenCompra.cs" />
     <Compile Include="Models\CrudHelpers.cs" />
     <Compile Include="Models\cSolicitud.cs" />
     <Compile Include="Models\cUsuario.cs" />
@@ -3920,6 +3921,8 @@
     <Content Include="Views\Infraestructura\Solicitudes.cshtml" />
     <Content Include="Views\Admon\OrdenCompra.cshtml" />
     <Content Include="Views\Admon\PorPedido.cshtml" />
+    <Content Include="Views\Admon\prueba.cshtml" />
+    <Content Include="Views\Admon\Formato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
