@@ -107,14 +107,14 @@
                             </div>
                         </div>
                         
-                        @Html.InitCrudPopupsForGrid("DinnersGrid", "Admon")
+                        @Html.InitCrudPopupsForGrid("DinnersGrid", "OrdenComp")
                         @* popup names will be action + gridid; name is used when calling awe.open(name) *@
 
                         @if (ViewBag.Visible)
                         {
                             @(Html.Awe().Grid("DinnersGrid")
                                   .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
-                                  .Url(Url.Action("GridGetItems", "Admon"))
+                                  .Url(Url.Action("GridGetItems", "OrdenComp"))
                                   .Resizable()
                                   .Reorderable()
                                   .Height(450)

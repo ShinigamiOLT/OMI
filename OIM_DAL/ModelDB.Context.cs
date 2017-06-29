@@ -52,40 +52,18 @@ namespace OIM_DAL
         public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
     
-        public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
-        {
-            var idSolParameter = idSol.HasValue ?
-                new ObjectParameter("IdSol", idSol) :
-                new ObjectParameter("IdSol", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PedidoMXSolicitud_Result>("PedidoMXSolicitud", idSolParameter);
-        }
-    
-        public virtual ObjectResult<PedidosXFolioXEstatus_Result> PedidosXFolioXEstatus(Nullable<int> idSol, Nullable<int> estatus)
-        {
-            var idSolParameter = idSol.HasValue ?
-                new ObjectParameter("IdSol", idSol) :
-                new ObjectParameter("IdSol", typeof(int));
-    
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PedidosXFolioXEstatus_Result>("PedidosXFolioXEstatus", idSolParameter, estatusParameter);
-        }
-    
         public virtual ObjectResult<Sp_AllPedido_Result> Sp_AllPedido()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedido_Result>("Sp_AllPedido");
         }
     
-        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result2> Sp_AllPedidoXEstatus(Nullable<int> estatus)
+        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result> Sp_AllPedidoXEstatus(Nullable<int> estatus)
         {
             var estatusParameter = estatus.HasValue ?
                 new ObjectParameter("Estatus", estatus) :
                 new ObjectParameter("Estatus", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result2>("Sp_AllPedidoXEstatus", estatusParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result>("Sp_AllPedidoXEstatus", estatusParameter);
         }
     
         public virtual ObjectResult<Sp_AllPedidoXEstatusXAdmin_Result> Sp_AllPedidoXEstatusXAdmin(Nullable<int> estatus, Nullable<int> orden)
@@ -99,28 +77,6 @@ namespace OIM_DAL
                 new ObjectParameter("Orden", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin_Result>("Sp_AllPedidoXEstatusXAdmin", estatusParameter, ordenParameter);
-        }
-    
-        public virtual ObjectResult<Sp_AllPedidoXEstatus1_Result> Sp_AllPedidoXEstatus1(Nullable<int> estatus)
-        {
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus1_Result>("Sp_AllPedidoXEstatus1", estatusParameter);
-        }
-    
-        public virtual ObjectResult<Sp_AllPedidoXEstatusXAdmin1_Result> Sp_AllPedidoXEstatusXAdmin1(Nullable<int> estatus, Nullable<int> orden)
-        {
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(int));
-    
-            var ordenParameter = orden.HasValue ?
-                new ObjectParameter("Orden", orden) :
-                new ObjectParameter("Orden", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin1_Result>("Sp_AllPedidoXEstatusXAdmin1", estatusParameter, ordenParameter);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace OIM_DAL
     
     public partial class Sp_AllPedido_Result
     {
-        public int Id { get; set; }
+        public Nullable<int> Id { get; set; }
         public string Folio { get; set; }
         public string Categoria { get; set; }
         public string Descripcion { get; set; }

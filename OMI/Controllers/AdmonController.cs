@@ -118,18 +118,23 @@ namespace OMI.Controllers
         {
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
-            if ((input.Autorizar == 3 || input.Autorizar==1)  && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
+            if (input.Autorizar == 3 && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
             {
                 input.Nota = "<strong> Si selecciona otro proveedor debera de ingresar el nombre </strong>";
                 return PartialView(input);
             }
-            if (input.Autorizar == 2 || input.Autorizar==4 ) //se rechazo
+            if (input.Autorizar == 2) //se rechazo
             {
                 input.Proveedor = 0;
-                input.OtroProvedor = "";
+                input.OtroProvedor = "Rechazado";
 
             }
-          
+            if (input.Autorizar == 1) //Se 
+            {
+                input.Proveedor = 0;
+                input.OtroProvedor = "Rechazado";
+
+            }
             int id = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)
@@ -235,6 +240,25 @@ namespace OMI.Controllers
 
     public class OrdenCompController : Controller
     {
+        public static object MapToGridModel(TbPedidoM o)
+        {
+            return
+                new
+                {
+                    o.Id,
+                    o.Descripcion,
+                    o.Cantidad,
+                    IdSupervisor = o.Supervisores.TbUsuario.Nombre,
+                    Estatus = o.TbStatusAutorizacion.Nombre,
+                    Unidad = o.TbUnidad.Nombre,
+                    Categoria = o.TbCategoria.Nombre,
+                    Seleccionado = o.TbOrdenCompra.Nombre,
+                    Observacion = o.Observacion,
+                    Solicitud = o.IdSolicitud,
+                    Proveedor = o.Proveedor
+
+                };
+        }
         public ActionResult GridGetItems(GridParams g, string search)
         {
             int id = 1;
@@ -257,7 +281,8 @@ namespace OMI.Controllers
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem =
                     () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
-                Map = MaptoGridModel.MapToGridModel
+                Map = MapToGridModel,
+
             }.Build());
         }
     }

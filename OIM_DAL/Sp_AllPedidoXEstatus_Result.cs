@@ -13,7 +13,7 @@ namespace OIM_DAL
     
     public partial class Sp_AllPedidoXEstatus_Result
     {
-        public int Id { get; set; }
+        public Nullable<int> Id { get; set; }
         public string Folio { get; set; }
         public string Categoria { get; set; }
         public string Descripcion { get; set; }
@@ -28,5 +28,7 @@ namespace OIM_DAL
         public System.DateTime Fecha { get; set; }
         public string Estatus { get; set; }
         public int Infra { get; set; }
+        public Nullable<System.DateTime> FAutorizacion { get; set; }
+        public string Proveedor { get; set; }
     }
 }
