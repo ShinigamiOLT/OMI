@@ -104,5 +104,21 @@ namespace OMI.Models
         public String Nota { get; set; }
     }
 
+    public class PrecioUnitarioInput
+    {
+
+
+       
+        [DisplayName("Precio")]
+        public decimal Precio { get; set; }
+
+        public PrecioUnitarioInput()
+        {
+            Precio = 0;
+        }
+
+        public int Id { get; set; }
+    }
+
 
 }

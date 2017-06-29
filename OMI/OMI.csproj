@@ -249,6 +249,7 @@
     <Compile Include="Models\Procedimientos.cs" />
     <Compile Include="Models\TbCompras.cs" />
     <Compile Include="Models\UtilApp.cs" />
+    <Compile Include="Models\Utils\Enumerables.cs" />
     <Compile Include="Models\Utils\IExplorer.cs" />
     <Compile Include="Models\Utils\MaptoGridModel.cs" />
     <Compile Include="Models\Utils\Message.cs" />
@@ -3926,6 +3927,7 @@
     <Content Include="Views\Admon\PorPedido.cshtml" />
     <Content Include="Views\Admon\prueba.cshtml" />
     <Content Include="Views\Admon\Formato.cshtml" />
+    <Content Include="Views\OrdenComp\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,12 @@
+﻿@model OMI.Models.PrecioUnitarioInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+     
+        @Html.HiddenFor(o=> o.Id)
+       @Html.Label(" Hola: ", new {@class="form-control"})  
+        <br/>
+      @Html.EditorFor(o=>o.Precio)
+    }
+}

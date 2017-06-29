@@ -122,18 +122,19 @@
                                   .Groupable(false)
 
                                   .Columns(
+                                      new Column {Name = "No.", Width = 55, Hidden = true},
                                       new Column {Name = "Id", Width = 55, Hidden = true},
                                       new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
 
                                       new Column {Name = "Cantidad"},
                                       new Column {Name = "Unidad"},
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion"},
                                       new Column {Name = "Observacion"},
                                       new Column {Name = "Seleccionado"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
-
+                                      new Column {Name = "Precio"},
+                                      new Column {Name = "Importe"},
+                                      new Column {Name = "PrecioIngresar", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide()),
+                                new Column { ClientFormat = GridUtils.DeleteFormat("DinnersGrid")}.Mod(o => o.Nohide())
                                   ))
                         }
 

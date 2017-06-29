@@ -18,6 +18,7 @@ namespace OIM_DAL
         public TbProveedores()
         {
             this.TbCompras = new HashSet<TbCompras>();
+            this.TbPedidoM = new HashSet<TbPedidoM>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace OIM_DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbCompras> TbCompras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
     }
 }

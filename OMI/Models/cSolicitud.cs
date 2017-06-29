@@ -162,9 +162,11 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
         public void UpdatePedido(ProveedorInput input)
         {
             var dinner = GetPedidoM(input.id);
+            dinner.IdProveedor = input.Proveedor;
             if (input.Proveedor == 0)
             {
                 dinner.Proveedor = input.OtroProvedor;
+               
             }
             else
             {

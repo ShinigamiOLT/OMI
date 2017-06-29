@@ -164,6 +164,9 @@
           <Property Name="OrdenCompra" Type="int" />
           <Property Name="IdSolicitud" Type="int" />
           <Property Name="IdOrdenCompra" Type="int" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -408,6 +411,18 @@
             </Principal>
             <Dependent Role="TbPedidoM">
               <PropertyRef Name="IdOrdenCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_Pedido_Proveedor">
+          <End Role="TbProveedores" Type="Self.TbProveedores" Multiplicity="0..1" />
+          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -698,6 +713,10 @@
             <End Role="TbCompras" EntitySet="TbCompras" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
+          <AssociationSet Name="id_Pedido_Proveedor" Association="Self.id_Pedido_Proveedor">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
           <AssociationSet Name="id_sol_fk" Association="Self.id_sol_fk">
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
@@ -912,6 +931,10 @@
             <Parameter Name="Estatus" Mode="In" Type="Int32" />
             <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="id_Pedido_Proveedor" Association="DBOPSGIModel.id_Pedido_Proveedor">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supervisores">
           <Key>
@@ -1084,6 +1107,10 @@
           <NavigationProperty Name="TbSolicitud" Relationship="DBOPSGIModel.id_sol_fk" FromRole="TbPedidoM" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidad" Relationship="DBOPSGIModel.IdUnidad_fk" FromRole="TbPedidoM" ToRole="TbUnidad" />
           <NavigationProperty Name="TbStatusAutorizacion" Relationship="DBOPSGIModel.Status_fk" FromRole="TbPedidoM" ToRole="TbStatusAutorizacion" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <NavigationProperty Name="TbProveedores" Relationship="DBOPSGIModel.id_Pedido_Proveedor" FromRole="TbPedidoM" ToRole="TbProveedores" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -1131,6 +1158,7 @@
           <Property Name="Categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Confiable" Type="Int32" />
           <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.FK_id_comp_prove" FromRole="TbProveedores" ToRole="TbCompras" />
+          <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.id_Pedido_Proveedor" FromRole="TbProveedores" ToRole="TbPedidoM" />
         </EntityType>
         <EntityType Name="TbSolicitud">
           <Key>
@@ -1572,6 +1600,18 @@
           <Property Type="String" Name="Proveedor" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" />
         </ComplexType>
+        <Association Name="id_Pedido_Proveedor">
+          <End Type="DBOPSGIModel.TbProveedores" Role="TbProveedores" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbPedidoM">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1717,6 +1757,9 @@
           <EntitySetMapping Name="TbPedidoM">
             <EntityTypeMapping TypeName="DBOPSGIModel.TbPedidoM">
               <MappingFragment StoreEntitySet="TbPedidoM">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="OrdenCompra" ColumnName="OrdenCompra" />

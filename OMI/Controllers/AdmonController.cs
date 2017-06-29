@@ -212,32 +212,56 @@ namespace OMI.Controllers
         public ActionResult OrdenCompra()
         {
             OIMEntity contextOimEntity = new OIMEntity();
-            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3,3).OrderBy(x => x.Proveedor).ToList();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.Autorizado).OrderBy(x => x.Proveedor).ToList();
+            list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion).OrderBy(x => x.Proveedor).ToList());
+
             return View(list);
         }
         [HttpPost]
-        public ActionResult OrdenCompra(Sp_AllPedidoXEstatus_Result[] valor)
+        public ActionResult OrdenCompra(Sp_AllPedidoXEstatus_Result[] valor, int[] reglon,int[] reglon1)
         {
+            if (reglon.Length > 0)
+            {
+                //implica que hay mas de un valor.
+              COrdenCompra compranueva = new COrdenCompra();
+                {
+                    compranueva.nuevo();
+                    compranueva.ListaPedidos(reglon);
+
+
+                 return   RedirectToAction("Formato", new {Id = compranueva.Id} );
+                }
+            }
+
             OIMEntity contextOimEntity = new OIMEntity();
-            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, 3).OrderBy(x => x.Proveedor).ToList();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.Autorizado).OrderBy(x => x.Proveedor).ToList();
+            list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion).OrderBy(x => x.Proveedor).ToList());
             return View(list);
         }
         public ActionResult prueba()
         {
             OIMEntity contextOimEntity = new OIMEntity();
-            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, 3).OrderBy(x => x.Proveedor).ToList();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3,(int) eOrdenCompra.Autorizado).OrderBy(x => x.Proveedor).ToList();
+             list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion).OrderBy(x => x.Proveedor).ToList());
             return View(list);
         }
 
-        public ActionResult Formato()
+        public ActionResult Formato(int Id)
         {
-           COrdenCompra compra = new COrdenCompra();
+
+            COrdenCompra compra   = new COrdenCompra();
+
+            compra.Id=Id;
             compra.nuevo();
             ViewBag.Visible = true;
+
+            Session["IdCompra"] = compra.Id;
             return View(compra);
         }
     }
 
+
+  
     public class OrdenCompController : Controller
     {
         public static object MapToGridModel(TbPedidoM o)
@@ -245,45 +269,78 @@ namespace OMI.Controllers
             return
                 new
                 {
+                    Numero=1,
                     o.Id,
-                    o.Descripcion,
-                    o.Cantidad,
-                    IdSupervisor = o.Supervisores.TbUsuario.Nombre,
-                    Estatus = o.TbStatusAutorizacion.Nombre,
-                    Unidad = o.TbUnidad.Nombre,
                     Categoria = o.TbCategoria.Nombre,
+                    o.Cantidad,
+                    Unidad = o.TbUnidad.Nombre,
+                    o.Descripcion,
+                   
+                  
+                    
                     Seleccionado = o.TbOrdenCompra.Nombre,
-                    Observacion = o.Observacion,
-                    Solicitud = o.IdSolicitud,
-                    Proveedor = o.Proveedor
+                    Precio =o.Precio,
+            Importe =o.Importe,
+                    Observacion = o.Observacion
 
                 };
         }
+        
         public ActionResult GridGetItems(GridParams g, string search)
         {
+           
             int id = 1;
-            if (Session["IdSolicitud"] != null)
-                id = (int)Session["IdSolicitud"];
-            cSolicitud sol = new cSolicitud(id, 1);
-            if (!sol.Valido)
-                return RedirectToAction("Index");
+            if (Session["IdCompra"] != null)
+                id = (int)Session["IdCompra"];
+            COrdenCompra sol = new COrdenCompra();
+            sol.Id = id;
+            sol.nuevo();
+
+           
             search = (search ?? "").ToLower();
             var items = sol.contexto.TbPedidoM
-
-                .Where(o => o.Dato != 2)
-                .Where(o => o.Estatus == 3)
+                .Where( x=>x.IdOrdenCompra !=null)
+               .Where(x=>((int)x.IdOrdenCompra) ==id)
 
                 .OrderBy(m => m.Id)
                 .AsQueryable();
-
-            return Json(new GridModelBuilder<TbPedidoM>(items, g)
+            int i= 0;
+           
+            return Json( new GridModelBuilder<TbPedidoM>(items, g)
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem =
-                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
-                Map = MapToGridModel,
+                    () => sol.GetPedidoM(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
+                Map = MapToGridModel
 
             }.Build());
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            OIMEntity contexto = new OIMEntity();
+            PrecioUnitarioInput precio = new PrecioUnitarioInput();
+            var elemnto = contexto.TbPedidoM.Find(Id);
+            if (elemnto != null)
+            {
+                precio.Precio = 0;
+                precio.Id = Id;
+            }
+            return PartialView(precio);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PrecioUnitarioInput input)
+        {
+            OIMEntity contexto = new OIMEntity();
+
+            var elemnto = contexto.TbPedidoM.Find(input.Id);
+            if (elemnto != null)
+            {
+              elemnto.Precio=  input.Precio;
+            }
+            contexto.SaveChanges();
+            return Json(new { Id = input.Id });
         }
     }
 }

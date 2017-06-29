@@ -56,6 +56,7 @@
         <AssociationConnector Association="DBOPSGIModel.Tecnica_fk" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Area" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Tipo" />
+        <AssociationConnector Association="DBOPSGIModel.id_Pedido_Proveedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
