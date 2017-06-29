@@ -247,6 +247,7 @@
     <Compile Include="Models\MobileUtils.cs" />
     <Compile Include="Models\PedidoInPut.cs" />
     <Compile Include="Models\Procedimientos.cs" />
+    <Compile Include="Models\TbCompras.cs" />
     <Compile Include="Models\UtilApp.cs" />
     <Compile Include="Models\Utils\IExplorer.cs" />
     <Compile Include="Models\Utils\MaptoGridModel.cs" />
@@ -3814,7 +3815,9 @@
     <Content Include="Utilidades\TextFile1.txt" />
     <Content Include="Utilidades\TextFile2.txt" />
     <Content Include="Utilidades\TextFile3.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

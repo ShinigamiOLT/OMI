@@ -74,6 +74,12 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sp_AllPedidoXEstatus1_Result.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sp_AllPedidoXEstatusXAdmin1_Result.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sp_AllPedidoXEstatusXAdmin_Result.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

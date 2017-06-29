@@ -54,8 +54,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem =
-                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),
-                        sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
+                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
                 Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
@@ -80,8 +79,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem =
-                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),
-                        sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
+                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
                 Map = MaptoGridModel.MapToGridModel
             }.Build());
         }
@@ -95,7 +93,7 @@ namespace OMI.Controllers
             int id_ = contextOimEntity.TbPedidoM.FirstOrDefault(x=> x.Id== id).IdSolicitud  ;
             Session["IdSolicitud"] = id_;
             cSolicitud sol = new cSolicitud(id_, 1);
-            var pedido = sol.GetPedidoM(id, id_);
+            var pedido = sol.GetPedidoM(id);
             var provedor = sol.contexto.TbProveedores.Where(x => x.Nombre == pedido.Proveedor);
             var clave = 0;
             if (provedor.Any())
@@ -120,23 +118,18 @@ namespace OMI.Controllers
         {
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
-            if (input.Autorizar == 3 && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
+            if ((input.Autorizar == 3 || input.Autorizar==1)  && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
             {
                 input.Nota = "<strong> Si selecciona otro proveedor debera de ingresar el nombre </strong>";
                 return PartialView(input);
             }
-            if (input.Autorizar == 2) //se rechazo
+            if (input.Autorizar == 2 || input.Autorizar==4 ) //se rechazo
             {
                 input.Proveedor = 0;
-                input.OtroProvedor = "Rechazado";
+                input.OtroProvedor = "";
 
             }
-            if (input.Autorizar == 1) //Se 
-            {
-                input.Proveedor = 0;
-                input.OtroProvedor = "Rechazado";
-
-            }
+          
             int id = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)
@@ -154,7 +147,7 @@ namespace OMI.Controllers
            
             int id_ = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id_, 1);
-            var pedido=   sol.GetPedidoM(id, id_);
+            var pedido=   sol.GetPedidoM(id);
             var provedor = sol.contexto.TbProveedores.Where(x => x.Nombre == pedido.Proveedor);
             var clave = 0;
             if(  provedor.Any())
@@ -263,8 +256,7 @@ namespace OMI.Controllers
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
                 GetItem =
-                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key),
-                        sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
+                    () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
                 Map = MaptoGridModel.MapToGridModel
             }.Build());
         }

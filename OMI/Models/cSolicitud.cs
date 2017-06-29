@@ -51,10 +51,10 @@ namespace OMI.Models
             get { return TbSol. Fecha.ToShortDateString(); }
         }
 
-        public  TbPedidoM Get<T> (int id,int id2) where T : TbPedidoM
+        public  TbPedidoM Get<T> (int id) where T : TbPedidoM
         {
 
-            return  contexto.TbPedidoM.Find(id,id2);
+            return  contexto.TbPedidoM.Find(id);
         }
 
        
@@ -118,26 +118,26 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
         public void AgregaPedido(TbPedidoM dinner)
         {
             dinner.Id = GeneraIdPedidoM();
-            dinner.OrdenCompra = 1;
+            dinner.OrdenCompra = null;
             dinner.TbOrdenCompra = contexto.TbOrdenCompra.Find(1);
         contexto.TbPedidoM.Add(dinner);
             contexto.SaveChanges();
         }
 
 
-        internal TbPedidoM GetPedidoM(int id_P,int id_Sol)
+        internal TbPedidoM GetPedidoM(int id_P)
         {
            
-            return contexto.TbPedidoM.Find(id_P,id_Sol);
+            return contexto.TbPedidoM.Find(id_P);
         }
-        internal TbPedidoPersonal GetPedidoP(int id, int id2)
+        internal TbPedidoPersonal GetPedidoP(int id)
         {
 
-            return contexto.TbPedidoPersonal.Find(id, id2);
+            return contexto.TbPedidoPersonal.Find(id);
         }
         public void UpdatePedido(PedidoInPut input)
         {
-            var dinner = GetPedidoM(input.Id,input.IdSolicitud);
+            var dinner = GetPedidoM(input.Id);
 
             dinner.Cantidad = input.Cantidad;
             dinner.IdUnidad = input.IdUnidad;
@@ -150,7 +150,7 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
         }
         public void UpdatePedido(AutorizaInput input)
         {
-            var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
+            var dinner = GetPedidoM(input.id);
 
             dinner.Estatus = input.Autorizar;
             dinner.Observacion = input.Observacion;
@@ -161,7 +161,7 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
         }
         public void UpdatePedido(ProveedorInput input)
         {
-            var dinner = GetPedidoM(input.id, TbSol.IdSolicitud);
+            var dinner = GetPedidoM(input.id);
             if (input.Proveedor == 0)
             {
                 dinner.Proveedor = input.OtroProvedor;
@@ -183,7 +183,7 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
         }
         public void UpdatePedidoP(PedidoPInPut input)
         {
-            var dinner = GetPedidoP(input.Id, input.IdSolicitud);
+            var dinner = GetPedidoP(input.Id);
 
             dinner.Cantidad = input.Cantidad;
             dinner.IdTipoEspecialidad = input.Especialidad;
@@ -197,19 +197,19 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
 
         public void DelPedido(int inputId)
         {
-           contexto.Entry(GetPedidoM(inputId,TbSol.IdSolicitud)).State = EntityState.Deleted;
+           contexto.Entry(GetPedidoM(inputId)).State = EntityState.Deleted;
             contexto.SaveChanges();
         }
         public void DelPedidoM(int inputId)
         {
        //     contexto.Entry(GetPedidoM(inputId, TbSol.IdSolicitud)).State = EntityState.Deleted;
-            GetPedidoM(inputId, TbSol.IdSolicitud).Dato = 2;
+            GetPedidoM(inputId).Dato = 2;
             contexto.SaveChanges();
         }
         public void DelPedidoP(int inputId)
         {
             //     contexto.Entry(GetPedidoM(inputId, TbSol.IdSolicitud)).State = EntityState.Deleted;
-            GetPedidoP(inputId, TbSol.IdSolicitud).Dato = 2;
+            GetPedidoP(inputId).Dato = 2;
             contexto.SaveChanges();
         }
 

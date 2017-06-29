@@ -29,7 +29,7 @@ namespace OMI.Controllers
             return Json(new GridModelBuilder<TbPedidoM>(items, g)
             {
                 Key = "Id", // needed for api select, update, tree, nesting, EF
-                GetItem = () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key), sol.TbSol.IdSolicitud), // called by the grid.api.update ( edit popupform success js func )
+                GetItem = () => sol.Get<TbPedidoM>(Convert.ToInt32(g.Key)), // called by the grid.api.update ( edit popupform success js func )
                 Map = MaptoGridModel.MapToGridModel
             }.Build());
         }

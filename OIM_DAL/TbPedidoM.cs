@@ -15,7 +15,6 @@ namespace OIM_DAL
     public partial class TbPedidoM
     {
         public int Id { get; set; }
-        public int IdSolicitud { get; set; }
         public int IdCategoria { get; set; }
         public string Descripcion { get; set; }
         public int IdUnidad { get; set; }
@@ -29,12 +28,15 @@ namespace OIM_DAL
         public Nullable<int> Autorizacion { get; set; }
         public string Observacion { get; set; }
         public Nullable<int> OrdenCompra { get; set; }
+        public int IdSolicitud { get; set; }
+        public Nullable<int> IdOrdenCompra { get; set; }
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }
+        public virtual TbCompras TbCompras { get; set; }
+        public virtual TbOrdenCompra TbOrdenCompra { get; set; }
         public virtual TbSolicitud TbSolicitud { get; set; }
         public virtual TbUnidad TbUnidad { get; set; }
         public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
-        public virtual TbOrdenCompra TbOrdenCompra { get; set; }
     }
 }

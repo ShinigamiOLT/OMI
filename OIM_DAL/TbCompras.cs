@@ -14,18 +14,27 @@ namespace OIM_DAL
     
     public partial class TbCompras
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TbCompras()
+        {
+            this.TbPedidoM = new HashSet<TbPedidoM>();
+        }
+    
         public int Id { get; set; }
         public string Folio { get; set; }
         public string NombreProveedor { get; set; }
         public Nullable<int> ClaveProveedor { get; set; }
-        public Nullable<System.DateTime> FechaOrden { get; set; }
+        public System.DateTime FechaOrden { get; set; }
         public Nullable<bool> Open { get; set; }
         public Nullable<int> IdFormato { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> IdProveedor { get; set; }
+        public Nullable<int> EstatusCompra { get; set; }
     
         public virtual TbFormato TbFormato { get; set; }
-        public virtual TbUsuario TbUsuario { get; set; }
         public virtual TbProveedores TbProveedores { get; set; }
+        public virtual TbUsuario TbUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
     }
 }

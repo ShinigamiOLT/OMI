@@ -34,13 +34,16 @@ namespace OIM_DAL
         public virtual DbSet<TbAreaInteres> TbAreaInteres { get; set; }
         public virtual DbSet<TbCategoria> TbCategoria { get; set; }
         public virtual DbSet<TbCategoriaRH> TbCategoriaRH { get; set; }
+        public virtual DbSet<TbCompras> TbCompras { get; set; }
         public virtual DbSet<TbEspecialidad> TbEspecialidad { get; set; }
         public virtual DbSet<TbFormato> TbFormato { get; set; }
         public virtual DbSet<TbMedioContacto> TbMedioContacto { get; set; }
         public virtual DbSet<TbOportunidad> TbOportunidad { get; set; }
+        public virtual DbSet<TbOrdenCompra> TbOrdenCompra { get; set; }
         public virtual DbSet<TbPedidoM> TbPedidoM { get; set; }
         public virtual DbSet<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual DbSet<TbProfesion> TbProfesion { get; set; }
+        public virtual DbSet<TbProveedores> TbProveedores { get; set; }
         public virtual DbSet<TbSolicitud> TbSolicitud { get; set; }
         public virtual DbSet<TbStatusAutorizacion> TbStatusAutorizacion { get; set; }
         public virtual DbSet<TbTipoOportunidad> TbTipoOportunidad { get; set; }
@@ -48,9 +51,6 @@ namespace OIM_DAL
         public virtual DbSet<TbUnidadNegocios> TbUnidadNegocios { get; set; }
         public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
-        public virtual DbSet<TbProveedores> TbProveedores { get; set; }
-        public virtual DbSet<TbOrdenCompra> TbOrdenCompra { get; set; }
-        public virtual DbSet<TbCompras> TbCompras { get; set; }
     
         public virtual ObjectResult<PedidoMXSolicitud_Result> PedidoMXSolicitud(Nullable<int> idSol)
         {
@@ -99,6 +99,28 @@ namespace OIM_DAL
                 new ObjectParameter("Orden", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin_Result>("Sp_AllPedidoXEstatusXAdmin", estatusParameter, ordenParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AllPedidoXEstatus1_Result> Sp_AllPedidoXEstatus1(Nullable<int> estatus)
+        {
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus1_Result>("Sp_AllPedidoXEstatus1", estatusParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AllPedidoXEstatusXAdmin1_Result> Sp_AllPedidoXEstatusXAdmin1(Nullable<int> estatus, Nullable<int> orden)
+        {
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin1_Result>("Sp_AllPedidoXEstatusXAdmin1", estatusParameter, ordenParameter);
         }
     }
 }

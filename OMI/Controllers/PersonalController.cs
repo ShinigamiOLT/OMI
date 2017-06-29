@@ -127,7 +127,7 @@ namespace OMI.Controllers
             cSolicitud sol = new cSolicitud(id_, 3);
             if (!sol.Valido)
                 return RedirectToAction("Index");
-            var dinner = sol.GetPedidoP(id, sol.TbSol.IdSolicitud);
+            var dinner = sol.GetPedidoP(id);
 
             return PartialView(new DeleteConfirmInput
             {
