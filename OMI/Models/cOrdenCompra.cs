@@ -95,9 +95,10 @@ namespace OMI.Models
             foreach (var i in reglon)
             {
            elemento =  contexto.TbPedidoM.Find(i);
-                if(elemento !=null) 
-                    elemento.IdOrdenCompra = TbCompras_.Id;
-              contexto.Entry(elemento).State= EntityState.Modified;
+                if(elemento !=null)
+                { elemento.IdOrdenCompra = TbCompras_.Id;
+                 contexto.Entry(elemento).State= EntityState.Modified;
+                }
             }
 
             if (elemento!=null)

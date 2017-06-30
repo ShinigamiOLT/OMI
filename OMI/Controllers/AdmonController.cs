@@ -118,23 +118,18 @@ namespace OMI.Controllers
         {
             if (!ModelState.IsValid)
                 return PartialView("Create", input);
-            if (input.Autorizar == 3 && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
+            if ((input.Autorizar == 3 || input.Autorizar==1 ) && input.Proveedor == 0 && string.IsNullOrWhiteSpace(input.OtroProvedor))
             {
                 input.Nota = "<strong> Si selecciona otro proveedor debera de ingresar el nombre </strong>";
                 return PartialView(input);
             }
-            if (input.Autorizar == 2) //se rechazo
+            if (input.Autorizar == 2 || input.Autorizar == 4) //se rechazo
             {
                 input.Proveedor = 0;
-                input.OtroProvedor = "Rechazado";
+                input.OtroProvedor = "";
 
             }
-            if (input.Autorizar == 1) //Se 
-            {
-                input.Proveedor = 0;
-                input.OtroProvedor = "Rechazado";
-
-            }
+            
             int id = (int)Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)
@@ -222,6 +217,11 @@ namespace OMI.Controllers
         {
             if (reglon.Length > 0)
             {
+
+                if (ObtienePedido(reglon))
+                {
+
+              
                 //implica que hay mas de un valor.
               COrdenCompra compranueva = new COrdenCompra();
                 {
@@ -231,6 +231,7 @@ namespace OMI.Controllers
 
                  return   RedirectToAction("Formato", new {Id = compranueva.Id} );
                 }
+                }
             }
 
             OIMEntity contextOimEntity = new OIMEntity();
@@ -238,6 +239,46 @@ namespace OMI.Controllers
             list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion).OrderBy(x => x.Proveedor).ToList());
             return View(list);
         }
+
+        public ContentResult GetTex()
+        {
+            throw new Exception("Este es un error");
+        }
+
+        private bool ObtienePedido(int[] reglon)
+        {
+            //bosquemos los pedidos y vemos si pertenece alos mismos provedores
+            using (OIMEntity contexto = new OIMEntity())
+            {
+
+                List<string> Provedores = new List<string>();
+                foreach (int i in reglon)
+                {
+                  var elemento =  contexto.TbPedidoM.Find(i);
+                    string nombre = "";
+                    if (elemento.IdProveedor == 0)
+                    {
+                        nombre = elemento.Proveedor;
+
+                    }
+                    else
+                    {
+                        nombre = elemento.TbCompras.NombreProveedor;
+                    }
+
+                    if (Provedores.Contains(nombre))
+                    {
+                        return false;
+                    }
+                    Provedores.Add(nombre);
+
+                }
+
+                return true;
+            }
+
+        }
+
         public ActionResult prueba()
         {
             OIMEntity contextOimEntity = new OIMEntity();
@@ -304,7 +345,7 @@ namespace OMI.Controllers
 
                 .OrderBy(m => m.Id)
                 .AsQueryable();
-            int i= 0;
+          
            
             return Json( new GridModelBuilder<TbPedidoM>(items, g)
             {
@@ -337,8 +378,38 @@ namespace OMI.Controllers
             var elemnto = contexto.TbPedidoM.Find(input.Id);
             if (elemnto != null)
             {
-              elemnto.Precio=  input.Precio;
+                elemnto.Precio=  input.Precio;
+                elemnto.Importe = elemnto.Cantidad * input.Precio;
             }
+            contexto.SaveChanges();
+            return Json(new { Id = input.Id });
+        }
+
+        public ActionResult Delete(int id, string gridId)
+        {
+
+            OIMEntity contexto = new OIMEntity();
+
+            var dinner = contexto.TbPedidoM.Find(id);
+
+            return PartialView(new DeleteConfirmInput
+            {
+                Id = id,
+                GridId = gridId,
+                Message = string.Format("¿Estas Seguro que quieres Eliminar el pedido de <b>{0}</b> ?", dinner.Descripcion)
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(DeleteConfirmInput input)
+        {
+            OIMEntity contexto = new OIMEntity();
+
+            var dinner = contexto.TbPedidoM.Find(input.Id);
+            //este eliminar es virtual xk lo que queremos es desanclar al numero de orden
+           // contexto.TbPedidoM.Remove(dinner);
+            dinner.IdOrdenCompra = null;
+            contexto.Entry(dinner).State= EntityState.Modified ;
             contexto.SaveChanges();
             return Json(new { Id = input.Id });
         }

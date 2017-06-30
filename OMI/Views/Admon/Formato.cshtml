@@ -134,7 +134,7 @@
                                       new Column {Name = "Precio"},
                                       new Column {Name = "Importe"},
                                       new Column {Name = "PrecioIngresar", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide()),
-                                new Column { ClientFormat = GridUtils.DeleteFormat("DinnersGrid")}.Mod(o => o.Nohide())
+                                new Column { ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
                                   ))
                         }
 
