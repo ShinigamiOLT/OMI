@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using Omu.AwesomeMvc;
 using OMI.Models;
 using OMI.Models.Utils;
 using  System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace OMI.Controllers
 {
@@ -90,7 +92,7 @@ namespace OMI.Controllers
          
 
             OIMEntity contextOimEntity = new OIMEntity();
-            int id_ = contextOimEntity.TbPedidoM.FirstOrDefault(x=> x.Id== id).IdSolicitud  ;
+            int id_ = contextOimEntity.TbPedidoM.FirstOrDefault(x=> x.Id== id).IdSolicitud.Value  ;
             Session["IdSolicitud"] = id_;
             cSolicitud sol = new cSolicitud(id_, 1);
             var pedido = sol.GetPedidoM(id);
@@ -240,10 +242,7 @@ namespace OMI.Controllers
             return View(list);
         }
 
-        public ContentResult GetTex()
-        {
-            throw new Exception("Este es un error");
-        }
+       
 
         private bool ObtienePedido(int[] reglon)
         {
@@ -296,8 +295,20 @@ namespace OMI.Controllers
             compra.nuevo();
             ViewBag.Visible = true;
 
+            ViewBag.Valor = 200;
             Session["IdCompra"] = compra.Id;
             return View(compra);
+        }
+
+        [HttpPost]
+        public JsonResult Sumatoria( int id)
+        {
+            OIMEntity contexto= new OIMEntity();
+           var valor= (contexto.Sp_Suma(id).FirstOrDefault());
+       
+            NumLetra ele = new NumLetra();
+        string valor1= valor + " " + ele.Convertir(valor.Value.ToString(), false);
+            return Json( valor1 );
         }
     }
 
@@ -382,6 +393,8 @@ namespace OMI.Controllers
                 elemnto.Importe = elemnto.Cantidad * input.Precio;
             }
             contexto.SaveChanges();
+
+            ViewBag.Valor = 100;
             return Json(new { Id = input.Id });
         }
 

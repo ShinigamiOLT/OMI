@@ -638,6 +638,9 @@
           <Parameter Name="Estatus" Type="int" Mode="In" />
           <Parameter Name="Orden" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_Suma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Orden" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBOPSGIModelStoreContainer">
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaDirectorio" EntityType="Self.TablaDirectorio" Schema="dbo" store:Type="Tables" />
@@ -935,6 +938,9 @@
             <End Role="TbProveedores" EntitySet="TbProveedores" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
+          <FunctionImport Name="Sp_Suma" ReturnType="Collection(Decimal)">
+            <Parameter Name="Orden" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Supervisores">
           <Key>
@@ -1969,6 +1975,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Suma" FunctionName="DBOPSGIModel.Store.Sp_Suma" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

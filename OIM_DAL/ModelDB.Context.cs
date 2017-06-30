@@ -78,5 +78,14 @@ namespace OIM_DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin_Result>("Sp_AllPedidoXEstatusXAdmin", estatusParameter, ordenParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_Suma(Nullable<int> orden)
+        {
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_Suma", ordenParameter);
+        }
     }
 }

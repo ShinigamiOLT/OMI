@@ -196,7 +196,7 @@ namespace OMI.Controllers
                 Id = dinner.Id,
                 IdUnidad = dinner.IdUnidad,
                 Descripcion = dinner.Descripcion,
-                IdSolicitud = dinner.IdSolicitud,
+                IdSolicitud = dinner.IdSolicitud.Value,
                 Cantidad = dinner.Cantidad,
                 Categoria = dinner.IdCategoria
             };

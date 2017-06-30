@@ -105,62 +105,9 @@
                 }
             </div>
             
-            <div>
-                @using (Ajax.BeginForm(new AjaxOptions()))
-                {
-                    <p>
-                        @Ajax.ActionLink("Traer Texto","GetText", new AjaxOptions()
-                        {
-                            UpdateTargetId = "ContainerP",
-                            InsertionMode = InsertionMode.Replace,
-                            OnFailure = "ShowErrorMessage"
-                        })
-                    </p>
-                    <p id="ContainerP"></p>
-                }
-            </div>
-            <div class="errorMessage" id="diverrorMessage">
-                <div id="errorTitle">
-                    
-                </div>
-                <div id="errorButtons">
-                    <input type="button" value="aceptar" id="btnAceptarError"/>     
-                </div>
-            </div>
+           
+           
         </div>
     </div>
 </div>
-@section Scripts
-{https://fernandombeccaria.wordpress.com/2012/07/12/mostrar-mensajes-de-error-en-un-modal-pop-up-desde-un-controlador-mvc/
 
-    <style type="text/css">
-        div.errorMessage
-        {
-            display: none;
-            width: 200px;
-            background-color: #ffffff;
-            border: 1px solid #ff0000;
-            margin-left: auto;
-            margin-right: auto;
-            vertical-align: text-bottom;
-            height: 30px;
-            padding-top: 10px;
-        }
-        div.errorMessage #errorTitle
-        { text-align: center;
-            background-color: #ff0000;
-            color: #ffffff;
-            font-size: 1.2em;
-            font-weight: bold;
-            height: 30px;
-            padding-top: 10px;
-
-        }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $()
-        };
-
-    </script>
-}

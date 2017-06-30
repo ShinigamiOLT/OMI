@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Ingenieria Aplicada OnePro</h3>
+                <h3 class="panel-title">Ingenieria Aplicada OnePro @ViewBag.Valor </h3>
             </div>
             <div class="panel-body">
               
@@ -106,7 +106,8 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        </div>
+                    <div class="row">
                         @Html.InitCrudPopupsForGrid("DinnersGrid", "OrdenComp")
                         @* popup names will be action + gridid; name is used when calling awe.open(name) *@
 
@@ -117,30 +118,38 @@
                                   .Url(Url.Action("GridGetItems", "OrdenComp"))
                                   .Resizable()
                                   .Reorderable()
-                                  .Height(450)
+                                  .Height(0)
                                   .Paging(false)
                                   .Groupable(false)
 
                                   .Columns(
-                                      new Column {Name = "No.", Width = 55, Hidden = true},
+                                      new Column {Name = "No.", Width = 55}.Mod(o => o.Nohide()),
                                       new Column {Name = "Id", Width = 55, Hidden = true},
-                                      new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
+                                      new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"}.Mod(o => o.Nohide()),
 
-                                      new Column {Name = "Cantidad"},
-                                      new Column {Name = "Unidad"},
+                                      new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
+                                      new Column {Name = "Unidad"}.Mod(o => o.Nohide()),
                                       new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "Observacion"},
-                                      new Column {Name = "Seleccionado"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "Precio"},
-                                      new Column {Name = "Importe"},
-                                      new Column {Name = "PrecioIngresar", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide()),
-                                new Column { ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
+                                      new Column {Name = "Observacion",Hidden = true},
+                                      new Column {Name = "Seleccionado", Hidden = true },
+                                      new Column {Name = "Precio", Hidden = false }.Mod(o => o.Nohide()),
+                                      new Column {Name = "Importe", Hidden = false }.Mod(o=> o.Nohide()),
+                                      new Column {Name = "" ,Width = 45, ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide()),
+                                      new Column { Width = 45,ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
                                   ))
                         }
 
 
                         <br/>
+
                     </div>
+                    <div class="row">
+                        <input class="btn btn-success" type="button" value="Cantidad" id="btnValor"/>
+                        <br/>
+                        <b>Importe Total:   </b> <label id="ValorResultado"></label>
+                        <br/>
+                    </div>
+                   
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
                                
@@ -185,3 +194,31 @@
 
 
 
+@section Scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script type="text/javascript">
+        
+
+        $(function() {
+            $("#btnValor").click(function() {
+
+                var url = "@Url.Action("Sumatoria", "Admon")";
+                var clave = @Html.ValueFor(o => o.Id);
+                var data = { id: clave };
+                $.post(url, data).done(function(data) {
+                    $("#ValorResultado").html(data);
+
+                }).fail(manejaerrorajax).always(function() {
+
+                });
+            });
+
+            function manejaerrorajax(err) {
+                console.log(err.responseText);
+            }
+        });
+
+    </script>
+}

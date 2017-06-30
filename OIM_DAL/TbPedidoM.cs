@@ -28,7 +28,7 @@ namespace OIM_DAL
         public Nullable<int> Autorizacion { get; set; }
         public string Observacion { get; set; }
         public Nullable<int> OrdenCompra { get; set; }
-        public int  IdSolicitud { get; set; }
+        public Nullable<int> IdSolicitud { get; set; }
         public Nullable<int> IdOrdenCompra { get; set; }
         public Nullable<int> IdProveedor { get; set; }
         public Nullable<decimal> Precio { get; set; }

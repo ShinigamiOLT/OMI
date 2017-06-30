@@ -10,6 +10,7 @@ function formatoaceptacion(lunch, prop) {
     if (estado == 'Autorizado') color = 'green';
     return "<div style='color:" + color + ";text-width:bold;'>" + estado + " </div>";
 }
+
 $(document).ready(function () {
 
 
