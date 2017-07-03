@@ -84,8 +84,8 @@
 
 
                                     <!--Html.ActionLink("Edit", "NuevaSolicitud", new {id = item.Id})-->
-                                    <button type="submit" class="btn btn-success" value="1">Entregar</button>
-
+                               
+                                    <input type="submit" name="Id" value="@Html.DisplayFor(modelItem=>item.IdPedido)" class="btn btn-success" />
                                 </td>
                             </tr>
                         }

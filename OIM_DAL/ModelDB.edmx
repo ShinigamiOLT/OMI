@@ -71,6 +71,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="AreaInventario" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="TbCategoriaRH">
           <Key>
@@ -111,6 +112,22 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="Revision" Type="int" />
+        </EntityType>
+        <EntityType Name="TbInve_Equipo_Comp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="255" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Numero" Type="varchar" MaxLength="255" />
+          <Property Name="Serie" Type="varchar" MaxLength="255" />
+          <Property Name="Procesador" Type="varchar" MaxLength="255" />
+          <Property Name="Observacion" Type="varchar" MaxLength="255" />
+          <Property Name="Accesorio" Type="varchar" MaxLength="255" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="FechaMantenimiento" Type="datetime" />
         </EntityType>
         <EntityType Name="TbMedioContacto">
           <Key>
@@ -280,7 +297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__6A30C649">
+        <Association Name="FK__TbOportun__idUsu__7F2BE32F">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -476,6 +493,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_usuario_inventario_fk">
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="0..1" />
+          <End Role="TbInve_Equipo_Comp" Type="Self.TbInve_Equipo_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Comp">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="IdCategoria_fk">
           <End Role="TbCategoria" Type="Self.TbCategoria" Multiplicity="1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -661,6 +690,7 @@
           <EntitySet Name="TbCompras" EntityType="Self.TbCompras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbInve_Equipo_Comp" EntityType="Self.TbInve_Equipo_Comp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbMedioContacto" EntityType="Self.TbMedioContacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbOportunidad" EntityType="Self.TbOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbOrdenCompra" EntityType="Self.TbOrdenCompra" Schema="dbo" store:Type="Tables" />
@@ -679,7 +709,7 @@
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__6A30C649" Association="Self.FK__TbOportun__idUsu__6A30C649">
+          <AssociationSet Name="FK__TbOportun__idUsu__7F2BE32F" Association="Self.FK__TbOportun__idUsu__7F2BE32F">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
@@ -742,6 +772,10 @@
           <AssociationSet Name="id_usuario_fk" Association="Self.id_usuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="Supervisores" EntitySet="Supervisores" />
+          </AssociationSet>
+          <AssociationSet Name="id_usuario_inventario_fk" Association="Self.id_usuario_inventario_fk">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
           </AssociationSet>
           <AssociationSet Name="IdCategoria_fk" Association="Self.IdCategoria_fk">
             <End Role="TbCategoria" EntitySet="TbCategoria" />
@@ -934,9 +968,6 @@
             <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
           </AssociationSet>
           <FunctionImport Name="Sp_AllPedido" ReturnType="Collection(DBOPSGIModel.Sp_AllPedido_Result)" />
-          <FunctionImport Name="Sp_AllPedidoXEstatus" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatus_Result)">
-          <Parameter Name="Estatus" Mode="In" Type="Int32" />
-          </FunctionImport>
           <AssociationSet Name="id_Pedido_Proveedor" Association="DBOPSGIModel.id_Pedido_Proveedor">
             <End Role="TbProveedores" EntitySet="TbProveedores" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
@@ -953,6 +984,14 @@
             <Parameter Name="Valor" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="Sp_Historial" ReturnType="Collection(DBOPSGIModel.Sp_Historial_Result)" />
+          <FunctionImport Name="Sp_AllPedidoXEstatus" ReturnType="Collection(DBOPSGIModel.Sp_AllPedidoXEstatus_Result)">
+          <Parameter Name="Estatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TbInve_Equipo_Comp" EntityType="DBOPSGIModel.TbInve_Equipo_Comp" />
+          <AssociationSet Name="id_usuario_inventario_fk" Association="DBOPSGIModel.id_usuario_inventario_fk">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supervisores">
           <Key>
@@ -1009,6 +1048,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.IdCategoria_fk" FromRole="TbCategoria" ToRole="TbPedidoM" />
+          <Property Name="AreaInventario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TbCategoriaRH">
           <Key>
@@ -1256,6 +1296,7 @@
           <NavigationProperty Name="TbSolicitud" Relationship="DBOPSGIModel.IdUsuario_fk" FromRole="TbUsuario" ToRole="TbSolicitud" />
           <NavigationProperty Name="TbUnidadNegocios" Relationship="DBOPSGIModel.Negocio_fk" FromRole="TbUsuario" ToRole="TbUnidadNegocios" />
           <NavigationProperty Name="TbUnidadTecnica" Relationship="DBOPSGIModel.Tecnica_fk" FromRole="TbUsuario" ToRole="TbUnidadTecnica" />
+          <NavigationProperty Name="TbInve_Equipo_Comp" Relationship="DBOPSGIModel.id_usuario_inventario_fk" FromRole="TbUsuario" ToRole="TbInve_Equipo_Comp" />
         </EntityType>
         <Association Name="id_usuario_fk">
           <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
@@ -1581,25 +1622,6 @@
           <Property Type="DateTime" Name="Fecha" Nullable="false" />
           <Property Type="String" Name="MiEstatus" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="Sp_AllPedidoXEstatus_Result">
-          <Property Type="Int32" Name="Id" Nullable="true" />
-          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Cantidad" Nullable="false" />
-          <Property Type="Int32" Name="Autoriza" Nullable="false" />
-          <Property Type="Int32" Name="Surtido" Nullable="false" />
-          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" />
-          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Infra" Nullable="false" />
-          <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
-          <Property Type="String" Name="Proveedor" Nullable="true" />
-        </ComplexType>
         <Association Name="id_Pedido_Proveedor">
           <End Type="DBOPSGIModel.TbProveedores" Role="TbProveedores" Multiplicity="0..1" />
           <End Type="DBOPSGIModel.TbPedidoM" Role="TbPedidoM" Multiplicity="*" />
@@ -1654,6 +1676,55 @@
           <Property Type="Int32" Name="IdSolicitud" Nullable="false" />
           <Property Type="String" Name="FolioSolicitud" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="Sp_AllPedidoXEstatus_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="Int32" Name="IdPedido" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Unidad" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Autoriza" Nullable="false" />
+          <Property Type="Int32" Name="Surtido" Nullable="false" />
+          <Property Type="String" Name="Formato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NombreFormato" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Area" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Infra" Nullable="false" />
+          <Property Type="DateTime" Name="FAutorizacion" Nullable="true" />
+          <Property Type="String" Name="Proveedor" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TbInve_Equipo_Comp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Procesador" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Accesorio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="FechaMantenimiento" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TbUsuario" Relationship="DBOPSGIModel.id_usuario_inventario_fk" FromRole="TbInve_Equipo_Comp" ToRole="TbUsuario" />
+        </EntityType>
+        <Association Name="id_usuario_inventario_fk">
+          <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbInve_Equipo_Comp" Role="TbInve_Equipo_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Comp">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1712,6 +1783,7 @@
           <EntitySetMapping Name="TbCategoria">
             <EntityTypeMapping TypeName="DBOPSGIModel.TbCategoria">
               <MappingFragment StoreEntitySet="TbCategoria">
+                <ScalarProperty Name="AreaInventario" ColumnName="AreaInventario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1966,29 +2038,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatus" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DBOPSGIModel.Sp_AllPedidoXEstatus_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
-                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
-                <ScalarProperty Name="Formato" ColumnName="Formato" />
-                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Infra" ColumnName="Infra" />
-                <ScalarProperty Name="FAutorizacion" ColumnName="FAutorizacion" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_Suma" FunctionName="DBOPSGIModel.Store.Sp_Suma" />
           <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatusXAdmin" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatusXAdmin">
             <ResultMapping>
@@ -2041,6 +2090,47 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AllPedidoXEstatus" FunctionName="DBOPSGIModel.Store.Sp_AllPedidoXEstatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBOPSGIModel.Sp_AllPedidoXEstatus_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Autoriza" ColumnName="Autoriza" />
+                <ScalarProperty Name="Surtido" ColumnName="Surtido" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="NombreFormato" ColumnName="NombreFormato" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Infra" ColumnName="Infra" />
+                <ScalarProperty Name="FAutorizacion" ColumnName="FAutorizacion" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TbInve_Equipo_Comp">
+            <EntityTypeMapping TypeName="DBOPSGIModel.TbInve_Equipo_Comp">
+              <MappingFragment StoreEntitySet="TbInve_Equipo_Comp">
+                <ScalarProperty Name="FechaMantenimiento" ColumnName="FechaMantenimiento" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Accesorio" ColumnName="Accesorio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Procesador" ColumnName="Procesador" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -110,6 +110,9 @@
     <Compile Include="TbFormato.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbInve_Equipo_Comp.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbMedioContacto.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

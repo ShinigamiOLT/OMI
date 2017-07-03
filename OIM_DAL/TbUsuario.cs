@@ -22,6 +22,7 @@ namespace OIM_DAL
             this.TbOportunidad = new HashSet<TbOportunidad>();
             this.TbPedidoPersonal = new HashSet<TbPedidoPersonal>();
             this.TbSolicitud = new HashSet<TbSolicitud>();
+            this.TbInve_Equipo_Comp = new HashSet<TbInve_Equipo_Comp>();
         }
     
         public int Id { get; set; }
@@ -44,5 +45,7 @@ namespace OIM_DAL
         public virtual ICollection<TbSolicitud> TbSolicitud { get; set; }
         public virtual TbUnidadNegocios TbUnidadNegocios { get; set; }
         public virtual TbUnidadTecnica TbUnidadTecnica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbInve_Equipo_Comp> TbInve_Equipo_Comp { get; set; }
     }
 }

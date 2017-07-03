@@ -318,7 +318,7 @@ namespace OMI.Controllers
 
         public ActionResult Formato(COrdenCompra compra, string Opcion)
         {
-            if (Opcion == "Cancelar")
+            if ( Opcion == "Cancelar")
             {
 
                 // si se cancela borramos los valores del idcompra y retornamos a la venta de Orden de Compra

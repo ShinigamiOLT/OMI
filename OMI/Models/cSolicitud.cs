@@ -29,6 +29,11 @@ namespace OMI.Models
             {
                 CreaNuevaSolicitud(idformato, idusuario);
             }
+            //actualizamos el nombre del formato
+            TbSol.TbFormato = contexto.TbFormato.Find(idformato);
+            TbSol.Folio = TbSol.TbFormato.Nombre + "-" + TbSol.IdSolicitud.ToString("000");
+            contexto.SaveChanges();
+
             if (TbSol.IdFormato == idformato)
                 Valido = true;
         }

@@ -51,19 +51,11 @@ namespace OIM_DAL
         public virtual DbSet<TbUnidadNegocios> TbUnidadNegocios { get; set; }
         public virtual DbSet<TbUnidadTecnica> TbUnidadTecnica { get; set; }
         public virtual DbSet<TbUsuario> TbUsuario { get; set; }
+        public virtual DbSet<TbInve_Equipo_Comp> TbInve_Equipo_Comp { get; set; }
     
         public virtual ObjectResult<Sp_AllPedido_Result> Sp_AllPedido()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedido_Result>("Sp_AllPedido");
-        }
-    
-        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result> Sp_AllPedidoXEstatus(Nullable<int> estatus)
-        {
-            var estatusParameter = estatus.HasValue ?
-                new ObjectParameter("Estatus", estatus) :
-                new ObjectParameter("Estatus", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result>("Sp_AllPedidoXEstatus", estatusParameter);
         }
     
         public virtual ObjectResult<Nullable<decimal>> Sp_Suma(Nullable<int> orden)
@@ -104,6 +96,15 @@ namespace OIM_DAL
         public virtual ObjectResult<Sp_Historial_Result> Sp_Historial()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Historial_Result>("Sp_Historial");
+        }
+    
+        public virtual ObjectResult<Sp_AllPedidoXEstatus_Result> Sp_AllPedidoXEstatus(Nullable<int> estatus)
+        {
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result>("Sp_AllPedidoXEstatus", estatusParameter);
         }
     }
 }

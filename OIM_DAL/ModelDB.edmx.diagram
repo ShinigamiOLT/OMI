@@ -57,6 +57,8 @@
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Area" />
         <AssociationConnector Association="DBOPSGIModel.Tb_Opor_Tipo" />
         <AssociationConnector Association="DBOPSGIModel.id_Pedido_Proveedor" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Equipo_Comp" Width="1.5" PointX="5.25" PointY="38.5" />
+        <AssociationConnector Association="DBOPSGIModel.id_usuario_inventario_fk" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,19 +12,20 @@ namespace OIM_DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TbCategoria
+    public partial class TbInve_Equipo_Comp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TbCategoria()
-        {
-            this.TbPedidoM = new HashSet<TbPedidoM>();
-        }
-    
         public int Id { get; set; }
+        public string Tipo { get; set; }
         public string Nombre { get; set; }
-        public string AreaInventario { get; set; }
+        public string Numero { get; set; }
+        public string Serie { get; set; }
+        public string Procesador { get; set; }
+        public string Observacion { get; set; }
+        public string Accesorio { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
+        public Nullable<System.DateTime> FechaAlta { get; set; }
+        public Nullable<System.DateTime> FechaMantenimiento { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TbPedidoM> TbPedidoM { get; set; }
+        public virtual TbUsuario TbUsuario { get; set; }
     }
 }

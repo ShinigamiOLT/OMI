@@ -217,6 +217,7 @@
     <Compile Include="Controllers\DownloaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfraestructuraController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OportunidadController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
@@ -3932,6 +3933,8 @@
     <Content Include="Views\OrdenComp\Edit.cshtml" />
     <Content Include="Views\Admon\Historial.cshtml" />
     <Content Include="Views\Admon\DetallePedido.cshtml" />
+    <Content Include="Views\Inventario\EquipoComputo.cshtml" />
+    <Content Include="Views\Inventario\CreaEquipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

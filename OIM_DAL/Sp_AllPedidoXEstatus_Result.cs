@@ -14,6 +14,7 @@ namespace OIM_DAL
     public partial class Sp_AllPedidoXEstatus_Result
     {
         public Nullable<int> Id { get; set; }
+        public int IdPedido { get; set; }
         public string Folio { get; set; }
         public string Categoria { get; set; }
         public string Descripcion { get; set; }

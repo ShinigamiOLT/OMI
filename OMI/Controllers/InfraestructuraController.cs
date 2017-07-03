@@ -47,7 +47,7 @@ namespace OMI.Controllers
 
 
           Session["IdSolicitud"]=  id;
-            cSolicitud sol = new cSolicitud(id ?? 0, 1);
+            cSolicitud sol = new cSolicitud(id ?? 0, 2);
             if (!sol.Valido || sol.TbSol.EnviadoInfra ==0)
                 return RedirectToAction("Requermientos","Infraestructura");
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
@@ -111,7 +111,9 @@ namespace OMI.Controllers
             using (OIMEntity contexto=new OIMEntity())
             {
                 var lista= contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Inventario).ToList();
-               return View(lista); 
+
+                lista.AddRange(contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Entregado).ToList());
+                return View(lista); 
             }
             
         }
@@ -124,7 +126,9 @@ namespace OMI.Controllers
             {
               var elemento=  contexto.TbPedidoM.Find(Id);
                 elemento.Estatus = (int) StatusInfra.Entregado;
+                contexto.SaveChanges();
                 var lista = contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Inventario).ToList();
+                lista.AddRange(contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Entregado).ToList());
                 return View(lista);
             }
 
