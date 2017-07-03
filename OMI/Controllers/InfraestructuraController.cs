@@ -110,10 +110,24 @@ namespace OMI.Controllers
         {
             using (OIMEntity contexto=new OIMEntity())
             {
-                var lista= contexto.Sp_AllPedidoXEstatus(4).ToList();
+                var lista= contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Inventario).ToList();
                return View(lista); 
             }
             
+        }
+        [HttpPost]
+        public ActionResult Solicitudes(int Id)
+        {
+
+
+            using (OIMEntity contexto = new OIMEntity())
+            {
+              var elemento=  contexto.TbPedidoM.Find(Id);
+                elemento.Estatus = (int) StatusInfra.Entregado;
+                var lista = contexto.Sp_AllPedidoXEstatus((int)StatusInfra.Inventario).ToList();
+                return View(lista);
+            }
+
         }
     }
 }

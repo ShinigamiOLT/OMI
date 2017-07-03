@@ -1,96 +1,103 @@
 ﻿@model IEnumerable<OIM_DAL.Sp_AllPedidoXEstatus_Result>
     
 
+@using (Html.BeginForm("Solicitudes", "Infraestructura", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%">
+                        <thead> <tr>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro</h3>
-            </div>
-            <div class="panel-body">
-                <table id="assets-data-table" class="table table-striped table-bordered" style="width:100%">
-                    <thead>   <tr>
-          
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Folio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Categoria)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Descripcion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Unidad)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Cantidad)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Estatus)
-                        </th>
-                        
-                        <th>
-                            @Html.DisplayNameFor(model => model.Usuario)
-                        </th>
-                       
-                        <th>
-                            @Html.DisplayNameFor(model => model.Fecha)
-                        </th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Folio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Categoria)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Unidad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cantidad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Estatus)
-                            </td>
-                          
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario)
-                            </td>
-                           
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Fecha)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "NuevaSolicitud", new {id = item.Id}) 
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Folio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Categoria)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Unidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cantidad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estatus)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Fecha)
+                            </th>
+                            <th></th>
                         </tr>
-                    }
-                    </tbody>
+                        </thead>
+
+                        <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Folio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Categoria)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Unidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Estatus)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Usuario)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fecha)
+                                </td>
+                                <td>
 
 
-                </table>
+                                    <!--Html.ActionLink("Edit", "NuevaSolicitud", new {id = item.Id})-->
+                                    <button type="submit" class="btn btn-success" value="1">Entregar</button>
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 
 
 

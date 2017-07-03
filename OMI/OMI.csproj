@@ -3930,6 +3930,8 @@
     <Content Include="Views\Admon\prueba.cshtml" />
     <Content Include="Views\Admon\Formato.cshtml" />
     <Content Include="Views\OrdenComp\Edit.cshtml" />
+    <Content Include="Views\Admon\Historial.cshtml" />
+    <Content Include="Views\Admon\DetallePedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

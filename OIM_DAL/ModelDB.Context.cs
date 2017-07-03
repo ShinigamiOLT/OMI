@@ -66,6 +66,15 @@ namespace OIM_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatus_Result>("Sp_AllPedidoXEstatus", estatusParameter);
         }
     
+        public virtual ObjectResult<Nullable<decimal>> Sp_Suma(Nullable<int> orden)
+        {
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_Suma", ordenParameter);
+        }
+    
         public virtual ObjectResult<Sp_AllPedidoXEstatusXAdmin_Result> Sp_AllPedidoXEstatusXAdmin(Nullable<int> estatus, Nullable<int> orden)
         {
             var estatusParameter = estatus.HasValue ?
@@ -79,13 +88,22 @@ namespace OIM_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AllPedidoXEstatusXAdmin_Result>("Sp_AllPedidoXEstatusXAdmin", estatusParameter, ordenParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_Suma(Nullable<int> orden)
+        public virtual int Sp_Total(Nullable<int> id, Nullable<decimal> valor)
         {
-            var ordenParameter = orden.HasValue ?
-                new ObjectParameter("Orden", orden) :
-                new ObjectParameter("Orden", typeof(int));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_Suma", ordenParameter);
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("Valor", valor) :
+                new ObjectParameter("Valor", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Total", idParameter, valorParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Historial_Result> Sp_Historial()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Historial_Result>("Sp_Historial");
         }
     }
 }

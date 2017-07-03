@@ -33,6 +33,8 @@ namespace OIM_DAL
         public Nullable<int> IdProveedor { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<decimal> Importe { get; set; }
+        public Nullable<int> ConfirmaOrden { get; set; }
+        public Nullable<System.DateTime> FechaEntregaUsuario { get; set; }
     
         public virtual Supervisores Supervisores { get; set; }
         public virtual TbCategoria TbCategoria { get; set; }

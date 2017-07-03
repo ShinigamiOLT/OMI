@@ -1,0 +1,168 @@
+﻿@model IEnumerable<OIM_DAL.Sp_Historial_Result>
+@{
+    ViewBag.Title = "Historial";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ingenieria Aplicada OnePro  </h3>
+            </div>
+            <div class="panel-body">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Historial de Orden de Compra</label>
+                            <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Proveedor)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaOrdenCompra)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FAutorizacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Categoria)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cantidad)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Unidad)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Autoriza)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Surtido)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Area)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaSolicitud)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IdCompra)
+                                    </th>
+                                   
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FolioCompra)
+                                    </th>
+                                   
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FolioSolicitud)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Proveedor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaOrdenCompra)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FAutorizacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Categoria)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Unidad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Autoriza)
+                                        </td>
+                                        <td id="tiposurtido">
+                                            @Html.DisplayFor(modelItem => item.Surtido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Area)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaSolicitud)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdCompra)
+                                        </td>
+                                        <td>
+                                            <!--Html.DisplayFor(modelItem => item.Id)-->
+                                            @Html.ActionLink(Html.DisplayFor(modelItem=> item.FolioCompra).ToString(),"FolioCompra",new {Id = item.IdCompra})
+                                        </td>
+                                      
+                                        <td>
+                                            <!--Html.DisplayFor(modelItem => item.IdSolicitud)-->
+                                            @Html.ActionLink(Html.DisplayFor(modelItem=> item.FolioSolicitud).ToString(),"FolioSolicitud",new {Id = item.IdSolicitud})
+                                        </td>
+                                       
+                                        <td>
+                                        
+                                            @Html.ActionLink("Details", "DetallePedido", new {id = item.IdPedido}) 
+                                        </td>
+                                    </tr>
+                                }
+</tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            function poncolor() {
+                var dato = document.getElementById("tiposurtido").firstChild.data;
+
+                var color = 'maroon';
+                if (dato == 1) {
+                    return "<div style='color:" + color + ";text-width:bold;'>" + dato + " </div>";
+                }
+            }
+        });
+    </script>
+}

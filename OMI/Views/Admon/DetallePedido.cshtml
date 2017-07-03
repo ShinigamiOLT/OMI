@@ -1,0 +1,213 @@
+﻿@model OIM_DAL.TbPedidoM
+
+@{
+    ViewBag.Title = "DetallePedido";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ingenieria Aplicada OnePro  </h3>
+            </div>
+            <div class="panel-body">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Detalles del Requerimiento</h2>
+
+                            <div>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Descripcion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Cantidad)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Cantidad)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Surtido)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Surtido)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Dato)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Dato)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.FechaAutorizacion)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FechaAutorizacion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Proveedor)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Proveedor)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Autorizacion)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Autorizacion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Observacion)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Observacion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Precio)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Precio)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Importe)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Importe)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.ConfirmaOrden)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ConfirmaOrden)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Supervisores.TbUsuario.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Supervisores.TbUsuario.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbCategoria.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbCategoria.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbCompras.Folio)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbCompras.Folio)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbOrdenCompra.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbOrdenCompra.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbSolicitud.Folio)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbSolicitud.Folio)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbUnidad.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbUnidad.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbStatusAutorizacion.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbStatusAutorizacion.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.TbProveedores.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TbProveedores.Nombre)
+                                    </dd>
+                                    
+                                </dl>
+                            </div>
+                            <div class="panel-footer">
+                                
+                                <a type="button" class="btn btn-info" href="@Url.Action( "Historial")" >Regresar al Historial</a>
+                                @if (Model.Surtido==0)
+                                {
+  
+                              
+                                <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#MiModal"> Cancelar Requerimiento </a>
+                                <a type="button" class="btn btn-success" href="@Url.Action( "Surtir","Admon",new {Id =Model.Id})">Surtir Material </a>  }
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="MiModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+             
+                <button type="button" class="close" data-dismiss="modal" arial-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4> Confirmar Cancelacion</h4>  <p>
+                    Esta seguro de cancelar este requerimiento?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <a type="submit" class="btn btn-success" href="@Url.Action( "Historial")">Cancelar </a>
+            </div>
+        </div>
+    </div>
+
+</div>

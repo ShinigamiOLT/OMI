@@ -11,26 +11,26 @@ namespace OIM_DAL
 {
     using System;
     
-    public partial class Sp_AllPedidoXEstatusXAdmin_Result
+    public partial class Sp_Historial_Result
     {
-        public int Id { get; set; }
-        public string Folio { get; set; }
+        public int IdPedido { get; set; }
+        public string Proveedor { get; set; }
+        public System.DateTime FechaOrdenCompra { get; set; }
+        public Nullable<System.DateTime> FAutorizacion { get; set; }
         public string Categoria { get; set; }
-        public string Descripcion { get; set; }
-        public string Unidad { get; set; }
         public int Cantidad { get; set; }
+        public string Unidad { get; set; }
+        public string Descripcion { get; set; }
         public int Autoriza { get; set; }
         public int Surtido { get; set; }
-        public string Formato { get; set; }
-        public string NombreFormato { get; set; }
         public string Usuario { get; set; }
         public string Area { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public string Estatus { get; set; }
-        public int Infra { get; set; }
-        public Nullable<System.DateTime> FAutorizacion { get; set; }
-        public string Proveedor { get; set; }
+        public System.DateTime FechaSolicitud { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> IdCompra { get; set; }
+        public int Id { get; set; }
+        public string FolioCompra { get; set; }
+        public int IdSolicitud { get; set; }
+        public string FolioSolicitud { get; set; }
     }
 }

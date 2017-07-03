@@ -161,7 +161,7 @@ namespace OMI.Controllers
                 Estatus = 1,
                 IdSupervisor = 1,
                
-                Surtido = 1,
+                Surtido = 0,
                 Cantidad = input.Cantidad,
                 TbUnidad =  sol.contexto.TbUnidad.Find(input.IdUnidad),
                 TbCategoria =  sol.GetCategoria (input.Categoria),

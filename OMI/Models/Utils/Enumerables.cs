@@ -13,7 +13,20 @@ namespace OMI.Models.Utils
         Autorizado,
             Pendiente
     }
+    enum Confirma
+    { No=0,
+        Si=1
+       
+    }
 
+    enum StatusInfra
+    {
+        Pendiente=1,
+        Rechazado,
+        Autorizado,
+        Inventario,
+        Entregado
+    }
     class NumLetra
     {
         private String[] UNIDADES =

@@ -77,6 +77,9 @@
     <Compile Include="Sp_AllPedido_Result.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sp_Historial_Result.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Supervisores.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
