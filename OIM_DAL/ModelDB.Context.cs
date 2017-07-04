@@ -54,6 +54,9 @@ namespace OIM_DAL
         public virtual DbSet<TbInve_Equipo_Comp> TbInve_Equipo_Comp { get; set; }
         public virtual DbSet<Tb_EstadoEquipo> Tb_EstadoEquipo { get; set; }
         public virtual DbSet<TbInve_Equipo_Varios> TbInve_Equipo_Varios { get; set; }
+        public virtual DbSet<Tb_EstadoLic> Tb_EstadoLic { get; set; }
+        public virtual DbSet<TbInve_Licencias> TbInve_Licencias { get; set; }
+        public virtual DbSet<TbInve_Vehiculos> TbInve_Vehiculos { get; set; }
     
         public virtual ObjectResult<Sp_AllPedido_Result> Sp_AllPedido()
         {

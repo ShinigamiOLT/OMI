@@ -12,29 +12,17 @@ namespace OIM_DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TbInve_Equipo_Comp
+    public partial class Tb_EstadoLic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TbInve_Equipo_Comp()
+        public Tb_EstadoLic()
         {
             this.TbInve_Licencias = new HashSet<TbInve_Licencias>();
         }
     
         public int Id { get; set; }
-        public string Tipo { get; set; }
         public string Nombre { get; set; }
-        public string Numero { get; set; }
-        public string Serie { get; set; }
-        public string Procesador { get; set; }
-        public string Observacion { get; set; }
-        public string Accesorio { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public Nullable<System.DateTime> FechaAlta { get; set; }
-        public Nullable<System.DateTime> FechaMantenimiento { get; set; }
-        public Nullable<int> Estado { get; set; }
     
-        public virtual TbUsuario TbUsuario { get; set; }
-        public virtual Tb_EstadoEquipo Tb_EstadoEquipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbInve_Licencias> TbInve_Licencias { get; set; }
     }

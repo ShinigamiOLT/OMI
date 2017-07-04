@@ -75,7 +75,7 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var datos = contexto.TbInve_Equipo_Comp.Find(Id);
-            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
+            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList().OrderBy(x=>x.Nombre), "Id", "Nombre");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
 
             return View(datos);
@@ -127,7 +127,7 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var datos = contexto.TbInve_Equipo_Varios.Find(Id);
-            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
+            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList().OrderBy(x => x.Nombre), "Id", "Nombre");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
 
             return View(datos);
@@ -145,5 +145,112 @@ namespace OMI.Controllers
         }
 
 
+        public ActionResult Licencia()
+        {
+            OIMEntity contexto = new OIMEntity();
+            var lista = contexto.TbInve_Licencias.ToList().OrderBy(x => x.Tipo).ToList();
+            return View(lista);
+
+        }
+
+        public ActionResult EditLic(int Id)
+        {
+            OIMEntity contexto = new OIMEntity();
+            var elemento = contexto.TbInve_Licencias.Find(Id);
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
+            return View(elemento);
+        }
+
+        [HttpPost]
+        public ActionResult EditLic(TbInve_Licencias nuevo)
+        {
+            OIMEntity contexto = new OIMEntity();
+            contexto.Entry(nuevo).State = EntityState.Modified;
+            contexto.SaveChanges();
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
+
+            return RedirectToAction("Licencia");
+        }
+
+        public ActionResult CreateLic()
+        {
+            OIMEntity contexto = new OIMEntity();
+            var elemento = new TbInve_Licencias();
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
+            return View(elemento);
+        }
+
+        [HttpPost]
+        public ActionResult CreateLic(TbInve_Licencias nuevo)
+        {
+            OIMEntity contexto = new OIMEntity();
+          
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
+            if (nuevo.Tipo == null)
+                return View(nuevo);
+            int Siguiente = 1;
+            if (contexto.TbInve_Equipo_Comp.Any())
+            {
+                Siguiente = contexto.TbInve_Licencias.Max(x => x.Id) + 1;
+            }
+            nuevo.Id = Siguiente;
+            contexto.TbInve_Licencias.Add(nuevo);
+            contexto.SaveChanges();
+            return RedirectToAction("Licencia");
+        }
+
+        public ActionResult Vehiculos()
+        {
+            OIMEntity contexto = new OIMEntity();
+            var lista = contexto.TbInve_Vehiculos.ToList().OrderBy(x => x.Codigo).ToList();
+            return View(lista);
+
+        }
+
+        public ActionResult CreateVehiculo()
+        {
+            OIMEntity contexto = new OIMEntity();
+            TbInve_Vehiculos varios = new TbInve_Vehiculos();
+          
+            return View(varios);
+        }
+        [HttpPost]
+        public ActionResult CreateVehiculo(TbInve_Vehiculos nuevo)
+        {
+            OIMEntity contexto = new OIMEntity();
+            int Siguiente = 1;
+            if (contexto.TbInve_Equipo_Comp.Any())
+            {
+                Siguiente = contexto.TbInve_Vehiculos.Max(x => x.Id) + 1;
+            }
+            nuevo.Id = Siguiente;
+            contexto.TbInve_Vehiculos.Add(nuevo);
+            contexto.SaveChanges();
+
+            return RedirectToAction("Vehiculos");
+
+        }
+
+
+        public ActionResult EditVehiculo(int Id)
+        {
+            OIMEntity contexto = new OIMEntity();
+            var elemento = contexto.TbInve_Vehiculos.Find(Id);
+            return View(elemento);
+        }
+
+        [HttpPost]
+        public ActionResult EditVehiculo(TbInve_Vehiculos nuevo)
+        {
+            OIMEntity contexto = new OIMEntity();
+            contexto.Entry(nuevo).State = EntityState.Modified;
+            contexto.SaveChanges();
+
+            return RedirectToAction("Vehiculos");
+        }
     }
 }

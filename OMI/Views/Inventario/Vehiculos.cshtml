@@ -1,0 +1,91 @@
+﻿@model IEnumerable<OIM_DAL.TbInve_Vehiculos>
+@{
+    ViewBag.Title = "Inventario - Vehiculo";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <a type="button" class="btn btn-primary" href="@Url.Action("CreateVehiculo")">Nuevo Vehiculo</a>
+                </p>
+                <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Placas)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Codigo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tipo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaAlta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Factura)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Arrendadora)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Serie)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RentaMensual)
+                        </th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Placas)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Codigo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tipo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaAlta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Factura)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Arrendadora)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Serie)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RentaMensual)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditVehiculo", new { id=item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

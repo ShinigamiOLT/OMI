@@ -1,61 +1,61 @@
-﻿@model IEnumerable<OIM_DAL.TbInve_Equipo_Comp>
+﻿@model IEnumerable<OIM_DAL.TbInve_Licencias>
 @{
-    ViewBag.Title = "Inventario - Equipo de Computo";
+    ViewBag.Title = "Inventarios - Licencias de Software";
 }
-
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
-               
-               
-                <a type="button" class="btn btn-primary" href=@Url.Action("CreaEquipo") >Nuevo Equipo</a>
-             
+
+                <p>
+                    <a type="button" class="btn btn-primary" href="@Url.Action("CreateLic")">Nueva Licencia</a>  
+                </p>
+
                 <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%">
                     <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model=> model.Id)
+                            @Html.DisplayNameFor(model => model.Id)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Tipo)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
+                            @Html.DisplayNameFor(model => model.Software)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Numero)
+                            @Html.DisplayNameFor(model => model.FCompra)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Serie)
+                            @Html.DisplayNameFor(model => model.FInstalacion)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Procesador)
+                            @Html.DisplayNameFor(model => model.FCaducidad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CuentaVinculada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Version)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Observacion)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Accesorio)
+                            @Html.DisplayNameFor(model => model.Tb_EstadoLic.Nombre)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaAlta)
-                        </th>
-                       
-                        <th>
-                            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Tb_EstadoEquipo.Nombre)
+                            @Html.DisplayNameFor(model => model.TbInve_Equipo_Comp.Tipo)
                         </th>
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody> 
-                    @foreach (var item in Model) {
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Id)
@@ -64,35 +64,37 @@
                                 @Html.DisplayFor(modelItem => item.Tipo)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
+                                @Html.DisplayFor(modelItem => item.Software)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Numero)
+                                @Html.DisplayFor(modelItem => item.FCompra)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Serie)
+                                @Html.DisplayFor(modelItem => item.FInstalacion)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Procesador)
+                                @Html.DisplayFor(modelItem => item.FCaducidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CuentaVinculada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Version)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Observacion)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Accesorio)
+                                @Html.DisplayFor(modelItem => item.Tb_EstadoLic.Nombre)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FechaAlta)
-                            </td>
-                          
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
-                            </td>
-                            <td id="Celda">
-                                @Html.DisplayFor(modelItem => item.Tb_EstadoEquipo.Nombre)
+                                @Html.DisplayFor(modelItem => item.TbInve_Equipo_Comp.Tipo)
+                                @Html.DisplayFor(modelItem => item.TbInve_Equipo_Comp.Numero)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "EditEquipo", new {id = item.Id}) 
+
+                                @Html.ActionLink("Edit", "EditLic", new {id = item.Id}) |
+                                @Html.ActionLink("Delete", "DeleteLic", new {id = item.Id})
                             </td>
                         </tr>
                     }
@@ -102,6 +104,4 @@
         </div>
     </div>
 </div>
-
-
 

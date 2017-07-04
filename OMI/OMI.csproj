@@ -3939,6 +3939,12 @@
     <Content Include="Views\Inventario\EquipoVarios.cshtml" />
     <Content Include="Views\Inventario\CreateVarios.cshtml" />
     <Content Include="Views\Inventario\EditVarios.cshtml" />
+    <Content Include="Views\Inventario\Licencia.cshtml" />
+    <Content Include="Views\Inventario\EditLic.cshtml" />
+    <Content Include="Views\Inventario\CreateLic.cshtml" />
+    <Content Include="Views\Inventario\Vehiculos.cshtml" />
+    <Content Include="Views\Inventario\CreateVehiculo.cshtml" />
+    <Content Include="Views\Inventario\EditVehiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

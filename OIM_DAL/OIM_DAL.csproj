@@ -116,6 +116,12 @@
     <Compile Include="TbInve_Equipo_Varios.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbInve_Licencias.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TbInve_Vehiculos.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbMedioContacto.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -159,6 +165,9 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Tb_EstadoEquipo.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tb_EstadoLic.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>
