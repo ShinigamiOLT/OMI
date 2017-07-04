@@ -3935,6 +3935,10 @@
     <Content Include="Views\Admon\DetallePedido.cshtml" />
     <Content Include="Views\Inventario\EquipoComputo.cshtml" />
     <Content Include="Views\Inventario\CreaEquipo.cshtml" />
+    <Content Include="Views\Inventario\EditEquipo.cshtml" />
+    <Content Include="Views\Inventario\EquipoVarios.cshtml" />
+    <Content Include="Views\Inventario\CreateVarios.cshtml" />
+    <Content Include="Views\Inventario\EditVarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

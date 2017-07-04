@@ -12,22 +12,16 @@ namespace OIM_DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TbInve_Equipo_Comp
+    public partial class TbInve_Equipo_Varios
     {
         public int Id { get; set; }
         public string Tipo { get; set; }
         public string Nombre { get; set; }
-        public string Numero { get; set; }
         public string Serie { get; set; }
-        public string Procesador { get; set; }
-        public string Observacion { get; set; }
-        public string Accesorio { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
-        public Nullable<System.DateTime> FechaMantenimiento { get; set; }
         public Nullable<int> Estado { get; set; }
+        public string Modelo { get; set; }
     
-        public virtual TbUsuario TbUsuario { get; set; }
         public virtual Tb_EstadoEquipo Tb_EstadoEquipo { get; set; }
     }
 }

@@ -113,6 +113,9 @@
     <Compile Include="TbInve_Equipo_Comp.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbInve_Equipo_Varios.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbMedioContacto.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -153,6 +156,9 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="TbUsuario.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tb_EstadoEquipo.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>

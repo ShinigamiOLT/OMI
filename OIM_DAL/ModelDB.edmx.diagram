@@ -59,6 +59,10 @@
         <AssociationConnector Association="DBOPSGIModel.id_Pedido_Proveedor" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Equipo_Comp" Width="1.5" PointX="5.25" PointY="38.5" />
         <AssociationConnector Association="DBOPSGIModel.id_usuario_inventario_fk" />
+        <EntityTypeShape EntityType="DBOPSGIModel.Tb_EstadoEquipo" Width="1.5" PointX="7.375" PointY="7.875" />
+        <AssociationConnector Association="DBOPSGIModel.id_estado_inven" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Equipo_Varios" Width="1.5" PointX="9.625" PointY="7.5" />
+        <AssociationConnector Association="DBOPSGIModel.id_estado_varios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

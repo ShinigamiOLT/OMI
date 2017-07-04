@@ -35,6 +35,13 @@
           <Property Name="Rev" Type="int" Nullable="false" />
           <Property Name="Link" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Tb_EstadoEquipo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Tb_Opor_Area">
           <Key>
             <PropertyRef Name="IdOportunidad" />
@@ -128,6 +135,19 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaAlta" Type="datetime" />
           <Property Name="FechaMantenimiento" Type="datetime" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <EntityType Name="TbInve_Equipo_Varios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar(max)" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Serie" Type="nvarchar(max)" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="Modelo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TbMedioContacto">
           <Key>
@@ -297,7 +317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TbOportun__idUsu__7F2BE32F">
+        <Association Name="FK__TbOportun__idUsu__6EF57B66">
           <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,6 +386,30 @@
             </Principal>
             <Dependent Role="Tb_Opor_Area">
               <PropertyRef Name="IdAreaInteres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_estado_inven">
+          <End Role="Tb_EstadoEquipo" Type="Self.Tb_EstadoEquipo" Multiplicity="0..1" />
+          <End Role="TbInve_Equipo_Comp" Type="Self.TbInve_Equipo_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_EstadoEquipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Comp">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_estado_varios">
+          <End Role="Tb_EstadoEquipo" Type="Self.Tb_EstadoEquipo" Multiplicity="0..1" />
+          <End Role="TbInve_Equipo_Varios" Type="Self.TbInve_Equipo_Varios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_EstadoEquipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Varios">
+              <PropertyRef Name="Estado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -681,6 +725,7 @@
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaDirectorio" EntityType="Self.TablaDirectorio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaMaestra" EntityType="Self.TablaMaestra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_EstadoEquipo" EntityType="Self.Tb_EstadoEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Area" EntityType="Self.Tb_Opor_Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Opor_Tipo" EntityType="Self.Tb_Opor_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbArea" EntityType="Self.TbArea" Schema="dbo" store:Type="Tables" />
@@ -691,6 +736,7 @@
           <EntitySet Name="TbEspecialidad" EntityType="Self.TbEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbFormato" EntityType="Self.TbFormato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbInve_Equipo_Comp" EntityType="Self.TbInve_Equipo_Comp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbInve_Equipo_Varios" EntityType="Self.TbInve_Equipo_Varios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbMedioContacto" EntityType="Self.TbMedioContacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbOportunidad" EntityType="Self.TbOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbOrdenCompra" EntityType="Self.TbOrdenCompra" Schema="dbo" store:Type="Tables" />
@@ -709,7 +755,7 @@
             <End Role="TbArea" EntitySet="TbArea" />
             <End Role="TbUsuario" EntitySet="TbUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__TbOportun__idUsu__7F2BE32F" Association="Self.FK__TbOportun__idUsu__7F2BE32F">
+          <AssociationSet Name="FK__TbOportun__idUsu__6EF57B66" Association="Self.FK__TbOportun__idUsu__6EF57B66">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
           </AssociationSet>
@@ -732,6 +778,14 @@
           <AssociationSet Name="id_Area" Association="Self.id_Area">
             <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
             <End Role="Tb_Opor_Area" EntitySet="Tb_Opor_Area" />
+          </AssociationSet>
+          <AssociationSet Name="id_estado_inven" Association="Self.id_estado_inven">
+            <End Role="Tb_EstadoEquipo" EntitySet="Tb_EstadoEquipo" />
+            <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
+          </AssociationSet>
+          <AssociationSet Name="id_estado_varios" Association="Self.id_estado_varios">
+            <End Role="Tb_EstadoEquipo" EntitySet="Tb_EstadoEquipo" />
+            <End Role="TbInve_Equipo_Varios" EntitySet="TbInve_Equipo_Varios" />
           </AssociationSet>
           <AssociationSet Name="id_formatoOpor" Association="Self.id_formatoOpor">
             <End Role="TbFormato" EntitySet="TbFormato" />
@@ -991,6 +1045,16 @@
           <AssociationSet Name="id_usuario_inventario_fk" Association="DBOPSGIModel.id_usuario_inventario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
             <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
+          </AssociationSet>
+          <EntitySet Name="Tb_EstadoEquipo" EntityType="DBOPSGIModel.Tb_EstadoEquipo" />
+          <AssociationSet Name="id_estado_inven" Association="DBOPSGIModel.id_estado_inven">
+            <End Role="Tb_EstadoEquipo" EntitySet="Tb_EstadoEquipo" />
+            <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
+          </AssociationSet>
+          <EntitySet Name="TbInve_Equipo_Varios" EntityType="DBOPSGIModel.TbInve_Equipo_Varios" />
+          <AssociationSet Name="id_estado_varios" Association="DBOPSGIModel.id_estado_varios">
+            <End Role="Tb_EstadoEquipo" EntitySet="Tb_EstadoEquipo" />
+            <End Role="TbInve_Equipo_Varios" EntitySet="TbInve_Equipo_Varios" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supervisores">
@@ -1712,6 +1776,8 @@
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <Property Name="FechaMantenimiento" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TbUsuario" Relationship="DBOPSGIModel.id_usuario_inventario_fk" FromRole="TbInve_Equipo_Comp" ToRole="TbUsuario" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="Tb_EstadoEquipo" Relationship="DBOPSGIModel.id_estado_inven" FromRole="TbInve_Equipo_Comp" ToRole="Tb_EstadoEquipo" />
         </EntityType>
         <Association Name="id_usuario_inventario_fk">
           <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="0..1" />
@@ -1722,6 +1788,52 @@
             </Principal>
             <Dependent Role="TbInve_Equipo_Comp">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tb_EstadoEquipo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbInve_Equipo_Comp" Relationship="DBOPSGIModel.id_estado_inven" FromRole="Tb_EstadoEquipo" ToRole="TbInve_Equipo_Comp" />
+          <NavigationProperty Name="TbInve_Equipo_Varios" Relationship="DBOPSGIModel.id_estado_varios" FromRole="Tb_EstadoEquipo" ToRole="TbInve_Equipo_Varios" />
+        </EntityType>
+        <Association Name="id_estado_inven">
+          <End Type="DBOPSGIModel.Tb_EstadoEquipo" Role="Tb_EstadoEquipo" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbInve_Equipo_Comp" Role="TbInve_Equipo_Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_EstadoEquipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Comp">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TbInve_Equipo_Varios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Serie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="Modelo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tb_EstadoEquipo" Relationship="DBOPSGIModel.id_estado_varios" FromRole="TbInve_Equipo_Varios" ToRole="Tb_EstadoEquipo" />
+        </EntityType>
+        <Association Name="id_estado_varios">
+          <End Type="DBOPSGIModel.Tb_EstadoEquipo" Role="Tb_EstadoEquipo" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbInve_Equipo_Varios" Role="TbInve_Equipo_Varios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_EstadoEquipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbInve_Equipo_Varios">
+              <PropertyRef Name="Estado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2117,6 +2229,7 @@
           <EntitySetMapping Name="TbInve_Equipo_Comp">
             <EntityTypeMapping TypeName="DBOPSGIModel.TbInve_Equipo_Comp">
               <MappingFragment StoreEntitySet="TbInve_Equipo_Comp">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaMantenimiento" ColumnName="FechaMantenimiento" />
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2125,6 +2238,27 @@
                 <ScalarProperty Name="Procesador" ColumnName="Procesador" />
                 <ScalarProperty Name="Serie" ColumnName="Serie" />
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_EstadoEquipo">
+            <EntityTypeMapping TypeName="DBOPSGIModel.Tb_EstadoEquipo">
+              <MappingFragment StoreEntitySet="Tb_EstadoEquipo">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbInve_Equipo_Varios">
+            <EntityTypeMapping TypeName="DBOPSGIModel.TbInve_Equipo_Varios">
+              <MappingFragment StoreEntitySet="TbInve_Equipo_Varios">
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
