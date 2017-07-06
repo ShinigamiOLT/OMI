@@ -38,6 +38,12 @@ namespace OMI
             // jquery datatables css file
             bundles.Add(new StyleBundle("~/Content/datatables").Include(
                 "~/Content/DataTables/css/dataTables.bootstrap.css"));
+
+            // jquery jspdf js files
+            bundles.Add(new ScriptBundle("~/bundles/jspdf").Include(
+                "~/Scripts/jspdf/jspdf.debug.js",
+                "~/Scripts/jspdf/html2pdf.js"
+                ));
         }
     }
 }

@@ -1,23 +1,27 @@
-﻿<div class="row">
+﻿@{
+    ViewBag.Title = "Organizacíon - Organigrama";
+}<div class="row">
     <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div  id="imprimir" class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Sistema OIM</h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
-            <div style="text-align: center">
-                <h1>
-                    <span>
-                        ORGANIGRAMA INTERNO DE TRABAJO
-                        <br />
-                        INGENIERÍA APLICADA ONEPRO
+            <div class="panel-body">
+                <div style="text-align: center">
+                    <h1>
+                        <span>
+                            ORGANIGRAMA INTERNO DE TRABAJO
+                            <br />
+                            INGENIERÍA APLICADA ONEPRO
 
-                    </span>
-                </h1>
-            </div>
+                        </span>
+                    </h1>
+                </div>
 
-            <div class="crop-img" >
-                  <img  src="@Url.Content("~/Images/organigrama.png")" style="float:left;clear:left;" alt="imgf" />
+                <div class="crop-img" style="text-align: center;">
+                    <img  src="@Url.Content("~/Images/organigrama.png")"  alt="imgf" />
         
+                </div>
             </div>
         </div>
     </div>

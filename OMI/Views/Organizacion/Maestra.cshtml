@@ -1,70 +1,75 @@
 ﻿@model IEnumerable<OIM_DAL.TablaMaestra>
+    @{
+        ViewBag.Title = "Organización - Listra Mestra SGI";
+        
+    }
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div id="imprimir" class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Lista maestra de documentos SGI</h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
                 <input type="button" id="btnExport" value="Export to Excel" />
                 <table id="assets-data-table" class="table table-striped table-bordered" style="width:100%">
-                    <thead> 
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Codigo)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Area)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Fecha)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Rev)
-                        </th>
-                      @*  <th>
-                            @Html.DisplayNameFor(model => model.Link)
-                        </th>
-                        <th></th>*@
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Codigo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Area)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Fecha)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rev)
+                            </th>
+                            @*  <th>
+                                    @Html.DisplayNameFor(model => model.Link)
+                                </th>
+                                <th></th>*@
+                        </tr>
                     </thead>
                     <tbody>
 
-                    @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                               @Html.ActionLink(Html.DisplayFor(modelItem => item.Codigo).ToString(),"Download",new {id=item.Id})
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Area)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem =>( item.Fecha ))
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Rev)
-                            </td>
-                           @* <td>
-                                @Html.DisplayFor(modelItem => item.Link)
-                            </td>
-                            <td>
-                          
-                                @Html.ActionLink("Details", "Download", new {id = item.Id}) 
-                            </td>*@
-                        </tr>
-                    }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(Html.DisplayFor(modelItem => item.Codigo).ToString(), "Download", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Area)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => (item.Fecha))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rev)
+                                </td>
+                                @* <td>
+                                        @Html.DisplayFor(modelItem => item.Link)
+                                    </td>
+                                    <td>
+
+                                        @Html.ActionLink("Details", "Download", new {id = item.Id})
+                                    </td>*@
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

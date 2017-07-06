@@ -5,19 +5,19 @@
 @model OMI.Models.cSolicitud
 
 @{
-    ViewBag.Title = "NuevaSolcitud";
+    ViewBag.Title = "Admon - Nueva Solcitud";
 }
 @Html.AntiForgeryToken()
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div id="imprimir" class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Ingenieria Aplicada OnePro</h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
-              
-               
+
+
                 <div class="container">
 
                     <div class="row">
@@ -61,12 +61,12 @@
                                 </ul>
                             </div>
                         </div>
-                            
-                           
+
+
 
                         @Html.InitCrudPopupsForGrid("DinnersGrid", "Admon")
                         @* popup names will be action + gridid; name is used when calling awe.open(name) *@
-                       
+
                         @if (ViewBag.Visible == 1)
                         {
                             @(Html.Awe().Grid("DinnersGrid")
@@ -79,21 +79,22 @@
                                   .Groupable(false)
 
                                   .Columns(
-                                      new Column {Name = "Id", Width = 55, Hidden = true},
-                                      new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"},
+                                      new Column { Name = "Id", Width = 55, Hidden = true },
+                                      new Column { Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria" },
 
-                                      new Column {Name = "Cantidad"},
-                                      new Column {Name = "Unidad"},
-                                      new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "IdSupervisor", Header = "Autoriza"},
-                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" },
-                                      new Column { Name =  "Observacion"},
-                                      new Column { Name = "Seleccionado"}.Mod(o=>o.Nohide()),
-                                      new Column {Name ="Proveedor",ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
+                                      new Column { Name = "Cantidad" },
+                                      new Column { Name = "Unidad" },
+                                      new Column { Name = "Descripcion" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "IdSupervisor", Header = "Autoriza" },
+                                      new Column { Name = "Estatus", ClientFormatFunc = "formatoaceptacion" },
+                                      new Column { Name = "Observacion" },
+                                      new Column { Name = "Seleccionado" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid") }.Mod(o => o.Nohide())
 
                                       ))
                         }
-                        else{
+                        else
+                        {
                             @(Html.Awe().Grid("DinnersGrid")
                                   .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
                                   .Url(Url.Action("GridGetItems", "Admon"))
@@ -104,25 +105,25 @@
                                   .Groupable(false)
 
                                   .Columns(
-                                      new Column {Name = "Id", Width = 55,Hidden = true},
-                                      new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria",}.Mod(o => o.Nohide()),
+                                      new Column { Name = "Id", Width = 55, Hidden = true },
+                                      new Column { Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria", }.Mod(o => o.Nohide()),
 
-                                      new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
-                                      new Column {Name = "Unidad" }.Mod(o => o.Nohide()),
-                                      new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
+                                      new Column { Name = "Cantidad" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Unidad" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Descripcion" }.Mod(o => o.Nohide()),
 
-                                      new Column {Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
-                                      new Column {Name = "Estatus", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
-                                      new Column { Name =  "Observacion"},
-                                      new Column { Name = "Seleccionado" ,Hidden = true},
-                                      new Column {Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())))
+                                      new Column { Name = "IdSupervisor", Header = "Autoriza" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Estatus", ClientFormatFunc = "formatoaceptacion" }.Mod(o => o.Nohide()),
+                                      new Column { Name = "Observacion" },
+                                      new Column { Name = "Seleccionado", Hidden = true },
+                                      new Column { Name = "Proveedor", ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid") }.Mod(o => o.Nohide())))
                         }
 
-                        <br/>
+                        <br />
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
-                               
+
                             @using (Html.BeginForm("Enviar", "Admon", FormMethod.Post, new { @class = "normalPost" }))
                             {
                                 if (ViewBag.Visible == 1)
@@ -138,29 +139,26 @@
                                   .UseAjax(false)
                                   .Confirm(true)
                                   .FormClass("normalPost")
-                                      
-                                  .ConfirmOptions(o => {o.Message="Esta seguro de enviar esta Solicitud";
-                                                           o.Title = "Confirmar envio";
-                                                           o.YesText = "Enviar";
-                                                           o.NoText = "Cancelar";
+
+                                  .ConfirmOptions(o =>
+                                  {
+                                      o.Message = "Esta seguro de enviar esta Solicitud";
+                                      o.Title = "Confirmar envio";
+                                      o.YesText = "Enviar";
+                                      o.NoText = "Cancelar";
 
                                   })
                                   .Tag(new { target = "confirmCont" }))
                             <div id="confirmCont"></div>
 
-                                
-                           
+
+
                         </div>
                     </div>
                 </div>
-                
-    
+
+
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-

@@ -245,12 +245,7 @@ namespace OMI.Controllers
         }
 
 
-        public ActionResult Lista()
-        {
-            
-            return View();
-        }
-
+       
         public ActionResult Concentrado()
         {
             OIMEntity contexto = new OIMEntity();
@@ -294,15 +289,7 @@ namespace OMI.Controllers
             return RedirectToAction("AllSolicitud", "Solicitud", new { id });
         }
 
-        public ActionResult Autorizar()//string parent, int p1, string a, string b)
-        {
-            return PartialView();
-        }
-        [HttpPost]
-        public ActionResult Autorizar(AutorizaInput entrada)
-        {
-            return Json(entrada);
-        }
+       
         [HttpGet]
         public JsonResult Eliminar(int id = 0)
         {

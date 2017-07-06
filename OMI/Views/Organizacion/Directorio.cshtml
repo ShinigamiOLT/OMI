@@ -1,49 +1,50 @@
 ﻿@model IEnumerable<OIM_DAL.TablaDirectorio>
 
 @{
-    ViewBag.Title = "Directorio";
+    ViewBag.Title = "Organización - Directorio";
 }
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div id="imprimir" class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Directorio</h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
                 <table id="assets-data-table" class="table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Correo)
-                        </th>
-                        
-                        <th>
-                            @Html.DisplayNameFor(model => model.Celular)
-                        </th>
-                       
-                    </tr>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Correo)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Celular)
+                            </th>
+
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Correo)
-                            </td>
-                           
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Celular)
-                            </td>
-                           
-                          
-                        </tr>
-                    }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Correo)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Celular)
+                                </td>
+
+
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

@@ -97,6 +97,22 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -226,6 +242,11 @@
     <Compile Include="Controllers\TbOportunidadsController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DBOPSGIDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBOPSGIDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3710,6 +3731,18 @@
     <Content Include="Download\Files\FI_DI_02.xls" />
     <Content Include="fonts\Javacom.otf" />
     <Content Include="fonts\Crystal Personal Use.ttf" />
+    <Content Include="Reportes\AprovechamientoGas.rdlc" />
+    <Content Include="DBOPSGIDataSet.xsc">
+      <DependentUpon>DBOPSGIDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DBOPSGIDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBOPSGIDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DBOPSGIDataSet.xss">
+      <DependentUpon>DBOPSGIDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3808,6 +3841,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf\html2pdf.js" />
+    <Content Include="Scripts\jspdf\jspdf.debug.js" />
+    <Content Include="Scripts\jspdf\jspdf.min.js" />
     <Content Include="Scripts\mitable.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
@@ -3894,13 +3930,11 @@
     <Content Include="Views\Shared\Delete.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Register.cshtml" />
-    <Content Include="Views\Solicitud\Lista.cshtml" />
     <Content Include="Views\Solicitud\Concentrado.cshtml" />
     <Content Include="Views\Solicitud\AllSolicitud.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\Personal\Create.cshtml" />
     <Content Include="Views\Shared\_PartialPersona.cshtml" />
-    <Content Include="Views\Solicitud\Autorizar.cshtml" />
     <Content Include="Views\Shared\_MenuIzquierdo.cshtml" />
     <Content Include="Views\Oportunidad\Index.cshtml" />
     <Content Include="Views\TbOportunidads\Create.cshtml" />
@@ -3962,6 +3996,7 @@
     <EmbeddedResource Include="Migrations\201706091445361_InitialCreate.resx">
       <DependentUpon>201706091445361_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OIM_DAL\OIM_DAL.csproj">

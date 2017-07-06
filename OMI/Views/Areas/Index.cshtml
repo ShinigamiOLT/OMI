@@ -5,29 +5,79 @@
 }
 
 <h2>Index</h2>
-
+<div id="HTMLtoPDF">
 <p>
     @Html.ActionLink("Create New", "Create")
+   
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
-        <th></th>
+        <th>Opciones</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        function DescargarPDF(ContenidoID, nombre) {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            html = $('#' + ContenidoID).html();
+            specialElementHandlers = {};
+            margins = { top: 10, bottom: 20, left: 20, width: 522 };
+            pdf.fromHTML(html,
+                margins.left,
+                margins.top,
+                { 'width': margins.width },
+                function(dispose) { pdf.save(nombre + '.pdf'); },
+                margins);
+        }
+
+        function HTMLtoPDF() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            source = source = $('#HTMLtoPDF')[0];
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+                }
+            }
+            margins = {
+                top: 50,
+                left: 60,
+                width: 545
+            };
+            pdf.fromHTML(
+                source // HTML string or DOM elem ref.
+                , margins.left // x coord
+                , margins.top // y coord
+                , {
+                    'width': margins.width // max width of content on PDF
+                    , 'elementHandlers': specialElementHandlers
+                },
+                function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF
+                    //          this allow the insertion of new lines after html
+                    pdf.save('html2pdf.pdf');
+                }
+            )
+        }
+
+    </script>
+
+}
