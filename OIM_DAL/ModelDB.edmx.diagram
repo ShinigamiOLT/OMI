@@ -68,6 +68,9 @@
         <AssociationConnector Association="DBOPSGIModel.id_estado_lic" />
         <AssociationConnector Association="DBOPSGIModel.id_equipo_lic" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Vehiculos" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Papeleria" Width="1.5" PointX="9.75" PointY="19.875" />
+        <AssociationConnector Association="DBOPSGIModel.id_Espe_varios" />
+        <AssociationConnector Association="DBOPSGIModel.Id_Id_requerimientos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

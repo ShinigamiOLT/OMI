@@ -16,7 +16,6 @@ namespace OIM_DAL
     {
         public int Id { get; set; }
         public string Placas { get; set; }
-        public string Codigo { get; set; }
         public string Tipo { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public string Factura { get; set; }
@@ -24,5 +23,9 @@ namespace OIM_DAL
         public string Descripcion { get; set; }
         public string Serie { get; set; }
         public string RentaMensual { get; set; }
+        public string NumeroOne { get; set; }
+        public Nullable<bool> Visible { get; set; }
+        public string Estatus { get; set; }
+        public string Modelo { get; set; }
     }
 }

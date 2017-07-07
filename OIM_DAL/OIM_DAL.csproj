@@ -119,6 +119,9 @@
     <Compile Include="TbInve_Licencias.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbInve_Papeleria.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbInve_Vehiculos.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

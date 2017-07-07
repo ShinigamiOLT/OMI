@@ -44,5 +44,6 @@ namespace OIM_DAL
         public virtual TbUnidad TbUnidad { get; set; }
         public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
         public virtual TbProveedores TbProveedores { get; set; }
+        public virtual TbInve_Papeleria TbInve_Papeleria { get; set; }
     }
 }

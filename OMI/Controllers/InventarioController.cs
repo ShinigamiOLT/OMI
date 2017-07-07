@@ -29,18 +29,8 @@ namespace OMI.Controllers
 
         public ActionResult CreaEquipo()
         {
-            var lista = new TbInve_Equipo_Comp()
-            {
-                Tipo = "",
-                Nombre = "",
-                Numero = "",
-                Serie = "",
-                Procesador = "",
-                Observacion = "",
-                Accesorio = ""
-
-
-            };
+            var lista = new TbInve_Equipo_Comp();
+            
 
             lista.FechaAlta = lista.FechaMantenimiento = DateTime.Now;
             lista.IdUsuario = 1;
@@ -206,7 +196,7 @@ namespace OMI.Controllers
         public ActionResult Vehiculos()
         {
             OIMEntity contexto = new OIMEntity();
-            var lista = contexto.TbInve_Vehiculos.ToList().OrderBy(x => x.Codigo).ToList();
+            var lista = contexto.TbInve_Vehiculos.ToList().OrderBy(x => x.NumeroOne).ToList();
             return View(lista);
 
         }

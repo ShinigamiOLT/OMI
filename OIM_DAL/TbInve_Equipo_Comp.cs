@@ -22,16 +22,18 @@ namespace OIM_DAL
     
         public int Id { get; set; }
         public string Tipo { get; set; }
-        public string Nombre { get; set; }
-        public string Numero { get; set; }
         public string Serie { get; set; }
         public string Procesador { get; set; }
-        public string Observacion { get; set; }
         public string Accesorio { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaMantenimiento { get; set; }
         public Nullable<int> Estado { get; set; }
+        public string Descripcion { get; set; }
+        public string NumeroOne { get; set; }
+        public string Caracteristicas { get; set; }
+        public string Modelo { get; set; }
+        public Nullable<bool> Visible { get; set; }
     
         public virtual TbUsuario TbUsuario { get; set; }
         public virtual Tb_EstadoEquipo Tb_EstadoEquipo { get; set; }
