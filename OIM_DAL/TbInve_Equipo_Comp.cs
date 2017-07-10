@@ -33,7 +33,7 @@ namespace OIM_DAL
         public string NumeroOne { get; set; }
         public string Caracteristicas { get; set; }
         public string Modelo { get; set; }
-        public Nullable<bool> Visible { get; set; }
+        public bool Visible { get; set; }
     
         public virtual TbUsuario TbUsuario { get; set; }
         public virtual Tb_EstadoEquipo Tb_EstadoEquipo { get; set; }

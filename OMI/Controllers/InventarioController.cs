@@ -21,7 +21,7 @@ namespace OMI.Controllers
         public ActionResult EquipoComputo()
         {
             OIMEntity contexto = new OIMEntity();
-            var lista = contexto.TbInve_Equipo_Comp.ToList();
+            var lista = contexto.TbInve_Equipo_Comp.Where(x=>x.Visible).ToList();
 
             return View(lista);
         }
@@ -34,6 +34,7 @@ namespace OMI.Controllers
 
             lista.FechaAlta = lista.FechaMantenimiento = DateTime.Now;
             lista.IdUsuario = 1;
+            lista.Visible = true;
 
             OIMEntity db = new OIMEntity();
             ViewBag.Usuarios = new SelectList(db.TbUsuario.ToList(), "Id", "Nombre");
@@ -54,6 +55,8 @@ namespace OMI.Controllers
                 Siguiente = contexto.TbInve_Equipo_Comp.Max(x => x.Id) + 1;
             }
             nuevo.Id = Siguiente;
+            nuevo.Visible = true;
+
             contexto.TbInve_Equipo_Comp.Add(nuevo);
             contexto.SaveChanges();
             ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
@@ -74,6 +77,7 @@ namespace OMI.Controllers
         [HttpPost]
         public ActionResult EditEquipo(TbInve_Equipo_Comp equipo)
         {
+            equipo.Visible = true;
             OIMEntity contexto = new OIMEntity();
             contexto.Entry(equipo).State = EntityState.Modified;
             contexto.SaveChanges();
@@ -85,7 +89,7 @@ namespace OMI.Controllers
         public ActionResult EquipoVarios()
         {
             OIMEntity contexto = new OIMEntity();
-            var lista = contexto.TbInve_Equipo_Varios.ToList();
+            var lista = contexto.TbInve_Equipo_Varios.Where(x=>x.Visible).ToList();
             return View(lista);
         }
 
@@ -95,18 +99,20 @@ namespace OMI.Controllers
             OIMEntity contexto = new OIMEntity();
             TbInve_Equipo_Varios varios = new TbInve_Equipo_Varios();
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
+            ViewBag.Usuario = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
             return View(varios);
         }
         [HttpPost]
         public ActionResult CreateVarios(TbInve_Equipo_Varios nuevo)
         {
             OIMEntity contexto = new OIMEntity();
-            int Siguiente = 1;
+            int Siguiente = 0;
             if (contexto.TbInve_Equipo_Comp.Any())
         {
-            Siguiente = contexto.TbInve_Equipo_Comp.Max(x => x.Id) + 1;
+            Siguiente = contexto.TbInve_Equipo_Varios.Max(x => x.Id);
         }
-            nuevo.Id = Siguiente;
+            nuevo.Id = Siguiente+1;
+            nuevo.Visible = true;
             contexto.TbInve_Equipo_Varios.Add(nuevo);
             contexto.SaveChanges();
 
@@ -117,7 +123,8 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var datos = contexto.TbInve_Equipo_Varios.Find(Id);
-            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList().OrderBy(x => x.Nombre), "Id", "Nombre");
+          
+           ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList().OrderBy(x => x.Nombre), "Id", "Nombre");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
 
             return View(datos);
@@ -126,11 +133,14 @@ namespace OMI.Controllers
         [HttpPost]
         public ActionResult EditVarios(TbInve_Equipo_Varios equipo)
         {
+            equipo.Visible = true;
             OIMEntity contexto = new OIMEntity();
             contexto.Entry(equipo).State = EntityState.Modified;
             contexto.SaveChanges();
-            ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
-            ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
+            ViewBag.Usuarios =  new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
+            ViewBag.Estado =    new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
+
+        
             return RedirectToAction("EquipoVarios");
         }
 
@@ -138,7 +148,7 @@ namespace OMI.Controllers
         public ActionResult Licencia()
         {
             OIMEntity contexto = new OIMEntity();
-            var lista = contexto.TbInve_Licencias.ToList().OrderBy(x => x.Tipo).ToList();
+            var lista = contexto.TbInve_Licencias.Include(x=>x.TbInve_Equipo_Comp.TbUsuario).ToList().OrderBy(x => x.Tipo).ToList();
             return View(lista);
 
         }
@@ -147,7 +157,7 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var elemento = contexto.TbInve_Licencias.Find(Id);
-            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.Where(x=>x.Visible).ToList(), "Id", "NumeroOne");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
             return View(elemento);
         }
@@ -158,7 +168,7 @@ namespace OMI.Controllers
             OIMEntity contexto = new OIMEntity();
             contexto.Entry(nuevo).State = EntityState.Modified;
             contexto.SaveChanges();
-            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.Where(x => x.Visible).ToList(), "Id", "NumeroOne");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
 
             return RedirectToAction("Licencia");
@@ -168,7 +178,7 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var elemento = new TbInve_Licencias();
-            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.Where(x => x.Visible).ToList(), "Id", "NumeroOne");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
             return View(elemento);
         }
@@ -178,7 +188,7 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
           
-            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.ToList(), "Id", "Numero");
+            ViewBag.Equipo = new SelectList(contexto.TbInve_Equipo_Comp.Where(x => x.Visible).ToList(), "Id", "NumeroOne");
             ViewBag.Estado = new SelectList(contexto.Tb_EstadoLic.ToList(), "Id", "Nombre");
             if (nuevo.Tipo == null)
                 return View(nuevo);

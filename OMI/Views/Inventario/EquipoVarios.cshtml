@@ -17,23 +17,33 @@
                     <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Tipo)
+                            @Html.DisplayNameFor(model => model.Id)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NumeroOne)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Serie)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaAlta)
+                            @Html.DisplayNameFor(model => model.Tipo)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Modelo)
                         </th>
                         <th>
+    @Html.DisplayNameFor(model => model.FechaAlta)
+</th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Tb_EstadoEquipo.Nombre)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
+                        </th>
+                       
                         <th></th>
                     </tr>
                     </thead>
@@ -45,25 +55,43 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Tipo)
+                                @Html.DisplayFor(modelItem => item.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumeroOne)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Serie)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FechaAlta)
+                                @Html.DisplayFor(modelItem => item.Tipo)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Modelo)
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.FechaAlta)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Tb_EstadoEquipo.Nombre)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "EditVarios", new {id = item.Id})
+                                @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
+                            </td>
+                            <td>
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-sliders" aria-hidden="true"></i> Opción <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("EditVarios", new {id = item.Id})">Editar</a></li>
+                                           
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     }

@@ -21,13 +21,16 @@
                             @Html.DisplayNameFor(model => model.Id)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Tipo)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Software)
+                            @Html.DisplayNameFor(model => model.Modelo)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FCompra)
+                            @Html.DisplayNameFor(model => model.FechaAlta)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.FInstalacion)
@@ -39,9 +42,6 @@
                             @Html.DisplayNameFor(model => model.CuentaVinculada)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Version)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.Observacion)
                         </th>
                         <th>
@@ -49,6 +49,9 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.TbInve_Equipo_Comp.Tipo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TbInve_Equipo_Comp.TbUsuario.Nombre)
                         </th>
                         <th></th>
                     </tr>
@@ -61,13 +64,16 @@
                                 @Html.DisplayFor(modelItem => item.Id)
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Tipo)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Software)
+                                @Html.DisplayFor(modelItem => item.Modelo)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FCompra)
+                                @Html.DisplayFor(modelItem => item.FechaAlta)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.FInstalacion)
@@ -79,9 +85,6 @@
                                 @Html.DisplayFor(modelItem => item.CuentaVinculada)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Version)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.Observacion)
                             </td>
                             <td>
@@ -89,12 +92,22 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TbInve_Equipo_Comp.Tipo)
-                                @Html.DisplayFor(modelItem => item.TbInve_Equipo_Comp.Numero)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TbInve_Equipo_Comp.TbUsuario.Nombre)
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "EditLic", new {id = item.Id}) |
-                                @Html.ActionLink("Delete", "DeleteLic", new {id = item.Id})
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-sliders" aria-hidden="true"></i> Opción <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("EditLic", new {id = item.Id})">Editar</a></li>
+                                           
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     }

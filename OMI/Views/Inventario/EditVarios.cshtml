@@ -21,19 +21,19 @@
                       @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                       @Html.HiddenFor(model => model.Id)
 
-                      <div class="form-group row">
-                          @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="form-group  row">
+                          @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-sm-10">
-                              @Html.TextBoxFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                              @Html.TextAreaFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                           </div>
                       </div>
 
                       <div class="form-group row">
-                          @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.NumeroOne, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-sm-10">
-                              @Html.TextBoxFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                              @Html.TextBoxFor(model => model.NumeroOne, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.NumeroOne, "", new { @class = "text-danger" })
                           </div>
                       </div>
 
@@ -46,13 +46,26 @@
                       </div>
 
                       <div class="form-group row">
+                          @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-sm-10">
+                              @Html.TextBoxFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          @Html.LabelFor(model => model.Modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-sm-10">
+                              @Html.TextBoxFor(model => model.Modelo, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.Modelo, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+                      <div class="form-group row">
                           @Html.LabelFor(model => model.FechaAlta, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-sm-10">
-                              @Html.TextBoxFor(model => model.FechaAlta, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.Awe().DatePickerFor(model => model.FechaAlta)
                               @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
                           </div>
                       </div>
-
                       <div class="form-group row">
                           @Html.LabelFor(model => model.Estado, "Estado", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-sm-10">
@@ -61,19 +74,21 @@
                               @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
 
                           </div>
-                      </div> 
+                      </div>
 
                       <div class="form-group row">
-                          @Html.LabelFor(model => model.Modelo, htmlAttributes: new { @class = "control-label col-md-2" })
-                          <div class="col-sm-10">
-                              @Html.TextBoxFor(model => model.Modelo, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.Modelo, "", new { @class = "text-danger" })
+                          @Html.LabelFor(model => model.Especialista, "Especialista", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-10">
+                              @Html.DropDownList("Especialista", ViewBag.Usuarios as SelectList, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                                 
+                              @Html.ValidationMessageFor(model => model.Especialista, "", new { @class = "text-danger" })
+
                           </div>
-                      </div>
+                      </div> 
 
                       <div class="form-group">
                           <div class="col-md-offset-2 col-md-10">
-                              <input type="submit" value="Guardar" class="btn btn-default" />
+                              <button type="submit" class="btn btn-primary">Guardar Cambio</button>
                           </div>
                       </div>
                   </div>

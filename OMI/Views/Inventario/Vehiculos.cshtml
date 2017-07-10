@@ -20,11 +20,17 @@
                             @Html.DisplayNameFor(model => model.Placas)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Codigo)
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NumeroOne)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Tipo)
                         </th>
+                        <th>
+    @Html.DisplayNameFor(model => model.Serie)
+</th>
                         <th>
                             @Html.DisplayNameFor(model => model.FechaAlta)
                         </th>
@@ -34,14 +40,12 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Arrendadora)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Descripcion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Serie)
-                        </th>
+                       
                         <th>
                             @Html.DisplayNameFor(model => model.RentaMensual)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Estatus)
                         </th>
                         <th></th>
                     </tr>
@@ -53,10 +57,16 @@
                                 @Html.DisplayFor(modelItem => item.Placas)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Codigo)
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumeroOne)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Tipo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Serie)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.FechaAlta)
@@ -68,17 +78,22 @@
                                 @Html.DisplayFor(modelItem => item.Arrendadora)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Serie)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.RentaMensual)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "EditVehiculo", new { id=item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                                @Html.DisplayFor(modelItem => item.Tb_EstadoVehiculo.Nombre)
+                            </td>
+                            <td>
+                                <!-- Single button -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-sliders" aria-hidden="true"></i> Opción <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("EditVehiculo", new {id = item.Id})">Editar</a></li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     }

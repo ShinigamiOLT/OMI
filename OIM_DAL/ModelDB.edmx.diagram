@@ -67,10 +67,12 @@
         <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Licencias" Width="1.5" PointX="7.5" PointY="38.75" />
         <AssociationConnector Association="DBOPSGIModel.id_estado_lic" />
         <AssociationConnector Association="DBOPSGIModel.id_equipo_lic" />
-        <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Vehiculos" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Papeleria" Width="1.5" PointX="9.75" PointY="19.875" />
         <AssociationConnector Association="DBOPSGIModel.id_Espe_varios" />
         <AssociationConnector Association="DBOPSGIModel.Id_Id_requerimientos" />
+        <EntityTypeShape EntityType="DBOPSGIModel.Tb_EstadoVehiculo" Width="1.5" PointX="8.125" PointY="26.75" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Vehiculos" Width="1.5" PointX="10.375" PointY="25.75" />
+        <AssociationConnector Association="DBOPSGIModel.id_Vehiculo_estado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

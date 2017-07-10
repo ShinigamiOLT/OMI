@@ -28,27 +28,28 @@
                                 @Html.DisplayNameFor(model => model.Descripcion)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Numero)
+                                @Html.DisplayNameFor(model => model.NumeroOne)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Serie)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Procesador)
+                                @Html.DisplayNameFor(model => model.Tipo)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Observacion)
-                            </th>
+    @Html.DisplayNameFor(model => model.Caracteristicas)
+</th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Accesorio)
+                                @Html.DisplayNameFor(model => model.Modelo)
                             </th>
+                           
                             <th>
                                 @Html.DisplayNameFor(model => model.FechaAlta)
                             </th>
-
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.Accesorio)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.TbUsuario.Nombre)
                             </th>
@@ -66,30 +67,30 @@
                                     @Html.DisplayFor(modelItem => item.Id)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Tipo)
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Numero)
+                                    @Html.DisplayFor(modelItem => item.NumeroOne)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Serie)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Procesador)
+                                    @Html.DisplayFor(modelItem => item.Tipo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Observacion)
+                                    @Html.DisplayFor(modelItem => item.Caracteristicas)
                                 </td>
+                               
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Accesorio)
+                                    @Html.DisplayFor(modelItem => item.Modelo)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FechaAlta)
                                 </td>
-
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Accesorio)
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TbUsuario.Nombre)
                                 </td>
@@ -97,7 +98,21 @@
                                     @Html.DisplayFor(modelItem => item.Tb_EstadoEquipo.Nombre)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "EditEquipo", new { id = item.Id })
+                                    <!-- Split button  Html.ActionLink("Edit", "EditEquipo", new {id = item.Id})-->
+                                    
+                                    <!-- Single button -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-sliders" aria-hidden="true"></i> Opción <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("EditEquipo", new {id = item.Id})">Editar</a></li>
+                                           
+                                        </ul>
+                                    </div>
+
+
+
                                 </td>
                             </tr>
                         }

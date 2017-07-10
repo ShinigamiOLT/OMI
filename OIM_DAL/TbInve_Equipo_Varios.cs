@@ -23,6 +23,7 @@ namespace OIM_DAL
         public string Descripcion { get; set; }
         public string NumeroOne { get; set; }
         public Nullable<int> Especialista { get; set; }
+        public bool Visible { get; set; }
     
         public virtual Tb_EstadoEquipo Tb_EstadoEquipo { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
