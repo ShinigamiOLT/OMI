@@ -24,7 +24,7 @@ namespace OIM_DAL
         public string Descripcion { get; set; }
         public string Serie { get; set; }
         public string RentaMensual { get; set; }
-        public Nullable<bool> Visible { get; set; }
+        public bool Visible { get; set; }
         public string Modelo { get; set; }
         public Nullable<int> Estatus { get; set; }
     

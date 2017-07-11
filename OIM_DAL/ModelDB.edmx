@@ -35,6 +35,13 @@
           <Property Name="Rev" Type="int" Nullable="false" />
           <Property Name="Link" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Tb_Estado_OnOff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Tb_EstadoEquipo">
           <Key>
             <PropertyRef Name="Id" />
@@ -451,6 +458,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_enviacompra">
+          <End Role="Tb_Estado_OnOff" Type="Self.Tb_Estado_OnOff" Multiplicity="0..1" />
+          <End Role="TbSolicitud" Type="Self.TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Estado_OnOff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="EnviadoCom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_enviainfra">
+          <End Role="Tb_Estado_OnOff" Type="Self.Tb_Estado_OnOff" Multiplicity="1" />
+          <End Role="TbSolicitud" Type="Self.TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Estado_OnOff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="EnviadoInfra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="id_equipo_lic">
           <End Role="TbInve_Equipo_Comp" Type="Self.TbInve_Equipo_Comp" Multiplicity="0..1" />
           <End Role="TbInve_Licencias" Type="Self.TbInve_Licencias" Multiplicity="*" />
@@ -847,6 +878,7 @@
           <EntitySet Name="Supervisores" EntityType="Self.Supervisores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaDirectorio" EntityType="Self.TablaDirectorio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TablaMaestra" EntityType="Self.TablaMaestra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Estado_OnOff" EntityType="Self.Tb_Estado_OnOff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_EstadoEquipo" EntityType="Self.Tb_EstadoEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_EstadoLic" EntityType="Self.Tb_EstadoLic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_EstadoVehiculo" EntityType="Self.Tb_EstadoVehiculo" Schema="dbo" store:Type="Tables" />
@@ -905,6 +937,14 @@
           <AssociationSet Name="id_Area" Association="Self.id_Area">
             <End Role="TbAreaInteres" EntitySet="TbAreaInteres" />
             <End Role="Tb_Opor_Area" EntitySet="Tb_Opor_Area" />
+          </AssociationSet>
+          <AssociationSet Name="id_enviacompra" Association="Self.id_enviacompra">
+            <End Role="Tb_Estado_OnOff" EntitySet="Tb_Estado_OnOff" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="id_enviainfra" Association="Self.id_enviainfra">
+            <End Role="Tb_Estado_OnOff" EntitySet="Tb_Estado_OnOff" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
           </AssociationSet>
           <AssociationSet Name="id_equipo_lic" Association="Self.id_equipo_lic">
             <End Role="TbInve_Equipo_Comp" EntitySet="TbInve_Equipo_Comp" />
@@ -1228,6 +1268,15 @@
             <End Role="Tb_EstadoVehiculo" EntitySet="Tb_EstadoVehiculo" />
             <End Role="TbInve_Vehiculos" EntitySet="TbInve_Vehiculos" />
           </AssociationSet>
+          <EntitySet Name="Tb_Estado_OnOff" EntityType="DBOPSGIModel.Tb_Estado_OnOff" />
+          <AssociationSet Name="id_enviacompra" Association="DBOPSGIModel.id_enviacompra">
+            <End Role="Tb_Estado_OnOff" EntitySet="Tb_Estado_OnOff" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="id_enviainfra" Association="DBOPSGIModel.id_enviainfra">
+            <End Role="Tb_Estado_OnOff" EntitySet="Tb_Estado_OnOff" />
+            <End Role="TbSolicitud" EntitySet="TbSolicitud" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supervisores">
           <Key>
@@ -1473,6 +1522,8 @@
           <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.id_sol_fk" FromRole="TbSolicitud" ToRole="TbPedidoM" />
           <NavigationProperty Name="TbPedidoPersonal" Relationship="DBOPSGIModel.id_SolP_fk" FromRole="TbSolicitud" ToRole="TbPedidoPersonal" />
           <NavigationProperty Name="TbUsuario" Relationship="DBOPSGIModel.IdUsuario_fk" FromRole="TbSolicitud" ToRole="TbUsuario" />
+          <NavigationProperty Name="Tb_Estado_OnOff" Relationship="DBOPSGIModel.id_enviacompra" FromRole="TbSolicitud" ToRole="Tb_Estado_OnOff" />
+          <NavigationProperty Name="Tb_Estado_OnOff1" Relationship="DBOPSGIModel.id_enviainfra" FromRole="TbSolicitud" ToRole="Tb_Estado_OnOff" />
         </EntityType>
         <EntityType Name="TbStatusAutorizacion">
           <Key>
@@ -2141,6 +2192,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Tb_Estado_OnOff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbSolicitud" Relationship="DBOPSGIModel.id_enviacompra" FromRole="Tb_Estado_OnOff" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbSolicitud1" Relationship="DBOPSGIModel.id_enviainfra" FromRole="Tb_Estado_OnOff" ToRole="TbSolicitud" />
+        </EntityType>
+        <Association Name="id_enviacompra">
+          <End Type="DBOPSGIModel.Tb_Estado_OnOff" Role="Tb_Estado_OnOff" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Estado_OnOff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="EnviadoCom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_enviainfra">
+          <End Type="DBOPSGIModel.Tb_Estado_OnOff" Role="Tb_Estado_OnOff" Multiplicity="1" />
+          <End Type="DBOPSGIModel.TbSolicitud" Role="TbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Estado_OnOff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitud">
+              <PropertyRef Name="EnviadoInfra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2632,6 +2716,14 @@
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="NumeroOne" ColumnName="NumeroOne" />
                 <ScalarProperty Name="Placas" ColumnName="Placas" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Estado_OnOff">
+            <EntityTypeMapping TypeName="DBOPSGIModel.Tb_Estado_OnOff">
+              <MappingFragment StoreEntitySet="Tb_Estado_OnOff">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

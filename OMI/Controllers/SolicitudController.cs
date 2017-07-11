@@ -17,18 +17,13 @@ namespace OMI.Controllers
     public class SolicitudController : Controller
     {
       
-      
-
-       
 
         // GET: Solicitud
         public ActionResult Index()
         {
             return View();
         }
-
         
-
         public ActionResult NuevaSolicitud(int? ID)
         {
 

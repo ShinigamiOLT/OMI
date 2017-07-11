@@ -36,5 +36,7 @@ namespace OIM_DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TbPedidoPersonal> TbPedidoPersonal { get; set; }
         public virtual TbUsuario TbUsuario { get; set; }
+        public virtual Tb_Estado_OnOff Tb_Estado_OnOff { get; set; }
+        public virtual Tb_Estado_OnOff Tb_Estado_OnOff1 { get; set; }
     }
 }

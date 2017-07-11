@@ -176,6 +176,9 @@
     <Compile Include="Tb_EstadoVehiculo.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tb_Estado_OnOff.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelDB.edmx">

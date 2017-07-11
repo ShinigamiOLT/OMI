@@ -28,7 +28,10 @@ namespace OMI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                "~/Content/css/micss.css"));
+                "~/Content/css/micss_.css"));
+            bundles.Add(new StyleBundle("~/Content/css2").Include(
+              
+                "~/Content/site.css"));
 
             // jquery datataables js files
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(

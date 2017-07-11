@@ -73,6 +73,9 @@
         <EntityTypeShape EntityType="DBOPSGIModel.Tb_EstadoVehiculo" Width="1.5" PointX="8.125" PointY="26.75" />
         <EntityTypeShape EntityType="DBOPSGIModel.TbInve_Vehiculos" Width="1.5" PointX="10.375" PointY="25.75" />
         <AssociationConnector Association="DBOPSGIModel.id_Vehiculo_estado" />
+        <EntityTypeShape EntityType="DBOPSGIModel.Tb_Estado_OnOff" Width="1.5" PointX="10.375" PointY="0.875" />
+        <AssociationConnector Association="DBOPSGIModel.id_enviacompra" />
+        <AssociationConnector Association="DBOPSGIModel.id_enviainfra" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3979,6 +3979,7 @@
     <Content Include="Views\Inventario\Vehiculos.cshtml" />
     <Content Include="Views\Inventario\CreateVehiculo.cshtml" />
     <Content Include="Views\Inventario\EditVehiculo.cshtml" />
+    <Content Include="Views\Admon\SolicitudCotizacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

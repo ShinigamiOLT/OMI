@@ -25,12 +25,10 @@ namespace OMI.Controllers
 
         public ActionResult Details(int? id)
         {
-
-
-
+            
             cSolicitud sol = new cSolicitud(id ?? 0, 1);
             if (!sol.Valido)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             Session["IdSolicitud"] = sol.TbSol.IdSolicitud;
             ViewBag.Visible = sol.TbSol.EnviadoCom;
             return View(sol);
@@ -43,7 +41,7 @@ namespace OMI.Controllers
                 id = (int) Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             search = (search ?? "").ToLower();
             var items = sol.contexto.TbPedidoM
                 .Where(o => o.IdSolicitud == sol.TbSol.IdSolicitud)
@@ -69,7 +67,7 @@ namespace OMI.Controllers
                 id = (int) Session["IdSolicitud"];
             cSolicitud sol = new cSolicitud(id, 1);
             if (!sol.Valido)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             search = (search ?? "").ToLower();
             var items = sol.contexto.TbPedidoM
 
@@ -216,8 +214,8 @@ namespace OMI.Controllers
             OIMEntity contextOimEntity = new OIMEntity();
             var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.Autorizado)
                 .OrderBy(x => x.Proveedor).ToList();
-            list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.SeleccionCotizacion)
-                .OrderBy(x => x.Proveedor).ToList());
+           /* list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.SeleccionCotizacion)
+                .OrderBy(x => x.Proveedor).ToList());*/
 
             return View(list);
         }
@@ -249,8 +247,50 @@ namespace OMI.Controllers
             OIMEntity contextOimEntity = new OIMEntity();
             var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.Autorizado)
                 .OrderBy(x => x.Proveedor).ToList();
-            list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.SeleccionCotizacion)
-                .OrderBy(x => x.Proveedor).ToList());
+           /* list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.SeleccionCotizacion)
+                .OrderBy(x => x.Proveedor).ToList());*/
+            return View(list);
+        }
+
+        public ActionResult SolicitudCotizacion()
+        {
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion)
+                .OrderBy(x => x.Proveedor).ToList();
+            /* list.AddRange(contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int) eOrdenCompra.SeleccionCotizacion)
+                 .OrderBy(x => x.Proveedor).ToList());*/
+
+            return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult SolicitudCotizacion(int[] reglon)
+        {
+
+            if (reglon != null)
+                if (reglon.Length > 0)
+                {
+
+                    if (ObtienePedido(reglon))
+                    {
+
+
+                        //implica que hay mas de un valor.
+                        COrdenCompra compranueva = new COrdenCompra();
+                        {
+                            compranueva.nuevo();
+                            compranueva.ListaPedidos(reglon);
+
+
+                            return RedirectToAction("Formato", new { Id = compranueva.Id });
+                        }
+                    }
+                }
+
+            OIMEntity contextOimEntity = new OIMEntity();
+            var list = contextOimEntity.Sp_AllPedidoXEstatusXAdmin(3, (int)eOrdenCompra.SeleccionCotizacion)
+                .OrderBy(x => x.Proveedor).ToList();
+            
             return View(list);
         }
 

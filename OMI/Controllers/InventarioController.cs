@@ -69,7 +69,7 @@ namespace OMI.Controllers
             OIMEntity contexto = new OIMEntity();
             var datos = contexto.TbInve_Equipo_Comp.Find(Id);
             ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList().OrderBy(x=>x.Nombre), "Id", "Nombre");
-            ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
+            ViewBag.Estados = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
 
             return View(datos);
         }
@@ -82,7 +82,7 @@ namespace OMI.Controllers
             contexto.Entry(equipo).State = EntityState.Modified;
             contexto.SaveChanges();
             ViewBag.Usuarios = new SelectList(contexto.TbUsuario.ToList(), "Id", "Nombre");
-            ViewBag.Estado = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
+            ViewBag.Estados = new SelectList(contexto.Tb_EstadoEquipo.ToList(), "Id", "Nombre");
             return RedirectToAction("EquipoComputo");
         }
 
@@ -206,7 +206,7 @@ namespace OMI.Controllers
         public ActionResult Vehiculos()
         {
             OIMEntity contexto = new OIMEntity();
-            var lista = contexto.TbInve_Vehiculos.ToList().OrderBy(x => x.NumeroOne).ToList();
+            var lista = contexto.TbInve_Vehiculos.Where(x=>x.Visible).OrderBy(x => x.NumeroOne).ToList();
             return View(lista);
 
         }
@@ -215,10 +215,11 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             TbInve_Vehiculos varios = new TbInve_Vehiculos();
-          
+            ViewBag.Estatus =new SelectList( contexto.Tb_EstadoVehiculo.ToList(),"Id","Nombre");
             return View(varios);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateVehiculo(TbInve_Vehiculos nuevo)
         {
             OIMEntity contexto = new OIMEntity();
@@ -230,7 +231,7 @@ namespace OMI.Controllers
             nuevo.Id = Siguiente;
             contexto.TbInve_Vehiculos.Add(nuevo);
             contexto.SaveChanges();
-
+            ViewBag.Estatus = new SelectList(contexto.Tb_EstadoVehiculo.ToList(), "Id", "Nombre");
             return RedirectToAction("Vehiculos");
 
         }
@@ -240,6 +241,8 @@ namespace OMI.Controllers
         {
             OIMEntity contexto = new OIMEntity();
             var elemento = contexto.TbInve_Vehiculos.Find(Id);
+
+            ViewBag.Estatus = new SelectList(contexto.Tb_EstadoVehiculo.ToList(), "Id", "Nombre");
             return View(elemento);
         }
 
@@ -250,6 +253,7 @@ namespace OMI.Controllers
             contexto.Entry(nuevo).State = EntityState.Modified;
             contexto.SaveChanges();
 
+            ViewBag.Estatus = new SelectList(contexto.Tb_EstadoVehiculo.ToList(), "Id", "Nombre");
             return RedirectToAction("Vehiculos");
         }
     }

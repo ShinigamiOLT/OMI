@@ -4,6 +4,8 @@
 
 <div class="left side-menu">
     <div class="sidebar-inner slimscrollleft">
+    @if (Request.IsAuthenticated)
+    {
         <div class="user-details">
             <div class="pull-left">
                 <img src="~/Content/assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
@@ -12,16 +14,19 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">@User.Identity.GetUserName()<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
+                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile
+                            <div class="ripple-wrapper"></div></a></li>
                         <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
                         <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
                         <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
                     </ul>
                 </div>
-                
+
                 <p class="text-muted m-0">Administrador</p>
             </div>
         </div>
+        
+    }
         <!--- Divider -->
         <div id="sidebar-menu">
             <ul>
@@ -150,6 +155,8 @@
                             <ul>
                                 <li><a href="@Url.Action("PorPedido", "Admon")">Solicitud Compra</a></li>
                                 <li><a href="@Url.Action("OrdenCompra", "Admon")">Orden Compra</a></li> 
+                                <li><a href="@Url.Action("SolicitudCotizacion", "Admon")">Solicitud de Cotizacion</a></li> 
+
                                 <li><a href="@Url.Action("index", "home")">Evaluacion Post-Venta</a></li> 
                                 <li><a href="@Url.Action("Historial", "Admon")">Historial Orden Compra</a></li>
                             </ul>

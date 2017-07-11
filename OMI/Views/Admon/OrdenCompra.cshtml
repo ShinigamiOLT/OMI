@@ -1,13 +1,15 @@
 ﻿
 @model IEnumerable<OIM_DAL.Sp_AllPedidoXEstatusXAdmin_Result>
 
-
+@{
+    ViewBag.Title = "Admon - Orden de Compra";
+}
 
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Sistema OIM - Ingenieria Aplicada OnePro</h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm("ordencompra", "Admon", FormMethod.Post))
