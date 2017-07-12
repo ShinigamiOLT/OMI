@@ -160,6 +160,7 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
             dinner.Estatus = input.Autorizar;
             dinner.Observacion = input.Observacion;
             dinner.FechaAutorizacion = DateTime.Now.Date;
+            dinner.ConfirmaOrden = 0;
             contexto.Entry(dinner).State = EntityState.Modified;
             contexto.SaveChanges();
 
@@ -181,7 +182,7 @@ siguiente= contexto.TbPedidoM.Max(x => x.Id);
             }
 
             dinner.OrdenCompra = input.Autorizar;
-
+            dinner.ConfirmaOrden = 0;
             dinner.Observacion = input.Observacion;
             dinner.FechaAutorizacion = DateTime.Now.Date;
             contexto.Entry(dinner).State = EntityState.Modified;

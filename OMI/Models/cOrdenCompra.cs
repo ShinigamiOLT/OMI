@@ -61,7 +61,7 @@ namespace OMI.Models
 
         }
 
-        public void nuevo()
+        public void nuevo(int idFormato)
         {
             if (Id != 0)
             {
@@ -76,7 +76,7 @@ namespace OMI.Models
 
                 TbCompras_.Id = Id;
                 TbCompras_.FechaOrden = DateTime.Now;
-                TbCompras_.IdFormato = 6;
+                TbCompras_.IdFormato = idFormato;
                 TbCompras_.IdUsuario = 2;
                 TbCompras_.IdProveedor = 1;
                 TbCompras_.TbUsuario = contexto.TbUsuario.Find(TbCompras_.IdUsuario);

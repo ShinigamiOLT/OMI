@@ -6,7 +6,7 @@
 @model OMI.Models.COrdenCompra
 
 @{
-    ViewBag.Title = "NuevaSolcitud";
+    ViewBag.Title = "Admon - "+ Model.TbCompras_.TbFormato.Descripcion;
 }
 @Html.AntiForgeryToken()
 
@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <div class="panel panel-border panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Ingenieria Aplicada OnePro @ViewBag.Valor </h3>
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
             </div>
             <div class="panel-body">
             

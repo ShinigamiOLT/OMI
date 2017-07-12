@@ -79,10 +79,7 @@ namespace OMI.Controllers
                 sol.EnviarPedido();
 
 
-            return RedirectToAction("NuevaSolicitud", "Solicitud", new
-            {
-                id
-            });
+            return RedirectToAction("AllSolicitud");
         }
 
 
@@ -95,7 +92,7 @@ namespace OMI.Controllers
             if (!sol.Valido)
                 return RedirectToAction("Index");
             search = (search ?? "").ToLower();
-            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == sol.TbSol.IdSolicitud).Where(o => o.Dato !=2).AsQueryable();//.OrderBy(m=>m.Id);
+            var items = sol.contexto.TbPedidoM.Where(o => o.IdSolicitud == sol.TbSol.IdSolicitud).Where(o => o.Dato !=2).Include(x=>x.TbOrdenCompra).AsQueryable();//.OrderBy(m=>m.Id);
 
             return Json(new GridModelBuilder<TbPedidoM>(items, g)
             {
