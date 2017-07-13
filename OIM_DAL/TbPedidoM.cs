@@ -14,6 +14,12 @@ namespace OIM_DAL
     
     public partial class TbPedidoM
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TbPedidoM()
+        {
+            this.TbSolicitudCotizacion = new HashSet<TbSolicitudCotizacion>();
+        }
+    
         public int Id { get; set; }
         public int IdCategoria { get; set; }
         public string Descripcion { get; set; }
@@ -45,5 +51,7 @@ namespace OIM_DAL
         public virtual TbStatusAutorizacion TbStatusAutorizacion { get; set; }
         public virtual TbProveedores TbProveedores { get; set; }
         public virtual TbInve_Papeleria TbInve_Papeleria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TbSolicitudCotizacion> TbSolicitudCotizacion { get; set; }
     }
 }

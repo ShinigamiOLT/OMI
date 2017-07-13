@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<OIM_DAL.Sp_AllPedidoXEstatusXAdmin_Result>
+﻿@model IEnumerable<OIM_DAL.Sp_AllPedidoXEstatusXAdmin_Result>
 
 @{
     ViewBag.Title = "Admon - Solicitud de Cotizacion";
@@ -15,6 +14,14 @@
                 @using (Html.BeginForm("SolicitudCotizacion", "Admon", FormMethod.Post))
                 {
                     <button type="submit" class="btn btn-success">Gnerar Orden</button>
+                    <button type="button" class="awe-btn" onclick="awe.open('createDinner')">Crear</button>
+                    @(Html.Awe().InitPopupForm()
+                        .Name("createDinner")
+                        .Height(400)
+                        .Url(Url.Action("Create","Admon"))
+                        .Success("created")
+                        
+    )
                     <table id="assets-data-table" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                             <tr>
@@ -62,11 +69,12 @@
                             {
                                 <tr name="reglon1" value="@Html.DisplayFor(modelItem => item.Id)">
                                     <td>
-                                        <input type="checkbox" name="reglon" value="@Html.DisplayFor(modelItem => item.Id)" />
+                                        <input type="radio" name="reglon" value="@Html.DisplayFor(modelItem => item.Id)" />
 
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Proveedor)
+
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Folio)
@@ -112,4 +120,11 @@
         </div>
     </div>
 </div>
-
+@section Scripts
+{
+    <script type="text/javascript">
+    function created(result,popup) {
+        alert('creado');
+    }
+    </script>
+}

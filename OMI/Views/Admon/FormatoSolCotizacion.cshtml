@@ -1,176 +1,193 @@
 ﻿@using Omu.Awem.Helpers
 @using Omu.AwesomeMvc
 @using OMII.Utils
-@model OMI.Models.COrdenCompra
+@model OMI.Models.cSolCotizacion
 
 @{
-    ViewBag.Title = "Admon - "+Model.TbCompras_.TbFormato.Descripcion; 
+    ViewBag.Title = "Admon - "+Model.TbSolicitud.TbFormato.Descripcion; 
 }
 @Html.AntiForgeryToken()
 
 <div class="row">
-<div class="col-md-12">
-<div class="panel panel-border panel-primary">
-<div class="panel-heading">
-    <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
-</div>
-<div class="panel-body">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;@ViewBag.Title</h4>
+            </div>
+            <div class="panel-body">
             
-    <div class="container">
+                <div class="container">
 
-        <div class="row">
+                    <div class="row">
 
-            <div class="col-md-8">
-                <div class="menubar-logo" id="titulo">
-                    <span class="container">
-                        <h1>@Html.DisplayFor(m => m.TbCompras_.TbFormato.Descripcion)</h1>
-                    </span>
+                        <div class="col-md-8">
+                            <div class="menubar-logo" id="titulo">
+                                <span class="container">
+                                    <h1>@Html.DisplayFor(m => m.TbSolicitud.TbFormato.Descripcion)</h1>
+                                </span>
 
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-
-                    <div class="panel-body">
-                        <div class="input-group ">
-                            <span class="input-group-addon" id="sizing-addon4">Folio</span>
-                            <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Html.DisplayFor(m => m.TbCompras_.Folio)" style="text-align: right; color: red" readonly=true>
+                            </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
 
-                        <ul class="list-group">
-                            <li class="list-group-item"><h6>No. Formato:@Html.DisplayFor(m => m.TbCompras_.TbFormato.Nombre)</h6></li>
-                            <li class="list-group-item"><h6>Revisión: @Html.DisplayFor(m => m.TbCompras_.TbFormato.Revision)</h6></li>
-                        </ul>
+                                <div class="panel-body">
+                                    <div class="input-group ">
+                                        <span class="input-group-addon" id="sizing-addon4">Folio</span>
+                                        <input type="text" class="form-control" name="Folio" placeholder="Username" aria-describedby="sizing-addon1" value="@Html.DisplayFor(m => m.TbSolicitud.Folio)" style="text-align: right; color: red" readonly=true>
+                                    </div>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><h6>No. Formato:@Html.DisplayFor(m => m.TbSolicitud.TbFormato.Nombre)</h6></li>
+                                        <li class="list-group-item"><h6>Revisión: @Html.DisplayFor(m => m.TbSolicitud.TbFormato.Revision)</h6></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Datos del Solicitante</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item"><h6>Area Solicitante: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbCompras_.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
-                            <li class="list-group-item"><h6>Usuario:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbCompras_.TbUsuario.Nombre)</strong></span></h6></li>
-                            <li class="list-group-item"><h6>Fecha:<span style="color: red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Datos del Solicitante</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><h6>Area Solicitante: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSolicitud.TbUsuario.TbArea.Nombre)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Usuario:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbSolicitud.TbUsuario.Nombre)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Fecha:<span style="color: red"><strong> @Html.DisplayFor(m => m.FechaCorta)</strong></span></h6></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Datos del Proveedor</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item"><h6>Provedoor: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbCompras_.TbProveedores.Nombre)</strong></span></h6></li>
-                            <li class="list-group-item"><h6>Representate:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbCompras_.TbProveedores.Vendedor)</strong></span></h6></li>
-                            <li class="list-group-item"><h6>Telefono:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbCompras_.TbProveedores.Telefono)</strong></span></h6></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Datos del Proveedor</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><h6>Provedoor: <span style="color: red;"><strong> @Html.DisplayFor(m => m.TbSolicitud.TbProveedores.Nombre)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Representate:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbSolicitud.TbProveedores.Vendedor)</strong></span></h6></li>
+                                        <li class="list-group-item"><h6>Telefono:<span style="color: red"><strong> @Html.DisplayFor(m => m.TbSolicitud.TbProveedores.Telefono)</strong></span></h6></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="contenido-lista">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Notas </h3>
-                    </div>
-                    <div class="panel-body">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contenido-lista">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Notas </h3>
+                                </div>
+                                <div class="panel-body">
                        
                         
-                            <p>
-                                <h6>@Html.DisplayFor(m => m.observaciones[0])<span style="color: red; line-height: 200%;"> @Html.DisplayFor(m => m.observaciones[1])</span></h6>
-                            </p>
+                                    <p>
+                                        <h6>@Html.DisplayFor(m => m.observaciones[0])<span style="color: red; line-height: 200%;"> @Html.DisplayFor(m => m.observaciones[1])</span></h6>
+                                    </p>
                       
 
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @Html.InitCrudPopupsForGrid("DinnersGrid", "SolicitudCotizacion")
-            @* popup names will be action + gridid; name is used when calling awe.open(name) *@
+                    <div class="row">
+                        @Html.InitCrudPopupsForGrid("DinnersGrid", "SolicitudCotizacion")
+                        @* popup names will be action + gridid; name is used when calling awe.open(name) *@
 
           
-                @(Html.Awe().Grid("DinnersGrid")
-                      .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
-                      .Url(Url.Action("GridGetItems", "SolicitudCotizacion"))
-                      .Resizable()
-                      .Reorderable()
-                      .Height(0)
-                      .Paging(false)
-                      .Groupable(false)
+                        @(Html.Awe().Grid("DinnersGrid")
+                              .Mod(o => o.PageInfo().ColumnsSelector().ColumnsAutohide())
+                              .Url(Url.Action("GridGetItems", "SolicitudCotizacion"))
+                              .Resizable()
+                              .Reorderable()
+                              .Height(0)
+                              .Paging(false)
+                              .Groupable(false)
+                              .ShowFooter(false)
+                              .Columns(
+                                  new Column {Name = "No.", Width = 55}.Mod(o => o.Nohide()),
+                                  new Column {Name = "Id", Width = 55, Hidden = true},
+                                  new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"}.Mod(o => o.Nohide()),
 
-                      .Columns(
-                          new Column {Name = "No.", Width = 55}.Mod(o => o.Nohide()),
-                          new Column {Name = "Id", Width = 55, Hidden = true},
-                          new Column {Name = "Categoria", ClientFormat = ".Categoria", Header = "Categoria"}.Mod(o => o.Nohide()),
-
-                          new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
-                          new Column {Name = "Unidad"}.Mod(o => o.Nohide()),
-                          new Column {Name = "Descripcion"}.Mod(o => o.Nohide()),
+                                  new Column {Name = "Cantidad"}.Mod(o => o.Nohide()),
+                                  new Column {Name = "Unidad"}.Mod(o => o.Nohide()),
+                                  new Column {Name = "Descripcion"}.Mod(o => o.Nohide())
                         
-                          new Column {Name = "", Width = 45, ClientFormat = GridUtils.EditFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide()),
-                          new Column {Width = 45, ClientFormat = GridUtils.DeleteFormatForGrid("DinnersGrid")}.Mod(o => o.Nohide())
-                      ))
+                                 
+                              ))
            
 
 
-            <br/>
+                        <br/>
 
-        </div>
+                    </div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 " style="align-items: right;">
 
-                @using (Html.BeginForm("Formato", "Admon", FormMethod.Post, new { @class = "normalPost" }))
-                {
-                    if (ViewBag.Visible)
-                    {
+                            @using (Html.BeginForm("Formato", "Admon", FormMethod.Post, new { @class = "normalPost" }))
+                            {
+                                
                                     @*   <a class="btn btn-danger" id="btnCancelar" href="@Url.Action("Cancelar", "Admon")">Cancelar</a>
                                   <input type="submit" value="Guardar" id="btnSave" class="btn btn-primary"/><a class="btn btn-success" id="btnCancelar" href="@Url.Action("Enviar", "Solicitud")">Enviar</a>
     <a class="btn btn-primary" id="btnSave" href="@Url.Action("Guadar", "Admon")">Guardar</a>  <button type="submit" class="btn btn-success">Enviar</button>*@
-                        <input type="submit" value="Cancelar" name="Opcion" class="btn btn-danger"/>
-                        <input type="submit" value="Solicitud Cotizacion" name="Opcion" class="btn btn-success"/>
+                                    <input type="submit" value="Cancelar" name="Opcion" class="btn btn-danger"/>
+                                    <input type="submit" value="Solicitud Cotizacion" name="Opcion" class="btn btn-success"/>
                                     
-                    }
-                }
-                @(Html.Awe().Form()
-                      .UseAjax(false)
-                      .Confirm(true)
-                      .FormClass("normalPost")
+                                
+                            }
+                            @(Html.Awe().Form()
+                                  .UseAjax(false)
+                                  .Confirm(true)
+                                  .FormClass("normalPost")
 
-                      .ConfirmOptions(o =>
-                      {
-                          o.Message = "Esta seguro de enviar esta Solicitud";
-                          o.Title = "Confirmar envio";
-                          o.YesText = "Enviar";
-                          o.NoText = "Cancelar";
+                                  .ConfirmOptions(o =>
+                                  {
+                                      o.Message = "Esta seguro de enviar esta Solicitud";
+                                      o.Title = "Confirmar envio";
+                                      o.YesText = "Enviar";
+                                      o.NoText = "Cancelar";
 
-                      })
-                      .Tag(new {target = "confirmCont"}))
-                <div id="confirmCont"></div>
+                                  })
+                                  .Tag(new {target = "confirmCont"}))
+                            <div id="confirmCont"></div>
 
+                        </div>
+                    </div>
+                    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+             
+                                    <button type="button" class="close" data-dismiss="modal" arial-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4> Confirmar Cancelacion</h4>  <p>
+                                        Esta seguro de cancelar este requerimiento?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <a type="submit" class="btn btn-success" href="@Url.Action( "Historial")">Cancelar </a>
+                                </div>
+                            </div>
+                        </div>
 
-
+                    </div>
+                </div>
+              
+    
             </div>
         </div>
     </div>
-              
-    
 </div>
-</div>
-</div>
-</div>
+
 
 
 

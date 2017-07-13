@@ -149,6 +149,9 @@
     <Compile Include="TbSolicitud.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TbSolicitudCotizacion.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="TbStatusAutorizacion.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

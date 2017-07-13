@@ -60,6 +60,7 @@ namespace OIM_DAL
         public virtual DbSet<Tb_EstadoVehiculo> Tb_EstadoVehiculo { get; set; }
         public virtual DbSet<TbInve_Vehiculos> TbInve_Vehiculos { get; set; }
         public virtual DbSet<Tb_Estado_OnOff> Tb_Estado_OnOff { get; set; }
+        public virtual DbSet<TbSolicitudCotizacion> TbSolicitudCotizacion { get; set; }
     
         public virtual ObjectResult<Sp_AllPedido_Result> Sp_AllPedido()
         {

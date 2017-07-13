@@ -214,7 +214,7 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="Serie" Type="varchar" MaxLength="255" />
           <Property Name="RentaMensual" Type="varchar" MaxLength="255" />
-          <Property Name="Visible" Type="bit" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
           <Property Name="Modelo" Type="varchar" MaxLength="255" />
           <Property Name="Estatus" Type="int" />
         </EntityType>
@@ -327,6 +327,19 @@
           <Property Name="Folio" Type="varchar" MaxLength="50" />
           <Property Name="EnviadoInfra" Type="int" Nullable="false" />
           <Property Name="EnviadoCom" Type="int" />
+        </EntityType>
+        <EntityType Name="TbSolicitudCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdPedido" Type="int" Nullable="false" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="Folio" Type="varchar" MaxLength="255" />
+          <Property Name="NomProveedor" Type="varchar" MaxLength="255" />
+          <Property Name="FechaSol" Type="date" Nullable="false" />
+          <Property Name="IdFormato" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
         </EntityType>
         <EntityType Name="TbStatusAutorizacion">
           <Key>
@@ -542,6 +555,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_Formato_SC">
+          <End Role="TbFormato" Type="Self.TbFormato" Multiplicity="0..1" />
+          <End Role="TbSolicitudCotizacion" Type="Self.TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="id_formatoOpor">
           <End Role="TbFormato" Type="Self.TbFormato" Multiplicity="1" />
           <End Role="TbOportunidad" Type="Self.TbOportunidad" Multiplicity="*" />
@@ -630,6 +655,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="id_Pedido_SC">
+          <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="1" />
+          <End Role="TbSolicitudCotizacion" Type="Self.TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbPedidoM">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_Proveedor_SC">
+          <End Role="TbProveedores" Type="Self.TbProveedores" Multiplicity="0..1" />
+          <End Role="TbSolicitudCotizacion" Type="Self.TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="id_sol_fk">
           <End Role="TbSolicitud" Type="Self.TbSolicitud" Multiplicity="0..1" />
           <End Role="TbPedidoM" Type="Self.TbPedidoM" Multiplicity="*" />
@@ -663,6 +712,18 @@
             </Principal>
             <Dependent Role="Tb_Opor_Tipo">
               <PropertyRef Name="IdTipoOportunidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_User_SC">
+          <End Role="TbUsuario" Type="Self.TbUsuario" Multiplicity="0..1" />
+          <End Role="TbSolicitudCotizacion" Type="Self.TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -904,6 +965,7 @@
           <EntitySet Name="TbProfesion" EntityType="Self.TbProfesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbProveedores" EntityType="Self.TbProveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbSolicitud" EntityType="Self.TbSolicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbSolicitudCotizacion" EntityType="Self.TbSolicitudCotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbStatusAutorizacion" EntityType="Self.TbStatusAutorizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbTipoOportunidad" EntityType="Self.TbTipoOportunidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TbUnidad" EntityType="Self.TbUnidad" Schema="dbo" store:Type="Tables" />
@@ -966,6 +1028,10 @@
             <End Role="Tb_EstadoEquipo" EntitySet="Tb_EstadoEquipo" />
             <End Role="TbInve_Equipo_Varios" EntitySet="TbInve_Equipo_Varios" />
           </AssociationSet>
+          <AssociationSet Name="id_Formato_SC" Association="Self.id_Formato_SC">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
           <AssociationSet Name="id_formatoOpor" Association="Self.id_formatoOpor">
             <End Role="TbFormato" EntitySet="TbFormato" />
             <End Role="TbOportunidad" EntitySet="TbOportunidad" />
@@ -994,6 +1060,14 @@
             <End Role="TbProveedores" EntitySet="TbProveedores" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
           </AssociationSet>
+          <AssociationSet Name="id_Pedido_SC" Association="Self.id_Pedido_SC">
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="id_Proveedor_SC" Association="Self.id_Proveedor_SC">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
           <AssociationSet Name="id_sol_fk" Association="Self.id_sol_fk">
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
             <End Role="TbPedidoM" EntitySet="TbPedidoM" />
@@ -1005,6 +1079,10 @@
           <AssociationSet Name="id_tipo" Association="Self.id_tipo">
             <End Role="TbTipoOportunidad" EntitySet="TbTipoOportunidad" />
             <End Role="Tb_Opor_Tipo" EntitySet="Tb_Opor_Tipo" />
+          </AssociationSet>
+          <AssociationSet Name="id_User_SC" Association="Self.id_User_SC">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
           </AssociationSet>
           <AssociationSet Name="id_usuario_fk" Association="Self.id_usuario_fk">
             <End Role="TbUsuario" EntitySet="TbUsuario" />
@@ -1277,6 +1355,23 @@
             <End Role="Tb_Estado_OnOff" EntitySet="Tb_Estado_OnOff" />
             <End Role="TbSolicitud" EntitySet="TbSolicitud" />
           </AssociationSet>
+          <EntitySet Name="TbSolicitudCotizacion" EntityType="DBOPSGIModel.TbSolicitudCotizacion" />
+          <AssociationSet Name="id_Pedido_SC" Association="DBOPSGIModel.id_Pedido_SC">
+            <End Role="TbPedidoM" EntitySet="TbPedidoM" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="id_Proveedor_SC" Association="DBOPSGIModel.id_Proveedor_SC">
+            <End Role="TbProveedores" EntitySet="TbProveedores" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="id_Formato_SC" Association="DBOPSGIModel.id_Formato_SC">
+            <End Role="TbFormato" EntitySet="TbFormato" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="id_User_SC" Association="DBOPSGIModel.id_User_SC">
+            <End Role="TbUsuario" EntitySet="TbUsuario" />
+            <End Role="TbSolicitudCotizacion" EntitySet="TbSolicitudCotizacion" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supervisores">
           <Key>
@@ -1383,6 +1478,7 @@
           <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.FK_Id_com_formato" FromRole="TbFormato" ToRole="TbCompras" />
           <NavigationProperty Name="TbOportunidad" Relationship="DBOPSGIModel.id_formatoOpor" FromRole="TbFormato" ToRole="TbOportunidad" />
           <NavigationProperty Name="TbSolicitud" Relationship="DBOPSGIModel.IdFormato_fk" FromRole="TbFormato" ToRole="TbSolicitud" />
+          <NavigationProperty Name="TbSolicitudCotizacion" Relationship="DBOPSGIModel.id_Formato_SC" FromRole="TbFormato" ToRole="TbSolicitudCotizacion" />
         </EntityType>
         <EntityType Name="TbMedioContacto">
           <Key>
@@ -1457,6 +1553,7 @@
           <Property Name="ConfirmaOrden" Type="Int32" />
           <Property Name="FechaEntregaUsuario" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TbInve_Papeleria" Relationship="DBOPSGIModel.Id_Id_requerimientos" FromRole="TbPedidoM" ToRole="TbInve_Papeleria" />
+          <NavigationProperty Name="TbSolicitudCotizacion" Relationship="DBOPSGIModel.id_Pedido_SC" FromRole="TbPedidoM" ToRole="TbSolicitudCotizacion" />
         </EntityType>
         <EntityType Name="TbPedidoPersonal">
           <Key>
@@ -1505,6 +1602,7 @@
           <Property Name="Confiable" Type="Int32" />
           <NavigationProperty Name="TbCompras" Relationship="DBOPSGIModel.FK_id_comp_prove" FromRole="TbProveedores" ToRole="TbCompras" />
           <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.id_Pedido_Proveedor" FromRole="TbProveedores" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbSolicitudCotizacion" Relationship="DBOPSGIModel.id_Proveedor_SC" FromRole="TbProveedores" ToRole="TbSolicitudCotizacion" />
         </EntityType>
         <EntityType Name="TbSolicitud">
           <Key>
@@ -1586,6 +1684,7 @@
           <NavigationProperty Name="TbUnidadTecnica" Relationship="DBOPSGIModel.Tecnica_fk" FromRole="TbUsuario" ToRole="TbUnidadTecnica" />
           <NavigationProperty Name="TbInve_Equipo_Comp" Relationship="DBOPSGIModel.id_usuario_inventario_fk" FromRole="TbUsuario" ToRole="TbInve_Equipo_Comp" />
           <NavigationProperty Name="TbInve_Equipo_Varios" Relationship="DBOPSGIModel.id_Espe_varios" FromRole="TbUsuario" ToRole="TbInve_Equipo_Varios" />
+          <NavigationProperty Name="TbSolicitudCotizacion" Relationship="DBOPSGIModel.id_User_SC" FromRole="TbUsuario" ToRole="TbSolicitudCotizacion" />
         </EntityType>
         <Association Name="id_usuario_fk">
           <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="1" />
@@ -2175,7 +2274,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Serie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="RentaMensual" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Visible" Type="Boolean" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
           <Property Name="Modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Estatus" Type="Int32" />
           <NavigationProperty Name="Tb_EstadoVehiculo" Relationship="DBOPSGIModel.id_Vehiculo_estado" FromRole="TbInve_Vehiculos" ToRole="Tb_EstadoVehiculo" />
@@ -2222,6 +2321,71 @@
             </Principal>
             <Dependent Role="TbSolicitud">
               <PropertyRef Name="EnviadoInfra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TbSolicitudCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdPedido" Type="Int32" Nullable="false" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="Folio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NomProveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TbPedidoM" Relationship="DBOPSGIModel.id_Pedido_SC" FromRole="TbSolicitudCotizacion" ToRole="TbPedidoM" />
+          <NavigationProperty Name="TbProveedores" Relationship="DBOPSGIModel.id_Proveedor_SC" FromRole="TbSolicitudCotizacion" ToRole="TbProveedores" />
+          <Property Name="FechaSol" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="IdFormato" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="TbFormato" Relationship="DBOPSGIModel.id_Formato_SC" FromRole="TbSolicitudCotizacion" ToRole="TbFormato" />
+          <NavigationProperty Name="TbUsuario" Relationship="DBOPSGIModel.id_User_SC" FromRole="TbSolicitudCotizacion" ToRole="TbUsuario" />
+        </EntityType>
+        <Association Name="id_Pedido_SC">
+          <End Type="DBOPSGIModel.TbPedidoM" Role="TbPedidoM" Multiplicity="1" />
+          <End Type="DBOPSGIModel.TbSolicitudCotizacion" Role="TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbPedidoM">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_Proveedor_SC">
+          <End Type="DBOPSGIModel.TbProveedores" Role="TbProveedores" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbSolicitudCotizacion" Role="TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbProveedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_Formato_SC">
+          <End Type="DBOPSGIModel.TbFormato" Role="TbFormato" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbSolicitudCotizacion" Role="TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbFormato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_User_SC">
+          <End Type="DBOPSGIModel.TbUsuario" Role="TbUsuario" Multiplicity="0..1" />
+          <End Type="DBOPSGIModel.TbSolicitudCotizacion" Role="TbSolicitudCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TbSolicitudCotizacion">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2724,6 +2888,20 @@
             <EntityTypeMapping TypeName="DBOPSGIModel.Tb_Estado_OnOff">
               <MappingFragment StoreEntitySet="Tb_Estado_OnOff">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbSolicitudCotizacion">
+            <EntityTypeMapping TypeName="DBOPSGIModel.TbSolicitudCotizacion">
+              <MappingFragment StoreEntitySet="TbSolicitudCotizacion">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="FechaSol" ColumnName="FechaSol" />
+                <ScalarProperty Name="NomProveedor" ColumnName="NomProveedor" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

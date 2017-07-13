@@ -76,6 +76,11 @@
         <EntityTypeShape EntityType="DBOPSGIModel.Tb_Estado_OnOff" Width="1.5" PointX="10.375" PointY="0.875" />
         <AssociationConnector Association="DBOPSGIModel.id_enviacompra" />
         <AssociationConnector Association="DBOPSGIModel.id_enviainfra" />
+        <EntityTypeShape EntityType="DBOPSGIModel.TbSolicitudCotizacion" Width="1.5" PointX="9.75" PointY="12.5" />
+        <AssociationConnector Association="DBOPSGIModel.id_Pedido_SC" />
+        <AssociationConnector Association="DBOPSGIModel.id_Proveedor_SC" />
+        <AssociationConnector Association="DBOPSGIModel.id_Formato_SC" />
+        <AssociationConnector Association="DBOPSGIModel.id_User_SC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

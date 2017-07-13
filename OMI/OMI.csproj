@@ -231,14 +231,19 @@
     <Compile Include="Controllers\ClaveUnidadLookupController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DownloaderController.cs" />
+    <Compile Include="Controllers\NombreAutoCompleteController.cs" />
+    <Compile Include="Models\Utils\ForSolCot.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfraestructuraController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MealAutoCompleteController.cs" />
     <Compile Include="Controllers\OportunidadController.cs" />
+    <Compile Include="Controllers\OrdenCompController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\SolicitudCotizacionController.cs" />
     <Compile Include="Controllers\TbOportunidadsController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -259,6 +264,7 @@
     <Compile Include="Models\cOportunidad.cs" />
     <Compile Include="Models\cOrdenCompra.cs" />
     <Compile Include="Models\CrudHelpers.cs" />
+    <Compile Include="Models\cSolCotizacion.cs" />
     <Compile Include="Models\cSolicitud.cs" />
     <Compile Include="Models\cUsuario.cs" />
     <Compile Include="Models\forOportunidad.cs" />
@@ -3981,6 +3987,7 @@
     <Content Include="Views\Inventario\EditVehiculo.cshtml" />
     <Content Include="Views\Admon\SolicitudCotizacion.cshtml" />
     <Content Include="Views\Admon\FormatoSolCotizacion.cshtml" />
+    <Content Include="Views\Admon\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

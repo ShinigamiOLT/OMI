@@ -5,7 +5,7 @@
         }
         @Html.Label("", new {@for = ViewData[Settings.ContextKey] + ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty) + postfix})
     </div>
-    <div class="einput">
+    <div class="einput" style="color: green;">
         @RenderBody()
     </div>
     @Html.ValidationMessage("")
